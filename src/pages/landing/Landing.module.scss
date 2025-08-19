@@ -272,6 +272,11 @@ body {
         bottom: 0;
         left: 0;
       }
+      @media (aspect-ratio < 8/12), (max-width: 730px) {
+        .treeExtender {
+          display: none;
+        }
+      }
     }
 
     @media (aspect-ratio < 8/12), (max-width: 730px) {
