@@ -360,7 +360,7 @@ export default function Landing({
                 />
               </div>
               <div className={styles.treeExtender}></div>
-            </div>
+            </div>  
             <div className={styles.logoContainer}>
               <img src={logo} className={styles.logo} alt="Logo" />
             </div>
@@ -418,22 +418,7 @@ export default function Landing({
             </div>
           </div>
         </div>
-          {/* <div className={styles.bottomContent} ref={bottomContentRef}>
-            {
-              // replace this with actual about us and give it the required ref 
-            }
-            <div className={styles.dummyAboutUs} ref={aboutUsRef} /> 
-            {
-              // Don't render contact doors until the refs are set
-              treeImageRef.current && aboutUsRef.current &&
-              <ContactDoors
-                aboutUsRef={aboutUsRef} 
-                pinnedContRef={wrapperRef}
-                bottomContentRef={bottomContentRef}
-              />
-            }
-          </div> */}
-      </div>
+      </div>  
     </>
   );
 }

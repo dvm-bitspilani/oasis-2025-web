@@ -74,10 +74,12 @@
                             font-weight: 100;
                             font-family: 'Averia Serif Libre', serif;
                             text-align: center;
+                            overflow: hidden;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            text-overflow: ellipsis;
                             -webkit-line-clamp: 2;
                             line-clamp: 2;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
                         }
                         .contactLinks {
                             display: flex;
@@ -107,10 +109,9 @@
             }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 750px) {
             grid-template-columns: 1fr;
             gap: 3rem;
         }
     }
-    
 }

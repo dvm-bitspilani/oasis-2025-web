@@ -5,6 +5,7 @@ import door2 from '/images/contact/Door2.png';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
+import ContactGallery from './components/contactGallery/ContactGallery';
 
 interface ContactDoorsProps {
     aboutUsRef: React.RefObject<HTMLDivElement | null>,
@@ -18,6 +19,7 @@ export default function ContactDoors({ aboutUsRef, pinnedContRef, bottomContentR
     // const scrollerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
+        return
         console.log(pinnedContRef?.current, aboutUsRef?.current)
         gsap.registerPlugin(ScrollTrigger);
 
@@ -52,6 +54,7 @@ export default function ContactDoors({ aboutUsRef, pinnedContRef, bottomContentR
     });
 
     useEffect(() => {
+        return
         const handleResize = () => ScrollTrigger.refresh();
 
         window.addEventListener('resize', handleResize);
@@ -59,13 +62,10 @@ export default function ContactDoors({ aboutUsRef, pinnedContRef, bottomContentR
     },[])
 
     return (
-        <div className={styles.contactDoors}>
-            <div className={styles.contactDoor} ref={door1Ref}>
-                <img className={styles.contactDoorImg} src={door1} />
-            </div>
-            <div className={styles.contactDoor} ref={door2Ref}>
-                <img className={styles.contactDoorImg} src={door2} />
-            </div>
+        <div className={styles.contactSection}>
+            <div className={styles.contactDoor} ref={door1Ref} style={{backgroundImage: `url(${door1})`}} />
+            <div className={styles.contactDoor} ref={door2Ref} style={{backgroundImage: `url(${door2})`}} />
+            <ContactGallery />
         </div>
     )
 }
