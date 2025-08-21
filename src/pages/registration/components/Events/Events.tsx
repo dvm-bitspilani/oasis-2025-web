@@ -364,7 +364,6 @@ const Events = forwardRef<
                   </button>
                 </li>
               ))}
-              <li className={styles.eventItemOverlay}></li>
             </ul>
             <button
               className={styles.confirmButton}

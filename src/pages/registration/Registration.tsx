@@ -10,7 +10,7 @@ import bgExtend from "/svgs/registration/bg-extended.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
@@ -186,13 +186,15 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     })();
   };
 
-  // useEffect triggered only if startAnimation = true
+  useEffect(()=>{
+    document.body.style.position = "static";
+  },[])
   // useEffect(() => {
   //   // if (startAnimation) {
   //   toRegPage(false);
-  //   setTimeout(() => {
-  //     toEventPage();
-  //   }, 2500);
+  //   // setTimeout(() => {
+  //   //   toEventPage();
+  //   // }, 2500);
   //   // }
   // }, []);
 

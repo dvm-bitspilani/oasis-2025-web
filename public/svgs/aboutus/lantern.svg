@@ -1,150 +1,4 @@
-import { useEffect } from "react";
-import { gsap } from "gsap";
-import styles from "./AboutUs.module.scss";
-import Header from "/svgs/aboutus/header.svg";
-import fan from "/svgs/aboutus/fan.svg";
-import Dagger from "/svgs/aboutus/dagger.svg"
-// import Lantern from "/svgs/aboutus/lantern.svg"
-const icons = [
-  "/svgs/aboutus/letter1.svg",
-  "/svgs/aboutus/letter2.svg",
-  "/svgs/aboutus/letter3.svg",
-];
-
-const AboutUs = () => {
-  useEffect(() => {
-    gsap.set(`.${styles.fan2}`, {
-      xPercent: 100,
-      yPercent: -100,
-    });
-  }, []);
-
-  useEffect(() => {
-    gsap.to(`.${styles.fan1}`, {
-      rotation: 10,
-      duration: 0.5,
-      yoyo: true,
-      repeat: -1,
-      ease: "power1.inOut",
-    });
-
-    gsap.to(`.${styles.fan2}`, {
-      rotation: "+=10",
-      duration: 0.5,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-
-    const spawnIcon = (fanSelector: string, isFan1: boolean) => {
-      const fanEl = document.querySelector(fanSelector) as HTMLElement;
-      if (!fanEl || !fanEl.parentElement) return;
-
-      const rect = fanEl.getBoundingClientRect();
-      const parentRect = fanEl.parentElement.getBoundingClientRect();
-
-      const startX = rect.left - parentRect.left + rect.width / 2;
-      const startY = rect.top - parentRect.top + rect.height / 2;
-
-      const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      const img = document.createElement("img");
-      img.src = iconSrc;
-      img.className = styles.flyingIcon;
-      img.style.left = `${startX}px`;
-      img.style.top = `${startY}px`;
-
-      fanEl.parentElement.appendChild(img);
-
-      let angle;
-      if (isFan1) {
-        angle = Math.random() * (Math.PI / 2);
-      } else {
-        angle = Math.PI + Math.random() * (Math.PI / 2); 
-      }
-
-      const distance = 150 + Math.random() * 100;
-      const dx = Math.cos(angle) * distance;
-      const dy = -Math.sin(angle) * distance;
-
-      gsap.fromTo(
-        img,
-        { opacity: 0, scale: 0, x: 0, y: 0 },
-        {
-          opacity: 1,
-          scale: 1,
-          x: dx,
-          y: dy,
-          duration: 2,
-          ease: "power2.out",
-          onComplete: () => {
-            gsap.to(img, {
-              opacity: 0,
-              duration: 0.5,
-              onComplete: () => img.remove(),
-            });
-          },
-        }
-      );
-    };
-
-   let interval: number;
-
-
-    const startSpawning = () => {
-      interval = setInterval(() => {
-        spawnIcon(`.${styles.fan1}`, true);
-        spawnIcon(`.${styles.fan2}`, false);
-      }, 600);
-    };
-
-    const stopSpawning = () => clearInterval(interval);
-
-    const handleVisibility = () => {
-      if (document.hidden) {
-        stopSpawning();
-      } else {
-        startSpawning();
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibility);
-
-    // start initially
-    startSpawning();
-
-    return () => {
-      stopSpawning();
-      document.removeEventListener("visibilitychange", handleVisibility);
-    };
-  }, []);
-
-  return (
-    <div className={styles.AboutContainer}>
-      <div className={styles.header}>
-        <img src={Header} alt="About Us" />
-      </div>
-
-      <div className={styles.wrapper}>
-        <div className={styles.vid}>
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/fizPRMJfBzk"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            style={{ objectFit: "cover" }}
-          ></iframe>
-
-          {/* Fans */}
-          <img src={fan} alt="" className={styles.fan1} />
-          <img src={fan} alt="" className={styles.fan2} />
-        </div>
-      </div>
-      <div className={styles.abt}>
-        
-        <div className={styles.lantern}><svg width="197" height="219" viewBox="0 0 197 219" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="197" height="219" viewBox="0 0 197 219" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_3670_3802)">
 <path d="M137.107 115.84C136.914 114.228 136.406 112.682 135.585 111.18C139.221 109.859 141.613 106.02 141.112 101.922C140.919 100.31 140.411 98.7648 139.59 97.2619C143.226 95.9414 145.618 92.1024 145.117 88.0044C144.78 85.2724 143.572 82.7424 141.412 80.3022C142.446 78.6431 142.947 76.6165 142.692 74.5244C141.414 64.1131 125.683 56.4696 116.184 53.6373C106.686 50.805 89.3945 48.5649 82.8105 56.6335C81.4886 58.2618 80.8326 60.2359 80.8261 62.1996C77.717 63.0651 75.3523 64.5358 73.6352 66.6465C71.041 69.8306 71.0148 74.3713 73.3765 77.4787C71.8918 78.2934 70.6433 79.3096 69.6301 80.5641C67.0359 83.7482 67.0097 88.289 69.3714 91.3963C67.8868 92.211 66.6382 93.2272 65.625 94.4818C63.0308 97.6659 63.0047 102.207 65.3664 105.314C63.8817 106.129 62.6332 107.145 61.62 108.399C59.0258 111.583 58.9996 116.124 61.3613 119.232C59.8766 120.046 58.6281 121.062 57.6149 122.317C55.0207 125.501 54.9945 130.042 57.3562 133.149C55.8716 133.964 54.623 134.98 53.6098 136.235C50.6575 139.853 51.0342 145.225 54.4437 148.256C57.5113 150.974 61.9867 150.875 65.0027 148.203C67.591 147.51 76.2449 147.698 88.1087 151.244C99.9606 154.79 107.352 159.393 109.161 161.396C109.955 164.163 112.05 166.245 114.631 167.013C115.694 167.331 116.846 167.429 118.017 167.246C122.492 166.582 125.664 162.257 125.092 157.593C124.898 155.981 124.391 154.435 123.57 152.932C127.206 151.612 129.598 147.773 129.097 143.675C128.903 142.063 128.396 140.518 127.575 139.015C131.211 137.694 133.603 133.855 133.102 129.757C132.909 128.145 132.401 126.6 131.58 125.097C135.216 123.777 137.608 119.938 137.107 115.84Z" fill="white"/>
 </g>
@@ -170,7 +24,7 @@ const AboutUs = () => {
 <path d="M55.8189 133.446C70.9404 128.717 87.7981 129.88 102.231 136.415C110.887 140.359 118.632 146.43 124.775 153.743C120.303 149.216 115.375 145.23 110.06 141.899C93.9816 131.978 74.0906 129.289 55.8189 133.446Z" fill="#F4F4F4"/>
 </g>
 <path d="M118.189 167.213C117.162 170.762 102.041 169.367 84.4062 164.1C66.7716 158.833 53.3024 151.681 54.3292 148.131C55.356 144.582 70.4771 145.977 88.1118 151.244C105.746 156.511 119.216 163.664 118.189 167.213Z" fill="url(#paint3_linear_3670_3802)"/>
-<mask id="mask0_3670_3802" style={{maskType:"luminance" }}maskUnits="userSpaceOnUse" x="54" y="146" width="65" height="24">
+<mask id="mask0_3670_3802" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="54" y="146" width="65" height="24">
 <path d="M118.189 167.217C117.162 170.766 102.041 169.371 84.4062 164.104C66.7716 158.837 53.3024 151.685 54.3292 148.135C55.356 144.586 70.4771 145.981 88.1118 151.248C105.746 156.515 119.216 163.667 118.189 167.217Z" fill="white"/>
 </mask>
 <g mask="url(#mask0_3670_3802)">
@@ -181,7 +35,7 @@ const AboutUs = () => {
 <path d="M81.7505 151.563C80.8947 153.324 80.5493 155.39 81.3145 157.26C82.1595 159.328 84.4762 160.63 86.7679 160.864C89.5035 161.144 91.1029 159.473 91.8238 157.279C92.1327 156.341 92.3815 155.401 92.5708 154.436L81.7508 151.55L81.7505 151.563Z" fill="#FAEFD6"/>
 <path d="M118.193 167.215C117.777 168.678 114.925 169.304 110.479 169.159C113.425 169.173 115.263 168.722 115.549 167.722C116.381 164.831 103.795 158.52 87.4273 153.624C71.0713 148.729 57.1214 147.113 56.2892 150.004C56.003 151.004 57.2956 152.395 59.7979 154.008C55.9761 151.691 53.9051 149.596 54.3336 148.133C55.3604 144.583 70.4818 145.966 88.1162 151.246C105.751 156.512 119.22 163.677 118.205 167.227L118.193 167.215Z" fill="url(#paint4_radial_3670_3802)"/>
 <path d="M115.548 167.721C114.716 170.612 100.778 168.997 84.4102 164.101C68.0421 159.206 55.4563 152.907 56.2887 150.003C57.1209 147.113 71.0588 148.728 87.4269 153.623C103.795 158.519 116.381 164.818 115.548 167.721Z" stroke="#861A26" stroke-width="0.73" stroke-miterlimit="10"/>
-<path style={{mixBlendMode:"color-dodge"}} d="M142.775 128.92C151.61 98.2066 138.793 67.3377 114.148 59.9727C89.5037 52.6077 62.363 71.5356 53.5282 102.249C44.6933 132.963 57.5098 163.832 82.1546 171.197C106.799 178.562 133.94 159.634 142.775 128.92Z" fill="url(#paint5_radial_3670_3802)"/>
+<path style="mix-blend-mode:color-dodge" d="M142.775 128.92C151.61 98.2066 138.793 67.3377 114.148 59.9727C89.5037 52.6077 62.363 71.5356 53.5282 102.249C44.6933 132.963 57.5098 163.832 82.1546 171.197C106.799 178.562 133.94 159.634 142.775 128.92Z" fill="url(#paint5_radial_3670_3802)"/>
 <defs>
 <filter id="filter0_d_3670_3802" x="0.741093" y="0.162968" width="195.323" height="218.055" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
@@ -230,13 +84,3 @@ const AboutUs = () => {
 </radialGradient>
 </defs>
 </svg>
-</div>
-         <img src={Dagger} alt="" className={styles.dagger1} />
-       
-      </div>
-      
-    </div>
-  );
-};
-
-export default AboutUs;

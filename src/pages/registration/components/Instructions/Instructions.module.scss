@@ -50,12 +50,6 @@
           url("/public/svgs/registration/list-tag.svg");
       }
     }
-    .eventItemOverlay {
-      display: none;
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .googleButton {
@@ -67,6 +61,9 @@
     padding: 1vw 3vw 1vw 1vw;
     border: none;
     z-index: 4;
+    &:focus {
+      outline: none;
+    }
   }
 }
 
@@ -89,6 +86,21 @@
       max-height: 60svh;
       overflow-y: scroll;
       gap: 5vw;
+      padding: 4vw 0;
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 7%,      
+        #000 93%,
+        transparent 100%
+      );
+      --webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 7%,
+        #000 93%,
+        transparent 100%
+      );
       scrollbar-width: none;
       &::-webkit-scrollbar {
         display: none;
@@ -107,22 +119,6 @@
           width: clamp(1rem, 2vw + 0.5rem, 1.9rem);
           height: clamp(1rem, +2vw + 0.5rem, 1.9rem);
         }
-      }
-      .eventItemOverlay {
-        display: block;
-        position: absolute;
-        bottom: 10vh;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        aspect-ratio: 6.0899;
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.5),
-          rgba(0, 0, 0, 1)
-        );
-        z-index: 3;
-        pointer-events: none;
       }
     }
     .googleButton {

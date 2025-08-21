@@ -2,27 +2,38 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
 //import type { SingleValue } from "react-select";
-import Field from "/svgs/registration/field2.svg"
+import Field from "/svgs/registration/field2.svg";
 import styles from "./Register.module.scss";
-
+import Drop from "/svgs/registration/Drop.svg";
 import { useEffect, useState, forwardRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 
 import statesData from "./cities.json";
-
 import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
-import Refer from "/svgs/registration/field4.svg"
-import Gen from "/svgs/registration/field3.svg"
-// import { head } from "framer-motion/client";
-interface StateItem {
-  state: string;
-  cities: string[];
-}
+import Gen from "/svgs/registration/field3.svg";
+import { components } from "react-select";
 
-const typedStatesData: StateItem[] = statesData;
-const stateOptions = typedStatesData.map((item) => ({
+const CustomDropdownIndicator = (props: any) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <img
+        src={Drop}
+        alt="Dropdown"
+        style={{
+          width: "1.2rem",
+          display: "none",
+          paddingLeft: "2vw",
+          height: "1.2rem",
+          pointerEvents: "none",
+        }}
+      />
+    </components.DropdownIndicator>
+  );
+};
+
+const stateOptions = statesData.map((item) => ({
   value: item.state,
   label: item.state,
 }));
@@ -39,7 +50,8 @@ const registrationSchema = yup.object({
   year: yup.string().required("Year of study is required"),
   state: yup.string().required("State is required"),
   city: yup.string().required("City is required"),
-  referral: yup.string().nullable().optional(),
+  date: yup.date().required("Date of Birth is required"),
+  //  referral: yup.string().nullable().optional(),
 });
 
 type FormData = yup.InferType<typeof registrationSchema>;
@@ -64,9 +76,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
     useEffect(() => {
       axios
-        .get(
-          "https://bits-oasis.org/2025/main/registrations/get_college/"
-        )
+        .get("https://bits-oasis.org/2025/main/registrations/get_college/")
         .then((response) => {
           setCollegeOptions(
             response.data.data.map((college: { id: number; name: string }) => ({
@@ -79,9 +89,9 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
     }, []);
 
     const getAvailableCities = (stateName: string) =>
-      (
-        typedStatesData.find((item) => item.state === stateName)?.cities ?? []
-      ).map((city) => ({ value: city, label: city }));
+      (statesData.find((item) => item.state === stateName)?.cities ?? []).map(
+        (city) => ({ value: city, label: city })
+      );
 
     useEffect(() => {
       setAvailableCities(getAvailableCities(selectedState));
@@ -104,7 +114,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         year: "",
         state: "",
         city: "",
-        referral: null,
+        //referral: null,
+        date: undefined,
       },
     });
 
@@ -121,8 +132,9 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
       );
       return [...startsWith, ...contains];
     };
-    const isMobile = window.innerWidth < 1200 && (window.innerWidth/window.innerHeight)<0.75
-     const customStyles = {
+    const isMobile =
+      window.innerWidth < 1200 && window.innerWidth / window.innerHeight < 0.75;
+    const customStyles = {
       noOptionsMessage: (provided: any) => ({
         ...provided,
         color: "white",
@@ -134,7 +146,6 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         ...provided,
         paddingLeft: 0,
         paddingRight: 0,
-        
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -142,6 +153,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         outline: "none",
         background: "transparent",
         border: "none",
+        height: isMobile ? "0vh" : "3vw",
         paddingBottom: isMobile ? "5vw" : "0vw",
       }),
       menuList: (provided: any) => ({
@@ -157,13 +169,13 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         ...provided,
         color: "white",
         textAlign: "center",
-        display:"flex",
-        justifyContent:"center",
-        alignItem:"center",
-        height: "10vw",
-        width:"80vw",
-        paddingLeft: isMobile?"0%":"30%",
-        paddingTop:isMobile?"0vw":"5vw",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "3vw",
+        width: "80vw",
+        paddingLeft: isMobile ? "0%" : "0%",
+        paddingTop: isMobile ? "0vw" : "0vw",
       }),
       input: (provided: any) => ({
         ...provided,
@@ -171,7 +183,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         padding: 0,
         margin: 0,
         color: "white",
-        zIndex:"5",
+        zIndex: "5",
       }),
       placeholder: (provided: any) => ({
         ...provided,
@@ -182,8 +194,9 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         textAlign: "center",
         color: "white",
         margin: 0,
-        zIndex:"5",
-        
+        zIndex: "5",
+        height: "3vw",
+
         whiteSpace: "nowrap",
       }),
       menu: (provided: any) => ({
@@ -204,7 +217,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         ...provided,
         width: "100%",
         padding: 0,
-        height: "5vw",
+        height: "3vw",
         background: "transparent",
         color: "white",
         display: "flex",
@@ -235,9 +248,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         alignItems: "center",
         background: "transparent",
         border: "none",
-        height: "2.3rem",
-        
-        width:isMobile ? "33.6vw":"100%",
+        height: "3vw",
+        width: isMobile ? "33.6vw" : "100%",
       }),
       menuList: (provided: any) => ({
         ...provided,
@@ -253,18 +265,17 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         color: "white",
         textAlign: "center",
         height: "2.3rem",
-         zIndex:"5",
+        zIndex: "5",
         paddingLeft: 0,
-        
-        width:isMobile ? "33.6vw":"100%",
+        width: isMobile ? "33.6vw" : "100%",
       }),
       input: (provided: any) => ({
         ...provided,
         textAlign: "center",
         padding: 0,
         margin: 0,
-        
-        width:isMobile ? "33.6vw":"100%",
+        display: "flex",
+        width: isMobile ? "33.6vw" : "100%",
         color: "white",
       }),
       placeholder: (provided: any, state: any) => ({
@@ -274,11 +285,10 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             ? "none"
             : "block",
         color: "white",
-        zIndex:"5",
-        width:isMobile ? "33.6vw":"100%",
+        zIndex: "5",
+        width: isMobile ? "33.6vw" : "100%",
         textAlign: "center",
       }),
-
       menu: (provided: any) => ({
         ...provided,
         marginTop: 0,
@@ -305,12 +315,6 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-      }),
-      dropdownIndicator: (provided: any) => ({
-        ...provided,
-        color: "white",
-        display: "none",
-        cursor: "pointer",
       }),
       indicatorSeparator: () => ({
         display: "none",
@@ -355,7 +359,6 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                 <div className={styles.clouds}>
                   <img src={Field} alt="" />
                   <input value={userEmail} disabled placeholder={userEmail} />
-
                 </div>
                 <p>{errors.email_id?.message}</p>
               </div>
@@ -365,7 +368,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   <div className={styles.field1}>
                     <div className={styles.sameline}>
                       <label>GENDER </label>
-                    </div><div className={styles.clouds}>
+                    </div>
+                    <div className={styles.clouds}>
                       <img src={Gen} alt="" />
                       <Controller
                         name="gender"
@@ -388,23 +392,14 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                             }
                             className={`${styles.selection} ${styles.genderSelect}`}
                             classNamePrefix="Select"
+                            components={{
+                              DropdownIndicator: CustomDropdownIndicator,
+                            }}
                           />
                         )}
                       />
-
-                      
                     </div>
                     <p>{errors.gender?.message}</p>
-                  </div>
-
-                  <div className={styles.referral}>
-                    <div className={styles.sameline}>
-                      <label>REFERRAL CODE </label>
-                    </div>
-                    <div className={styles.clouds}>
-                      <img src={Refer} alt="" />
-                      <input {...register("referral")} />
-                    </div>
                   </div>
                 </div>
               </div>
@@ -436,7 +431,6 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     name="college_id"
                     control={control}
                     render={({ field }) => (
-                      
                       <Select
                         {...field}
                         options={collegeOptions}
@@ -471,7 +465,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     className={styles.radioGroup}
                     aria-label="Year of Study"
                   >
-                    {["1", "2", "3", "4"].map((year) => (
+                    {["1", "2", "3", "4", "5"].map((year) => (
                       <label key={year} className={styles.radioLabel}>
                         <input
                           type="radio"

@@ -35,17 +35,8 @@ $inputheight: 10vh;
     }
   }
 }
- input, textarea, select {
-  &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-    -webkit-text-fill-color: #000 !important;
-    transition: background-color 5000s ease-in-out 0s;
-  }
-}
 
 .registerContainer {
-
-
   display: none;
   opacity: 0;
   flex-direction: column;
@@ -54,254 +45,266 @@ $inputheight: 10vh;
   width: 100vw;
   height: 43vw;
   margin-bottom: 5vw;
-}
 
-.registrationForm {
-  z-index: 3;
-  display: flex;
-  position: absolute;
-  bottom: 24svh;
-  left: 0;
-  // transform: translateY(-50vw);
-  color: white;
-  padding: 2rem;
-  width: 100%;
-  // height: 40vw;
-  flex-direction: column;
-  align-items: center;
-  // justify-content: center;
-
+  input:-webkit-autofill,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: white !important;
+    color: white !important;
+    background-color: transparent !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
   .react-select__input-container {
     input {
       box-shadow: none !important;
     }
   }
 
-  .title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .formColumns {
-    z-index: 4;
+  .registrationForm {
+    z-index: 3;
     display: flex;
-    flex-wrap: wrap;
-    gap: 21vw;
-  }
-  .left {
-    .together {
+    position: absolute;
+    bottom: 24svh;
+    left: 0;
+    color: white;
+    padding: 2rem;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+
+    .formColumns {
+      z-index: 4;
       display: flex;
-      flex-direction: row;
-      width: 31vw;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 21vw;
 
-      .fields {
-        display: flex;
-        flex-direction: row;
-        gap: 0;
+      .left {
+        .together {
+          display: flex;
+          flex-direction: row;
+          width: 31vw;
+          gap: 10px;
+
+          .fields {
+            display: flex;
+            flex-direction: row;
+            gap: 0;
+
+            .field1 {
+              display: flex;
+              flex-direction: column;
+              width: 12.6vw;
+
+              .sameline {
+                width: 10vw;
+                label {
+                  z-index: 100;
+                  text-align: center;
+                }
+              }
+
+              .clouds {
+                position: relative;
+                width: 10vw;
+                input,
+                select {
+                  width: 12.6vw;
+                  padding-top: 1vw;
+                }
+                img {
+                  width: 12.6vw;
+                  height: auto;
+                  position: absolute;
+                  object-fit: contain;
+                  align-self: baseline;
+                }
+                .selection {
+                  width: 13vw;
+                  padding-top: 1vw;
+
+                  // Normal + focused state control
+                  .Select__control,
+                  .Select__control--is-focused {
+                    border: 1px solid #ededed;
+                    height: 2.5rem;
+                    width: 10vw !important;
+                    padding: 0 !important;
+                    box-shadow: none !important;
+                  }
+
+                  .Select__placeholder {
+                    color: #fff;
+                    padding: 0 !important;
+                    width: 10vw;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .clouds {
+          input {
+            text-align: center;
+            height: 4vw;
+          }
+        }
       }
-
-      .field1,
-      .field2 {
+      .right {
+        .clouds {
+          img {
+            padding-top: 3.5vw;
+          }
+          fieldset {
+            border: none;
+            box-shadow: none;
+          }
+        }
+      }
+      .left,
+      .right {
+        flex: 1;
         display: flex;
         flex-direction: column;
-      }
+        gap: 4vw;
 
-      .field1 {
-        width: 12.6vw;
-        .sameline{
+        .Select__control,
+        .Select__control--is-focused {
+          border: 1px solid #ededed;
+          height: 2.5rem;
+          outline: none !important;
+          box-shadow: none !important;
+          padding-left: "5vw" !important;
+          padding-right: "5vw" !important;
+          width: 10vw !important;
+          padding: 0 !important;
+          box-shadow: none !important;
+        }
+        .genderSelect__placeholder {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           width: 100%;
-          label{
           text-align: center;
+          color: white;
+          padding: 0;
+          margin: 0;
+          white-space: nowrap;
+        }
+
+        .email,
+        .together {
+          margin-left: 1vw;
+        }
+        .mobile,
+        .name {
+          margin-left: 4.5vw;
+        }
+        .college,
+        .city {
+          margin-left: 0.5vw;
+        }
+        .year,
+        .states {
+          margin-left: 4.5vw;
+        }
+        .referral {
+          .sameline {
+            width: 18vw;
+          }
+          .clouds {
+            height: 3vw;
+            width: 18vw;
+            input {
+              width: 18vw;
+            }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+              background: transparent;
+              color: transparent;
+              opacity: 0; /* hides icon */
+              position: absolute;
+              right: 0;
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+              z-index: 3;
+            }
+
+            .dateWrapper input[type="date"] {
+              position: relative;
+              z-index: 2;
+              background: transparent;
+              color: white;
+              padding-right: 2.5rem; // leave space for icon
+            }
+            .dateWrapper {
+              position: relative;
+            }
+            .dat {
+              position: absolute !important;
+
+              top: 1.25vw;
+              left: 0.5vw;
+              width: 3vw;
+              height: 3vw;
+              pointer-events: none;
+              z-index: 1;
+            }
           }
         }
-        .clouds {
+        .radioInput {
+          appearance: none;
+
+          padding: 0;
+          width: 1vw !important;
+          height: 1vw !important;
+          border: 2px solid white;
+          border-radius: 50%;
           position: relative;
-
-          img {
-            width: 12.6vw;
-            height: auto;
+          outline: none;
+          cursor: pointer;
+          background-color: transparent;
+          transition: border-color 0.3s ease;
+          &:checked::after {
+            content: "";
             position: absolute;
-            object-fit: contain;
-            align-self:baseline;
-          }
-        }
-        input,
-        select,
-        .selection {
-          width: 12.6vw;
-          padding-top: 1vw;
-        }
+            top: 50%;
+            left: 50%;
+            width: 8px;
 
-        .selection {
-          width: 13vw;
+            height: 8px;
+            background: linear-gradient(
+              0deg,
+              #f57572 0%,
+              #f8a26c 42.84%,
+              #fcdf81 102.69%
+            );
 
-          // Normal + focused state control
-          .Select__control,
-          .Select__control--is-focused {
-            border: 1px solid #ededed;
-            height: 2.5rem;
-            width: 10vw !important;
-            padding: 0 !important;
-            box-shadow: none !important;
-          }
-
-          .Select__placeholder {
-            color: #fff;
-            padding: 0 !important;
-            width: 10vw;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
           }
         }
 
-        .sameline {
-          width: 10vw;
-        }
-
-        .clouds {
-          width: 10vw;
-        }
-      }
-
-      .field2 {
         input,
         select {
-          width: 20vw !important;
+          text-align: center;
+          width: 30vw;
+          font-size: 0.8rem;
+          height: 2.1rem;
+          background: transparent;
+          border: 0;
+          padding-top: 2vw;
+          color: white;
         }
 
-        .sameline {
-          width: 20vw !important;
+        p {
+          transform: translateY(2.5vw);
+          font-size: 0.75rem;
+          color: #ffb3b3;
+          text-align: center;
         }
-
-        .clouds {
-          width: 20vw !important;
-        }
-      }
-    }
-  }
-  .left,
-  .right {
-    .Select__control,
-    .Select__control--is-focused {
-      border: 1px solid #ededed;
-      height: 2.5rem;
-      outline: none !important;
-      box-shadow: none !important;
-
-      padding-left: "5vw" !important;
-      padding-right: "5vw" !important;
-      width: 10vw !important;
-      padding: 0 !important;
-      box-shadow: none !important;
-    }
-    .genderSelect__placeholder {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      text-align: center;
-      color: white;
-      padding: 0;
-      margin: 0;
-      white-space: nowrap;
-    }
-
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2vw;
-
-    .name {
-      margin-left: 3vw;
-    }
-    .email,
-    .together {
-      margin-left: 1vw;
-    }
-    .mobile,
-    .name {
-      margin-left: 4.5vw;
-    }
-    .college,
-    .city {
-      margin-left: 0.5vw;
-    }
-    .year,
-    .states {
-      margin-left: 4.5vw;
-    }
-    .referral {
-      .sameline {
-        width: 18vw;
-      }
-      .clouds {
-        width: 18vw;
-        input {
-          width: 18vw;
-        }
-      }
-    }
-    .radioInput {
-      appearance: none;
-      
-  padding: 0 ;
-      width: 18px !important;
-      height: 18px !important;
-      border: 2px solid white;
-      border-radius: 50%;
-      position: relative;
-      outline: none;
-      cursor: pointer;
-      background-color: transparent;
-      transition: border-color 0.3s ease;
-      &:checked::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 8px;
-
-        height: 8px;
-        background: linear-gradient(
-          0deg,
-          #f57572 0%,
-          #f8a26c 42.84%,
-          #fcdf81 102.69%
-        );
-
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
-
-    input,
-    select {
-      text-align: center;
-      width: 30vw;
-      font-size: 0.8rem;
-      height: 2.1rem;
-      background: transparent;
-      border: 0;
-      padding-top: 2vw;
-      color: white;
-    }
-
-    p {
-      height: 0.5vw;
-      font-size: 0.75rem;
-      color: #ffb3b3;
-      margin: 0.2rem 0 0 0;
-    }
-  }
-
-  .right {
-    .clouds {
-      img {
-        padding-top: 3.5vw;
-      }
-      fieldset {
-        border: none;
-        box-shadow: none;
       }
     }
   }
@@ -394,7 +397,7 @@ select {
     overflow-x: visible;
     overflow-y: hidden;
     display: flex;
-   //align-self: center;
+    //align-self: center;
     width: 100%;
     object-fit: contain;
     pointer-events: none;
@@ -409,18 +412,18 @@ select {
     right: 0;
   }
 }
-.right{
-  .clouds{
-    img{
-        position: absolute;
-    overflow-x: visible;
-    overflow-y: hidden;
-    display: flex;
-   align-self: center;
-    width: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    z-index: -2;
+.right {
+  .clouds {
+    img {
+      position: absolute;
+      overflow-x: visible;
+      overflow-y: hidden;
+      display: flex;
+      align-self: center;
+      width: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      z-index: -2;
     }
   }
 }
@@ -435,7 +438,7 @@ select {
   padding-right: 3.1rem;
   width: 100%;
   z-index: 5;
-  height: 2.2rem;
+  height: 3vw;
   background: transparent;
   box-shadow: none;
   color: white;
@@ -525,17 +528,6 @@ input::placeholder {
   color: #cfcfcf;
   opacity: 1;
 }
-// input {
-//   // text-align: center !important;
-//   // margin: 0 !important;
-//   // caret-color: white;
-// }
-
-// input::placeholder {
-//   // text-align: center !important;
-//   // color: #cfcfcf;
-//   // opacity: 1;
-// }
 
 .react-select__control {
   display: flex !important;
@@ -617,239 +609,167 @@ input::placeholder {
   margin: 0 !important;
 }
 
-/*
-@media (max-aspect-ratio:1.4){
-   .left,.right{
-    .sameline{
-      font-size: clamp(
-        0.2rem ,0.2vw + 0.1rem,0.8rem
-      );
-    }
-   }
-}
-*/
-// @media (max-width: 720px) {
-//   .registerContainer {
-//     height: 80vh;
-//     .registrationForm {
-//       width: 100vw;
-//       display: flex;
-//       margin: 0;
-//       padding: 0;
-//       justify-content: center;
-//       align-items: center;
-//       bottom: 0;
-//       top: 7rem;
-//       .formColumns {
-//         margin: 0;
-//         padding: 0;
-
-//         margin-top: 10vw;
-//         flex-direction: column;
-//         gap: 0;
-
-//         justify-content: center;
-//         align-items: center;
-//         .left,
-//         .right {
-//           margin: 0;
-//         }
-//         .left {
-//           .name,
-//           .mobile,
-//           .referral,
-//           .gender,
-//           .email,
-//           .together {
-//             margin: 0;
-//             padding: 0;
-//           }
-//           .mobile {
-//             .clouds {
-//               input {
-//                 width: 50vw;
-//               }
-//             }
-//           }
-//         }
-//         .right {
-//           .year,
-//           .college,
-//           .states,
-//           .city {
-//             margin: 0;
-//             padding: 0;
-//           }
-//         }
-//         .left,
-//         .right {
-//           .sameline {
-//             width: 50vw;
-//           }
-//           .clouds,
-//           .together,
-//           .fields {
-//             width: 50vw;
-//           }
-//           .fields {
-//             flex-direction: column;
-//           }
-
-//           .field1 {
-//             width: 50vw;
-//             .sameline {
-//               width: 50vw;
-//             }
-//             .clouds {
-//               width: 50vw;
-//             }
-//           }
-//           .referral {
-//             width: 50vw;
-//             .sameline {
-//               width: 50vw;
-//             }
-//             .clouds {
-//               width: 50vw;
-//               input {
-//                 width: 50vw;
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
 @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
   .registerContainer {
     height: 63vw;
     overflow: hidden;
-      overflow: scroll;
-    .registrationForm{
+    overflow: scroll;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .registrationForm {
       padding: 0;
-    .formColumns{
-      flex-direction: column;
-      gap:2vw;
-      .left{
-        .name,.email,.mobile{
-          margin: 0;
+      .formColumns {
+        flex-direction: column;
+        gap: 2vw;
+        .left {
+          .name,
+          .email,
+          .mobile {
+            margin: 0;
+          }
+          .together {
+            margin-left: -0.5vw;
+          }
         }
-        .together{
-          margin-left: -0.5vw;
+        .right {
+          .year,
+          .states {
+            margin: 0;
+          }
         }
       }
-      .right{
-        .year,.states{
-          margin: 0;
-        }
-      }
-    }}
+    }
   }
 }
-$mobilewidth:80vw;
-$part1:$mobilewidth*0.42;
-$part2:$mobilewidth*0.58;
+$mobilewidth: 80vw;
+$part1: $mobilewidth * 0.42;
+$part2: $mobilewidth * 0.58;
 @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
   .registerContainer {
     padding: 0;
     overflow: visible;
-    .registrationForm{
+    .registrationForm {
       position: absolute;
-      top:20vw;
+      top: 20vw;
       height: 65vh;
       padding: 0;
-      overflow: scroll;
-    .formColumns{
-      flex-direction: column;
-        gap:10vw;
-      .left,.right{
-        .sameline{
+      overflow-y: scroll;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 7%,
+        #000 93%,
+        transparent 100%
+      );
+      --webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 7%,
+        #000 93%,
+        transparent 100%
+      );
+      .formColumns {
+        flex-direction: column;
+        gap: 10vw;
+
+        .left,
+        .right {
+          .sameline {
             width: $mobilewidth;
-            label{
+            label {
               font-size: 1rem;
             }
             img {
-    width: 15vw;
-    $h:height
-  }
+              width: 15vw;
+              $h: height;
+            }
           }
-        .clouds{
-          height:8vh;
-          width:$mobilewidth;
-          input{
-            width:$mobilewidth;
-             height:7vh;
-          }
-          
-        }
-        display: flex;
-        gap:10vw;
-      }
-      .left{
-        .name,.email,.mobile{
-          margin: 0;
-        }
-        .together{
-          margin-left: -0.5vw;
-        }
-        .sameline{
+          .clouds {
+            height: 8vh;
             width: $mobilewidth;
-            label{
-              font-size: 1rem;
-            }
-            img {
-    width: 15vw;
-  }
-          }
-        .clouds{
-          width:$mobilewidth;
-          
-        }
-        .fields{
-          width: $mobilewidth;
-          .field1{
-            .sameline{
-              width: $part1;
-            }
-            .clouds{width: $part1;
-            img{
-              width: $part1;
-            }}
-            width: $part1;
-          }
-          .referral{
-            
-            .sameline{
-              width: $part2;
-            }
-            width: $part2;
-            .clouds{
-              width: $part2;
-              input{
-              text-align: left!important;
-              padding-left: 10px;
-            }
+            input {
+              width: $mobilewidth;
+              height: 7vh;
             }
           }
-        }
-      }
-      .right{
-        .year,.states{
-          margin: 0;
-        }
-        .radioGroup{
-          padding: 0;
-          padding-bottom: 1.5rem;
           display: flex;
-          align-items: center;
-          justify-content: center;
+          gap: 10vw;
+        }
+        .left {
+          .name,
+          .email,
+          .mobile {
+            margin: 0;
+          }
+          .together {
+            margin-left: -0.5vw;
+          }
+          .sameline {
+            width: $mobilewidth;
+            label {
+              font-size: 1rem;
+            }
+            img {
+              width: 15vw;
+            }
+          }
+          .clouds {
+            width: $mobilewidth;
+          }
+          .fields {
+            width: $mobilewidth;
+            .field1 {
+              .sameline {
+                width: $part1;
+              }
+              .clouds {
+                width: $part1;
+                img {
+                  width: $part1;
+                }
+              }
+              width: $part1;
+            }
+            .referral {
+              .sameline {
+                width: $part2;
+              }
+              width: $part2;
+              .clouds {
+                width: $part2;
+                input {
+                  text-align: center;
+                  width: $part2;
+                }
+              }
+            }
+          }
+        }
+        .right {
+          .year,
+          .states {
+            margin: 0;
+          }
+          .radioGroup {
+            padding: 0;
+            padding-bottom: 1.5rem;
+            padding-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
       }
-    }}
+    }
   }
-  .confirmButton{
+  .confirmButton {
     position: absolute;
     bottom: 15vh;
     width: 50vw;
@@ -858,7 +778,7 @@ $part2:$mobilewidth*0.58;
     text-align: center;
     padding: 0;
     margin: 0;
-    span{
+    span {
       padding: 0;
       text-align: center;
       width: 100%;

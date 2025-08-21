@@ -107,6 +107,9 @@
             z-index: 2;
             color: white;
             font: 400 1.6vw "Ibarra Real Nova SemiBold";
+            &:focus {
+              outline: none;
+            }
           }
         }
       }
@@ -256,26 +259,25 @@
           gap: 2vw;
           height: 50vw;
           padding: 0.5vw 0;
+          mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            #000 7%,
+            #000 93%,
+            transparent 100%
+          );
+          --webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            #000 7%,
+            #000 93%,
+            transparent 100%
+          );
           .eventItem {
             width: 50vw;
             button {
               font: 400 2.4vw "Ibarra Real Nova SemiBold";
             }
-          }
-          .eventItemOverlay {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50vw;
-            aspect-ratio: 6.0899;
-            background: linear-gradient(
-              to bottom,
-              rgba(0, 0, 0, 0.5),
-              rgba(0, 0, 0, 1)
-            );
-            z-index: 3;
-            pointer-events: none;
           }
         }
         .confirmButton {
@@ -368,21 +370,6 @@
               transform: translateY(20%);
               font: 400 5.6vw "Ibarra Real Nova SemiBold";
             }
-          }
-          .eventItemOverlay {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            aspect-ratio: 6.0899;
-            background: linear-gradient(
-              to bottom,
-              rgba(0, 0, 0, 0.5),
-              rgba(0, 0, 0, 1)
-            );
-            z-index: 3;
-            pointer-events: none;
           }
         }
         .confirmButton {
