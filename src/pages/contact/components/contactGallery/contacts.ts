@@ -24,7 +24,7 @@ const contacts: Contact[] = [
     {
         name: "Dhruv Maniar",
         role: "Sponsorsships and Company Collaborations",
-        phone: "+91 91675 32053",
+        phone: "+91 80174 72913",
         email: "dhruv@bits-oasis.org",
         imageURL: "/images/contact/Dhruv.png"
     },
