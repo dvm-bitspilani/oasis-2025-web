@@ -23,7 +23,7 @@ import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
-// import ContactDoors from "../contact/ContactDoors";
+import ContactDoors from "../contact/ContactDoors";
 i;
 
 gsap.registerPlugin(ScrollTrigger);
@@ -66,19 +66,19 @@ export default function Landing({
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
   const setRemoveGif = useOverlayStore((state) => state.setRemoveGif);
-  const treeImageRef = useRef<HTMLDivElement>(null);
+  const treeScalerRef = useRef<HTMLDivElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dateCountdownRef = useRef<HTMLDivElement>(null);
   const registerButtonRef = useRef<HTMLDivElement>(null);
   const landingMobileRef = useRef<HTMLImageElement>(null);
-  // const treeContainerRef = useRef<HTMLDivElement>(null);
-  // const aboutUsRef = useRef<HTMLDivElement>(null);
-  // const bottomContentRef = useRef<HTMLDivElement>(null);
+  const treeContainerRef = useRef<HTMLDivElement>(null);
+  const aboutUsRef = useRef<HTMLDivElement>(null);
+  const bottomContentRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    if (treeImageRef.current && landingRef.current) {
-      gsap.set(treeImageRef.current, {
+    if (treeScalerRef.current && landingRef.current) {
+      gsap.set(treeScalerRef.current, {
         autoAlpha: 1,
         scale: 1,
         y: 0,
@@ -138,7 +138,7 @@ export default function Landing({
       masterTimeline
 
         .to(
-          treeImageRef.current,
+          treeScalerRef.current,
           {
             scale: 1.2,
             duration: 4,
@@ -158,12 +158,20 @@ export default function Landing({
         )
 
         .to(
-          treeImageRef.current,
+          treeContainerRef.current,
           {
             y: "-50%",
             duration: 6,
-            scale: 1.2,
+            // scale: 1.2,
             ease: "sine.in",
+          },
+          3
+        )
+        .to(
+          treeScalerRef.current,
+          {
+            scale: 1.2,
+            ease: "sine.in"
           },
           3
         )
@@ -182,7 +190,7 @@ export default function Landing({
       masterTimeline
 
         .to(
-          treeImageRef.current,
+          treeScalerRef.current,
           {
             scale: 1.2,
             duration: 4,
@@ -201,15 +209,20 @@ export default function Landing({
         )
 
         .to(
-          treeImageRef.current,
+          treeContainerRef.current,
           {
             y: "-80%",
-            scale: 1.4,
+            // scale: 1.4,
             duration: 12,
             ease: "sine.in",
           },
           3
         )
+        .to(treeScalerRef.current, {
+          scale: 1.4,
+          duration: 12,
+          ease: "sine.in"
+        })
 
         .to(
           landingRef.current,
@@ -289,9 +302,8 @@ export default function Landing({
     <>
       <div className={styles.wrapperSquared}>
         <div
-          className={`${styles.wrapper} ${
-            !removeGif ? styles.pointerNoneEvent : ""
-          } ${overlayIsActive ? styles.mask : ""}`}
+          className={`${styles.wrapper} ${!removeGif ? styles.pointerNoneEvent : ""
+            } ${overlayIsActive ? styles.mask : ""}`}
           ref={wrapperRef}
         >
           <div
@@ -321,49 +333,66 @@ export default function Landing({
 
             <Navbar />
 
-            <div className={styles.treeContainer} ref={treeImageRef}>
-              <div className={styles.tree}>
-                <div className={styles.socialLinksContainer}>
-                  <div className={styles.wire}>
-                    <img src={wire} alt="" />
-                  </div>
-                  {socialLinks.map((link, index) => (
-                    <div
-                      key={index}
-                      className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
-                    >
-                      <a
-                        key={index}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.socialLink}
-                      >
-                        <img
-                          src={link.icon}
-                          alt=""
-                          className={`${styles.socialIcon} ${link.classNameIcon}`}
-                        />
-                        <img
-                          src={link.lamp}
-                          alt=""
-                          className={`${styles.socialLamp} ${link.classNameLamp}`}
-                        />
-                      </a>
+            <div className={styles.treeContainer} ref={treeContainerRef}>
+              <div className={styles.treeScaler} ref={treeScalerRef}>
+                <div className={styles.tree}>
+                  <div className={styles.socialLinksContainer}>
+                    <div className={styles.wire}>
+                      <img src={wire} alt="" />
                     </div>
-                  ))}
+                    {socialLinks.map((link, index) => (
+                      <div
+                        key={index}
+                        className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
+                      >
+                        <a
+                          key={index}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.socialLink}
+                        >
+                          <img
+                            src={link.icon}
+                            alt=""
+                            className={`${styles.socialIcon} ${link.classNameIcon}`}
+                          />
+                          <img
+                            src={link.lamp}
+                            alt=""
+                            className={`${styles.socialLamp} ${link.classNameLamp}`}
+                          />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                  <img
+                    src={tree}
+                    // className={styles.tree}
+                    alt=""
+                    loading="eager"
+                    fetchPriority="high"
+                    style={{ contain: "none" }}
+                  />
                 </div>
-                <img
-                  src={tree}
-                  // className={styles.tree}
-                  alt=""
-                  loading="eager"
-                  fetchPriority="high"
-                  style={{ contain: "none" }}
-                />
+                <div className={styles.treeExtender}></div>
               </div>
-              <div className={styles.treeExtender}></div>
-            </div>  
+              <div className={styles.bottomContent} ref={bottomContentRef}>
+                {
+                  // replace this with actual about us and give it the required ref 
+                }
+                <div className={styles.dummyAboutUs} ref={aboutUsRef} />
+                {
+                  // Don't render contact doors until the refs are set
+                  wrapperRef.current && aboutUsRef.current &&
+                  <ContactDoors
+                    aboutUsRef={aboutUsRef}
+                    pinnedContRef={wrapperRef}
+                    bottomContentRef={bottomContentRef}
+                  />
+                }
+              </div>
+            </div>
             <div className={styles.logoContainer}>
               <img src={logo} className={styles.logo} alt="Logo" />
             </div>
@@ -428,7 +457,7 @@ export default function Landing({
             <div className={styles.dummyAboutUs} ref={aboutUsRef} /> 
             {
               // Don't render contact doors until the refs are set
-              treeImageRef.current && aboutUsRef.current &&
+              treeScalerRef.current && aboutUsRef.current &&
               <ContactDoors
                 aboutUsRef={aboutUsRef} 
                 pinnedContRef={wrapperRef}

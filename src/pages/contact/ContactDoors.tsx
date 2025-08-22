@@ -65,7 +65,7 @@ export default function ContactDoors({ aboutUsRef, pinnedContRef, bottomContentR
         <div className={styles.contactSection}>
             <div className={styles.contactDoor} ref={door1Ref} style={{backgroundImage: `url(${door1})`}} />
             <div className={styles.contactDoor} ref={door2Ref} style={{backgroundImage: `url(${door2})`}} />
-            <ContactGallery />
+            {/* <ContactGallery /> */}
         </div>
     )
 }
