@@ -1,14 +1,14 @@
 @use "/src/assets/global.scss" as *;
 
 .eventsContainer {
-  margin: 0 0 5vw 24vw;
+  margin: 0 0 0vw 24vw;
   opacity: 0;
   display: none;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  height: 43vw;
-  z-index: 3;
+  height: 65svh;
+  z-index: 4;
 
   .headingCont {
     display: flex;
@@ -115,7 +115,7 @@
       }
       .confirmButton {
         position: absolute;
-        bottom: 0;
+        bottom: -2vw;
         transform: translateY(100%);
         align-self: center;
         outline: none;
@@ -123,7 +123,7 @@
         cursor: pointer;
         margin-top: 2vw;
         background: center / cover no-repeat
-          url("/images/registration/button-banner.png");
+          url("/svgs/registration/button-banner.svg");
         padding: 1vw;
         color: #fff;
         font: 100 1.5vw "Abhaya Libre Extrabold";
@@ -168,8 +168,6 @@
     }
 
     .eventDescription {
-      // display: none;
-      // opacity: 0;
       z-index: 3;
       height: 100%;
       width: 100%;
@@ -193,6 +191,12 @@
         font: 400 1.2vw "Abhaya Libre";
         margin-bottom: 1vw;
         line-height: 1.7;
+        height: 100%;
+        overflow-y: auto;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
       button {
         margin: auto auto 0 auto;
@@ -287,7 +291,6 @@
           align-self: center;
           margin-top: 1vw;
           padding: 1.5vw;
-          color: #fff;
           font: 100 2.5vw "Abhaya Libre Extrabold";
           justify-content: center;
           gap: 1vw;
@@ -373,17 +376,7 @@
           }
         }
         .confirmButton {
-          position: absolute;
-          bottom: 0;
-          transform: translateY(200%);
-          align-self: center;
-          margin-top: 1vw;
-          padding: 1.5vw;
-          color: #fff;
           font: 100 4.9vw "Abhaya Libre Extrabold";
-          justify-content: center;
-          gap: 1vw;
-          width: 45vw;
 
           .confirmIcon {
             width: 10vw;

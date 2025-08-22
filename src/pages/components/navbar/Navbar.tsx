@@ -9,13 +9,17 @@ import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
 
 const navItems = [
-  { label: "Home", katakana: "ホーム", links:"/" },
-  { label: "About Us", katakana: "アバウト・アス", links:"/aboutus"},
-  { label: "Events", katakana: "イベンツ", links:"/events"},
-  { label: "Contact", katakana: "コンタクト" , links:"/contactus"},
+  { label: "Home", katakana: "ホーム", links: "/" },
+  { label: "About Us", katakana: "アバウト・アス", links: "/aboutus" },
+  { label: "Events", katakana: "イベンツ", links: "/events" },
+  { label: "Contact", katakana: "コンタクト", links: "/contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({
+  goToPage,
+}: {
+  goToPage: (path: string) => void;
+}) {
   return (
     <nav className={styles.nav}>
       <div className={styles.hamMenuBtn}>
@@ -56,11 +60,14 @@ export default function Navbar() {
       </div>
       <ul className={styles.navList}>
         {navItems.map((item) => (
-          <li key={item.label} className={styles.navItem} >
-            <a className={styles.navLink} >
+          <li key={item.label} className={styles.navItem}>
+            <div
+              className={styles.navLink}
+              onClick={() => goToPage(item.links)}
+            >
               <div className={styles.actualLabel}>{item.label}</div>
               <div className={styles.katakana}>{item.katakana}</div>
-            </a>
+            </div>
           </li>
         ))}
       </ul>

@@ -4,9 +4,9 @@ import Instructions from "../../pages/registration/components/Instructions/Instr
 import Register from "../../pages/registration/components/Register/Register";
 import Events from "../../pages/registration/components/Events/Events";
 
-import banner from "/images/registration/reg-banner.png";
+import banner from "/svgs/registration/reg-banner.svg";
 import bgExtend from "/svgs/registration/bg-extended.svg";
-// import sun from "/svgs/registration/sunNew.svg";
+import bgMobile from "/svgs/registration/bg-mobile.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -15,14 +15,11 @@ import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Back from "/svgs/registration/back.svg";
-// import { useNavigate } from "react-router-dom";
 
 interface RegistrationProps {
   startAnimation: boolean;
   goToPage: (path: string) => void;
 }
-const isMobile =
-  window.innerWidth < 1200 && window.innerWidth / window.innerHeight < 0.75;
 
 const Registration = ({ goToPage }: RegistrationProps) => {
   const { contextSafe } = useGSAP();
@@ -40,9 +37,6 @@ const Registration = ({ goToPage }: RegistrationProps) => {
   const elemRef1 = useRef<HTMLDivElement>(null);
   const elemRef2 = useRef<HTMLDivElement>(null);
   const elemRef3 = useRef<HTMLDivElement>(null);
-  const sunRef = useRef<HTMLImageElement>(null);
-
-  //const navigate = useNavigate();
 
   const toFirstPage = () => {
     const mm = gsap.matchMedia();
@@ -50,18 +44,11 @@ const Registration = ({ goToPage }: RegistrationProps) => {
       "(min-width: 1200px) or (aspect-ratio > 1.45)",
       contextSafe(() => {
         gsap.to(bgRef.current, {
-          x: "-42.5%",
+          left: "0",
           duration: 1.5,
           // ease: "power1.out",
           onStart: () => setIsAnim(true),
           onComplete: () => setIsAnim(false),
-        });
-        gsap.to(sunRef.current, {
-          left: "-5%",
-          bottom: "17vw",
-          x: "0%",
-          duration: 1.5,
-          // ease: "power1.out",
         });
         const tl = gsap.timeline();
         tl.to(elemRef2.current, {
@@ -122,18 +109,11 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     contextSafe(() => {
       mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
         gsap.to(bgRef.current, {
-          x: "-16.5%",
+          left: "50%",
           duration: 1.5,
           // ease: "power1.out",
           onStart: () => setIsAnim(true),
           onComplete: () => setIsAnim(false),
-        });
-        gsap.to(sunRef.current, {
-          left: "50%",
-          bottom: "33svh",
-          x: "-49.5%",
-          duration: 1.5,
-          // ease: "power1.out",
         });
         const tl = gsap.timeline();
         tl.to(back ? elemRef3.current : elemRef1.current, {
@@ -186,9 +166,9 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     })();
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     document.body.style.position = "static";
-  },[])
+  }, []);
   // useEffect(() => {
   //   // if (startAnimation) {
   //   toRegPage(false);
@@ -203,18 +183,11 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
       contextSafe(() => {
         gsap.to(bgRef.current, {
-          x: "-1%",
+          left: "76%",
           duration: 1.5,
           // ease: "power1.out",
           onStart: () => setIsAnim(true),
           onComplete: () => setIsAnim(false),
-        });
-        gsap.to(sunRef.current, {
-          left: "67%",
-          bottom: "17vw",
-          x: "0%",
-          duration: 1.5,
-          // ease: "power1.out",
         });
         const tl = gsap.timeline();
         tl.to(elemRef2.current, {
@@ -275,7 +248,6 @@ const Registration = ({ goToPage }: RegistrationProps) => {
         goToPage("/");
         break;
       case 2:
-        console.log("Navigating back to the first page");
         toFirstPage();
         break;
       case 3:
@@ -320,10 +292,14 @@ const Registration = ({ goToPage }: RegistrationProps) => {
   return (
     <div className={styles.instrback}>
       {/* <img src={sun} alt="sun" className={styles.sun} ref={sunRef} /> */}
-      <div className={styles.overlay}></div>
-      <span className={styles.sun} ref={sunRef}></span>
+      {/* <div className={styles.overlay}></div> */}
       <img
-        src={bgExtend}
+        src={
+          window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45) ")
+            .matches
+            ? bgMobile
+            : bgExtend
+        }
         alt="background"
         className={styles.backgroundImage}
         ref={bgRef}
@@ -336,11 +312,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
         onClick={backButtonHandler}
         className={styles.backBtn}
       >
-        <img
-          src={Back}
-          alt=""
-          style={{ width: isMobile ? "12vw" : "4vw", height: "auto" }}
-        />
+        <img src={Back} alt="Back Button" />
       </button>
 
       <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />

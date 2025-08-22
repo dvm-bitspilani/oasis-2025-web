@@ -1,40 +1,4 @@
-$inputwidth: 30vw;
-$inputheight: 10vh;
 @use "/src/assets/global.scss" as *;
-
-.confirmButton {
-  position: absolute;
-  bottom: 2vw;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  outline: none;
-  border: none;
-  text-align: center;
-  cursor: pointer;
-  margin: 2vw 0;
-  background: center / cover no-repeat
-    url("/images/registration/button-banner.png");
-  padding: 1vw;
-  color: #fff;
-  font: 100 1.5vw "Abhaya Libre Extrabold";
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 22vw;
-  span {
-    padding-left: 40%;
-    text-align: center;
-  }
-
-  .confirmIcon {
-    width: 7vw;
-    height: 0.5vw;
-    &:last-child {
-      rotate: 180deg;
-    }
-  }
-}
 
 .registerContainer {
   display: none;
@@ -43,621 +7,272 @@ $inputheight: 10vh;
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 43vw;
-  margin-bottom: 5vw;
+  height: 100%;
+  z-index: 3;
+  position: relative;
 
   input:-webkit-autofill,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
     box-shadow: 0 0 0 1000px transparent inset !important;
-    -webkit-text-fill-color: white !important;
-    color: white !important;
+    -webkit-text-fill-color: #e2dccb !important;
+    color: #e2dccb !important;
+    font: 100 1.4vw "Abhaya Libre Extrabold" !important;
     background-color: transparent !important;
     transition: background-color 5000s ease-in-out 0s;
   }
-  .react-select__input-container {
-    input {
-      box-shadow: none !important;
-    }
-  }
 
   .registrationForm {
-    z-index: 3;
-    display: flex;
     position: absolute;
-    bottom: 24svh;
+    transform: translateY(50%);
+    bottom: 45.5svh;
     left: 0;
     color: white;
-    padding: 2rem;
     width: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
 
     .formColumns {
-      z-index: 4;
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
       gap: 21vw;
 
       .left {
-        .together {
-          display: flex;
-          flex-direction: row;
-          width: 31vw;
-          gap: 10px;
-
-          .fields {
-            display: flex;
-            flex-direction: row;
-            gap: 0;
-
-            .field1 {
-              display: flex;
-              flex-direction: column;
-              width: 12.6vw;
-
-              .sameline {
-                width: 10vw;
-                label {
-                  z-index: 100;
-                  text-align: center;
-                }
-              }
-
-              .clouds {
-                position: relative;
-                width: 10vw;
-                input,
-                select {
-                  width: 12.6vw;
-                  padding-top: 1vw;
-                }
-                img {
-                  width: 12.6vw;
-                  height: auto;
-                  position: absolute;
-                  object-fit: contain;
-                  align-self: baseline;
-                }
-                .selection {
-                  width: 13vw;
-                  padding-top: 1vw;
-
-                  // Normal + focused state control
-                  .Select__control,
-                  .Select__control--is-focused {
-                    border: 1px solid #ededed;
-                    height: 2.5rem;
-                    width: 10vw !important;
-                    padding: 0 !important;
-                    box-shadow: none !important;
-                  }
-
-                  .Select__placeholder {
-                    color: #fff;
-                    padding: 0 !important;
-                    width: 10vw;
-                  }
-                }
-              }
-            }
-          }
-        }
-        .clouds {
-          input {
-            text-align: center;
-            height: 4vw;
-          }
-        }
+        align-items: flex-end;
       }
       .right {
-        .clouds {
-          img {
-            padding-top: 3.5vw;
-          }
-          fieldset {
-            border: none;
-            box-shadow: none;
-          }
-        }
+        align-items: flex-start;
       }
+
       .left,
       .right {
+        width: 100%;
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 4vw;
+        justify-content: center;
+        gap: 1vw;
 
-        .Select__control,
-        .Select__control--is-focused {
-          border: 1px solid #ededed;
-          height: 2.5rem;
-          outline: none !important;
-          box-shadow: none !important;
-          padding-left: "5vw" !important;
-          padding-right: "5vw" !important;
-          width: 10vw !important;
-          padding: 0 !important;
-          box-shadow: none !important;
-        }
-        .genderSelect__placeholder {
-          display: flex;
-          justify-content: center;
+        .clouds {
+          position: relative;
+          width: 28vw;
+          aspect-ratio: 5.8223;
+          overflow: visible;
           align-items: center;
-          width: 100%;
-          text-align: center;
-          color: white;
           padding: 0;
           margin: 0;
-          white-space: nowrap;
+          z-index: 0;
+
+          input {
+            width: 100%;
+            height: 100%;
+            color: #e2dccb;
+            box-sizing: border-box;
+            background: transparent;
+            border: 0;
+            text-align: center;
+            font: 100 1.4vw "Abhaya Libre Extrabold";
+            &:focus {
+              outline: none;
+              box-shadow: none;
+            }
+          }
+
+          img {
+            position: absolute;
+            overflow-x: visible;
+            overflow-y: hidden;
+            display: flex;
+            width: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            z-index: -2;
+          }
+          .react-select-container {
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            // overflow: visible;
+          }
+          .radioGroup {
+            border: none;
+            box-shadow: none;
+            width: 100%;
+            z-index: 5;
+            height: 100%;
+            background: transparent;
+            box-shadow: none;
+            color: #e2dccb;
+            border-radius: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.3vw;
+            position: relative;
+
+            .radioLabel {
+              display: flex;
+              align-items: center;
+              gap: 0.3vw;
+              font: 100 1.4vw "Abhaya Libre Extrabold";
+              color: #e2dccb;
+              cursor: pointer;
+
+              .radioInput {
+                appearance: none;
+                padding: 0;
+                width: 1.2vw !important;
+                height: 1.2vw !important;
+                border: 2px solid white;
+                border-radius: 50%;
+                position: relative;
+                outline: none;
+                cursor: pointer;
+                background-color: transparent;
+                transition: border-color 0.3s ease;
+
+                &:checked::after {
+                  content: "";
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  width: 0.4vw;
+                  height: 0.4vw;
+                  background: linear-gradient(
+                    0deg,
+                    #f57572 0%,
+                    #f8a26c 42.84%,
+                    #fcdf81 102.69%
+                  );
+                  border-radius: 50%;
+                  transform: translate(-50%, -50%);
+                }
+              }
+            }
+          }
+        }
+
+        .sameline {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          top: 0.5vw;
+
+          label {
+            color: #fff9e9;
+            font: 400 1.4vw "Abhaya Libre";
+            text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
+          }
+          img {
+            width: 7vw;
+          }
         }
 
         .email,
-        .together {
-          margin-left: 1vw;
+        .gender,
+        .city,
+        .mobile,
+        .name,
+        .college,
+        .year,
+        .states {
+          width: 100%;
+          z-index: 5;
+          position: relative;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+        }
+
+        .email,
+        .gender {
+          margin-right: 5vw;
         }
         .mobile,
         .name {
-          margin-left: 4.5vw;
+          margin-right: 1vw;
         }
         .college,
         .city {
-          margin-left: 0.5vw;
+          margin-left: 1vw;
         }
         .year,
         .states {
-          margin-left: 4.5vw;
-        }
-        .referral {
-          .sameline {
-            width: 18vw;
-          }
-          .clouds {
-            height: 3vw;
-            width: 18vw;
-            input {
-              width: 18vw;
-            }
-
-            input[type="date"]::-webkit-calendar-picker-indicator {
-              background: transparent;
-              color: transparent;
-              opacity: 0; /* hides icon */
-              position: absolute;
-              right: 0;
-              width: 100%;
-              height: 100%;
-              cursor: pointer;
-              z-index: 3;
-            }
-
-            .dateWrapper input[type="date"] {
-              position: relative;
-              z-index: 2;
-              background: transparent;
-              color: white;
-              padding-right: 2.5rem; // leave space for icon
-            }
-            .dateWrapper {
-              position: relative;
-            }
-            .dat {
-              position: absolute !important;
-
-              top: 1.25vw;
-              left: 0.5vw;
-              width: 3vw;
-              height: 3vw;
-              pointer-events: none;
-              z-index: 1;
-            }
-          }
-        }
-        .radioInput {
-          appearance: none;
-
-          padding: 0;
-          width: 1vw !important;
-          height: 1vw !important;
-          border: 2px solid white;
-          border-radius: 50%;
-          position: relative;
-          outline: none;
-          cursor: pointer;
-          background-color: transparent;
-          transition: border-color 0.3s ease;
-          &:checked::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 8px;
-
-            height: 8px;
-            background: linear-gradient(
-              0deg,
-              #f57572 0%,
-              #f8a26c 42.84%,
-              #fcdf81 102.69%
-            );
-
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-          }
+          margin-left: 5vw;
         }
 
-        input,
-        select {
-          text-align: center;
-          width: 30vw;
-          font-size: 0.8rem;
-          height: 2.1rem;
-          background: transparent;
-          border: 0;
-          padding-top: 2vw;
-          color: white;
-        }
-
-        p {
-          transform: translateY(2.5vw);
-          font-size: 0.75rem;
+        .error {
+          position: absolute;
+          left: 18%;
+          bottom: -0.8vw;
           color: #ffb3b3;
-          text-align: center;
+          font: 400 1vw "Abhaya Libre";
+          text-align: left;
         }
       }
     }
   }
-}
-
-select {
-  background-color: transparent;
-  color: white;
-  option {
-    background-color: #2e0505;
-    color: white;
-    width: 30vw;
-    font-size: 1rem;
-    text-align: center;
-  }
-}
-.field1 {
-  option {
-    width: 1vw;
-    font-size: 1rem;
-    text-align: left;
-  }
-}
-.birds2 {
-  margin-top: 2vw;
-  width: 45vw;
-  height: 4vw;
-  background: center / contain no-repeat url("/svgs/registration/birds2.svg");
-  background-blend-mode: overlay;
-
-  .header {
-    margin-top: 1vw;
-    text-align: center;
-    font-size: 4vw;
-  }
-}
-
-.sameline {
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4px;
-  width: $inputwidth;
-
-  label {
-    color: #fff9e9;
-    font: 400 1.2vw "Abhaya Libre";
-    text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
-  }
-}
-
-.gendob {
-  height: 1vw;
-}
-.gendob .react-select__placeholder {
-  width: auto !important; // Allow placeholder to expand based on content
-  min-width: 8vw !important;
-  text-align: center !important;
-  color: #cfcfcf;
-  opacity: 1;
-}
-
-.clouds {
-  height: 2.3rem;
-  position: relative;
-  width: 30vw;
-  overflow: visible;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-
-  input {
-    width: 100%;
-    padding-left: 3.1rem;
-    padding-right: 3.1rem;
-    color: white;
-    padding: 0.5rem;
-    font-size: 1rem;
-    z-index: 3;
-    box-sizing: border-box;
-    &:focus {
-      outline: none;
-      box-shadow: none;
-    }
-  }
-
-  img {
+  .confirmButton {
     position: absolute;
-    overflow-x: visible;
-    overflow-y: hidden;
-    display: flex;
-    //align-self: center;
-    width: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    z-index: -2;
-  }
-
-  img:first-of-type {
-    left: 0;
-  }
-
-  img:last-of-type {
-    right: 0;
-  }
-}
-.right {
-  .clouds {
-    img {
-      position: absolute;
-      overflow-x: visible;
-      overflow-y: hidden;
-      display: flex;
-      align-self: center;
-      width: 100%;
-      object-fit: contain;
-      pointer-events: none;
-      z-index: -2;
-    }
-  }
-}
-.sameline {
-  img {
-    width: 7vw;
-  }
-}
-
-.radioGroup {
-  padding-left: 3.1rem;
-  padding-right: 3.1rem;
-  width: 100%;
-  z-index: 5;
-  height: 3vw;
-  background: transparent;
-  box-shadow: none;
-  color: white;
-  border-radius: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5vw;
-  padding: 0.5rem 1rem;
-  position: relative;
-  padding-top: 1.1rem;
-
-  .radioLabel {
+    bottom: 2vw;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    outline: none;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    margin: 2vw 0;
+    background: center / cover no-repeat
+      url("/svgs/registration/button-banner.svg");
+    padding: 1vw;
+    color: #fff;
+    font: 100 1.5vw "Abhaya Libre Extrabold";
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    font-size: 1.2rem;
-    color: white;
+    justify-content: space-between;
+    width: 22vw;
+    span {
+      padding-left: 40%;
+      text-align: center;
+    }
 
-    cursor: pointer;
-    font-weight: 500;
+    .confirmIcon {
+      width: 7vw;
+      height: 0.5vw;
+      &:last-child {
+        rotate: 180deg;
+      }
+    }
   }
-}
-input::placeholder {
-  color: #cfcfcf;
-  font-family: $regFont;
-}
-
-.react-select__control {
-  box-sizing: border-box;
-  text-align: center;
-  width: 30vw;
-  height: 2.1rem;
-  background: #00000061;
-  border: 1px solid #ededed;
-  color: white;
-  padding: 0.5rem;
-  cursor: pointer;
-
-  width: 30vw;
-}
-
-.react-select__single-value {
-  color: white;
-
-  width: 30vw;
-  text-align: center;
-}
-
-.react-select__input {
-  color: white;
-  text-align: center;
-}
-.react-select__control--is-focused {
-  width: 30vw;
-  border-color: #ededed;
-}
-.react-select__menu {
-  border-radius: 10px;
-  margin-top: 0;
-  width: 30vw;
-  overflow: hidden;
-  z-index: 10;
-}
-.react-select__value-container {
-  box-sizing: border-box;
-  text-align: center;
-
-  width: 3vw;
-  height: 2.1rem;
-  background: #00000061;
-  border: 1px solid #ededed;
-  color: white;
-  padding: 0;
-  cursor: pointer;
-}
-
-.Select__input input {
-  text-align: center !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  caret-color: white;
-}
-
-.Select__input input::placeholder {
-  text-align: center !important;
-  color: #cfcfcf;
-  opacity: 1;
-}
-
-.react-select__control {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0 !important;
-  width: 30vw !important;
-  background: #00000061;
-  border: 1px solid #ededed;
-  box-shadow: 0 0 10px #e5c3845e;
-}
-
-.react-select__value-container {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0 !important;
-  width: 100% !important;
-}
-
-.react-select__input {
-  margin-left: 0 !important;
-  padding: 0 !important;
-  input {
-    text-align: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    caret-color: white;
-  }
-}
-
-.react-select__placeholder {
-  width: 100%;
-  text-align: center !important;
-  color: #cfcfcf;
-  opacity: 1;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-.react-select__control {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0 !important;
-  width: 30vw !important;
-  background: #00000061;
-  border: 1px solid #ededed;
-  box-shadow: 0 0 10px #e5c3845e;
-}
-
-.react-select__value-container {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0 !important;
-  width: 100% !important;
-  text-align: center;
-}
-
-.react-select__input {
-  margin: 0 !important;
-  padding-left: -20vw !important;
-
-  input {
-    width: 100% !important;
-    text-align: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    caret-color: white;
-  }
-}
-
-.react-select__placeholder {
-  width: 100%;
-  text-align: center !important;
-  color: #cfcfcf;
-  opacity: 1; // make sure it is visible
-  padding: 0 !important;
-  margin: 0 !important;
 }
 
 @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
   .registerContainer {
-    height: 63vw;
-    overflow: hidden;
-    overflow: scroll;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
+    margin: 0 0 5vw 0;
+    width: 100%;
+    height: 100svh;
+    position: relative;
+
+    input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    select:-webkit-autofill {
+      font: 100 3.2vw "Abhaya Libre Extrabold" !important;
     }
+
     .registrationForm {
-      padding: 0;
-      .formColumns {
-        flex-direction: column;
-        gap: 2vw;
-        .left {
-          .name,
-          .email,
-          .mobile {
-            margin: 0;
-          }
-          .together {
-            margin-left: -0.5vw;
-          }
-        }
-        .right {
-          .year,
-          .states {
-            margin: 0;
-          }
-        }
-      }
-    }
-  }
-}
-$mobilewidth: 80vw;
-$part1: $mobilewidth * 0.42;
-$part2: $mobilewidth * 0.58;
-@media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
-  .registerContainer {
-    padding: 0;
-    overflow: visible;
-    .registrationForm {
-      position: absolute;
-      top: 20vw;
-      height: 65vh;
-      padding: 0;
+      max-height: 60svh;
+      bottom: auto;
+      top: 0%;
+      transform: translateY(0%);
       overflow-y: scroll;
-      overflow-x: hidden;
       scrollbar-width: none;
+      padding: 4vw 0;
       &::-webkit-scrollbar {
         display: none;
       }
@@ -675,113 +290,146 @@ $part2: $mobilewidth * 0.58;
         #000 93%,
         transparent 100%
       );
+
       .formColumns {
         flex-direction: column;
-        gap: 10vw;
+        gap: 2vw;
 
         .left,
         .right {
-          .sameline {
-            width: $mobilewidth;
-            label {
-              font-size: 1rem;
-            }
-            img {
-              width: 15vw;
-              $h: height;
-            }
-          }
-          .clouds {
-            height: 8vh;
-            width: $mobilewidth;
-            input {
-              width: $mobilewidth;
-              height: 7vh;
-            }
-          }
-          display: flex;
-          gap: 10vw;
-        }
-        .left {
+          .year,
+          .states,
+          .college,
+          .city,
+          .mobile,
           .name,
           .email,
-          .mobile {
+          .gender {
             margin: 0;
-          }
-          .together {
-            margin-left: -0.5vw;
-          }
-          .sameline {
-            width: $mobilewidth;
-            label {
-              font-size: 1rem;
-            }
-            img {
-              width: 15vw;
-            }
           }
           .clouds {
-            width: $mobilewidth;
-          }
-          .fields {
-            width: $mobilewidth;
-            .field1 {
-              .sameline {
-                width: $part1;
-              }
-              .clouds {
-                width: $part1;
-                img {
-                  width: $part1;
-                }
-              }
-              width: $part1;
+            width: 70vw;
+            input {
+              font: 100 3.2vw "Abhaya Libre Extrabold";
             }
-            .referral {
-              .sameline {
-                width: $part2;
-              }
-              width: $part2;
-              .clouds {
-                width: $part2;
-                input {
-                  text-align: center;
-                  width: $part2;
+            .radioGroup {
+              gap: 1.5vw;
+
+              .radioLabel {
+                gap: 0.3vw;
+                font: 100 3.2vw "Abhaya Libre Extrabold";
+
+                .radioInput {
+                  width: 3.5vw !important;
+                  height: 3.5vw !important;
+                  border: 2px solid white;
+
+                  &:checked::after {
+                    width: 1.7vw;
+                    height: 1.7vw;
+                  }
                 }
               }
             }
           }
-        }
-        .right {
-          .year,
-          .states {
-            margin: 0;
+          .error {
+            left: 13%;
+            bottom: -1.2vw;
+            font: 400 2.5vw "Abhaya Libre";
           }
-          .radioGroup {
-            padding: 0;
-            padding-bottom: 1.5rem;
-            padding-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          .sameline {
+            label {
+              font: 400 3vw "Abhaya Libre";
+            }
+            img {
+              width: 18vw;
+            }
           }
         }
       }
     }
+    .confirmButton {
+      padding: 1.5vw;
+      font: 100 2.5vw "Abhaya Libre Extrabold";
+      justify-content: center;
+      gap: 1vw;
+      width: 45vw;
+
+      .confirmIcon {
+        width: 10vw;
+        height: 0.8vw;
+      }
+    }
   }
-  .confirmButton {
-    position: absolute;
-    bottom: 15vh;
-    width: 50vw;
-    height: 10vw;
-    font-size: 2rem;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-    span {
-      padding: 0;
-      text-align: center;
-      width: 100%;
+}
+
+@media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
+  .registerContainer {
+    input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    select:-webkit-autofill {
+      font: 100 3.2vw "Abhaya Libre Extrabold" !important;
+    }
+
+    .registrationForm {
+      max-height: 75svh;
+      padding: 7vw 0;
+
+      .formColumns {
+        gap: 9vw;
+
+        .left,
+        .right {
+          gap: 9vw;
+          .clouds {
+            width: 87vw;
+            input {
+              font: 100 4.2vw "Abhaya Libre Extrabold";
+            }
+            .radioGroup {
+              gap: 2.5vw;
+
+              .radioLabel {
+                gap: 0.7vw;
+                font: 100 4.2vw "Abhaya Libre Extrabold";
+
+                .radioInput {
+                  width: 3.5vw !important;
+                  height: 3.5vw !important;
+                  border: 2px solid white;
+
+                  &:checked::after {
+                    width: 1.7vw;
+                    height: 1.7vw;
+                  }
+                }
+              }
+            }
+          }
+          .error {
+            left: 13%;
+            bottom: -4vw;
+            font: 400 3.2vw "Abhaya Libre";
+          }
+          .sameline {
+            label {
+              font: 400 4.4vw "Abhaya Libre";
+            }
+            img {
+              width: 20vw;
+            }
+          }
+        }
+      }
+    }
+    .confirmButton {
+      bottom: 6vw;
+      font: 100 4.9vw "Abhaya Libre Extrabold";
+
+      .confirmIcon {
+        width: 10vw;
+        height: 1.5vw;
+      }
     }
   }
 }

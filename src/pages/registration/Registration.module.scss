@@ -2,20 +2,20 @@
 
 .instrback {
   background: linear-gradient(to bottom, #000 0%, #666666 100%);
-  min-height: 100svh;
+  height: 100svh;
   width: 100vw;
   display: flex;
   align-items: center;
   flex-direction: column;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 
   .backgroundImage {
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 175vw;
-    transform: translateX(-42.5%);
+    height: 75svh;
+    left: 7%;
+    transform: translateX(-50%);
     pointer-events: none;
     object-fit: cover;
     object-position: 0 0.5vw;
@@ -26,15 +26,12 @@
     position: absolute;
     bottom: 17vw;
     left: -5%;
-    // left: 50%;
-    // transform: translateX(-49.5%);
-    // transform: translateY(-25%);
     height: 20vw;
     aspect-ratio: 1;
     z-index: 0;
     border-radius: 50%;
-    box-shadow: 0px 0px 10px white;
-    background-color: white;
+    // box-shadow: 0px 0px 10px white;
+    // background-color: white;
     display: inline-block;
   }
 
@@ -61,9 +58,17 @@
     position: absolute;
     top: 2vw;
     left: 2vw;
-    background: transparent;
-    color: #fff;
-    font: 100 1.5vw "Abhaya Libre Extrabold";
+    width: 4vw;
+    height: 4vw;
+    background: black;
+    &:focus {
+      outline: none;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
   .inActive {
     display: none;
@@ -72,7 +77,7 @@
 
 @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
   .instrback {
-    height: 100svh;
+    // height: 100svh;
     overflow-y: hidden;
 
     .overlay {
@@ -85,10 +90,13 @@
       z-index: 1;
     }
     .backgroundImage {
-      left: 50%;
-      width: auto;
-      height: 100vw;
-      transform: translateX(-45%);
+      bottom: 0;
+      left: 0;
+      height: auto;
+      width: 100vw;
+      transform: translateX(0);
+      object-fit: contain;
+      object-position: 0 0;
     }
     .sun {
       position: absolute;
@@ -102,6 +110,10 @@
     .birds {
       width: 85vw;
     }
+    .backBtn {
+      width: 8vw;
+      height: 8vw;
+    }
   }
 }
 @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
@@ -109,18 +121,15 @@
     .birds {
       width: 85vw;
     }
-    .backgroundImage {
-      height: auto;
-      width: 900vw;
-      translate: 0 13%;
-      // filter: blur(1px);
-      // object-fit: cover;
-    }
     .sun {
       position: absolute;
       bottom: 63vw;
       height: 67vw;
       filter: blur(1px);
+    }
+    .backBtn {
+      width: 14vw;
+      height: 14vw;
     }
   }
 }

@@ -106,14 +106,11 @@ const Events = forwardRef<
   }) => {
     const mm = gsap.matchMedia();
     contextSafe(() => {
-      if (activeEvent && activeEvent.id !== event.id) {
+      if (!activeEvent || activeEvent.id !== event.id) {
         mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
           const tl = gsap.timeline({
             onStart: () => {
-              setActiveEvent((prev) => {
-                if (prev && prev.id === event.id) return null;
-                return event;
-              });
+              setActiveEvent(event);
             },
           });
           tl.set(eventDescRef.current, { display: "flex" }).fromTo(
@@ -122,14 +119,11 @@ const Events = forwardRef<
             { opacity: 1, duration: 0.5 }
           );
         });
-      }
-      mm.add("(max-width: 1199px) and (aspect-ratio <= 1.45)", () => {
-        setActiveEvent(() => {
-          // if (prev && prev.id === event.id) return null;
-          return event;
+        mm.add("(max-width: 1199px) and (aspect-ratio <= 1.45)", () => {
+          setActiveEvent(event);
+          setEventsModal(true);
         });
-        setEventsModal(true);
-      });
+      }
     })();
   };
 
@@ -137,21 +131,28 @@ const Events = forwardRef<
     event: { id: number; name: string; about: string } | null
   ) => {
     if (!event) return;
-
-    if (selectedEvents.some((e) => e.id === event.id)) {
-      sessionStorage.setItem(
-        "selectedEvents",
-        JSON.stringify(selectedEvents.filter((e) => e.id !== event.id))
-      );
-      setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
-    } else {
-      sessionStorage.setItem(
-        "selectedEvents",
-        JSON.stringify([...selectedEvents, event])
-      );
-      setSelectedEvents((prev) => [...prev, event]);
-    }
-    showEventDescription(event);
+    const mm = gsap.matchMedia();
+    contextSafe(() => {
+      mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
+        if (selectedEvents.some((e) => e.id === event.id)) {
+          sessionStorage.setItem(
+            "selectedEvents",
+            JSON.stringify(selectedEvents.filter((e) => e.id !== event.id))
+          );
+          setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
+        } else {
+          sessionStorage.setItem(
+            "selectedEvents",
+            JSON.stringify([...selectedEvents, event])
+          );
+          setSelectedEvents((prev) => [...prev, event]);
+        }
+        showEventDescription(event);
+      });
+      mm.add("(max-width: 1199px) and (aspect-ratio <= 1.45)", () => {
+        showEventDescription(event);
+      });
+    })();
   };
 
   function handleScroll() {
@@ -275,7 +276,7 @@ const Events = forwardRef<
                       showEventDescription(event);
                     }
                   }}
-                  onClick={() => showEventDescription(event)}
+                  onClick={() => handleEvent(event)}
                   className={styles.eventItem}
                 >
                   <svg
@@ -416,7 +417,6 @@ const Events = forwardRef<
           {activeEvent && (
             <div className={styles.eventDescription} ref={eventDescRef}>
               <h2>{activeEvent.name}</h2>
-              <p>{activeEvent.about}</p>
               <p>{activeEvent.about}</p>
               <button onClick={() => handleEvent(activeEvent)}>
                 {selectedEvents.some((e) => e.id === activeEvent.id)

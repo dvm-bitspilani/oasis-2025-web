@@ -23,14 +23,10 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
             able to login through your registered email id when required.
           </li>
           <li>All team members are required to register separately.</li>
-          <li>
-            A College Representative (CR) will be appointed for each college
-            who'll be responsible for allotting heads for all the societies the
-            college will be participating for.
-          </li>
           <li>All prof shows are free. </li>
           <li>
-            For further details contact, Parimal: 8638304074, Ishita: 7804051996
+            For further details contact, Ujjwal Kansal: +91 99915 20330, Sneha:
+            +91 90268 55597
           </li>
           <li>For detailed Instructions click here</li>
         </ul>

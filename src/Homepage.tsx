@@ -2,7 +2,11 @@ import Landing from "./pages/landing/Landing";
 import DrawingPreloader from "./pages/components/drawingPreloader/DrawingPreloader";
 import useOverlayStore from "./utils/store";
 
-export default function Homepage({ goToPage }: { goToPage: (path: string) => void }) {
+export default function Homepage({
+  goToPage,
+}: {
+  goToPage: (path: string) => void;
+}) {
   const removeGif = useOverlayStore((state) => state.removeGif);
   return (
     <div>

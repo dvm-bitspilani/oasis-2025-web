@@ -52,40 +52,93 @@
   mask-position: center;
 }
 
-.btnContainer {
+.infoContainer {
   position: absolute;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   top: 0;
   left: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  .btnContainer {
+    // height: 100%;
+    // width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .enterButton {
+      font-family: $primaryFont;
+      font-size: 2rem;
+      color: rgb(0, 0, 0);
+      background: none;
+      border: 2px solid rgb(0, 0, 0);
+      padding: 15px 40px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-image: url(/images/paper-texture.webp);
+      background-position: center;
+      transform: translate(-12%, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: fit-content;
+
+      &:hover {
+        opacity: 0.8;
+        scale: 1.05;
+      }
+      .enterButtonText {
+        margin-top: 1px;
+        height: 32px;
+      }
+    }
+  }
 }
-.enterButton {
+.infoText {
+  position: absolute;
+  bottom: 20px;
+  height: fit-content;
+  right: 0px;
   font-family: $primaryFont;
-  font-size: 2rem;
+  font-size: 1rem;
   color: rgb(0, 0, 0);
   background: none;
   border: 2px solid rgb(0, 0, 0);
-  padding: 15px 40px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  padding: 15px 20px;
+  border-radius: 20px;
+  width: fit-content;
+  text-align: center;
   background-image: url(/images/paper-texture.webp);
   background-position: center;
-  transform: translate(-12%, 0);
-
-  &:hover {
-    opacity: 0.8;
-    scale: 1.05;
-  }
+  width: 40vw;
+  transform: translate(-3%, 0);
+  // opacity: 0.8;
+  backdrop-filter: blur(50px);
+  min-width: 600px;
 }
 
 @media (aspect-ratio < 8/12), (max-width: 730px) {
-  .enterButton {
+  .infoContainer {
+    .btnContainer {
+      .enterButton {
+        transform: none;
+        translate: 0% -100%;
+      }
+    }
+  }
+}
+@media (aspect-ratio < 8/12), (max-width: 730px) {
+  .infoText {
     transform: none;
-    translate: 0% -100%;
+    right: 5vw;
+    width: 90svw;
+    min-width: 0px;
   }
 }
 

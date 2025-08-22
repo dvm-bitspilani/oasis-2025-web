@@ -6,6 +6,7 @@ import Registration from "./pages/registration/Registration";
 import DoorTransition from "./pages/components/page-transition/DoorTransition";
 import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
+import ComingSoon from "./pages/comingSoon/ComingSoon";
 
 export default function App() {
   const navigate = useNavigate();
@@ -16,9 +17,11 @@ export default function App() {
   }
 
   const [currentPage, setCurrentPage] = useState<
-    "home" | "register" | "events" | "aboutus" | "contact"
+    "home" | "register" | "events" | "aboutus" | "contact" | "comingSoon"
   >(
-    location.pathname === "/register"
+    location.pathname === "/"
+      ? "home"
+      : location.pathname === "/register"
       ? "register"
       : location.pathname === "/events"
       ? "events"
@@ -26,16 +29,14 @@ export default function App() {
       ? "aboutus"
       : location.pathname === "/contact"
       ? "contact"
-      : "home"
+      : "comingSoon"
   );
 
   const [doorPhase, setDoorPhase] = useState<
     "idle" | "closing" | "waiting" | "opening"
   >("idle");
 
-  const [isPreloading, setIsPreloading] = useState(
-    location.pathname !== "/"
-  );
+  const [isPreloading, setIsPreloading] = useState(location.pathname !== "/");
 
   const nextRoute = useRef<string | null>(null);
 
@@ -54,10 +55,16 @@ export default function App() {
     } else if (path === "/aboutus") {
       setCurrentPage("aboutus");
       setIsPreloading(true);
+    } else if (path === "/contact") {
+      setCurrentPage("contact");
+      setIsPreloading(true);
+    } else {
+      setCurrentPage("comingSoon");
+      setIsPreloading(false);
     }
   }, [location.pathname]);
 
- const handleDoorsClosed = () => {
+  const handleDoorsClosed = () => {
     setDoorPhase("waiting");
 
     if (nextRoute.current) {
@@ -103,9 +110,7 @@ export default function App() {
         page={location.pathname}
       />
 
-      {isPreloading && (
-        <Preloader onEnter={handlePreloaderEnter} />
-      )}
+      {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
 
       {!isPreloading && currentPage === "home" && (
         <Homepage goToPage={goToPage} />
@@ -114,19 +119,24 @@ export default function App() {
       {!isPreloading && currentPage === "register" && (
         <Registration
           goToPage={goToPage}
-          startAnimation={(location.state as LocationState)?.startAnimation || false}
+          startAnimation={
+            (location.state as LocationState)?.startAnimation || false
+          }
         />
       )}
 
-      {!isPreloading && currentPage === "events" && <div>Events Page</div>}
-      {!isPreloading && currentPage === "aboutus" && (<AboutUs/>)}
-      {!isPreloading && currentPage === "contact" && (<Contact />)}
+      {!isPreloading && currentPage === "events" && <ComingSoon />}
+      {!isPreloading && currentPage === "aboutus" && <AboutUs />}
+      {!isPreloading && currentPage === "contact" && <Contact />}
+      {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
 
       <Routes>
-        <Route path="/" element={null} />
+        <Route path="/" element={null} errorElement={<ComingSoon />} />
+        <Route path="/events" element={null} errorElement={<ComingSoon />} />
         <Route path="/register" element={null} />
         <Route path="/events" element={null} />
         <Route path="/aboutus" element={null} />
+        <Route path="/comingSoon" element={null} />
       </Routes>
     </>
   );

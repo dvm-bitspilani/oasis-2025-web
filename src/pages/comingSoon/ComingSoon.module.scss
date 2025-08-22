@@ -1,0 +1,73 @@
+.comingSoon {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: url("/images/landing/background1.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "Cinzel Decorative", serif;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      background: linear-gradient(90deg, #ff4d4d, #ffcc66);
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: #ddd;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+        background: #e63946;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+        &:hover {
+          background: #ff4d4d;
+          transform: translateY(-2px);
+        }
+
+        &.secondary {
+          background: #333;
+          &:hover {
+            background: #555;
+          }
+        }
+      }
+    }
+  }
+}

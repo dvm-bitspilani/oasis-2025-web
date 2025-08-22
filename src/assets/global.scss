@@ -20,8 +20,12 @@
   font-family: "Abhaya Libre";
   src: url("/fonts/AbhayaLibre-Regular.ttf");
 }
-
+@font-face {
+  font-family: "Abhaya Libre Bold";
+  src: url("/fonts/AbhayaLibre-Bold.ttf");
+}
 $primaryFont: "Japan Ramen", sans-serif;
 
 $gradient: linear-gradient(#ff6084 0%, #ff9c7b 100%);
 $regFont:"Abhaya Libre Extrabold", sans-serif;
+$abtFont:"Abhaya Libre Bold", sans-serif;

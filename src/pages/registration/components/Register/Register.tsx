@@ -1,10 +1,8 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
-//import type { SingleValue } from "react-select";
 import Field from "/svgs/registration/field2.svg";
 import styles from "./Register.module.scss";
-import Drop from "/svgs/registration/Drop.svg";
 import { useEffect, useState, forwardRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
@@ -12,26 +10,6 @@ import axios from "axios";
 import statesData from "./cities.json";
 import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
-import Gen from "/svgs/registration/field3.svg";
-import { components } from "react-select";
-
-const CustomDropdownIndicator = (props: any) => {
-  return (
-    <components.DropdownIndicator {...props}>
-      <img
-        src={Drop}
-        alt="Dropdown"
-        style={{
-          width: "1.2rem",
-          display: "none",
-          paddingLeft: "2vw",
-          height: "1.2rem",
-          pointerEvents: "none",
-        }}
-      />
-    </components.DropdownIndicator>
-  );
-};
 
 const stateOptions = statesData.map((item) => ({
   value: item.state,
@@ -44,14 +22,15 @@ const registrationSchema = yup.object({
   gender: yup.string().required("Gender is required"),
   phone: yup
     .string()
-    .matches(/^\+?\d{10,15}$/, "Invalid mobile number")
+    .matches(
+      /^((\+|00)91[\-\s]?|0)?(\d{10}|\d{3}[\-\s]?\d{3}[\-\s]?\d{4}|\d{5}[\-\s]?\d{5})$/,
+      "Invalid mobile number"
+    )
     .required("Mobile number is required"),
   college_id: yup.string().required("College is required"),
   year: yup.string().required("Year of study is required"),
   state: yup.string().required("State is required"),
   city: yup.string().required("City is required"),
-  date: yup.date().required("Date of Birth is required"),
-  //  referral: yup.string().nullable().optional(),
 });
 
 type FormData = yup.InferType<typeof registrationSchema>;
@@ -61,6 +40,17 @@ type PropsType = {
   userEmail: string;
   setUserData: React.Dispatch<React.SetStateAction<any>>;
 };
+
+type GenderOption = {
+  value: "M" | "F" | "O";
+  label: string;
+};
+
+const genderOptions: GenderOption[] = [
+  { value: "M", label: "Male" },
+  { value: "F", label: "Female" },
+  { value: "O", label: "Other" },
+];
 
 const Register = forwardRef<HTMLDivElement, PropsType>(
   function RegisterComponent(props, ref) {
@@ -114,8 +104,6 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         year: "",
         state: "",
         city: "",
-        //referral: null,
-        date: undefined,
       },
     });
 
@@ -132,196 +120,128 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
       );
       return [...startsWith, ...contains];
     };
-    const isMobile =
-      window.innerWidth < 1200 && window.innerWidth / window.innerHeight < 0.75;
-    const customStyles = {
-      noOptionsMessage: (provided: any) => ({
+    const isTablet = window.matchMedia(
+      "(max-width: 1200px) and (max-aspect-ratio: 1.45) "
+    ).matches;
+    const isMobile = window.matchMedia(
+      "(max-width: 1200px) and (max-aspect-ratio: 0.75) "
+    ).matches;
+    const customStyle = {
+      control: (provided: any) => ({
         ...provided,
-        color: "white",
-        backgroundColor: "#00000061",
-        padding: "10px",
-        textAlign: "center",
-      }),
-      control: (provided: any, state: any) => ({
-        ...provided,
-        paddingLeft: 0,
-        paddingRight: 0,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        boxShadow: state.isFocused ? "none" : provided.boxShadow,
         outline: "none",
-        background: "transparent",
         border: "none",
-        height: isMobile ? "0vh" : "3vw",
-        paddingBottom: isMobile ? "5vw" : "0vw",
-      }),
-      menuList: (provided: any) => ({
-        ...provided,
-        padding: 0,
-        margin: 0,
-        backgroundColor: "#2e0505",
-        color: "white",
-        borderRadius: "10px",
-        scrollbarWidth: "thin",
-      }),
-      singleValue: (provided: any) => ({
-        ...provided,
-        color: "white",
+        height: "100%",
+        width: "100%",
         textAlign: "center",
+        borderRadius: "0",
+        boxShadow: "none",
+      }),
+      noOptionsMessage: (provided: any, state: any) => ({
+        ...provided,
+        backgroundColor: state.isFocused ? "#FFF9E9" : "#131313CC",
+        color: state.isFocused ? "#1E1E1E" : "#FFF9E9",
+        textAlign: "center",
+        cursor: "pointer",
+        padding: "0.5vw 0",
         display: "flex",
-        justifyContent: "center",
         alignItems: "center",
-        height: "3vw",
-        width: "80vw",
-        paddingLeft: isMobile ? "0%" : "0%",
-        paddingTop: isMobile ? "0vw" : "0vw",
+        justifyContent: "center",
+        font: `100 ${
+          isMobile ? 4.2 : isTablet ? 3.2 : 1.5
+        }vw Abhaya Libre Extrabold`,
+        "&:hover": {
+          backgroundColor: state.isFocused ? "#FFF9E9" : "#1E1E1E",
+        },
       }),
-      input: (provided: any) => ({
-        ...provided,
-        textAlign: "center",
-        padding: 0,
-        margin: 0,
-        color: "white",
-        zIndex: "5",
+      dropdownIndicator: () => ({
+        display: "none",
+      }),
+      indicatorSeparator: () => ({
+        display: "none",
       }),
       placeholder: (provided: any) => ({
         ...provided,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         width: "100%",
-        textAlign: "center",
-        color: "white",
-        margin: 0,
-        zIndex: "5",
-        height: "3vw",
-
-        whiteSpace: "nowrap",
-      }),
-      menu: (provided: any) => ({
-        ...provided,
-        marginTop: 0,
-        width: isMobile ? "80vw" : "30vw",
-        borderRadius: "10px",
-        overflow: "hidden",
-        zIndex: 10,
-      }),
-      option: (provided: any, state: any) => ({
-        ...provided,
-        backgroundColor: state.isFocused ? "rgba(0,20,80,0.8)" : "#2e0505",
-        color: "white",
-        cursor: "pointer",
-      }),
-      valueContainer: (provided: any) => ({
-        ...provided,
-        width: "100%",
-        padding: 0,
-        height: "3vw",
-        background: "transparent",
-        color: "white",
+        height: "100%",
+        color: "#e2dccb",
+        font: `100 ${
+          isMobile ? 4.2 : isTablet ? 3.2 : 1.5
+        }vw Abhaya Libre Extrabold`,
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
-        textAlign: "center",
-      }),
-      dropdownIndicator: (provided: any) => ({
-        ...provided,
-        color: "white",
-        display: "none",
-        cursor: "pointer",
-      }),
-      indicatorSeparator: () => ({
-        display: "none",
-      }),
-    };
-    const customStylesGender = {
-      control: (provided: any, state: any) => ({
-        ...provided,
-        paddingLeft: 0,
-        paddingRight: 0,
-        display: "flex",
-        boxShadow: state.isFocused ? "none" : provided.boxShadow,
-        outline: "none",
         justifyContent: "center",
-        alignItems: "center",
-        background: "transparent",
-        border: "none",
-        height: "3vw",
-        width: isMobile ? "33.6vw" : "100%",
-      }),
-      menuList: (provided: any) => ({
-        ...provided,
-        padding: 0,
-        margin: 0,
-        backgroundColor: "#2e0505",
-        color: "white",
-        borderRadius: "10px",
-        scrollbarWidth: "thin",
-      }),
-      singleValue: (provided: any) => ({
-        ...provided,
-        color: "white",
-        textAlign: "center",
-        height: "2.3rem",
-        zIndex: "5",
-        paddingLeft: 0,
-        width: isMobile ? "33.6vw" : "100%",
       }),
       input: (provided: any) => ({
         ...provided,
-        textAlign: "center",
-        padding: 0,
-        margin: 0,
-        display: "flex",
-        width: isMobile ? "33.6vw" : "100%",
-        color: "white",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
       }),
-      placeholder: (provided: any, state: any) => ({
+      singleValue: (provided: any) => ({
         ...provided,
-        display:
-          state.isFocused || state.selectProps.inputValue || state.value
-            ? "none"
-            : "block",
-        color: "white",
-        zIndex: "5",
-        width: isMobile ? "33.6vw" : "100%",
-        textAlign: "center",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }),
+      valueContainer: () => ({
+        width: "100%",
+        height: "100%",
+        color: "#e2dccb",
+        font: `100 ${
+          isMobile ? 4.2 : isTablet ? 3.2 : 1.5
+        }vw Abhaya Libre Extrabold`,
+      }),
+      menuPortal: (provided: any) => ({
+        ...provided,
+        zIndex: 9999,
       }),
       menu: (provided: any) => ({
         ...provided,
-        marginTop: 0,
-        width: isMobile ? "33.6vw" : "12.6vw",
-        borderRadius: "10px",
+        zIndex: 4,
+        backgroundColor: "#1E1E1E",
+        maxHeight: `${isMobile ? 40 : isTablet ? 30 : 15}vw`,
+        height: "10vw",
         overflow: "hidden",
+        scrollbarWidth: "none",
+        "::-webkit-scrollbar": {
+          display: "none",
+        },
+        border: "1px solid #FFF9E9",
+        borderRadius: "5px",
+      }),
+      menuList: (provided: any) => ({
+        ...provided,
         zIndex: 10,
+        maxHeight: `${isMobile ? 40 : isTablet ? 30 : 15}vw`,
+        scrollbarWidth: "none",
+        "::-webkit-scrollbar": {
+          display: "none",
+        },
       }),
       option: (provided: any, state: any) => ({
         ...provided,
-        backgroundColor: state.isFocused ? "rgba(0,20,80,0.8)" : "#2e0505",
-        color: "white",
-        cursor: "pointer",
-      }),
-      valueContainer: (provided: any) => ({
-        ...provided,
-        width: "100%",
-        padding: 0,
-        height: "2.3rem",
-        background: "transparent",
-        color: "white",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        backgroundColor: state.isFocused ? "#FFF9E9" : "#131313CC",
+        color: state.isFocused ? "#1E1E1E" : "#FFF9E9",
         textAlign: "center",
-      }),
-      indicatorSeparator: () => ({
-        display: "none",
+        cursor: "pointer",
+        padding: "0.5vw 0",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        font: `100 ${
+          isMobile ? 4.4 : isTablet ? 3.2 : 1.5
+        }vw Abhaya Libre Extrabold`,
+        "&:hover": {
+          backgroundColor: state.isFocused ? "#FFF9E9" : "#1E1E1E",
+        },
       }),
     };
 
     const onSubmit = (data: any) => {
+      console.log("Form Data:", data);
       setUserData({
         ...data,
         email_id: userEmail,
@@ -347,7 +267,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   <img src={Field} alt="" />
                   <input {...register("name")} />
                 </div>
-                <p>{errors.name?.message}</p>
+                <p className={styles.error}>{errors.name?.message}</p>
               </div>
 
               <div className={styles.email}>
@@ -360,48 +280,42 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   <img src={Field} alt="" />
                   <input value={userEmail} disabled placeholder={userEmail} />
                 </div>
-                <p>{errors.email_id?.message}</p>
+                <p className={styles.error}>{errors.email_id?.message}</p>
               </div>
 
-              <div className={styles.together}>
-                <div className={styles.fields}>
-                  <div className={styles.field1}>
-                    <div className={styles.sameline}>
-                      <label>GENDER </label>
-                    </div>
-                    <div className={styles.clouds}>
-                      <img src={Gen} alt="" />
-                      <Controller
-                        name="gender"
-                        control={control}
-                        render={({ field }) => (
-                          <Select
-                            {...field}
-                            options={[
-                              { value: "M", label: "Male" },
-                              { value: "F", label: "Female" },
-                              { value: "O", label: "Other" },
-                            ]}
-                            styles={customStylesGender}
-                            placeholder="Gender"
-                            onChange={(val) => field.onChange(val?.value || "")}
-                            value={
-                              field.value
-                                ? { value: field.value, label: field.value }
-                                : null
-                            }
-                            className={`${styles.selection} ${styles.genderSelect}`}
-                            classNamePrefix="Select"
-                            components={{
-                              DropdownIndicator: CustomDropdownIndicator,
-                            }}
-                          />
-                        )}
-                      />
-                    </div>
-                    <p>{errors.gender?.message}</p>
-                  </div>
+              <div className={styles.gender}>
+                <div className={styles.sameline}>
+                  <img src={Left} alt="" />
+                  <label>GENDER</label>
+                  <img src={Right} alt="" />
                 </div>
+                <div className={styles.clouds}>
+                  <img src={Field} alt="" />
+
+                  <Controller
+                    name="gender"
+                    control={control}
+                    render={({ field }) => (
+                      <Select<GenderOption, false>
+                        {...field}
+                        menuPortalTarget={document.body}
+                        options={genderOptions}
+                        styles={customStyle}
+                        onChange={(val) => field.onChange(val?.value || "")}
+                        value={
+                          genderOptions.find(
+                            (opt) => opt.value === field.value
+                          ) || null
+                        }
+                        unstyled
+                        placeholder="--SELECT--"
+                        className={styles["react-select-container"]}
+                        classNamePrefix="react-select"
+                      />
+                    )}
+                  />
+                </div>
+                <p className={styles.error}>{errors.gender?.message}</p>
               </div>
 
               <div className={styles.mobile}>
@@ -414,7 +328,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   <img src={Field} alt="" />
                   <input {...register("phone")} />
                 </div>
-                <p>{errors.phone?.message}</p>
+                <p className={styles.error}>{errors.phone?.message}</p>
               </div>
             </div>
 
@@ -433,9 +347,9 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     render={({ field }) => (
                       <Select
                         {...field}
+                        menuPortalTarget={document.body}
                         options={collegeOptions}
-                        styles={customStyles}
-                        placeholder="Select College"
+                        styles={customStyle}
                         onChange={(val) => field.onChange(val?.value || "")}
                         value={
                           field.value
@@ -444,13 +358,15 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                               ) || null
                             : null
                         }
-                        className={styles.selection}
-                        classNamePrefix="Select"
+                        unstyled
+                        placeholder="--SELECT--"
+                        className={styles["react-select-container"]}
+                        classNamePrefix="react-select"
                       />
                     )}
                   />
                 </div>
-                <p>{errors.college_id?.message}</p>
+                <p className={styles.error}>{errors.college_id?.message}</p>
               </div>
 
               <div className={styles.year}>
@@ -477,8 +393,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                       </label>
                     ))}
                   </fieldset>
-                  <p className={styles.error}>{errors.year?.message}</p>
                 </div>
+                <p className={styles.error}>{errors.year?.message}</p>
               </div>
 
               <div className={styles.states}>
@@ -495,8 +411,10 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     render={({ field }) => (
                       <Select
                         {...field}
+                        menuPortalTarget={document.body}
+                        unstyled
                         options={getFilteredOptions(inputValue)}
-                        styles={customStyles}
+                        styles={customStyle}
                         onInputChange={(value) => setInputValue(value)}
                         filterOption={() => true}
                         value={
@@ -512,13 +430,14 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                           setSelectedState(val);
                           setValue("city", "", { shouldValidate: true });
                         }}
-                        placeholder="Enter State"
+                        placeholder="--SELECT--"
+                        className={styles["react-select-container"]}
                         classNamePrefix="react-select"
-                        className={styles.selection}
                       />
                     )}
                   />
                 </div>
+                <p className={styles.error}>{errors.state?.message}</p>
               </div>
 
               <div className={styles.city}>
@@ -535,9 +454,9 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     render={({ field }) => (
                       <Select
                         {...field}
+                        menuPortalTarget={document.body}
                         options={availableCities}
-                        styles={customStyles}
-                        placeholder="Select City"
+                        styles={customStyle}
                         isDisabled={!selectedState}
                         onChange={(val) => field.onChange(val?.value || "")}
                         value={
@@ -547,12 +466,15 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                               ) || null
                             : null
                         }
-                        className={styles.selection}
+                        unstyled
+                        placeholder="--SELECT--"
+                        className={styles["react-select-container"]}
+                        classNamePrefix="react-select"
                       />
                     )}
                   />
                 </div>
-                <p>{errors.city?.message}</p>
+                <p className={styles.error}>{errors.city?.message}</p>
               </div>
             </div>
           </div>
@@ -563,7 +485,31 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
           type="submit"
           onClick={handleSubmit(onSubmit)}
         >
-          <span> NEXT</span>
+          <svg
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={styles.confirmIcon}
+          >
+            <path
+              d="M0 3.80298C2.50922 3.80298 66.6863 5.62965 83.2277 6.54299L87.8205 3.80298L83.2277 0.925964L0 3.80298Z"
+              fill="white"
+              stroke="white"
+              strokeWidth="0.16"
+            />
+          </svg>
+          SUBMIT
+          <svg
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={styles.confirmIcon}
+          >
+            <path
+              d="M0 3.80298C2.50922 3.80298 66.6863 5.62965 83.2277 6.54299L87.8205 3.80298L83.2277 0.925964L0 3.80298Z"
+              fill="white"
+              stroke="white"
+              strokeWidth="0.16"
+            />
+          </svg>
         </button>
       </div>
     );

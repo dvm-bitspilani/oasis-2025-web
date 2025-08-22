@@ -39,8 +39,8 @@ export default function ContactGallery() {
                                         <img src={contact.imageURL} alt={contact.name} />
                                     </div>
                                     <div className={styles.contactDetails}>
-                                        <div className={styles.contactName}>{contact.name}</div>
-                                        <div className={styles.contactPosition}>{contact.role}</div>
+                                        <div className={styles.contactName} title={contact.name}>{contact.name}</div>
+                                        <div className={styles.contactPosition} title={contact.role}>{contact.role}</div>
                                         <div className={styles.contactLinks}>
                                             <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
                                             <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
@@ -63,8 +63,8 @@ export default function ContactGallery() {
                                         <img src={contact.imageURL} alt={contact.name} />
                                     </div>
                                     <div className={styles.contactDetails}>
-                                        <div className={styles.contactName}>{contact.name}</div>
-                                        <div className={styles.contactPosition}>{contact.role}</div>
+                                        <div className={styles.contactName} title={contact.name}>{contact.name}</div>
+                                        <div className={styles.contactPosition} title={contact.role}>{contact.role}</div>
                                         <div className={styles.contactLinks}>
                                             <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
                                             <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>

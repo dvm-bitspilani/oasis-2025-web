@@ -23,6 +23,7 @@ import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
+import AboutUs from "../aboutus/AboutUs";
 import ContactDoors from "../contact/ContactDoors";
 i;
 
@@ -160,7 +161,7 @@ export default function Landing({
         .to(
           treeContainerRef.current,
           {
-            y: "-50%",
+            y: "-47%",
             duration: 6,
             // scale: 1.2,
             ease: "sine.in",
@@ -171,7 +172,7 @@ export default function Landing({
           treeScalerRef.current,
           {
             scale: 1.2,
-            ease: "sine.in"
+            ease: "sine.in",
           },
           3
         )
@@ -211,18 +212,13 @@ export default function Landing({
         .to(
           treeContainerRef.current,
           {
-            y: "-80%",
+            y: "-57.5%",
             // scale: 1.4,
-            duration: 12,
+            duration: 20,
             ease: "sine.in",
           },
           3
         )
-        .to(treeScalerRef.current, {
-          scale: 1.4,
-          duration: 12,
-          ease: "sine.in"
-        })
 
         .to(
           landingRef.current,
@@ -298,14 +294,22 @@ export default function Landing({
     return () => clearInterval(timerId);
   }, []);
 
+  // useEffect(() => {
+  //   window.onresize = () => {
+  //     ScrollTrigger.refresh();
+  //   };
+  // }, []);
+
   return (
     <>
       <div className={styles.wrapperSquared}>
         <div
-          className={`${styles.wrapper} ${!removeGif ? styles.pointerNoneEvent : ""
-            } ${overlayIsActive ? styles.mask : ""}`}
+          className={`${styles.wrapper} ${
+            !removeGif ? styles.pointerNoneEvent : ""
+          } ${overlayIsActive ? styles.mask : ""}`}
           ref={wrapperRef}
         >
+          <Navbar goToPage={goToPage} />
           <div
             className={
               overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `
@@ -330,8 +334,6 @@ export default function Landing({
             />
 
             <img src={mobileCloud} className={styles.mobileCloud} />
-
-            <Navbar />
 
             <div className={styles.treeContainer} ref={treeContainerRef}>
               <div className={styles.treeScaler} ref={treeScalerRef}>
@@ -379,17 +381,20 @@ export default function Landing({
               </div>
               <div className={styles.bottomContent} ref={bottomContentRef}>
                 {
-                  // replace this with actual about us and give it the required ref 
+                  // replace this with actual about us and give it the required ref
                 }
-                <div className={styles.dummyAboutUs} ref={aboutUsRef} />
+                <div className={styles.AboutUs} ref={aboutUsRef}>
+                  <AboutUs />
+                </div>
                 {
                   // Don't render contact doors until the refs are set
-                  wrapperRef.current && aboutUsRef.current &&
-                  <ContactDoors
-                    aboutUsRef={aboutUsRef}
-                    pinnedContRef={wrapperRef}
-                    bottomContentRef={bottomContentRef}
-                  />
+
+                  wrapperRef.current && aboutUsRef.current && (
+                    <ContactDoors
+                      aboutUsRef={aboutUsRef}
+                      bottomContentRef={bottomContentRef}
+                    />
+                  )
                 }
               </div>
             </div>
@@ -466,6 +471,16 @@ export default function Landing({
             }
           </div> */}
       </div>
+      {/* <div
+        className={
+          overlayIsActive
+            ? styles.aboutUsContainer
+            : `${styles.noneDisplay} ${styles.aboutUsContainer}`
+        }
+        ref={aboutUsRef}
+      >
+        <AboutUs />
+      </div> */}
     </>
   );
 }
