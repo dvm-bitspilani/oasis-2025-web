@@ -6,7 +6,7 @@ import useOverlayStore from "../../utils/store";
 import styles from "./Landing.module.scss";
 
 import { useGSAP } from "@gsap/react";
-import { i } from "framer-motion/client";
+import { i, view } from "framer-motion/client";
 import Navbar from "../components/navbar/Navbar";
 import landingImage from "/images/landing/background1.png";
 import mobileMountains from "/images/landing/mobileMountains.png";
@@ -76,6 +76,24 @@ export default function Landing({
   const treeContainerRef = useRef<HTMLDivElement>(null);
   const aboutUsRef = useRef<HTMLDivElement>(null);
   const bottomContentRef = useRef<HTMLDivElement>(null);
+  const [viewportHeight, setViewportHeight] = useState<number>(
+    window.innerHeight
+  );
+  const [viewportWidth, setViewportWidth] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportHeight(window.innerHeight);
+      setViewportWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useGSAP(() => {
     if (treeScalerRef.current && landingRef.current) {
@@ -93,6 +111,8 @@ export default function Landing({
         force3D: true,
       });
     }
+
+    const yValue = 0 - (viewportWidth * 0.87 + viewportHeight);
 
     gsap.fromTo(
       registerButtonRef.current,
@@ -212,7 +232,7 @@ export default function Landing({
         .to(
           treeContainerRef.current,
           {
-            y: "-57.5%",
+            y: yValue,
             // scale: 1.4,
             duration: 20,
             ease: "sine.in",
@@ -241,7 +261,7 @@ export default function Landing({
           0
         );
     });
-  }, []);
+  }, [viewportWidth, viewportHeight]);
 
   useEffect(() => {
     if (overlayIsActive) {
@@ -386,7 +406,7 @@ export default function Landing({
                 <div className={styles.AboutUs} ref={aboutUsRef}>
                   <AboutUs />
                 </div>
-                {
+                {/* {
                   // Don't render contact doors until the refs are set
 
                   wrapperRef.current && aboutUsRef.current && (
@@ -395,7 +415,7 @@ export default function Landing({
                       bottomContentRef={bottomContentRef}
                     />
                   )
-                }
+                } */}
               </div>
             </div>
             <div className={styles.logoContainer}>
