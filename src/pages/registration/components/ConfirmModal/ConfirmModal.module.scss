@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   z-index: 1000;
   background: rgba(0, 0, 0, 0.3);
 }
@@ -78,5 +78,89 @@
   }
   .buttonsContainer {
     margin-top: unset;
+  }
+}
+@media screen and (max-width: 1200px) and (max-aspect-ratio: 1.45) {
+  .selectedEvents {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2.3vw 3.7vw;
+    width: 80vw;
+
+    .heading {
+      font: 400 4.3vw "DM Serif Text";
+    }
+    ul {
+      margin: 1vw 0 2vw 2.5vw;
+      height: 60svh;
+
+      li {
+        font: 400 3vw "DM Serif Text";
+      }
+    }
+    .buttonsContainer {
+
+      .cancelButton {
+        font: 400 3vw "DM Serif Text";
+        padding: 0.5vw 4vw;
+      }
+      .confirmButton {
+        font: 400 3vw "DM Serif Text";
+        padding: 0.5vw 4vw;
+        cursor: pointer;
+      }
+    }
+  }
+  .error {
+    height: 30svh;
+    gap: 4vw;
+    p {
+      color: #fff;
+      font: 400 3.5vw "DM Serif Text";
+    }
+  }
+}
+@media screen and (max-width: 1200px) and (max-aspect-ratio: 0.75) {
+  .selectedEvents {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 3vw 4.3vw;
+    width: 80vw;
+
+    .heading {
+      font: 400 4.3vw "DM Serif Text";
+    }
+    ul {
+      margin: 1vw 0 2vw 2.5vw;
+      height: 60svh;
+
+      li {
+        font: 400 3.5vw "DM Serif Text";
+      }
+    }
+    .buttonsContainer {
+
+      .cancelButton {
+        font: 400 4vw "DM Serif Text";
+        padding: 0.5vw 4vw;
+      }
+      .confirmButton {
+        font: 400 4vw "DM Serif Text";
+        padding: 0.5vw 4vw;
+        cursor: pointer;
+      }
+    }
+  }
+  .error {
+    height: 30svh;
+    gap: 4vw;
+    p {
+      color: #fff;
+      font: 400 4vw "DM Serif Text";
+    }
   }
 }

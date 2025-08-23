@@ -4,11 +4,11 @@ import styles from "./Preloader.module.scss";
 const imagesToPreload = [
   "/images/registration/reg-banner.png",
   "/svgs/registration/bg-extended.svg",
-  "/svgs/registration/left.svg",
-  "/svgs/registration/right.svg",
+  "/svgs/registration/bg-mobile.svg",
   "/svgs/registration/scrollThumb.svg",
+  "/svgs/registration/scroll-bar.svg",
   "/svgs/registration/leftarr.svg",
-  "/svgs/registration/rightarr.svg"
+  "/svgs/registration/rightarr.svg",
 ];
 
 interface PreloaderProps {

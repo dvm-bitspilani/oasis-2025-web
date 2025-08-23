@@ -1,5 +1,5 @@
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, createContext } from "react";
 import Preloader from "./pages/registration/components/Preloader/Preloader";
 import Homepage from "./Homepage";
 import Registration from "./pages/registration/Registration";
@@ -7,6 +7,8 @@ import DoorTransition from "./pages/components/page-transition/DoorTransition";
 import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
+
+export const navContext = createContext<{goToPage?: (page: string) => void}>({});
 
 export default function App() {
   const navigate = useNavigate();
@@ -102,7 +104,7 @@ export default function App() {
   };
 
   return (
-    <>
+    <navContext.Provider value={{ goToPage }}>
       <DoorTransition
         phase={doorPhase}
         onClosed={handleDoorsClosed}
@@ -126,7 +128,7 @@ export default function App() {
       )}
 
       {!isPreloading && currentPage === "events" && <ComingSoon />}
-      {!isPreloading && currentPage === "aboutus" && <AboutUs />}
+      {!isPreloading && currentPage === "aboutus" && <AboutUs goToPage={goToPage} />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
 
@@ -138,6 +140,6 @@ export default function App() {
         <Route path="/aboutus" element={null} />
         <Route path="/comingSoon" element={null} />
       </Routes>
-    </>
+    </navContext.Provider>
   );
 }

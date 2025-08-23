@@ -7,6 +7,8 @@ import cloud3 from "/svgs/landing/hamClouds/cloud3.min.svg";
 import cloud4 from "/svgs/landing/hamClouds/cloud4.min.svg";
 import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
+import { useState, useEffect } from "react";
+import { useHamStore } from "../../../utils/store";
 
 const navItems = [
   { label: "Home", katakana: "ホーム", links: "/" },
@@ -20,9 +22,36 @@ export default function Navbar({
 }: {
   goToPage: (path: string) => void;
 }) {
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  const [isMobile, setIsMobile] = useState(
+    viewportWidth / viewportHeight < 8 / 12 || viewportWidth < 730
+      ? true
+      : false
+  );
+  const setHamOpen = useHamStore((state) => state.setHamOpen);
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+      setViewportHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setIsMobile(viewportWidth / viewportHeight < 8 / 12 || viewportWidth < 730);
+  }, [viewportHeight, viewportWidth]);
+  const handleHamClick = () => {
+    if (isMobile) {
+      setHamOpen(true);
+    }
+  };
   return (
     <nav className={styles.nav}>
-      <div className={styles.hamMenuBtn}>
+      <div className={styles.hamMenuBtn} onClick={handleHamClick}>
         <img src={moon} alt="" className={styles.moon} />
         <img src={moonHam} alt="" className={styles.moonHam} />
         <div className={styles.clouds}>

@@ -202,8 +202,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         ...provided,
         zIndex: 4,
         backgroundColor: "#1E1E1E",
-        maxHeight: `${isMobile ? 40 : isTablet ? 30 : 15}vw`,
-        height: "10vw",
+        maxHeight: `${isMobile ? 40 : isTablet ? 30 : 10}vw`,
         overflow: "hidden",
         scrollbarWidth: "none",
         "::-webkit-scrollbar": {
@@ -215,7 +214,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
       menuList: (provided: any) => ({
         ...provided,
         zIndex: 10,
-        maxHeight: `${isMobile ? 40 : isTablet ? 30 : 15}vw`,
+        maxHeight: `${isMobile ? 40 : isTablet ? 30 : 10}vw`,
         scrollbarWidth: "none",
         "::-webkit-scrollbar": {
           display: "none",
@@ -497,7 +496,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
               strokeWidth="0.16"
             />
           </svg>
-          SUBMIT
+          NEXT
           <svg
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

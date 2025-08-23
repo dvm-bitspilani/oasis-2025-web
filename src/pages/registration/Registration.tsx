@@ -172,10 +172,29 @@ const Registration = ({ goToPage }: RegistrationProps) => {
   // useEffect(() => {
   //   // if (startAnimation) {
   //   toRegPage(false);
-  //   // setTimeout(() => {
-  //   //   toEventPage();
-  //   // }, 2500);
+  //   setTimeout(() => {
+  //     toEventPage();
+  //   }, 2500);
   //   // }
+  // }, []);
+  // const prevWidth = useRef(window.innerWidth);
+  // const prevHeight = useRef(window.innerHeight);
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     const newWidth = window.innerWidth;
+  //     const newHeight = window.innerHeight;
+
+  //     const widthDiff = Math.abs(newWidth - prevWidth.current);
+  //     const heightDiff = Math.abs(newHeight - prevHeight.current);
+
+  //     if (widthDiff >= 100 || heightDiff >= 100) {
+  //       window.location.reload();
+  //     }
+  //   };
+
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", handleResize);
   // }, []);
 
   const toEventPage = () => {

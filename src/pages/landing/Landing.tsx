@@ -23,9 +23,12 @@ import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
+import Ham from "../components/ham/ham";
 import AboutUs from "../aboutus/AboutUs";
 import ContactDoors from "../contact/ContactDoors";
 i;
+
+import { useHamStore } from "../../utils/store";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,6 +78,11 @@ export default function Landing({
   const landingMobileRef = useRef<HTMLImageElement>(null);
   const treeContainerRef = useRef<HTMLDivElement>(null);
   const aboutUsRef = useRef<HTMLDivElement>(null);
+  // const bottomContentRef = useRef<HTMLDivElement>(null);
+  const hamContainerRef = useRef<HTMLDivElement>(null);
+  const blurRef = useRef<HTMLDivElement>(null);
+  const isHamOpen = useHamStore((state) => state.isHamOpen);
+  const setIsHamOpen = useHamStore((state) => state.setHamOpen);
   const bottomContentRef = useRef<HTMLDivElement>(null);
   const [viewportHeight, setViewportHeight] = useState<number>(
     window.innerHeight
@@ -330,6 +338,34 @@ export default function Landing({
           ref={wrapperRef}
         >
           <Navbar goToPage={goToPage} />
+          {/* {isHamOpen && (
+            <div className={styles.hamContainer}>
+              <div
+                className={styles.blur}
+                onClick={() => setIsHamOpen(false)}
+              ></div>
+              <div className={styles.translateHam} ref={hamContainerRef}>
+                <Ham goToPage={goToPage} />
+              </div>
+            </div>
+          )} */}
+          <div
+            className={
+              isHamOpen
+                ? `${styles.hamContainer} ${styles.hamOpen}`
+                : styles.hamContainer
+            }
+          >
+            <div
+              className={styles.blur}
+              onClick={() => setIsHamOpen(false)}
+              ref={blurRef}
+            ></div>
+
+            <div className={styles.translateHam} ref={hamContainerRef}>
+              <Ham goToPage={goToPage} />
+            </div>
+          </div>
           <div
             className={
               overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `

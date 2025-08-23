@@ -18,7 +18,14 @@ const Confirmation = (props: PropsType) => {
     <div className={styles.selectedEvents}>
       <h2 className={styles.heading}>{props.eventData?.name}</h2>
       <p className={styles.description}>{props.eventData?.about}</p>
-      <button className={styles.confirmButton} onClick={props.handleEvent}>
+      <button
+        className={`${
+          props.selectedEvents.some((e) => e.id === props.eventData?.id)
+            ? styles.removeButton
+            : styles.confirmButton
+        }`}
+        onClick={props.handleEvent}
+      >
         {props.selectedEvents.some((e) => e.id === props.eventData?.id)
           ? "Remove"
           : "Add"}

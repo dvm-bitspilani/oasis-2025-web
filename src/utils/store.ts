@@ -15,3 +15,12 @@ const useOverlayStore = create<overlayActive>((set) => ({
 }));
 
 export default useOverlayStore;
+
+type ham = {
+    isHamOpen: boolean;
+    setHamOpen: (isOpen: boolean) => void;
+}
+export const useHamStore = create<ham>((set) => ({
+    isHamOpen: false,
+    setHamOpen: (isOpen) => set({ isHamOpen: isOpen })
+}));

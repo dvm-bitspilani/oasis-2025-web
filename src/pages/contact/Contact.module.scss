@@ -18,7 +18,7 @@
             position: relative;
 
             @media (max-width: 600px) {
-                padding: 0.6rem 0.9rem;
+                padding: 0.6rem 0.4rem;
             }
         }
 
@@ -54,10 +54,6 @@
         background-repeat: repeat;
         background-position: center;
         min-height: 100vh;
-
-        @media (max-width: 900px) {
-            background-size: 180vw auto;
-        }
     }
 }
 

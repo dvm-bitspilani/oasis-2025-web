@@ -28,11 +28,11 @@
   backdrop-filter: blur(10px);
 
   .heading {
-    color: #E2DCCB;
+    color: #e2dccb;
     font: 400 6vw "Abhaya Libre Extrabold";
   }
   .description {
-    color: #E2DCCB;
+    color: #e2dccb;
     font: 400 4vw "Abhaya Libre";
     margin: 1.5vw 0;
     line-height: 1.5;
@@ -43,7 +43,7 @@
   .confirmButton {
     margin: auto auto 0 auto;
     background-color: #fff6dd;
-    border: none;
+    border: 1.5px solid #ededed;
     border-radius: 2px;
     color: #000;
     width: 100%;
@@ -51,12 +51,23 @@
     padding: 1vw 0;
     cursor: pointer;
   }
+  .removeButton {
+    margin: auto auto 0 auto;
+    width: 100%;
+    font: 400 4vw "DM Serif Text";
+    padding: 1vw 0;
+    cursor: pointer;
+    border: 1.5px solid #ededed;
+    border-radius: 2px;
+    background: transparent;
+    color: #fff;
+  }
 
-  .close{
+  .close {
     position: absolute;
     top: 4vw;
     right: 2vw;
-    svg{
+    svg {
       width: 8vw;
       height: 8vw;
       cursor: pointer;

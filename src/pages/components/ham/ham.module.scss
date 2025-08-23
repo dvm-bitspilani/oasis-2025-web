@@ -1,0 +1,84 @@
+@use "../../../assets/global.scss" as *;
+
+.ham {
+  height: 100dvh;
+  width: 75dvw;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 16px;
+  z-index: 1000;
+  font-family: $primaryFont;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10dvh;
+  gap: 30px;
+  background-image: url("/images/landing/hamBackground.png");
+  background-size: cover;
+  background-position: center;
+  //   justify-content: center;
+  .logoContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 80%;
+    }
+  }
+  .closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 25px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .linkContainer {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .navItem {
+      font-size: 20px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      //   padding-top: 16px;
+      height: 40px;
+      padding-right: 15px;
+      padding-left: 15px;
+      img {
+        height: 30px;
+      }
+      .label {
+        transform: translateY(1px);
+      }
+    }
+    .line {
+      height: 1.5px;
+      width: 100%;
+      background-image: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+      );
+    }
+  }
+  .mwd {
+    position: absolute;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 12px;
+    width: 180px;
+  }
+}

@@ -1,0 +1,18 @@
+.backButton {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: clamp(3rem, 10vw, 5rem);
+    height: clamp(3rem, 10vw, 5rem);
+    margin: 1.2rem;
+    background-image: url('/svgs/registration/back.svg');
+    background-size: cover;
+    filter: drop-shadow(1px 0px 5px rgb(49, 49, 49));
+    transition: filter 0.3s;
+
+    &:hover {filter: drop-shadow(1px 0px 9px black)}
+
+    @media (max-width: 600px) {
+        margin: 1.2rem 0.6rem;
+    }
+} 
