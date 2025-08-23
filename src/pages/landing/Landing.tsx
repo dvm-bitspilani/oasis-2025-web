@@ -6,7 +6,7 @@ import useOverlayStore from "../../utils/store";
 import styles from "./Landing.module.scss";
 
 import { useGSAP } from "@gsap/react";
-import { i, view } from "framer-motion/client";
+import { i } from "framer-motion/client";
 import Navbar from "../components/navbar/Navbar";
 import landingImage from "/images/landing/background1.png";
 import mobileMountains from "/images/landing/mobileMountains.png";
@@ -25,7 +25,7 @@ import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
 import Ham from "../components/ham/ham";
 import AboutUs from "../aboutus/AboutUs";
-import ContactDoors from "../contact/ContactDoors";
+
 i;
 
 import { useHamStore } from "../../utils/store";
@@ -440,7 +440,7 @@ export default function Landing({
                   // replace this with actual about us and give it the required ref
                 }
                 <div className={styles.AboutUs} ref={aboutUsRef}>
-                  <AboutUs />
+                  <AboutUs goToPage={goToPage} />
                 </div>
                 {/* {
                   // Don't render contact doors until the refs are set
