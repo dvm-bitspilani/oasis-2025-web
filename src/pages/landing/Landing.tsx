@@ -88,6 +88,7 @@ export default function Landing({
     window.innerHeight
   );
   const [viewportWidth, setViewportWidth] = useState<number>(window.innerWidth);
+  const [treeScrollHeight, setTreeScrollHeight] = useState<number>(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -102,6 +103,25 @@ export default function Landing({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (treeContainerRef.current) {
+      treeContainerRef.current.addEventListener("scroll", () => {
+        if (treeContainerRef.current) {
+          setTreeScrollHeight(treeContainerRef.current.scrollHeight);
+        }
+      });
+      return () => {
+        if (treeContainerRef.current) {
+          treeContainerRef.current.removeEventListener("scroll", () => {
+            if (treeContainerRef.current) {
+              setTreeScrollHeight(treeContainerRef.current.scrollHeight);
+            }
+          });
+        }
+      };
+    }
+  }, [treeContainerRef.current]);
 
   useGSAP(() => {
     if (treeScalerRef.current && landingRef.current) {
@@ -120,8 +140,17 @@ export default function Landing({
       });
     }
 
-    const yValue = 0 - (viewportWidth * 0.87 + viewportHeight);
+    const yValue =
+      0 -
+      (treeContainerRef.current?.offsetHeight || 0) +
+      viewportHeight +
+      0.08 * viewportWidth;
 
+    const yValueMobile =
+      0 -
+      (treeContainerRef.current?.offsetHeight || 0) +
+      viewportHeight +
+      0.08 * viewportWidth;
     gsap.fromTo(
       registerButtonRef.current,
       { autoAlpha: 1 },
@@ -189,7 +218,7 @@ export default function Landing({
         .to(
           treeContainerRef.current,
           {
-            y: "-47%",
+            y: yValueMobile,
             duration: 6,
             // scale: 1.2,
             ease: "sine.in",
