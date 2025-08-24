@@ -73,6 +73,7 @@ export default function LandingRevamp({
   const dateCountdownRef = useRef<HTMLDivElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const landingMobileRef = useRef<HTMLImageElement>(null);
+  const treeContainerRef = useRef<HTMLDivElement>(null);
   const isHamOpen = useHamStore((state) => state.isHamOpen);
   const setIsHamOpen = useHamStore((state) => state.setHamOpen);
 
@@ -203,6 +204,11 @@ export default function LandingRevamp({
           </div>
 
           <div className={styles.backgroundContainer}>
+
+            <div className={styles.logoContainer}>
+              <img src={logo} className={styles.logo} alt="Logo" />
+            </div>
+            
             <div className={styles.desktopBackground}>
               <img
                 src={landingImage}
@@ -227,7 +233,52 @@ export default function LandingRevamp({
               <img src={mobileCloud} className={styles.mobileCloud} />
             </div>
           </div>
-          <div className={styles.foregroundContainer}></div>
+          <div className={styles.foregroundContainer}>
+
+            <div className={styles.treeContainer} ref={treeContainerRef}>
+              <div className={styles.tree}>
+                <div className={styles.socialLinksContainer}>
+                  <div className={styles.wire}>
+                    <img src={wire} alt="" />
+                  </div>
+                  {socialLinks.map((link, index) => (
+                    <div
+                      key={index}
+                      className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
+                    >
+                      <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.socialLink}
+                      >
+                        <img
+                          src={link.icon}
+                          alt=""
+                          className={`${styles.socialIcon} ${link.classNameIcon}`}
+                        />
+                        <img
+                          src={link.lamp}
+                          alt=""
+                          className={`${styles.socialLamp} ${link.classNameLamp}`}
+                        />
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                <img
+                  src={tree}
+                  // className={styles.tree}
+                  alt=""
+                  loading="eager"
+                  fetchPriority="high"
+                  style={{ contain: "none" }}
+                />
+              </div>
+              <div className={styles.treeExtender}></div>
+            </div>
+          </div>
         </div>
       </main>
     </>
