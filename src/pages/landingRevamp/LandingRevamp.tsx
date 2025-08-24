@@ -3,7 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
 
 import useOverlayStore from "../../utils/store";
-import styles from "./Landing.module.scss";
+import styles from "./LandingRevamp.module.scss";
 
 import { useGSAP } from "@gsap/react";
 import Navbar from "../components/navbar/Navbar";
@@ -208,7 +208,7 @@ export default function LandingRevamp({
             <div className={styles.logoContainer}>
               <img src={logo} className={styles.logo} alt="Logo" />
             </div>
-            
+
             <div className={styles.desktopBackground}>
               <img
                 src={landingImage}
