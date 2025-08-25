@@ -77,6 +77,9 @@ export default function LandingRevamp({
   const isHamOpen = useHamStore((state) => state.isHamOpen);
   const setIsHamOpen = useHamStore((state) => state.setHamOpen);
 
+  const treeImageRef = useRef<HTMLImageElement>(null);
+  const landingImageRef = useRef<HTMLImageElement>(null);
+
   useEffect(() => {
     if (overlayIsActive) {
       setTimeout(() => {
@@ -129,9 +132,170 @@ export default function LandingRevamp({
     return () => clearInterval(timerId);
   }, []);
 
+  useGSAP(() => {
+    if (treeImageRef.current && landingRef.current) {
+      gsap.set(treeImageRef.current, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        force3D: true,
+      });
+
+      gsap.set(landingRef.current, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        force3D: true,
+      });
+    }
+
+    gsap.fromTo(
+      registerButtonRef.current,
+      { autoAlpha: 1 },
+      {
+        autoAlpha: 0,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "200vh",
+          end: "+=200vh",
+          scrub: true,
+        },
+      }
+    );
+
+    const masterTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        start: "top top",
+        end: "+=800vh",
+        scrub: 1.2,
+      },
+    });
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(max-width: 730px) or (aspect-ratio < 8/12)", () => {
+      gsap.fromTo(
+        dateCountdownRef.current,
+        { autoAlpha: 1 },
+        {
+          autoAlpha: 0,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "200vh",
+            end: "+=200vh",
+            scrub: true,
+          },
+        }
+      );
+
+      masterTimeline
+
+        .to(
+          treeImageRef.current,
+          {
+            scale: 1.2,
+            duration: 4,
+            ease: "sine.inOut",
+          },
+          0
+        )
+
+        .to(
+          landingMobileRef.current,
+          {
+            scale: 1.05,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+
+        .to(
+          wrapperRef.current,
+          {
+            y: "-50%",
+            duration: 6,
+            scale: 1.2,
+            ease: "sine.in",
+          },
+          3
+        )
+
+        .to(
+          landingMobileRef.current,
+          {
+            y: "-30%",
+            duration: 6,
+            ease: "sine.in",
+          },
+          3
+        );
+    });
+    mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
+      masterTimeline
+
+        .to(
+          treeImageRef.current,
+          {
+            scale: 1.2,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+        .to(
+          landingRef.current,
+          {
+            scale: 1.1,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+
+        .to(
+          wrapperRef.current,
+          {
+            y: "-80%",
+            duration: 12,
+            ease: "sine.in",
+          },
+          0
+        )
+
+        .to(
+          landingRef.current,
+          {
+            y: "-20%",
+            duration: 8,
+            ease: "sine.in",
+          },
+          3.2
+        )
+
+        .to(
+          dateCountdownRef.current,
+          {
+            y: "-300%",
+            duration: 1,
+            ease: "sine.in",
+          },
+          0
+        );
+    });
+  }, []);
+
   return (
     <>
-      <main className={styles.wrapper} ref={wrapperRef}>
+      <main
+        className={`${styles.wrapper} ${
+          !removeGif ? styles.pointerNoneEvent : ""
+        } ${overlayIsActive ? styles.mask : ""}`}
+        ref={wrapperRef}
+      >
         <Navbar goToPage={goToPage} />
         <div
           className={
@@ -204,7 +368,6 @@ export default function LandingRevamp({
           </div>
 
           <div className={styles.backgroundContainer}>
-
             <div className={styles.logoContainer}>
               <img src={logo} className={styles.logo} alt="Logo" />
             </div>
@@ -217,7 +380,10 @@ export default function LandingRevamp({
               />
             </div>
 
-            <div className={styles.mobileBackground}>
+            <div
+              className={styles.mobileBackgroundContainer}
+              ref={landingMobileRef}
+            >
               <img
                 src={mobileMountains}
                 className={styles.mobileMountains}
@@ -233,10 +399,9 @@ export default function LandingRevamp({
               <img src={mobileCloud} className={styles.mobileCloud} />
             </div>
           </div>
-          <div className={styles.foregroundContainer}>
-
+          <div className={`${styles.foregroundContainer} ${styles.inviz}`}>
             <div className={styles.treeContainer} ref={treeContainerRef}>
-              <div className={styles.tree}>
+              <div className={styles.tree} ref={treeImageRef}>
                 <div className={styles.socialLinksContainer}>
                   <div className={styles.wire}>
                     <img src={wire} alt="" />
@@ -279,6 +444,54 @@ export default function LandingRevamp({
               <div className={styles.treeExtender}></div>
             </div>
           </div>
+          <div className={styles.foregroundContainer}>
+            <div className={styles.treeContainer} ref={treeContainerRef}>
+              <div className={styles.tree} ref={treeImageRef}>
+                <div className={styles.socialLinksContainer}>
+                  <div className={styles.wire}>
+                    <img src={wire} alt="" />
+                  </div>
+                  {socialLinks.map((link, index) => (
+                    <div
+                      key={index}
+                      className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
+                    >
+                      <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.socialLink}
+                      >
+                        <img
+                          src={link.icon}
+                          alt=""
+                          className={`${styles.socialIcon} ${link.classNameIcon}`}
+                        />
+                        <img
+                          src={link.lamp}
+                          alt=""
+                          className={`${styles.socialLamp} ${link.classNameLamp}`}
+                        />
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                <img
+                  src={tree}
+                  // className={styles.tree}
+                  alt=""
+                  loading="eager"
+                  fetchPriority="high"
+                  style={{ contain: "none" }}
+                />
+              </div>
+              <div className={styles.treeExtender}></div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.aboutUsContainer}>
+          <AboutUs goToPage={goToPage} />
         </div>
       </main>
     </>

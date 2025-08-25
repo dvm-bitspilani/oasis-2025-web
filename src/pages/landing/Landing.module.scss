@@ -50,8 +50,7 @@ body {
   position: fixed;
 }
 
-@media (max-width: 730px),
-(aspect-ratio < 8/12) {
+@media (max-width: 730px), (aspect-ratio < 8/12) {
   body {
     background-image: linear-gradient(to right, #d36f66, #be5964);
   }
@@ -177,8 +176,7 @@ body {
       mix-blend-mode: luminosity;
     }
 
-    @media (aspect-ratio < 8/12),
-    (max-width: 730px) {
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
       .mobileMountains {
         display: block;
       }
@@ -361,8 +359,7 @@ body {
       }
     }
 
-    @media (aspect-ratio < 8/12),
-    (max-width: 730px) {
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
       .treeContainer {
         position: fixed;
 
@@ -423,8 +420,7 @@ body {
       }
     }
 
-    @media (aspect-ratio < 8/12),
-    (max-width: 730px) {
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
       .logoContainer {
         left: 50%;
         transform: translateX(-50%);
@@ -478,8 +474,7 @@ body {
       }
     }
 
-    @media (aspect-ratio < 8/12),
-    (max-width: 730px) {
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
       .dateCountdown {
         z-index: 50;
         display: flex;
@@ -592,8 +587,7 @@ body {
       }
     }
 
-    @media (aspect-ratio < 8/12),
-    (max-width: 730px) {
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
       .registerBtnContainer {
         width: 300px;
         left: 50%;

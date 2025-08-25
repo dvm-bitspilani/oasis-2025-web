@@ -3,13 +3,13 @@ import { gsap } from "gsap";
 import styles from "./AboutUs.module.scss";
 import Header from "/svgs/aboutus/header.svg";
 import fan from "/svgs/aboutus/fan.png";
-import prev from "/svgs/aboutus/prev.svg"
-import pause from "/svgs/aboutus/pause.svg"
-import next from "/svgs/aboutus/next.svg"
+import prev from "/svgs/aboutus/prev.svg";
+import pause from "/svgs/aboutus/pause.svg";
+import next from "/svgs/aboutus/next.svg";
 import Aboutbar from "./components/Aboutbar";
-import Reg from "/svgs/aboutus/reghead.svg"
-import play from "/svgs/aboutus/play.svg"
-import nextarr from "/svgs/aboutus/nextarr.svg"
+import Reg from "/svgs/aboutus/reghead.svg";
+import play from "/svgs/aboutus/play.svg";
+import nextarr from "/svgs/aboutus/nextarr.svg";
 import BackButton from "../components/backButton/BackButton";
 declare global {
   interface Window {
@@ -31,11 +31,7 @@ const icons = [
 
 const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
 
-const AboutUs = ({
-  goToPage,
-}: {
-  goToPage: (path: string) => void;
-}) => {
+const AboutUs = ({ goToPage }: { goToPage: (path: string) => void }) => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -43,7 +39,8 @@ const AboutUs = ({
   const playerRef = useRef<any>(null);
   useEffect(() => {
     const initPlayer = () => {
-      if (playerRef.current || !playerContainerRef.current || !window.YT) return;
+      if (playerRef.current || !playerContainerRef.current || !window.YT)
+        return;
 
       playerRef.current = new window.YT.Player(playerContainerRef.current, {
         height: "100%",
@@ -82,7 +79,7 @@ const AboutUs = ({
     return () => {
       try {
         if (playerRef.current?.destroy) playerRef.current.destroy();
-      } catch { }
+      } catch {}
     };
   }, []);
 
@@ -159,7 +156,8 @@ const AboutUs = ({
       if (isFan1) {
         angle = Math.random() * (Math.PI / 2);
       } else {
-        angle = (-40 * Math.PI) / 180 + Math.PI + Math.random() * 2 * (Math.PI / 3);
+        angle =
+          (-40 * Math.PI) / 180 + Math.PI + Math.random() * 2 * (Math.PI / 3);
       }
 
       const distance = 20 + Math.random() * 100;
@@ -269,17 +267,15 @@ const AboutUs = ({
   ).matches;
   return (
     <div className={styles.AboutContainer}>
-      <Aboutbar goToPage={goToPage} />
+      {/* <Aboutbar goToPage={goToPage} /> */}
       <div className={styles.header}>
-        <img src=
-          {isMobile ? Reg : Header} alt="About Us" />
+        <img src={isMobile ? Reg : Header} alt="About Us" />
       </div>
 
       <div className={styles.content3D}>
         <div className={styles.wrapper}>
           <button onClick={prevVideo} className={styles.arr}>
-
-            <img src={nextarr} className={styles.prevarr} width="100%"  ></img>
+            <img src={nextarr} className={styles.prevarr} width="100%"></img>
           </button>
           <div className={styles.vid}>
             <div
@@ -289,7 +285,6 @@ const AboutUs = ({
 
             <img src={fan} alt="" className={styles.fan1} />
             <img src={fan} alt="" className={styles.fan2} />
-
           </div>
 
           <button onClick={nextVideo} className={styles.arr}>
@@ -302,7 +297,6 @@ const AboutUs = ({
           <div className={styles.controls}>
             <div className={styles.a1}></div>
             <div className={styles.buttonContainer}>
-
               <img
                 src="/svgs/aboutus/bord.svg"
                 className={styles.background}
@@ -314,7 +308,11 @@ const AboutUs = ({
                 </button>
                 <div className={styles.a1}></div>
                 <button onClick={togglePlayPause}>
-                  <img src={isPlaying ? play : pause} alt="" className={styles.btns2} />
+                  <img
+                    src={isPlaying ? play : pause}
+                    alt=""
+                    className={styles.btns2}
+                  />
                 </button>
                 <div className={styles.a1}></div>
                 <button onClick={nextVideo}>
@@ -333,9 +331,9 @@ const AboutUs = ({
               Technology and Science, Pilani, has been a vibrant part of India's
               cultural tapestry since 1971. Managed entirely by students, it's a
               dazzling showcase of talent in Dance, Drama, Literature, Comedy,
-              Fashion, and Music. It's where dreams come alive, laughter fills the
-              air, and creativity knows no bounds. Step into the world of Oasis,
-              where youth's boundless potential shines.
+              Fashion, and Music. It's where dreams come alive, laughter fills
+              the air, and creativity knows no bounds. Step into the world of
+              Oasis, where youth's boundless potential shines.
             </p>
           </div>
         </div>
@@ -343,7 +341,6 @@ const AboutUs = ({
       <BackButton className={styles.aboutBB} />
     </div>
   );
-
 };
 
 export default AboutUs;

@@ -36,6 +36,13 @@ const imagesToPreload = [
   "/svgs/landing/registerBtn.svg",
   "/images/landing/oasisLogo.png",
   "/images/landing/mobileCloud.png",
+  "/images/registration/reg-banner.png",
+  "/svgs/registration/bg-extended.svg",
+  "/svgs/registration/bg-mobile.svg",
+  "/svgs/registration/scrollThumb.svg",
+  "/svgs/registration/scroll-bar.svg",
+  "/svgs/registration/leftarr.svg",
+  "/svgs/registration/rightarr.svg",
 ];
 
 export default function DrawingPreloader({
