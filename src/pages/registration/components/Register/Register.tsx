@@ -22,10 +22,7 @@ const registrationSchema = yup.object({
   gender: yup.string().required("Gender is required"),
   phone: yup
     .string()
-    .matches(
-      /^((\+|00)91[\-\s]?|0)?(\d{10}|\d{3}[\-\s]?\d{3}[\-\s]?\d{4}|\d{5}[\-\s]?\d{5})$/,
-      "Invalid mobile number"
-    )
+    .matches(/^[1-9]\d{9}$/, "Invalid mobile number")
     .required("Mobile number is required"),
   college_id: yup.string().required("College is required"),
   year: yup.string().required("Year of study is required"),
