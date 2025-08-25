@@ -131,13 +131,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 22vw;
+        width: 24vw;
         z-index: 1;
 
         .confirmIcon {
-          width: 7vw;
-          height: 0.5vw;
-          transform: translateY(-0.25vw);
           &:last-child {
             rotate: 180deg;
           }
@@ -323,11 +320,6 @@
           justify-content: center;
           gap: 1vw;
           width: 55vw;
-
-          .confirmIcon {
-            width: 10vw;
-            height: 0.8vw;
-          }
         }
       }
 
@@ -407,10 +399,6 @@
           gap: 1vw;
           font: 100 5.2vw "Abhaya Libre Extrabold";
 
-          .confirmIcon {
-            width: 25vw;
-            height: 1.5vw;
-          }
         }
       }
 

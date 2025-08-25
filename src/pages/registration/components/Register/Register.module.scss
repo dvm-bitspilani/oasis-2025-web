@@ -28,7 +28,7 @@
     color: #e2dccb !important;
     font: 100 1.4vw "Abhaya Libre Extrabold" !important;
     background-color: transparent !important;
-    transition: background-color 5000s ease-in-out 0s;
+    transition: background-color 5000s ease-in-out 0s !important;
   }
 
   .registrationForm {
@@ -251,8 +251,6 @@
     }
 
     .confirmIcon {
-      width: 7vw;
-      height: 0.5vw;
       &:last-child {
         rotate: 180deg;
       }
@@ -268,9 +266,19 @@
     position: relative;
 
     input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
     textarea:-webkit-autofill,
     select:-webkit-autofill {
-      font: 100 3.2vw "Abhaya Libre Extrabold" !important;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+      box-shadow: 0 0 0 1000px transparent inset !important;
+      -webkit-text-fill-color: #e2dccb !important;
+      color: #e2dccb !important;
+      font: 100 3.2vw "Abhaya Libre Extrabold";
+      background-color: transparent !important;
+      transition: background-color 5000s ease-in-out 0s !important;
     }
 
     .registrationForm {
@@ -362,11 +370,6 @@
       justify-content: center;
       gap: 1vw;
       width: 55vw;
-
-      .confirmIcon {
-        width: 10vw;
-        height: 0.8vw;
-      }
     }
   }
 }
@@ -374,9 +377,19 @@
 @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
   .registerContainer {
     input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
     textarea:-webkit-autofill,
     select:-webkit-autofill {
-      font: 100 3.2vw "Abhaya Libre Extrabold" !important;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+      box-shadow: 0 0 0 1000px transparent inset !important;
+      -webkit-text-fill-color: #e2dccb !important;
+      color: #e2dccb !important;
+      font: 100 4.2vw "Abhaya Libre Extrabold" !important;
+      background-color: transparent !important;
+      transition: background-color 5000s ease-in-out 0s !important;
     }
 
     .registrationForm {
@@ -435,11 +448,6 @@
       gap: 1vw;
       bottom: 6vw;
       font: 100 5.2vw "Abhaya Libre Extrabold";
-
-      .confirmIcon {
-        width: 25vw;
-        height: 1.5vw;
-      }
     }
   }
 }
