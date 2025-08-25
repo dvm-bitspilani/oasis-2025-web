@@ -169,14 +169,14 @@ const Registration = ({ goToPage }: RegistrationProps) => {
   useEffect(() => {
     document.body.style.position = "static";
   }, []);
-  useEffect(() => {
-    // if (startAnimation) {
-    toRegPage(false);
-    setTimeout(() => {
-      toEventPage();
-    }, 2500);
-    // }
-  }, []);
+  // useEffect(() => {
+  //   // if (startAnimation) {
+  //   toRegPage(false);
+  //   setTimeout(() => {
+  //     toEventPage();
+  //   }, 2500);
+  //   // }
+  // }, []);
   // const prevWidth = useRef(window.innerWidth);
   // const prevHeight = useRef(window.innerHeight);
 
