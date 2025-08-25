@@ -52,8 +52,8 @@ export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
         c1.start({ "--dx": "0%", transition: { duration: 0.7, ease: "easeInOut" } }),
         c4.start({ "--dx": "0%", transition: { duration: 0.7, ease: "easeInOut" } }),
 
-        c2.start({ "--dx": "0%", transition: { duration: 0.9, ease: "easeInOut" } }),
-        c3.start({ "--dx": "0%", transition: { duration: 0.9, ease: "easeInOut" } }),
+        c2.start({ "--dx": "0.5%", transition: { duration: 0.9, ease: "easeInOut" } }),
+        c3.start({ "--dx": "-0.5%", transition: { duration: 0.9, ease: "easeInOut" } }),
       ]);
       // if (page ==="/register")
       // {

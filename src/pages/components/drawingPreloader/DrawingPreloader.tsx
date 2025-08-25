@@ -38,6 +38,10 @@ const imagesToPreload = [
   "/images/landing/mobileCloud.png",
 ];
 
+const soundsToPreload = [
+  "./sounds/door-close.mp3"
+]
+
 export default function DrawingPreloader({
   className,
 }: {
@@ -57,15 +61,15 @@ export default function DrawingPreloader({
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let loadedImages = 0;
+    let loadedAssets = 0;
 
     const preloadImage = (src: string) => {
       return new Promise((resolve) => {
         const img = new Image();
         img.src = src;
         img.onload = () => {
-          loadedImages++;
-          setProgress((loadedImages / imagesToPreload.length) * 99);
+          loadedAssets++;
+          setProgress((loadedAssets / (imagesToPreload.length + soundsToPreload.length)) * 99);
           const canvas = document.createElement("canvas");
           canvas.width = img.naturalWidth;
           canvas.height = img.naturalHeight;
@@ -81,14 +85,36 @@ export default function DrawingPreloader({
         };
       });
     };
+    const preloadSound = (src: string) => {
+      return new Promise((resolve) => {
+        const audio = new Audio(src);
+        audio.onloadeddata = () => {
+          loadedAssets++;
+          setProgress((loadedAssets / (imagesToPreload.length + soundsToPreload.length)) * 99);
+          resolve(audio);
+        };
+        audio.onerror = (err) => {
+          console.error("Image failed to load", err, audio);
+          resolve(audio);
+        };
+      });
+    };
 
     Promise.all(
-      imagesToPreload.map((src, i) =>
-        preloadImage(src).then(async (img) => {
-          await new Promise((resolve) => setTimeout(resolve, 1000 * i));
-          return img;
-        })
-      )
+      [
+        ...imagesToPreload.map((src, i) =>
+          preloadImage(src).then(async (img) => {
+            await new Promise((resolve) => setTimeout(resolve, 1000 * i));
+            return img;
+          })
+        ),
+        ...soundsToPreload.map((src, i) => 
+          preloadSound(src).then(async (audio) => {
+            await new Promise((resolve) => setTimeout(resolve, 1000 * i));
+            return audio;
+          })
+        )
+      ]
     )
       .then(() => {})
       .catch((err) => {

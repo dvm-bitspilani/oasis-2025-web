@@ -7,7 +7,7 @@
   height: 100svh;
   overflow: hidden;
   z-index: 9999;
-  pointer-events: none; 
+  // pointer-events: none; 
   background: transparent;
 }
 
@@ -32,14 +32,14 @@
 .door2 {
   --base: 0%;   
   right: 50vw;    
-  min-width: 30vw;
+  min-width: 31vw;
   object-position: 100% 0;
 }
 
 .door3 {
   --base: 0%;      
   left: 50vw;       
-  min-width: 30vw;
+  min-width: 31vw;
   object-position: 0 0;
 }
 

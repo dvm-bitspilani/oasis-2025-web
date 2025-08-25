@@ -110,7 +110,8 @@ export default function App() {
           video.onloadeddata = () => resolve(video);
           video.onerror = (error) => reject(error);
         })
-      ))
+      )),
+      
     ]
 
     await Promise.allSettled(promises)//.catch((error) => console.log(error))
