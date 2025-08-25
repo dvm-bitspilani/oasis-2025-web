@@ -10,7 +10,7 @@
   overflow-y: hidden;
   // background: url("/svgs/aboutus/background.svg");
   background-size: cover;
-  background-blend-mode: darken;
+  background-color: black;
 
   .aboutBB {
     background-image: url('/svgs/registration/back.svg');
@@ -72,6 +72,7 @@
       transform-style: preserve-3d;
 
       .vid {
+        img, iframe, > div{display:block;}
         width: 100%;
 
         aspect-ratio: 16 / 9;
@@ -192,7 +193,8 @@
 
       .abtus {
         position: relative;
-        top: - (9 / 16) * 53vw;
+        // top: -((9 / 16) * 53vw);
+        top:-29.8125vw;
         width: 100%;
         left: 30%;
 

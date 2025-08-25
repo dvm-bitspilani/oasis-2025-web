@@ -6,7 +6,6 @@ import fan from "/svgs/aboutus/fan.png";
 import prev from "/svgs/aboutus/prev.svg"
 import pause from "/svgs/aboutus/pause.svg"
 import next from "/svgs/aboutus/next.svg"
-import Aboutbar from "./components/Aboutbar";
 import Reg from "/svgs/aboutus/reghead.svg"
 import play from "/svgs/aboutus/play.svg"
 import nextarr from "/svgs/aboutus/nextarr.svg"
@@ -17,9 +16,10 @@ import xicon from "/svgs/aboutus/xicon.svg"
 import linkedin from "/svgs/aboutus/linkedin.svg"
 import yticon from "/svgs/aboutus/yticon.svg"
 import abtus from "/svgs/aboutus/abtus.svg"
-import aboutPageBG from "/svgs/aboutus/background.svg"
+import aboutPageBG from "/svgs/aboutus/background.jpg"
 import aboutPageBGMobile from "/svgs/aboutus/backg.svg"
 import aboutTextBG from "/images/aboutus/abtbck.png"
+import Navbar from "../components/navbar/Navbar";
 
 declare global {
   interface Window {
@@ -40,12 +40,17 @@ const icons = [
 ];
 
 const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
-
+const iconImages: HTMLImageElement[] = icons.map(src => {
+  const img = new Image();
+  img.src = src;
+  return img;
+});
 const AboutUs = ({
   goToPage,
 }: {
   goToPage: (path: string) => void;
 }) => {
+  
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -83,9 +88,12 @@ const AboutUs = ({
     if (window.YT && window.YT.Player) {
       initPlayer();
     } else {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
+      if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+  const tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.body.appendChild(tag);
+}
+
       window.onYouTubeIframeAPIReady = () => initPlayer();
     }
 
@@ -158,9 +166,10 @@ const AboutUs = ({
       const startX = fanEl.offsetLeft + fanEl.offsetWidth / 2;
       const startY = fanEl.offsetTop + fanEl.offsetHeight / 2;
 
-      const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      const img = document.createElement("img");
-      img.src = iconSrc;
+      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+      const iconTemplate = iconImages[Math.floor(Math.random() * iconImages.length)];
+const img = iconTemplate.cloneNode(true) as HTMLImageElement;
+// img.src = iconSrc;
       img.className = styles.flyingIcon;
       img.style.left = `${startX}px`;
       img.style.top = `${startY}px`;
@@ -209,9 +218,11 @@ const AboutUs = ({
       const startX = rect.left - parentRect.left + rect.width / 2;
       const startY = rect.top - parentRect.top + rect.height / 2 - 100;
 
-      const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      const img = document.createElement("img");
-      img.src = iconSrc;
+      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+      // const img = document.createElement("img");
+      // img.src = iconSrc;
+      const iconTemplate = iconImages[Math.floor(Math.random() * iconImages.length)];
+const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
       img.style.left = `${startX}px`;
       img.style.top = `${startY}px`;
@@ -253,9 +264,11 @@ const AboutUs = ({
       const container = document.querySelector(`.${styles.vid}`) as HTMLElement | null;
       if (!container) return;
 
-      const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      const img = document.createElement("img");
-      img.src = iconSrc;
+      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+      // const img = document.createElement("img");
+      // img.src = iconSrc;
+      const iconTemplate = iconImages[Math.floor(Math.random() * iconImages.length)];
+const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
 
       // Set start position
@@ -319,10 +332,12 @@ const AboutUs = ({
     const spawnFromCorner2 = (corner: "top-right" | "bottom-left") => {
       const container = document.querySelector(`.${styles.theme}`) as HTMLElement | null;
       if (!container) return;
-
-      const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      const img = document.createElement("img");
-      img.src = iconSrc;
+      
+      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+      // const img = document.createElement("img");
+      // img.src = iconSrc;
+      const iconTemplate = iconImages[Math.floor(Math.random() * iconImages.length)];
+const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
 
       // Set start position
@@ -423,7 +438,8 @@ const AboutUs = ({
 
   return (
     <div className={styles.AboutContainer} style={{backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`}} >
-      <Aboutbar goToPage={goToPage} />
+      <Navbar goToPage={goToPage} hideHam variant="about"/>
+
       <div className={styles.header}>
         <img src=
           {isMobile ? Reg : Header} alt="About Us" />
@@ -500,9 +516,9 @@ const AboutUs = ({
           </div>
         </div>
       </div>
-      <button className={styles.theme} onClick={() => { }}>
+      {/* <button className={styles.theme} onClick={() => { }}>
         <h3>ABOUT THEME</h3>
-      </button>
+      </button> */}
       <div className={styles.social}>
         <a href="https://www.linkedin.com/company/oasis24-bits-pilani/">
           <img src={linkedin} alt="Linkedin" />

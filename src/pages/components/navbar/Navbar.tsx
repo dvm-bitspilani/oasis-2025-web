@@ -19,9 +19,13 @@ const navItems = [
 
 export default function Navbar({
   goToPage,
+  hideHam = false,
+  variant = "default",
 }: {
   goToPage: (path: string) => void;
-}) {
+  hideHam?: boolean;
+  variant?: "default" | "about";
+})  {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [isMobile, setIsMobile] = useState(
@@ -50,7 +54,10 @@ export default function Navbar({
     }
   };
   return (
-    <nav className={styles.nav}>
+    <nav className={`${styles.nav} ${
+        variant === "about" ? styles.aboutVariant : ""
+      }`}>
+      {!hideHam &&(
       <div className={styles.hamMenuBtn} onClick={handleHamClick}>
         <img src={moon} alt="" className={styles.moon} />
         <img src={moonHam} alt="" className={styles.moonHam} />
@@ -87,6 +94,7 @@ export default function Navbar({
           />
         </div>
       </div>
+      )}
       <ul className={styles.navList}>
         {navItems.map((item) => (
           <li 
