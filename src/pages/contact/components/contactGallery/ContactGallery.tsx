@@ -31,12 +31,12 @@ export default function ContactGallery({ setHoriBarDetails }: { setHoriBarDetail
             // const barGapThreshold = 100;
             let barGap = Math.round(secondRowRelPos - firstRowRelPos);
             // if (barGap > barGapThreshold) 
-            barGap = barGap / Math.round(barGap / 150);
+            barGap = barGap / 2;//Math.round(barGap / 100);
 
             const firstRowAbsPos = firstRowRelPos + (document.scrollingElement?.scrollTop || 0);
             
             const firstBarPos = Math.round(firstRowAbsPos % barGap);
-            const numOfBars = Math.round((document.body.clientHeight || 0)/barGap);
+            const numOfBars = Math.round((document.body.clientHeight - firstBarPos || 0)/barGap);
 
             if (setHoriBarDetails) setHoriBarDetails({numOfBars, firstBarPos, barGap})
         }

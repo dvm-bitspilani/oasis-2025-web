@@ -15,12 +15,15 @@
         margin: auto;
         margin-bottom: 3rem;
         .contactBanner {
+            position: relative;
             width: 100%;
+            z-index: 20;
         }
 
         @media (max-width: 900px) {
-            width: clamp(15rem, 45vw, 30rem);
+            width: clamp(15rem, 72vw, 30rem);
             margin-top: 4.2rem;
+            margin-bottom: 0rem;
         }
     }
     .contactGalleryContainer {
@@ -109,8 +112,8 @@
 
                         @media (max-width: 1700px) {
                             gap: 0.3rem;
-                            .contactName {font-size: 1.7rem; line-height: 1.7rem;}
-                            .contactPosition {font-size: 1rem; line-height: 1rem;}
+                            .contactName {font-size: 1.2rem; line-height: 1.2rem;}
+                            .contactPosition {font-size: 0.9rem; line-height: 0.9rem;}
                             .contactLinks {
                                 gap: 1rem;
                                 div {
@@ -126,15 +129,15 @@
 
                         @media (max-width: 600px) {
                             gap: 0.1rem;
-                            .contactName {font-size: 0.9rem; line-height: 0.9rem;}
+                            .contactName {font-size: 0.7rem; line-height: 0.7rem; text-wrap: nowrap;}
                             .contactPosition {font-size: 0.6rem; line-height: 0.6rem;}
                             .contactLinks {
                                 gap: 1rem;
                                 div {
-                                    height: 0.8rem;
+                                    // height: 0.8rem;
                                     .contactIcon {
                                         font-size: 0.8rem; 
-                                        height: 0.8rem;
+                                        // height: 0.8rem;
                                         position: relative;
                                     }
                                 }
@@ -152,7 +155,7 @@
 
         @media (max-width: 900px) {
             // grid-template-columns: 1fr;
-            gap: 1rem;
+            gap: 1.5rem;
         }
     }
     

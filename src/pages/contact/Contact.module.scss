@@ -59,7 +59,15 @@
         background-position: center;
         min-height: 100vh;
 
-        .contactBB {z-index: 10;}
+        .contactBB {
+            z-index: 10;
+            margin-left: 3rem;
+
+            @media (max-width: 900px) {
+                margin-left: 2rem;
+                margin-top: 0.6rem;
+            }
+        }
     }
 
     .contactPageBg {
@@ -76,6 +84,7 @@
 
             display: grid;
             grid-template-columns: 1fr calc(83*100vw/1919) 1fr;
+            @media (max-width: 900px) {grid-template-columns: 1fr calc(37*100vw/1919) calc(8*100vw/1919) calc(37*100vw/1919) 1fr;}
 
             & :nth-child(odd) {
                 background-color: #7F5934;

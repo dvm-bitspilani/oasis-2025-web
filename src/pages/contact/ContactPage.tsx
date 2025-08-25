@@ -36,7 +36,9 @@ export default function Contact() {
                                 top: `${i*(horiBarDetails?.barGap || 0) + (horiBarDetails?.firstBarPos || 0)}px`
                             }} 
                         >
-                            <div /><div /><div />
+                            {
+                                Array(isMobile ? 5 : 3).fill(null).map(() => <div />)
+                            }
                         </div>
                     )
                 }
