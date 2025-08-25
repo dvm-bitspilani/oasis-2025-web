@@ -16,7 +16,7 @@ import xicon from "/svgs/aboutus/xicon.svg"
 import linkedin from "/svgs/aboutus/linkedin.svg"
 import yticon from "/svgs/aboutus/yticon.svg"
 import abtus from "/svgs/aboutus/abtus.svg"
-import aboutPageBG from "/svgs/aboutus/background.svg"
+import aboutPageBG from "/svgs/aboutus/background.jpg"
 import aboutPageBGMobile from "/svgs/aboutus/backg.svg"
 import aboutTextBG from "/images/aboutus/abtbck.png"
 import Navbar from "../components/navbar/Navbar";

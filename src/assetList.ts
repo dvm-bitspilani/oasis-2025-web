@@ -78,7 +78,7 @@ const assetList = {
             './svgs/aboutus/next.svg',
             './svgs/aboutus/pause.svg',
             './svgs/aboutus/prev.svg',
-            './svgs/aboutus/background.svg',
+            './svgs/aboutus/background.jpg',
             './svgs/aboutus/nextarr.svg',
             './svgs/aboutus/play.svg',
             './svgs/aboutus/prvarr.svg',
