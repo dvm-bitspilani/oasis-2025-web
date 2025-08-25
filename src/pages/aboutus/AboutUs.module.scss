@@ -72,6 +72,7 @@
       transform-style: preserve-3d;
 
       .vid {
+        img, iframe, > div{display:block;}
         width: 100%;
 
         aspect-ratio: 16 / 9;

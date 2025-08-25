@@ -501,9 +501,9 @@ const AboutUs = ({
           </div>
         </div>
       </div>
-      <button className={styles.theme} onClick={() => { }}>
+      {/* <button className={styles.theme} onClick={() => { }}>
         <h3>ABOUT THEME</h3>
-      </button>
+      </button> */}
       <div className={styles.social}>
         <a href="https://www.linkedin.com/company/oasis24-bits-pilani/">
           <img src={linkedin} alt="Linkedin" />
