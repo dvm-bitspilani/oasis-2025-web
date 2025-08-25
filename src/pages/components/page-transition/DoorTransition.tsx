@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { motion, useAnimation } from "framer-motion";
 import styles from "./style.module.scss";
 import Door1Image from "/images/doors/Door1.png";
@@ -6,6 +6,7 @@ import Door2Image from "/images/doors/Door2.png";
 import Door3Image from "/images/doors/Door3.png";
 import Door4Image from "/images/doors/Door4.png";
 // import Preloader from "../../registration/components/Preloader/Preloader";
+import assetList from '../../../assetList';
 
 type Phase = "idle" | "closing" | "waiting" | "opening";
 
@@ -13,10 +14,11 @@ interface Props {
   phase: Phase;
   onClosed?: () => void;
   onOpened?: () => void;
-  page: any;
+  percentageLoaded: number;
+  targetPageRef: RefObject<string | null>
 }
 
-export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
+export default function DoorTransition({ phase, onClosed, onOpened, percentageLoaded, targetPageRef }: Props) {
   const c1 = useAnimation();
   const c2 = useAnimation();
   const c3 = useAnimation();
@@ -29,6 +31,8 @@ export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
     innerRight: "300%",
     outerRight: "200%",
   };
+  const isLoading = targetPageRef.current && Object.keys(assetList).includes(targetPageRef?.current.replace("/", ""))
+
   useEffect(() => {
     closeSoundRef.current = new Audio("/sounds/door-close.mp3");
     openSoundRef.current = new Audio("/sounds/door-close.mp3");
@@ -52,8 +56,8 @@ export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
         c1.start({ "--dx": "0%", transition: { duration: 0.7, ease: "easeInOut" } }),
         c4.start({ "--dx": "0%", transition: { duration: 0.7, ease: "easeInOut" } }),
 
-        c2.start({ "--dx": "0.5%", transition: { duration: 0.9, ease: "easeInOut" } }),
-        c3.start({ "--dx": "-0.5%", transition: { duration: 0.9, ease: "easeInOut" } }),
+        c2.start({ "--dx": "0%", transition: { duration: 0.9, ease: "easeInOut" } }),
+        c3.start({ "--dx": "0%", transition: { duration: 0.9, ease: "easeInOut" } }),
       ]);
       // if (page ==="/register")
       // {
@@ -100,7 +104,11 @@ export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
       <motion.img src={Door2Image} className={`${styles.door} ${styles.door2}`} style={{ "--dx": START.innerLeft } as any} animate={c2} />
       <motion.img src={Door3Image} className={`${styles.door} ${styles.door3}`} style={{ "--dx": START.innerRight } as any} animate={c3} />
       <motion.img src={Door4Image} className={`${styles.door} ${styles.door4}`} style={{ "--dx": START.outerRight } as any} animate={c4} />
-      {<div className={`${styles.loadingText} ${phase === "waiting" && styles.loadingShow}`}>Loading</div>}
+      {
+        <div className={`${styles.loadingText} ${phase === "waiting" && styles.loadingShow} ${isLoading && styles.percentageShow}`}>
+          Loading{isLoading && `: ${Math.round(percentageLoaded)}%`}
+        </div>
+      }
     </div>
   );
 }

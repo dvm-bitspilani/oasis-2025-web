@@ -38,6 +38,7 @@ export default function App() {
   const [doorPhase, setDoorPhase] = useState<
     "idle" | "closing" | "waiting" | "opening"
   >("idle");
+  const [doorPLPercentageLoaded, setDoorPLPercentageLoaded] = useState<number>(0)
 
   const [isPreloading, setIsPreloading] = useState(location.pathname !== "/");
 
@@ -57,7 +58,6 @@ export default function App() {
 
     const page = nextRoute.current?.replace("/", "");
     if (page && Object.keys(assetList).includes(page)) await loadAssets(page as keyof typeof assetList)
-    console.log("Reached")
 
     if (nextRoute.current) {
       navigate(nextRoute.current, { state: { startAnimation: true } });
@@ -73,6 +73,7 @@ export default function App() {
   const handleDoorsOpened = () => {
     setDoorPhase("idle");
     nextRoute.current = null;
+    setDoorPLPercentageLoaded(0);
   };
 
   const goToPage = (path: string) => {
@@ -93,22 +94,27 @@ export default function App() {
   };
 
   const loadAssets = async (page: keyof typeof assetList) => {
+
+    const handleLoadedAsset = (callback: (param?: any) => void) => {
+      setDoorPLPercentageLoaded(prev => prev + 100/promises.length);
+      callback()
+    }
     
     const promises = [
       ...assetList[page].images.map((path) => (
         new Promise((resolve, reject) => {
           const image = new Image();
           image.src = path;
-          image.onload = () => {resolve(image), console.log("loaded asset")};
-          image.onerror = (error) => reject(error);
+          image.onload = () => handleLoadedAsset(() => resolve(image));
+          image.onerror = () => handleLoadedAsset((error) => reject(error));
         })
       )),
       ...assetList[page].videos.map((path) => (
         new Promise((resolve, reject) => {
           const video = document.createElement("video");
           video.src = path;
-          video.onloadeddata = () => resolve(video);
-          video.onerror = (error) => reject(error);
+          video.onloadeddata = () => handleLoadedAsset(() => resolve(video));
+          video.onerror = () => handleLoadedAsset((error) => reject(error));
         })
       )),
       
@@ -124,7 +130,8 @@ export default function App() {
         phase={doorPhase}
         onClosed={handleDoorsClosed}
         onOpened={handleDoorsOpened}
-        page={location.pathname}
+        percentageLoaded={doorPLPercentageLoaded}
+        targetPageRef={nextRoute}
       />
 
       {isPreloading && <Preloader onEnter={handlePreloaderEnter} targetLocation={nextRoute.current} />}

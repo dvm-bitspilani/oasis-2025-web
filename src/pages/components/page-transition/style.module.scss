@@ -27,20 +27,23 @@
   right: 50vw;      
   min-width: 20vw;
   object-position: 100% 0;
+  z-index: 20;
 }
 
 .door2 {
   --base: 0%;   
-  right: 50vw;    
-  min-width: 31vw;
+  right: calc(50vw - 1px);    
+  min-width: 35vw;
   object-position: 100% 0;
+  z-index: 10;
 }
 
 .door3 {
   --base: 0%;      
-  left: 50vw;       
-  min-width: 31vw;
+  left: calc(50vw - 1px);       
+  min-width: 35vw;
   object-position: 0 0;
+  z-index: 10;
 }
 
 .door4 {
@@ -48,6 +51,7 @@
   left: 50vw;        
   min-width: 20vw;
   object-position: 0 0;
+  z-index: 20;
 }
 
 .loadingText {
@@ -67,6 +71,10 @@
   transition: opacity 0.3s;
 
   &.loadingShow {opacity: 1;}
+  &.percentageShow {
+    min-width: 18.3rem;
+    @media (max-width: 900px) {min-width: 12.6rem;}
+  }
 
   @media (max-width: 900px) {
     font-size: 1.2rem;
