@@ -67,6 +67,11 @@
     padding: 1vw 3vw 1vw 1vw;
     border: none;
     z-index: 4;
+    transition: filter 0.3s;
+    
+    &:hover {
+      filter: brightness(0.8)
+    }
     &:focus {
       outline: none;
     }

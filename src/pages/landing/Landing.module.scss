@@ -293,6 +293,7 @@ body {
                 height: 30%;
                 filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
                 transition: filter 0.1s ease-out;
+                pointer-events: none;
               }
 
               .socialLamp {
@@ -300,6 +301,10 @@ body {
                 grid-column: 1/2;
                 z-index: 99;
                 width: 80%;
+                filter: brightness(1) drop-shadow(0px 0px 3px rgba(255, 213, 3, 0.823));
+                transition: filter 0.3s ease-out;
+
+                &:hover{filter: brightness(1.05) drop-shadow(0px 0px 15px rgba(255, 213, 3, 0.848))}
               }
 
               &:hover {
@@ -566,6 +571,9 @@ body {
       justify-items: center;
       cursor: pointer;
       user-select: none;
+      transition: filter 0.3s;
+
+      &:hover {filter: brightness(0.8)}
 
       .registerBtn {
         grid-row: 1/2;

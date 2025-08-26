@@ -245,6 +245,10 @@
     align-items: center;
     justify-content: space-between;
     width: 22vw;
+    transition: filter 0.3s;
+    
+    &:hover {filter: brightness(0.8)}
+
     span {
       padding-left: 40%;
       text-align: center;
