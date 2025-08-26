@@ -7,8 +7,9 @@ import cloud3 from "/svgs/landing/hamClouds/cloud3.min.svg";
 import cloud4 from "/svgs/landing/hamClouds/cloud4.min.svg";
 import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useHamStore } from "../../../utils/store";
+import { navContext } from "../../../App";
 
 const navItems = [
   { label: "Home", katakana: "ホーム", links: "/" },
@@ -18,14 +19,13 @@ const navItems = [
 ];
 
 export default function Navbar({
-  goToPage,
   hideHam = false,
   variant = "default",
 }: {
-  goToPage: (path: string) => void;
   hideHam?: boolean;
   variant?: "default" | "about";
 })  {
+  const { goToPage } = useContext(navContext);
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [isMobile, setIsMobile] = useState(
@@ -100,7 +100,7 @@ export default function Navbar({
           <li 
             key={item.label} 
             className={styles.navItem}
-            onClick={() => goToPage(item.links)}
+            onClick={() => goToPage?.(item.links)}
           >
             <div className={styles.navLink}>
               <div className={styles.actualLabel}>{item.label}</div>

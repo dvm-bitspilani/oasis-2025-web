@@ -18,9 +18,6 @@ import yticon from "/svgs/aboutus/yticon.svg"
 import abtus from "/svgs/aboutus/abtus.svg"
 import aboutPageBG from "/images/aboutus/background.jpg"
 import aboutPageBGMobile from "/svgs/aboutus/backg.svg"
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.body.appendChild(tag);
 import aboutTextBG from "/images/aboutus/abtbck.png"
 import Navbar from "../components/navbar/Navbar";
 
@@ -48,11 +45,7 @@ const iconImages: HTMLImageElement[] = icons.map(src => {
   img.src = src;
   return img;
 });
-const AboutUs = ({
-  goToPage,
-}: {
-  goToPage: (path: string) => void;
-}) => {
+const AboutUs = () => {
   
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -444,7 +437,7 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
 
   return (
     <div className={styles.AboutContainer} style={{backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`}} >
-      <Navbar goToPage={goToPage} hideHam variant="about"/>
+      <Navbar hideHam variant="about"/>
 
       <div className={styles.header}>
         <img src=

@@ -305,7 +305,7 @@ export default function Landing({
           } ${overlayIsActive ? styles.mask : ""}`}
           ref={wrapperRef}
         >
-          <Navbar goToPage={goToPage} />
+          <Navbar />
           {/* {isHamOpen && (
             <div className={styles.hamContainer}>
               <div
