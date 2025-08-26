@@ -32,16 +32,16 @@
 
 .door2 {
   --base: 0%;   
-  right: calc(50vw - 1px);    
-  min-width: 35vw;
+  right: 50vw; // calc(50vw - 1px);    
+  min-width: calc(30vw + 0.5px);
   object-position: 100% 0;
   z-index: 10;
 }
 
 .door3 {
   --base: 0%;      
-  left: calc(50vw - 1px);       
-  min-width: 35vw;
+  left: 50vw; // calc(50vw - 1px);       
+  min-width: calc(30vw + 0.5px);
   object-position: 0 0;
   z-index: 10;
 }
