@@ -58,6 +58,7 @@ export default function App() {
 
     const page = nextRoute.current?.replace("/", "");
     if (page && Object.keys(assetList).includes(page)) await loadAssets(page as keyof typeof assetList)
+    // await new Promise((resolve) => setTimeout(resolve, 10000))
 
     if (nextRoute.current) {
       navigate(nextRoute.current, { state: { startAnimation: true } });
