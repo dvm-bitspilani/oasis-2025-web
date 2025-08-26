@@ -12,6 +12,11 @@ html {
   }
 }
 
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 @media (max-width: 1350px) {
   html {
     --registerFontSize: 1.5rem;
@@ -146,417 +151,419 @@ body {
       }
     }
   }
-  .landingContainer {
-    height: fit-content;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    .dateCountdown {
-      user-select: none;
-      position: fixed;
-      z-index: 200;
-      right: 2svw;
-      top: 4svw;
-      width: 15svw;
-      min-width: fit-content;
-      display: flex;
-      align-items: center;
-      gap: 0.5svw;
-      will-change: auto;
-      font-family: $primaryFont;
-      color: #ffdfd0;
-      font-size: 2rem;
-      text-align: center;
-      background-color: none;
-
-      .timeLeft {
-        font-size: var(--counterSmallFontSize);
-
-        .days,
-        .hours,
-        .minutes,
-        .seconds {
-          font-size: var(--counterBigFontSize);
-          font-weight: bold;
-        }
-      }
-    }
-
-    .registerBtnContainer {
-      text-decoration: none;
-      position: fixed;
-      right: 3svw;
-      bottom: 2.5svw;
-      z-index: 101;
-      width: 22svw;
-      will-change: auto;
+  .scroller {
+    overflow-x: hidden;
+    .landingContainer {
+      height: fit-content;
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: 1fr;
-      align-items: center;
-      justify-items: center;
-      cursor: pointer;
-      user-select: none;
-
-      .registerBtn {
-        grid-row: 1/2;
-        grid-column: 1/2;
-        width: 100%;
-        transform: rotate(-2.5deg) translateY(2px);
-      }
-
-      .mobileRegisterBtn {
-        grid-row: 1/2;
-        grid-column: 1/2;
-        width: 100%;
-        display: none;
-      }
-
-      .registerBtnText {
-        font-family: $primaryFont;
-        font-size: var(--registerFontSize);
-        color: #ffdfd0;
-        text-align: center;
-        grid-row: 1/2;
-        grid-column: 1/2;
-        z-index: inherit;
-      }
-    }
-
-    .backgroundContainer {
-      z-index: -1;
-      height: 100svh;
       width: 100svw;
-      position: relative;
-      grid-column: 1/2;
-      grid-row: 1/2;
-
-      .logoContainer {
+      .dateCountdown {
+        user-select: none;
         position: fixed;
-        left: 3svw;
-        bottom: 2.5svw;
-        width: 30svw;
+        z-index: 200;
+        right: 2svw;
+        top: 4svw;
+        width: 15svw;
+        min-width: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 0.5svw;
         will-change: auto;
-        z-index: 1;
+        font-family: $primaryFont;
+        color: #ffdfd0;
+        font-size: 2rem;
+        text-align: center;
+        background-color: none;
 
-        .logo {
-          width: 100%;
+        .timeLeft {
+          font-size: var(--counterSmallFontSize);
+
+          .days,
+          .hours,
+          .minutes,
+          .seconds {
+            font-size: var(--counterBigFontSize);
+            font-weight: bold;
+          }
         }
       }
 
-      .desktopBackground {
+      .registerBtnContainer {
+        text-decoration: none;
         position: fixed;
-        top: 0;
-        left: 0;
-        height: 100svh;
-        width: 100svw;
-        .landingImage {
-          height: 100%;
+        right: 3svw;
+        bottom: 2.5svw;
+        z-index: 101;
+        width: 22svw;
+        will-change: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        align-items: center;
+        justify-items: center;
+        cursor: pointer;
+        user-select: none;
+
+        .registerBtn {
+          grid-row: 1/2;
+          grid-column: 1/2;
           width: 100%;
-          object-fit: cover;
-          object-position: center;
-          position: fixed;
+          transform: rotate(-2.5deg) translateY(2px);
         }
-      }
-      .mobileBackgroundContainer {
-        display: none;
-        .mobileBackground {
+
+        .mobileRegisterBtn {
+          grid-row: 1/2;
+          grid-column: 1/2;
           width: 100%;
-          height: 100dvh;
-          object-fit: cover;
-          object-position: center;
-          position: fixed;
-          bottom: 0;
-          z-index: -1;
-        }
-
-        .mobileMountains {
-          width: 100%;
-          object-fit: cover;
-          object-position: right;
-          position: fixed;
-          bottom: 0;
-          right: 0;
-          height: 70svh;
-          margin-bottom: calc(5svw);
-        }
-
-        .mobileCloud {
-          position: fixed;
-          left: 0;
-          top: 55%;
-          width: 150px;
-          mix-blend-mode: luminosity;
-        }
-      }
-      @media (aspect-ratio < 8/12), (max-width: 730px) {
-        .mobileBackgroundContainer {
-          display: block;
-        }
-      }
-
-      @media (aspect-ratio < 5/8) {
-        .mobileMountains {
-          right: -10svw;
-          width: auto;
-        }
-      }
-    }
-
-    .foregroundContainer {
-      grid-column: 1/2;
-      grid-row: 1/2;
-      width: 100svw;
-      height: fit-content;
-      overflow: hidden;
-      .treeContainer {
-        z-index: 100;
-        right: 0;
-        margin-top: -8vw;
-        width: 100%;
-        position: fixed;
-
-        .tree {
-          transform-origin: "center right";
-          will-change: transform;
-          margin-top: clamp(0svh, 100svh - 56.7svw, 100svh);
-          height: fit-content;
-          width: 100%;
-
-          &::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 60%;
-            background: linear-gradient(to bottom, transparent 0.1%, black);
-            pointer-events: none;
-          }
-          img {
-            width: 100%;
-          }
-
-          .socialLinksContainer {
-            position: absolute;
-            top: 2%;
-            right: 0;
-            height: fit-content;
-            width: fit-content;
-            z-index: 10;
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              object-position: center;
-              object-fit: contain;
-              object-position: top;
-              user-select: none;
-            }
-
-            .wire {
-              position: relative;
-              left: 0;
-              width: 50svw;
-            }
-
-            .socialLinkContainer {
-              position: absolute;
-              right: 0;
-              top: 100%;
-              animation: lantern-swinging-wind 6s ease-in-out infinite;
-              transform-origin: top center;
-
-              a {
-                display: grid;
-                grid-template-columns: 1/2;
-                grid-template-rows: 1/2;
-                align-items: center;
-                justify-items: center;
-                width: 6.5svw;
-
-                .socialIcon {
-                  grid-row: 1/2;
-                  grid-column: 1/2;
-                  z-index: 100;
-                  height: 30%;
-                  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
-                  transition: filter 0.1s ease-out;
-                }
-
-                .socialLamp {
-                  grid-row: 1/2;
-                  grid-column: 1/2;
-                  z-index: 99;
-                  width: 80%;
-                }
-
-                &:hover {
-                  .socialIcon {
-                    filter: none;
-                  }
-                }
-              }
-            }
-
-            .xDiv {
-              top: 94%;
-              right: 10%;
-
-              a {
-                .xIcon {
-                  width: 33%;
-                }
-              }
-            }
-
-            .instaDiv {
-              top: 94%;
-              right: 28%;
-
-              a {
-                .instaIcon {
-                  width: 38%;
-                  rotate: -12deg;
-                  translate: 1.5px -4px;
-                }
-              }
-            }
-
-            .linkdenDiv {
-              top: 88%;
-              right: 43%;
-
-              a {
-                .linkdenIcon {
-                  width: 36%;
-                  rotate: 8deg;
-                  translate: -1px -4px;
-                }
-              }
-            }
-          }
-        }
-        .treeExtender {
           display: none;
         }
 
-        // .treeExtender {
-        //   background-color: black;
-        //   background-size: cover;
-        //   background-position: center;
-        //   width: 100vw;
-        //   height: 25vh;
-        //   position: relative;
-        //   transform: translateY(-1vh);
-        //   left: 0;
-        // }
+        .registerBtnText {
+          font-family: $primaryFont;
+          font-size: var(--registerFontSize);
+          color: #ffdfd0;
+          text-align: center;
+          grid-row: 1/2;
+          grid-column: 1/2;
+          z-index: inherit;
+        }
       }
 
-      @media (aspect-ratio < 8/12), (max-width: 730px) {
-        .treeContainer {
-          .tree {
-            margin-top: clamp(0svh, 100svh - 80svw, 100svh);
+      .backgroundContainer {
+        z-index: -1;
+        height: 100svh;
+        width: 100svw;
+        position: fixed;
+        grid-column: 1/2;
+        grid-row: 1/2;
 
-            img {
-              scale: 1.2;
-            }
+        .logoContainer {
+          position: fixed;
+          left: 3svw;
+          bottom: 2.5svw;
+          width: 30svw;
+          will-change: auto;
+          z-index: 100;
+
+          .logo {
+            width: 100%;
+          }
+        }
+
+        .desktopBackground {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100svh;
+          width: 100svw;
+          z-index: -100;
+          .landingImage {
+            height: 100svh;
+            width: 100svw;
+            object-fit: cover;
+            object-position: center;
+            position: fixed;
+          }
+        }
+        .mobileBackgroundContainer {
+          display: none;
+          .mobileBackground {
+            width: 100dvw;
+            height: 100dvh;
+            object-fit: cover;
+            object-position: center;
+            position: fixed;
+            bottom: 0;
+            z-index: -1;
+          }
+
+          .mobileMountains {
+            width: 100svw;
+            object-fit: cover;
+            object-position: right;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            height: 70svh;
+            margin-bottom: calc(5svw);
+          }
+
+          .mobileCloud {
+            position: fixed;
+            left: 0;
+            top: 55%;
+            width: 150px;
+            mix-blend-mode: luminosity;
+          }
+        }
+        @media (aspect-ratio < 8/12), (max-width: 730px) {
+          .mobileBackgroundContainer {
+            display: block;
+          }
+        }
+
+        @media (aspect-ratio < 5/8) {
+          .mobileMountains {
+            right: -10svw;
+            width: auto;
+          }
+        }
+      }
+
+      .foregroundContainer {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        width: 100svw;
+        height: fit-content;
+        overflow: hidden;
+        .treeContainer {
+          z-index: 100;
+          right: 0;
+          margin-top: -8vw;
+          width: 100%;
+          .tree {
+            will-change: transform;
+            margin-top: clamp(0svh, 100svh - 56.7svw, 100svh);
+            height: fit-content;
+            width: 100%;
 
             &::after {
               content: "";
               position: absolute;
+              bottom: 0;
               left: 0;
               right: 0;
-              bottom: 0;
               height: 60%;
               background: linear-gradient(to bottom, transparent 0.1%, black);
               pointer-events: none;
             }
-          }
+            img {
+              width: 100%;
+            }
 
-          .socialLinksContainer {
+            .socialLinksContainer {
+              position: absolute;
+              top: 2%;
+              right: 0;
+              height: fit-content;
+              width: fit-content;
+              z-index: 10;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                object-fit: contain;
+                object-position: top;
+                user-select: none;
+              }
+
+              .wire {
+                position: relative;
+                left: 0;
+                width: 50svw;
+              }
+
+              .socialLinkContainer {
+                position: absolute;
+                right: 0;
+                top: 100%;
+                animation: lantern-swinging-wind 6s ease-in-out infinite;
+                transform-origin: top center;
+
+                a {
+                  display: grid;
+                  grid-template-columns: 1/2;
+                  grid-template-rows: 1/2;
+                  align-items: center;
+                  justify-items: center;
+                  width: 6.5svw;
+
+                  .socialIcon {
+                    grid-row: 1/2;
+                    grid-column: 1/2;
+                    z-index: 100;
+                    height: 30%;
+                    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+                    transition: filter 0.1s ease-out;
+                  }
+
+                  .socialLamp {
+                    grid-row: 1/2;
+                    grid-column: 1/2;
+                    z-index: 99;
+                    width: 80%;
+                  }
+
+                  &:hover {
+                    .socialIcon {
+                      filter: none;
+                    }
+                  }
+                }
+              }
+
+              .xDiv {
+                top: 94%;
+                right: 10%;
+
+                a {
+                  .xIcon {
+                    width: 33%;
+                  }
+                }
+              }
+
+              .instaDiv {
+                top: 94%;
+                right: 28%;
+
+                a {
+                  .instaIcon {
+                    width: 38%;
+                    rotate: -12deg;
+                    translate: 1.5px -4px;
+                  }
+                }
+              }
+
+              .linkdenDiv {
+                top: 88%;
+                right: 43%;
+
+                a {
+                  .linkdenIcon {
+                    width: 36%;
+                    rotate: 8deg;
+                    translate: -1px -4px;
+                  }
+                }
+              }
+            }
+          }
+          .treeExtender {
             display: none;
           }
-        }
-      }
 
-      @media (max-width: 500px) {
-        .treeContainer {
-          .tree {
-            margin-top: clamp(0svh, 100svh - 85svw, 100svh);
+          // .treeExtender {
+          //   background-color: black;
+          //   background-size: cover;
+          //   background-position: center;
+          //   width: 100vw;
+          //   height: 25vh;
+          //   position: relative;
+          //   transform: translateY(-1vh);
+          //   left: 0;
+          // }
+        }
+
+        @media (aspect-ratio < 8/12), (max-width: 730px) {
+          .treeContainer {
+            .tree {
+              margin-top: clamp(0svh, 100svh - 80svw, 100svh);
+
+              img {
+                scale: 1.2;
+              }
+
+              &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 60%;
+                background: linear-gradient(to bottom, transparent 0.1%, black);
+                pointer-events: none;
+              }
+            }
+
+            .socialLinksContainer {
+              display: none;
+            }
+          }
+        }
+
+        @media (max-width: 500px) {
+          .treeContainer {
+            .tree {
+              margin-top: clamp(0svh, 100svh - 85svw, 100svh);
+            }
           }
         }
       }
-    }
-    @media (max-width: 1100px) {
-      .dateCountdown {
-        display: none;
-      }
-    }
-
-    @media (aspect-ratio < 8/12), (max-width: 730px) {
-      .dateCountdown {
-        z-index: 50;
-        display: flex;
-        top: 250px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: fit-content;
-        font-size: 1.5rem;
-        padding: 0.5svw;
-        text-align: center;
-        gap: 1.5svw;
-      }
-      .registerBtnContainer {
-        width: 300px;
-        left: 50%;
-        transform: translateX(-50%);
-
-        .registerBtn {
+      @media (max-width: 1100px) {
+        .dateCountdown {
           display: none;
         }
-
-        .mobileRegisterBtn {
-          display: block;
-        }
-
-        .registerBtnText {
-          font-size: 1.5rem;
-        }
       }
-      .backgroundContainer {
-        .desktopBackground {
-          display: none;
-        }
-        .logoContainer {
+
+      @media (aspect-ratio < 8/12), (max-width: 730px) {
+        .dateCountdown {
+          z-index: 50;
+          display: flex;
+          top: 250px;
           left: 50%;
           transform: translateX(-50%);
-          top: 150px;
+          width: fit-content;
+          font-size: 1.5rem;
+          padding: 0.5svw;
+          text-align: center;
+          gap: 1.5svw;
+        }
+        .registerBtnContainer {
           width: 300px;
+          left: 50%;
+          transform: translateX(-50%);
+
+          .registerBtn {
+            display: none;
+          }
+
+          .mobileRegisterBtn {
+            display: block;
+          }
+
+          .registerBtnText {
+            font-size: 1.5rem;
+          }
+        }
+        .backgroundContainer {
+          .desktopBackground {
+            display: none;
+          }
+          .logoContainer {
+            left: 50%;
+            transform: translateX(-50%);
+            top: 150px;
+            width: 300px;
+          }
         }
       }
-    }
 
-    @media (aspect-ratio > 1/1) and (max-width: 730px) {
-      .backgroundContainer {
-        .logoContainer {
-          top: 30px;
-          left: 20px;
+      @media (aspect-ratio > 1/1) and (max-width: 730px) {
+        .backgroundContainer {
+          .logoContainer {
+            top: 30px;
+            left: 20px;
+            transform: none;
+          }
+        }
+        .dateCountdown {
+          top: 130px;
           transform: none;
         }
       }
-      .dateCountdown {
-        top: 130px;
-        transform: none;
-      }
-    }
-    .inviz {
-      opacity: 0;
-      pointer-events: none;
-      grid-column: 1/2;
-      grid-row: 1/2;
-      .treeContainer {
-        position: relative;
+      .inviz {
+        opacity: 0;
+        pointer-events: none;
+        grid-column: 1/2;
+        grid-row: 1/2;
+        .treeContainer {
+          position: relative;
+        }
       }
     }
   }

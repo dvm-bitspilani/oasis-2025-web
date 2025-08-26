@@ -78,7 +78,7 @@ export default function LandingRevamp({
   const setIsHamOpen = useHamStore((state) => state.setHamOpen);
 
   const treeImageRef = useRef<HTMLImageElement>(null);
-  const landingImageRef = useRef<HTMLImageElement>(null);
+  const scrollerRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     if (overlayIsActive) {
@@ -142,6 +142,13 @@ export default function LandingRevamp({
       });
 
       gsap.set(landingRef.current, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        force3D: true,
+      });
+
+      gsap.set(scrollerRef.current, {
         autoAlpha: 1,
         scale: 1,
         y: 0,
@@ -214,7 +221,7 @@ export default function LandingRevamp({
         )
 
         .to(
-          wrapperRef.current,
+          scrollerRef.current,
           {
             y: "-50%",
             duration: 6,
@@ -257,23 +264,23 @@ export default function LandingRevamp({
         )
 
         .to(
-          wrapperRef.current,
+          scrollerRef.current,
           {
-            y: "-80%",
+            y: "-400%",
             duration: 12,
             ease: "sine.in",
           },
-          0
+          1
         )
 
         .to(
           landingRef.current,
           {
-            y: "-20%",
+            y: "120vh",
             duration: 8,
             ease: "sine.in",
           },
-          3.2
+          1
         )
 
         .to(
@@ -287,6 +294,43 @@ export default function LandingRevamp({
         );
     });
   }, []);
+
+  // useGSAP(() => {
+  //   const scrollAnimationTimeline = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: wrapperRef.current,
+  //       scrub: true,
+  //       start: "top top",
+  //       end: "+=800vh",
+  //       onEnter: (self) => console.log("ENTERED:", self.trigger),
+  //       onLeave: (self) => console.log("LEFT:", self.trigger),
+  //       onUpdate: (self) => {
+  //         console.log("ACTIVE:", self.trigger, "Progress:", self.progress);
+  //       },
+  //     },
+  //   });
+
+  //   scrollAnimationTimeline
+  //     .to(
+  //       treeImageRef.current,
+  //       {
+  //         scale: 1.2,
+  //         y: "12%",
+  //         duration: 4,
+  //         ease: "power2.out",
+  //       },
+  //       0
+  //     )
+  //     .to(
+  //       landingRef.current,
+  //       {
+  //         scale: 1.1,
+  //         duration: 4,
+  //         ease: "power2.out",
+  //       },
+  //       0
+  //     );
+  // }, []);
 
   return (
     <>
@@ -313,185 +357,186 @@ export default function LandingRevamp({
             <Ham goToPage={goToPage} />
           </div>
         </div>
-
-        <div className={styles.landingContainer}>
-          <div className={styles.dateCountdown} ref={dateCountdownRef}>
-            <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
-              <div className={styles.days}>
-                {timeLeft.days > 10 ? (
-                  <span>{timeLeft.days}</span>
-                ) : (
-                  <span>0{timeLeft.days}</span>
-                )}
+        <div className={styles.scroller} ref={scrollerRef}>
+          <div className={styles.landingContainer}>
+            <div className={styles.dateCountdown} ref={dateCountdownRef}>
+              <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
+                <div className={styles.days}>
+                  {timeLeft.days >= 10 ? (
+                    <span>{timeLeft.days}</span>
+                  ) : (
+                    <span>0{timeLeft.days}</span>
+                  )}
+                </div>
+                DAYS
               </div>
-              DAYS
-            </div>
-            :
-            <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
-              <div className={styles.hours}>
-                {timeLeft.hours > 10 ? (
-                  <span>{timeLeft.hours}</span>
-                ) : (
-                  <span>0{timeLeft.hours}</span>
-                )}
+              :
+              <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
+                <div className={styles.hours}>
+                  {timeLeft.hours >= 10 ? (
+                    <span>{timeLeft.hours}</span>
+                  ) : (
+                    <span>0{timeLeft.hours}</span>
+                  )}
+                </div>
+                HOURS
               </div>
-              HOURS
-            </div>
-            :
-            <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
-              <div className={styles.minutes}>
-                {timeLeft.minutes > 10 ? (
-                  <span>{timeLeft.minutes}</span>
-                ) : (
-                  <span>0{timeLeft.minutes}</span>
-                )}
+              :
+              <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
+                <div className={styles.minutes}>
+                  {timeLeft.minutes >= 10 ? (
+                    <span>{timeLeft.minutes}</span>
+                  ) : (
+                    <span>0{timeLeft.minutes}</span>
+                  )}
+                </div>
+                MINUTES
               </div>
-              MINUTES
             </div>
-          </div>
-          <div
-            className={styles.registerBtnContainer}
-            onClick={() => goToPage("/register")}
-            ref={registerButtonRef}
-          >
-            <img
-              src={registerBtn}
-              className={styles.registerBtn}
-              alt="Register"
-            />
-            <img
-              src={mobileRegisterBtn}
-              className={styles.mobileRegisterBtn}
-              alt=""
-            />
-            <div className={styles.registerBtnText}>Register</div>
-          </div>
-
-          <div className={styles.backgroundContainer}>
-            <div className={styles.logoContainer}>
-              <img src={logo} className={styles.logo} alt="Logo" />
-            </div>
-
-            <div className={styles.desktopBackground}>
-              <img
-                src={landingImage}
-                className={styles.landingImage}
-                ref={landingRef}
-              />
-            </div>
-
             <div
-              className={styles.mobileBackgroundContainer}
-              ref={landingMobileRef}
+              className={styles.registerBtnContainer}
+              onClick={() => goToPage("/register")}
+              ref={registerButtonRef}
             >
               <img
-                src={mobileMountains}
-                className={styles.mobileMountains}
-                alt=""
-                ref={landingMobileRef}
+                src={registerBtn}
+                className={styles.registerBtn}
+                alt="Register"
               />
               <img
-                src={mobileBackground}
+                src={mobileRegisterBtn}
+                className={styles.mobileRegisterBtn}
                 alt=""
-                className={styles.mobileBackground}
               />
+              <div className={styles.registerBtnText}>Register</div>
+            </div>
 
-              <img src={mobileCloud} className={styles.mobileCloud} />
-            </div>
-          </div>
-          <div className={`${styles.foregroundContainer} ${styles.inviz}`}>
-            <div className={styles.treeContainer} ref={treeContainerRef}>
-              <div className={styles.tree} ref={treeImageRef}>
-                <div className={styles.socialLinksContainer}>
-                  <div className={styles.wire}>
-                    <img src={wire} alt="" />
-                  </div>
-                  {socialLinks.map((link, index) => (
-                    <div
-                      key={index}
-                      className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
-                    >
-                      <a
-                        key={index}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.socialLink}
-                      >
-                        <img
-                          src={link.icon}
-                          alt=""
-                          className={`${styles.socialIcon} ${link.classNameIcon}`}
-                        />
-                        <img
-                          src={link.lamp}
-                          alt=""
-                          className={`${styles.socialLamp} ${link.classNameLamp}`}
-                        />
-                      </a>
-                    </div>
-                  ))}
-                </div>
+            <div className={styles.backgroundContainer}>
+              <div className={styles.logoContainer}>
+                <img src={logo} className={styles.logo} alt="Logo" />
+              </div>
+
+              <div className={styles.desktopBackground}>
                 <img
-                  src={tree}
-                  // className={styles.tree}
-                  alt=""
-                  loading="eager"
-                  fetchPriority="high"
-                  style={{ contain: "none" }}
+                  src={landingImage}
+                  className={styles.landingImage}
+                  ref={landingRef}
                 />
               </div>
-              <div className={styles.treeExtender}></div>
-            </div>
-          </div>
-          <div className={styles.foregroundContainer}>
-            <div className={styles.treeContainer} ref={treeContainerRef}>
-              <div className={styles.tree} ref={treeImageRef}>
-                <div className={styles.socialLinksContainer}>
-                  <div className={styles.wire}>
-                    <img src={wire} alt="" />
-                  </div>
-                  {socialLinks.map((link, index) => (
-                    <div
-                      key={index}
-                      className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
-                    >
-                      <a
-                        key={index}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.socialLink}
-                      >
-                        <img
-                          src={link.icon}
-                          alt=""
-                          className={`${styles.socialIcon} ${link.classNameIcon}`}
-                        />
-                        <img
-                          src={link.lamp}
-                          alt=""
-                          className={`${styles.socialLamp} ${link.classNameLamp}`}
-                        />
-                      </a>
-                    </div>
-                  ))}
-                </div>
+
+              <div
+                className={styles.mobileBackgroundContainer}
+                ref={landingMobileRef}
+              >
                 <img
-                  src={tree}
-                  // className={styles.tree}
+                  src={mobileMountains}
+                  className={styles.mobileMountains}
                   alt=""
-                  loading="eager"
-                  fetchPriority="high"
-                  style={{ contain: "none" }}
+                  ref={landingMobileRef}
                 />
+                <img
+                  src={mobileBackground}
+                  alt=""
+                  className={styles.mobileBackground}
+                />
+
+                <img src={mobileCloud} className={styles.mobileCloud} />
               </div>
-              <div className={styles.treeExtender}></div>
+            </div>
+            <div className={`${styles.foregroundContainer} ${styles.inviz}`}>
+              <div className={styles.treeContainer}>
+                <div className={styles.tree}>
+                  <div className={styles.socialLinksContainer}>
+                    <div className={styles.wire}>
+                      <img src={wire} alt="" />
+                    </div>
+                    {socialLinks.map((link, index) => (
+                      <div
+                        key={index}
+                        className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
+                      >
+                        <a
+                          key={index}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.socialLink}
+                        >
+                          <img
+                            src={link.icon}
+                            alt=""
+                            className={`${styles.socialIcon} ${link.classNameIcon}`}
+                          />
+                          <img
+                            src={link.lamp}
+                            alt=""
+                            className={`${styles.socialLamp} ${link.classNameLamp}`}
+                          />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                  <img
+                    src={tree}
+                    // className={styles.tree}
+                    alt=""
+                    loading="eager"
+                    fetchPriority="high"
+                    style={{ contain: "none" }}
+                  />
+                </div>
+                <div className={styles.treeExtender}></div>
+              </div>
+            </div>
+            <div className={styles.foregroundContainer}>
+              <div className={styles.treeContainer} ref={treeContainerRef}>
+                <div className={styles.tree} ref={treeImageRef}>
+                  <div className={styles.socialLinksContainer}>
+                    <div className={styles.wire}>
+                      <img src={wire} alt="" />
+                    </div>
+                    {socialLinks.map((link, index) => (
+                      <div
+                        key={index}
+                        className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
+                      >
+                        <a
+                          key={index}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.socialLink}
+                        >
+                          <img
+                            src={link.icon}
+                            alt=""
+                            className={`${styles.socialIcon} ${link.classNameIcon}`}
+                          />
+                          <img
+                            src={link.lamp}
+                            alt=""
+                            className={`${styles.socialLamp} ${link.classNameLamp}`}
+                          />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                  <img
+                    src={tree}
+                    // className={styles.tree}
+                    alt=""
+                    loading="eager"
+                    fetchPriority="high"
+                    style={{ contain: "none" }}
+                  />
+                </div>
+                <div className={styles.treeExtender}></div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles.aboutUsContainer}>
-          <AboutUs goToPage={goToPage} />
+          <div className={styles.aboutUsContainer}>
+            <AboutUs goToPage={goToPage} />
+          </div>
         </div>
       </main>
     </>
