@@ -483,9 +483,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
           onClick={handleSubmit(onSubmit)}
         >
           <svg
-            className={styles.confirmIcon}
+            width="98"
+            height="8"
+            viewBox="0 0 98 8"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className={styles.confirmIcon}
           >
             <path
               d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
@@ -496,9 +499,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
           </svg>
           NEXT
           <svg
-            className={styles.confirmIcon}
+            width="98"
+            height="8"
+            viewBox="0 0 98 8"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className={styles.confirmIcon}
           >
             <path
               d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
