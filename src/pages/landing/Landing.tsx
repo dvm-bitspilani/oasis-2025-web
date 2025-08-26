@@ -32,7 +32,7 @@ import { useHamStore } from "../../utils/store";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
+const TARGET_DATE = new Date("2025-11-07T00:00:00Z");
 
 const socialLinks = [
   {
