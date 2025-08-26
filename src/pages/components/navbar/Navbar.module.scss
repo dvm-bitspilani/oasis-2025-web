@@ -205,6 +205,9 @@
 .aboutVariant {
   ul{
     padding-left: clamp(10px,8vw,100px); 
+    li{
+      color: #f2dd7c;
+    }
   }
 }
 @media (aspect-ratio < 8/12), (max-width: 730px) {

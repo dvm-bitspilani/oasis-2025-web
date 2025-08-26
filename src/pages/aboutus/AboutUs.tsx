@@ -60,52 +60,55 @@ const AboutUs = ({
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
   useEffect(() => {
-    const initPlayer = () => {
-      if (playerRef.current || !playerContainerRef.current || !window.YT) return;
+  const initPlayer = () => {
+    if (playerRef.current || !playerContainerRef.current || !window.YT) return;
 
-      playerRef.current = new window.YT.Player(playerContainerRef.current, {
-        height: "100%",
-        width: "100%",
-        videoId: videos[0],
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          rel: 0,
-          modestbranding: 1,
-          playsinline: 1,
+    playerRef.current = new window.YT.Player(playerContainerRef.current, {
+      height: "100%",
+      width: "100%",
+      videoId: videos[0],
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        rel: 0,
+        modestbranding: 1,
+        playsinline: 1,
+      },
+      events: {
+        onStateChange: (event: any) => {
+          const YTState = window.YT.PlayerState;
+          if (event.data === YTState.PLAYING) setIsPlaying(true);
+          if (event.data === YTState.PAUSED) setIsPlaying(false);
+          if (event.data === YTState.ENDED) {
+            setIsPlaying(false);
+            nextVideo();
+          }
         },
-        events: {
-          onStateChange: (event: any) => {
-            const YTState = window.YT.PlayerState;
-            if (event.data === YTState.PLAYING) setIsPlaying(true);
-            if (event.data === YTState.PAUSED) setIsPlaying(false);
-            if (event.data === YTState.ENDED) {
-              setIsPlaying(false);
-              nextVideo();
-            }
-          },
-        },
-      });
-    };
+      },
+    });
+  };
 
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
-  const tag = document.createElement("script");
-  tag.src = "https://www.youtube.com/iframe_api";
-  document.body.appendChild(tag);
-}
-
-      window.onYouTubeIframeAPIReady = () => initPlayer();
+  if (window.YT && window.YT.Player) {
+    initPlayer();
+  } else {
+    window.onYouTubeIframeAPIReady = () => initPlayer();
+    const existingScript = document.querySelector("script[src='https://www.youtube.com/iframe_api']");
+    if (!existingScript) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      tag.async = true;
+      document.body.appendChild(tag);
     }
+  }
 
-    return () => {
-      try {
-        if (playerRef.current?.destroy) playerRef.current.destroy();
-      } catch { }
-    };
-  }, []);
+  return () => {
+    if (playerRef.current && typeof playerRef.current.destroy === "function") {
+      playerRef.current.destroy();
+      playerRef.current = null;
+    }
+  };
+}, []);
+
 
   const loadByIndex = (index: number) => {
     if (!playerRef.current) return;
