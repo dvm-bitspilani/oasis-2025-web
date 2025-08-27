@@ -416,7 +416,7 @@ export default function Landing({
                 </div>
                 DAYS
               </div>
-              :
+              <div>:</div>
               <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
                 <div className={styles.hours}>
                   {timeLeft.hours >= 10 ? (
@@ -427,7 +427,7 @@ export default function Landing({
                 </div>
                 HOURS
               </div>
-              :
+              <div>:</div>
               <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
                 <div className={styles.minutes}>
                   {timeLeft.minutes >= 10 ? (

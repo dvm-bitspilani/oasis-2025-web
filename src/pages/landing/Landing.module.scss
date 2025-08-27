@@ -5,9 +5,9 @@
 // }
 
 html {
-  --registerFontSize: 2rem;
-  --counterBigFontSize: 2rem;
-  --counterSmallFontSize: 1.5rem;
+  --registerFontSize: 1.5rem;
+  --counterBigFontSize: 3em;
+  --counterSmallFontSize: 1.2rem;
   scrollbar-width: none;
 
   img {
@@ -39,8 +39,8 @@ html {
 @media (max-width: 800px) {
   html {
     --registerFontSize: 1rem;
-    --counterBigFontSize: 1.5rem;
-    --counterSmallFontSize: 1rem;
+    --counterBigFontSize: 2.4rem;
+    --counterSmallFontSize: 0.9rem;
   }
 }
 
@@ -455,7 +455,7 @@ body {
       width: 15svw;
       min-width: fit-content;
       display: flex;
-      align-items: center;
+      // align-items: center;
       gap: 0.5svw;
       will-change: auto;
       font-family: $primaryFont;
@@ -474,6 +474,12 @@ body {
           font-size: var(--counterBigFontSize);
           font-weight: bold;
         }
+      }
+
+      div:nth-of-type(even) {
+        font-size: 3rem;
+        
+        @media (max-width: 800px) {font-size: 2.4rem;}
       }
     }
 
