@@ -49,7 +49,7 @@ const AboutUs = () => {
   
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-
+const AboutRef = useRef<HTMLDivElement | null>(null);
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
   useEffect(()=>{
@@ -156,6 +156,13 @@ const AboutUs = () => {
       yoyo: true,
       repeat: -1,
       ease: "sine.inOut",
+    });
+    gsap.to(AboutRef.current, {
+      backgroundPositionY:"-=1000vh",
+      duration: 200,
+      
+      repeat: -1,
+      ease: "linear",
     });
 
     const spawnIcon = (fanSelector: string, isFan1: boolean) => {
@@ -439,7 +446,7 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
   }, [])
 
   return (
-    <div className={styles.AboutContainer} style={{backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`}} >
+    <div className={styles.AboutContainer} ref={AboutRef} style={{backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`}} >
       <Navbar hideHam variant="about"/>
 
       <div className={styles.header}>

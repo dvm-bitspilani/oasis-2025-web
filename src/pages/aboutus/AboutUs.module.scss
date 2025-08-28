@@ -10,6 +10,7 @@
   overflow-y: hidden;
   // background: url("/svgs/aboutus/background.svg");
   background-size: cover;
+  background-repeat: repeat;
   min-height: 100svh;
   height: fit-content;
   background-color: black;
@@ -307,7 +308,7 @@
   @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
 
     overflow-y: auto;
-
+    background-size: 180%;
     .content3D {
       flex-direction: column;
       align-items: center;
@@ -355,7 +356,6 @@
   @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
     // background: url("/svgs/aboutus/backg.svg");
     background-size: cover;
-    background-position: top;
 
     .aboutBB {
       filter: none;
