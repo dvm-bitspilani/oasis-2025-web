@@ -52,6 +52,9 @@ const AboutUs = () => {
 
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
+  useEffect(()=>{
+   document.body.style.position = "static";
+  },[])
   useEffect(() => {
   const initPlayer = () => {
     if (playerRef.current || !playerContainerRef.current || !window.YT) return;

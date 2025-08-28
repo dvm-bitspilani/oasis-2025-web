@@ -10,6 +10,8 @@
   overflow-y: hidden;
   // background: url("/svgs/aboutus/background.svg");
   background-size: cover;
+  min-height: 100svh;
+  height: fit-content;
   background-color: black;
 
   .aboutBB {
