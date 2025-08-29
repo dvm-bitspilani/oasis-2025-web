@@ -6,7 +6,7 @@ import fan from "/svgs/aboutus/fan.png";
 import prev from "/svgs/aboutus/prev.svg";
 import pause from "/svgs/aboutus/pause.svg";
 import next from "/svgs/aboutus/next.svg";
-import Aboutbar from "./components/Aboutbar";
+// import Aboutbar from "./components/Aboutbar";
 import Reg from "/svgs/aboutus/reghead.svg";
 import play from "/svgs/aboutus/play.svg";
 import nextarr from "/svgs/aboutus/nextarr.svg";
@@ -31,7 +31,7 @@ const icons = [
 
 const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
 
-const AboutUs = ({ goToPage }: { goToPage: (path: string) => void }) => {
+const AboutUs = () => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 

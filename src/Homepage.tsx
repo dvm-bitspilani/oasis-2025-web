@@ -1,4 +1,4 @@
-import Landing from "./pages/landingRevamp/LandingRevamp";
+// import Landing from "./pages/landingRevamp/LandingRevamp";
 import DrawingPreloader from "./pages/components/drawingPreloader/DrawingPreloader";
 import useOverlayStore from "./utils/store";
 import LandingRevamp from "./pages/landingRevamp/LandingRevamp";

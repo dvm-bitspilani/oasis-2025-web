@@ -550,7 +550,7 @@ export default function LandingRevamp({
             </div>
           </div>
           <div className={styles.aboutUsContainer}>
-            <AboutUs goToPage={goToPage} />
+            <AboutUs />
           </div>
         </div>
       </main>

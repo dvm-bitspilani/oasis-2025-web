@@ -8,7 +8,9 @@ import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 
-export const navContext = createContext<{goToPage?: (page: string) => void}>({});
+export const navContext = createContext<{ goToPage?: (page: string) => void }>(
+  {}
+);
 
 export default function App() {
   const navigate = useNavigate();
@@ -128,7 +130,7 @@ export default function App() {
       )}
 
       {!isPreloading && currentPage === "events" && <ComingSoon />}
-      {!isPreloading && currentPage === "aboutus" && <AboutUs goToPage={goToPage} />}
+      {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
 
