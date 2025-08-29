@@ -32,7 +32,7 @@ import { useHamStore } from "../../utils/store";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
+const TARGET_DATE = new Date("2025-11-07T00:00:00Z");
 
 const socialLinks = [
   {
@@ -92,12 +92,13 @@ export default function LandingRevamp({
 
   useEffect(() => {
     if (removeGif && wrapperRef.current) {
-      //change with new wrapperRef/containerRef
       wrapperRef.current.style.maskImage = "none";
-      document.body.style.position = "static";
+      // Use CSS class instead of position changes
+      document.body.classList.remove("scroll-locked");
     }
     if (!removeGif) {
-      document.body.style.position = "fixed";
+      // Lock scroll with CSS class during overlay
+      document.body.classList.add("scroll-locked");
     }
   }, [removeGif]);
 
@@ -135,18 +136,27 @@ export default function LandingRevamp({
   }, []);
 
   useEffect(() => {
-    const lenis = new Lenis({ smoothWheel: true });
-    lenis.on("scroll", () => {
-      ScrollTrigger.update();
+    const lenis = new Lenis({
+      smoothWheel: true,
+      lerp: 0.1,
+      // Optimize for better performance with large scroll ranges
+      infinite: false,
     });
-    const raf = (time: number) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    // Use GSAP ticker for better sync with ScrollTrigger
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
     return () => {
+      gsap.ticker.remove((time) => {
+        lenis.raf(time);
+      });
       lenis.destroy();
-      ScrollTrigger.refresh();
     };
   }, []);
 
@@ -201,6 +211,14 @@ export default function LandingRevamp({
     const mm = gsap.matchMedia();
 
     mm.add("(max-width: 730px) or (aspect-ratio < 8/12)", () => {
+      const masterTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          end: "+=140vh",
+          scrub: true,
+        },
+      });
       gsap.fromTo(
         dateCountdownRef.current,
         { autoAlpha: 1 },
@@ -210,7 +228,7 @@ export default function LandingRevamp({
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "00vh",
-            end: "+=200vh",
+            end: "+=60vh",
             scrub: true,
           },
         }
@@ -222,8 +240,8 @@ export default function LandingRevamp({
           treeImageRef.current,
           {
             scale: 1.2,
-            duration: 8,
-            ease: "power2.out",
+            duration: 24,
+            ease: "power2.inOut",
           },
           0
         )
@@ -233,8 +251,8 @@ export default function LandingRevamp({
           {
             scale: 1.1,
             // y: "8%",
-            duration: 8,
-            ease: "power2.out",
+            duration: 24,
+            ease: "power2.inOut",
           },
           0
         )
@@ -243,7 +261,7 @@ export default function LandingRevamp({
           scrollerRef.current,
           {
             // y: "-50%",,
-            y: "-50%",
+            y: "-12.55%",
             duration: 16,
           },
           6
@@ -252,11 +270,10 @@ export default function LandingRevamp({
         .to(
           landingMobileRef.current,
           {
-            y: "-35%",
-            duration: 10,
-            ease: "sine.in",
+            y: "-10%",
+            duration: 16,
           },
-          2
+          6
         );
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
@@ -266,8 +283,8 @@ export default function LandingRevamp({
           treeImageRef.current,
           {
             scale: 1.2,
-            duration: 8,
-            ease: "power2.out",
+            duration: 16,
+            ease: "power2.inOut",
           },
           0
         )
@@ -276,8 +293,8 @@ export default function LandingRevamp({
           {
             scale: 1.1,
             // y: "8%",
-            duration: 8,
-            ease: "power2.out",
+            duration: 16,
+            ease: "power2.inOut",
           },
           0
         )
@@ -285,8 +302,8 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            y: "-50%",
-            duration: 16,
+            y: "-15%",
+            duration: 20,
             // ease: "sine.in",
           },
           6
@@ -295,11 +312,11 @@ export default function LandingRevamp({
         .to(
           landingRef.current,
           {
-            y: "-35%",
-            duration: 20,
+            y: "-12%",
+            duration: 28,
             // ease: "sine.in",
           },
-          2
+          4
         )
 
         .to(
@@ -415,7 +432,7 @@ export default function LandingRevamp({
             </div>
             DAYS
           </div>
-          :
+          <div>:</div>
           <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
             <div className={styles.hours}>
               {timeLeft.hours >= 10 ? (
@@ -426,7 +443,7 @@ export default function LandingRevamp({
             </div>
             HOURS
           </div>
-          :
+          <div>:</div>
           <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
             <div className={styles.minutes}>
               {timeLeft.minutes >= 10 ? (
@@ -458,51 +475,6 @@ export default function LandingRevamp({
               <div className={styles.registerBtnText}>Register</div>
             </div>
 
-            <div className={`${styles.foregroundContainer} ${styles.inviz}`}>
-              <div className={styles.treeContainer}>
-                <div className={styles.tree}>
-                  <div className={styles.socialLinksContainer}>
-                    <div className={styles.wire}>
-                      <img src={wire} alt="" />
-                    </div>
-                    {socialLinks.map((link, index) => (
-                      <div
-                        key={index}
-                        className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
-                      >
-                        <a
-                          key={index}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.socialLink}
-                        >
-                          <img
-                            src={link.icon}
-                            alt=""
-                            className={`${styles.socialIcon} ${link.classNameIcon}`}
-                          />
-                          <img
-                            src={link.lamp}
-                            alt=""
-                            className={`${styles.socialLamp} ${link.classNameLamp}`}
-                          />
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                  <img
-                    src={tree}
-                    // className={styles.tree}
-                    alt=""
-                    loading="eager"
-                    fetchPriority="high"
-                    style={{ contain: "none" }}
-                  />
-                </div>
-                <div className={styles.treeExtender}></div>
-              </div>
-            </div>
             <div className={styles.foregroundContainer}>
               <div className={styles.treeContainer} ref={treeContainerRef}>
                 <div className={styles.tree} ref={treeImageRef}>
