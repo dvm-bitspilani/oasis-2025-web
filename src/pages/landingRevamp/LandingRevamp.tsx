@@ -23,12 +23,12 @@ import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
-import ContactDoors from "../contact/ContactDoors";
+// import ContactDoors from "../contact/ContactDoors";
 import Ham from "../components/ham/ham";
 import Lenis from "@studio-freight/lenis";
 
 import { useHamStore } from "../../utils/store";
-import { FaA } from "react-icons/fa6";
+// import { FaA } from "react-icons/fa6";
 
 gsap.registerPlugin(ScrollTrigger);
 
