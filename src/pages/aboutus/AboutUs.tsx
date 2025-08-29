@@ -45,7 +45,7 @@ const iconImages: HTMLImageElement[] = icons.map((src) => {
   img.src = src;
   return img;
 });
-const AboutUs = () => {
+const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -570,7 +570,7 @@ const AboutUs = () => {
           <img src={instaicon} alt="Instagram" />
         </a>
       </div>
-      <BackButton className={styles.aboutBB} />
+      {isBackBtn && <BackButton className={styles.aboutBB} />}
     </div>
   );
 };

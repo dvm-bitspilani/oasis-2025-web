@@ -84,15 +84,19 @@ export default function LandingRevamp({
   const scrollerRef = useRef<HTMLImageElement>(null);
 
   const [scrollHeight, setScrollHeight] = useState(
-    scrollerRef.current?.scrollHeight
+    (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
   );
   useEffect(() => {
     if (removeGif) {
-      setScrollHeight(scrollerRef.current?.scrollHeight);
+      setScrollHeight(
+        (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
+      );
     }
     const handleResize = () => {
       if (scrollerRef.current) {
-        setScrollHeight(scrollerRef.current.scrollHeight);
+        setScrollHeight(
+          (scrollerRef.current.scrollHeight ?? 0) - window.innerHeight * 1.4
+        );
       }
     };
     window.addEventListener("resize", handleResize);
@@ -218,7 +222,7 @@ export default function LandingRevamp({
     const masterTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: wrapperRef.current,
-        start: "0px",
+        start: "top top",
         end: `+=${scrollHeight}px`,
         scrub: true,
       },
@@ -231,7 +235,7 @@ export default function LandingRevamp({
         scrollTrigger: {
           trigger: wrapperRef.current,
           start: "top top",
-          end: "+=140vh",
+          end: `+=${scrollHeight}px`,
           scrub: true,
         },
       });
@@ -276,20 +280,20 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            y: "-50%",
+            y: "-20%",
             // y: "-12.55%",
             duration: 24,
           },
-          6
+          2
         )
 
         .to(
           landingMobileRef.current,
           {
             y: "-10%",
-            duration: 16,
+            duration: 20,
           },
-          6
+          2
         );
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
@@ -317,7 +321,7 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            y: "-80%",
+            y: "-20%",
             duration: 16,
             // ease: "sine.in",
           },
@@ -327,7 +331,7 @@ export default function LandingRevamp({
         .to(
           landingRef.current,
           {
-            y: "-60%",
+            y: "-12%",
             duration: 12,
             // ease: "sine.in",
           },
@@ -537,7 +541,7 @@ export default function LandingRevamp({
             </div>
           </div>
           <div className={styles.aboutUsContainer}>
-            <AboutUs />
+            <AboutUs isBackBtn={false} />
           </div>
         </div>
       </main>
