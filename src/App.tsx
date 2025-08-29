@@ -7,9 +7,11 @@ import DoorTransition from "./pages/components/page-transition/DoorTransition";
 import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
-import assetList from './assetList';
+import assetList from "./assetList";
 
-export const navContext = createContext<{goToPage?: (page: string) => void}>({});
+export const navContext = createContext<{ goToPage?: (page: string) => void }>(
+  {}
+);
 
 export default function App() {
   const navigate = useNavigate();
@@ -38,7 +40,8 @@ export default function App() {
   const [doorPhase, setDoorPhase] = useState<
     "idle" | "closing" | "waiting" | "opening"
   >("idle");
-  const [doorPLPercentageLoaded, setDoorPLPercentageLoaded] = useState<number>(0)
+  const [doorPLPercentageLoaded, setDoorPLPercentageLoaded] =
+    useState<number>(0);
 
   const [isPreloading, setIsPreloading] = useState(location.pathname !== "/");
 
@@ -46,25 +49,34 @@ export default function App() {
 
   useEffect(() => {
     const path = location.pathname.replace("/", "");
-    const pages = ["register", "events", "aboutus", "contact"]
+    const pages = ["register", "events", "aboutus", "contact"];
 
-    setCurrentPage(pages.includes(path) ? path as typeof currentPage : (path === "" ? "home" : "comingSoon"))
-    setIsPreloading(Object.keys(assetList).includes(path))
-    
+    setCurrentPage(
+      pages.includes(path)
+        ? (path as typeof currentPage)
+        : path === ""
+        ? "home"
+        : "comingSoon"
+    );
+    setIsPreloading(Object.keys(assetList).includes(path));
   }, [location.pathname]);
 
   const handleDoorsClosed = async () => {
     setDoorPhase("waiting");
 
     const page = nextRoute.current?.replace("/", "");
-    if (page && Object.keys(assetList).includes(page)) await loadAssets(page as keyof typeof assetList)
+    if (page && Object.keys(assetList).includes(page))
+      await loadAssets(page as keyof typeof assetList);
     // await new Promise((resolve) => setTimeout(resolve, 10000))
 
     if (nextRoute.current) {
       navigate(nextRoute.current, { state: { startAnimation: true } });
     }
 
-    if (nextRoute.current && !(Object.keys(assetList)).includes(nextRoute.current)) {
+    if (
+      nextRoute.current &&
+      !Object.keys(assetList).includes(nextRoute.current)
+    ) {
       setTimeout(() => {
         setDoorPhase("opening");
       }, 500);
@@ -95,35 +107,35 @@ export default function App() {
   };
 
   const loadAssets = async (page: keyof typeof assetList) => {
-
     const handleLoadedAsset = (callback: (param?: any) => void) => {
-      setDoorPLPercentageLoaded(prev => prev + 100/promises.length);
-      callback()
-    }
-    
-    const promises = [
-      ...assetList[page].images.map((path) => (
-        new Promise((resolve, reject) => {
-          const image = new Image();
-          image.src = path;
-          image.onload = () => handleLoadedAsset(() => resolve(image));
-          image.onerror = () => handleLoadedAsset((error) => reject(error));
-        })
-      )),
-      ...assetList[page].videos.map((path) => (
-        new Promise((resolve, reject) => {
-          const video = document.createElement("video");
-          video.src = path;
-          video.onloadeddata = () => handleLoadedAsset(() => resolve(video));
-          video.onerror = () => handleLoadedAsset((error) => reject(error));
-        })
-      )),
-      
-    ]
+      setDoorPLPercentageLoaded((prev) => prev + 100 / promises.length);
+      callback();
+    };
 
-    await Promise.allSettled(promises)//.catch((error) => console.log(error))
-    console.log("loaded")
-  }
+    const promises = [
+      ...assetList[page].images.map(
+        (path) =>
+          new Promise((resolve, reject) => {
+            const image = new Image();
+            image.src = path;
+            image.onload = () => handleLoadedAsset(() => resolve(image));
+            image.onerror = () => handleLoadedAsset((error) => reject(error));
+          })
+      ),
+      ...assetList[page].videos.map(
+        (path) =>
+          new Promise((resolve, reject) => {
+            const video = document.createElement("video");
+            video.src = path;
+            video.onloadeddata = () => handleLoadedAsset(() => resolve(video));
+            video.onerror = () => handleLoadedAsset((error) => reject(error));
+          })
+      ),
+    ];
+
+    await Promise.allSettled(promises); //.catch((error) => console.log(error))
+    console.log("loaded");
+  };
 
   return (
     <navContext.Provider value={{ goToPage }}>
@@ -135,7 +147,12 @@ export default function App() {
         targetPageRef={nextRoute}
       />
 
-      {isPreloading && <Preloader onEnter={handlePreloaderEnter} targetLocation={nextRoute.current} />}
+      {isPreloading && (
+        <Preloader
+          onEnter={handlePreloaderEnter}
+          targetLocation={nextRoute.current}
+        />
+      )}
 
       {!isPreloading && currentPage === "home" && (
         <Homepage goToPage={goToPage} />
@@ -154,7 +171,7 @@ export default function App() {
       {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
-{/* 
+      {/* 
       <Routes>
         <Route path="/" element={null} errorElement={<ComingSoon />} />
         <Route path="/events" element={null} errorElement={<ComingSoon />} />

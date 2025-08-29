@@ -3,23 +3,23 @@ import { gsap } from "gsap";
 import styles from "./AboutUs.module.scss";
 import Header from "/svgs/aboutus/header.svg";
 import fan from "/svgs/aboutus/fan.png";
-import prev from "/svgs/aboutus/prev.svg"
-import pause from "/svgs/aboutus/pause.svg"
-import next from "/svgs/aboutus/next.svg"
-import Reg from "/svgs/aboutus/reghead.svg"
-import play from "/svgs/aboutus/play.svg"
-import nextarr from "/svgs/aboutus/nextarr.svg"
+import prev from "/svgs/aboutus/prev.svg";
+import pause from "/svgs/aboutus/pause.svg";
+import next from "/svgs/aboutus/next.svg";
+import Reg from "/svgs/aboutus/reghead.svg";
+import play from "/svgs/aboutus/play.svg";
+import nextarr from "/svgs/aboutus/nextarr.svg";
 import BackButton from "../components/backButton/BackButton";
 import PlayButton from "/svgs/aboutus/borde.svg";
-import instaicon from "/svgs/aboutus/instaicon.svg"
-import xicon from "/svgs/aboutus/xicon.svg"
-import linkedin from "/svgs/aboutus/linkedin.svg"
-import yticon from "/svgs/aboutus/yticon.svg"
-import abtus from "/svgs/aboutus/abtus.svg"
-import aboutPageBG from "/images/aboutus/background.jpg"
-import aboutPageBGMobile from "/svgs/aboutus/backg.svg"
-import aboutTextBG from "/images/aboutus/abtbck.png"
-import Navbar from "../components/navbar/Navbar";
+import instaicon from "/svgs/aboutus/instaicon.svg";
+import xicon from "/svgs/aboutus/xicon.svg";
+import linkedin from "/svgs/aboutus/linkedin.svg";
+import yticon from "/svgs/aboutus/yticon.svg";
+import abtus from "/svgs/aboutus/abtus.svg";
+import aboutPageBG from "/images/aboutus/background.jpg";
+import aboutPageBGMobile from "/svgs/aboutus/backg.svg";
+import aboutTextBG from "/images/aboutus/abtbck.png";
+// import Navbar from "../components/navbar/Navbar";
 
 declare global {
   interface Window {
@@ -40,13 +40,12 @@ const icons = [
 ];
 
 const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
-const iconImages: HTMLImageElement[] = icons.map(src => {
+const iconImages: HTMLImageElement[] = icons.map((src) => {
   const img = new Image();
   img.src = src;
   return img;
 });
 const AboutUs = () => {
-  
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 const AboutRef = useRef<HTMLDivElement | null>(null);
@@ -56,55 +55,60 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
    document.body.style.position = "static";
   },[])
   useEffect(() => {
-  const initPlayer = () => {
-    if (playerRef.current || !playerContainerRef.current || !window.YT) return;
+    const initPlayer = () => {
+      if (playerRef.current || !playerContainerRef.current || !window.YT)
+        return;
 
-    playerRef.current = new window.YT.Player(playerContainerRef.current, {
-      height: "100%",
-      width: "100%",
-      videoId: videos[0],
-      playerVars: {
-        autoplay: 0,
-        controls: 0,
-        rel: 0,
-        modestbranding: 1,
-        playsinline: 1,
-      },
-      events: {
-        onStateChange: (event: any) => {
-          const YTState = window.YT.PlayerState;
-          if (event.data === YTState.PLAYING) setIsPlaying(true);
-          if (event.data === YTState.PAUSED) setIsPlaying(false);
-          if (event.data === YTState.ENDED) {
-            setIsPlaying(false);
-            nextVideo();
-          }
+      playerRef.current = new window.YT.Player(playerContainerRef.current, {
+        height: "100%",
+        width: "100%",
+        videoId: videos[0],
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1,
+          playsinline: 1,
         },
-      },
-    });
-  };
+        events: {
+          onStateChange: (event: any) => {
+            const YTState = window.YT.PlayerState;
+            if (event.data === YTState.PLAYING) setIsPlaying(true);
+            if (event.data === YTState.PAUSED) setIsPlaying(false);
+            if (event.data === YTState.ENDED) {
+              setIsPlaying(false);
+              nextVideo();
+            }
+          },
+        },
+      });
+    };
 
-  if (window.YT && window.YT.Player) {
-    initPlayer();
-  } else {
-    window.onYouTubeIframeAPIReady = () => initPlayer();
-    const existingScript = document.querySelector("script[src='https://www.youtube.com/iframe_api']");
-    if (!existingScript) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      tag.async = true;
-      document.body.appendChild(tag);
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      window.onYouTubeIframeAPIReady = () => initPlayer();
+      const existingScript = document.querySelector(
+        "script[src='https://www.youtube.com/iframe_api']"
+      );
+      if (!existingScript) {
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        tag.async = true;
+        document.body.appendChild(tag);
+      }
     }
-  }
 
-  return () => {
-    if (playerRef.current && typeof playerRef.current.destroy === "function") {
-      playerRef.current.destroy();
-      playerRef.current = null;
-    }
-  };
-}, []);
-
+    return () => {
+      if (
+        playerRef.current &&
+        typeof playerRef.current.destroy === "function"
+      ) {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
+    };
+  }, []);
 
   const loadByIndex = (index: number) => {
     if (!playerRef.current) return;
@@ -176,9 +180,10 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
       const startY = fanEl.offsetTop + fanEl.offsetHeight / 2;
 
       // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      const iconTemplate = iconImages[Math.floor(Math.random() * iconImages.length)];
-const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-// img.src = iconSrc;
+      const iconTemplate =
+        iconImages[Math.floor(Math.random() * iconImages.length)];
+      const img = iconTemplate.cloneNode(true) as HTMLImageElement;
+      // img.src = iconSrc;
       img.className = styles.flyingIcon;
       img.style.left = `${startX}px`;
       img.style.top = `${startY}px`;
@@ -189,7 +194,7 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       if (isFan1) {
         angle = Math.random() * (Math.PI / 2);
       } else {
-        angle = (-20 * Math.PI) / 180 + Math.PI + Math.random() * (Math.PI / 3);;
+        angle = (-20 * Math.PI) / 180 + Math.PI + Math.random() * (Math.PI / 3);
       }
 
       const distance = 20 + Math.random() * 100;
@@ -230,8 +235,9 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
       // const img = document.createElement("img");
       // img.src = iconSrc;
-      const iconTemplate = iconImages[Math.floor(Math.random() * iconImages.length)];
-const img = iconTemplate.cloneNode(true) as HTMLImageElement;
+      const iconTemplate =
+        iconImages[Math.floor(Math.random() * iconImages.length)];
+      const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
       img.style.left = `${startX}px`;
       img.style.top = `${startY}px`;
@@ -269,19 +275,25 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
         }
       );
     };
-    const spawnFromCorner = (corner: "top-left" | "top-right" | "bottom-left" | "bottom-right") => {
-      const container = document.querySelector(`.${styles.vid}`) as HTMLElement | null;
+    const spawnFromCorner = (
+      corner: "top-left" | "top-right" | "bottom-left" | "bottom-right"
+    ) => {
+      const container = document.querySelector(
+        `.${styles.vid}`
+      ) as HTMLElement | null;
       if (!container) return;
 
       // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
       // const img = document.createElement("img");
       // img.src = iconSrc;
-      const iconTemplate = iconImages[Math.floor(Math.random() * iconImages.length)];
-const img = iconTemplate.cloneNode(true) as HTMLImageElement;
+      const iconTemplate =
+        iconImages[Math.floor(Math.random() * iconImages.length)];
+      const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
 
       // Set start position
-      let startX = 0, startY = 0;
+      let startX = 0,
+        startY = 0;
       const padding = 10;
 
       switch (corner) {
@@ -312,8 +324,8 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       const centerX = container.clientWidth / 2;
       const centerY = container.clientHeight / 2;
 
-      const dx = (centerX - startX) * Math.random() / 4;
-      const dy = (centerY - startY) * Math.random() / 2;
+      const dx = ((centerX - startX) * Math.random()) / 4;
+      const dy = ((centerY - startY) * Math.random()) / 2;
 
       gsap.fromTo(
         img,
@@ -321,8 +333,8 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
         {
           opacity: 1,
           scale: 1,
-          x: - dx,
-          y: - dy,
+          x: -dx,
+          y: -dy,
           duration: 2,
           ease: "power2.out",
           onComplete: () => {
@@ -336,21 +348,23 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       );
     };
 
-
-
     const spawnFromCorner2 = (corner: "top-right" | "bottom-left") => {
-      const container = document.querySelector(`.${styles.theme}`) as HTMLElement | null;
+      const container = document.querySelector(
+        `.${styles.theme}`
+      ) as HTMLElement | null;
       if (!container) return;
-      
+
       // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
       // const img = document.createElement("img");
       // img.src = iconSrc;
-      const iconTemplate = iconImages[Math.floor(Math.random() * iconImages.length)];
-const img = iconTemplate.cloneNode(true) as HTMLImageElement;
+      const iconTemplate =
+        iconImages[Math.floor(Math.random() * iconImages.length)];
+      const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
 
       // Set start position
-      let startX = 0, startY = 0;
+      let startX = 0,
+        startY = 0;
       const padding = 0;
 
       switch (corner) {
@@ -372,8 +386,8 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       const centerX = container.clientWidth / 2;
       const centerY = container.clientHeight / 2;
 
-      const dx = (centerX - startX) * Math.random() / 4;
-      const dy = (centerY - startY) * Math.random() / 2;
+      const dx = ((centerX - startX) * Math.random()) / 4;
+      const dy = ((centerY - startY) * Math.random()) / 2;
 
       gsap.fromTo(
         img,
@@ -381,8 +395,8 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
         {
           opacity: 1,
           scale: 0.5,
-          x: - dx,
-          y: - dy,
+          x: -dx,
+          y: -dy,
           duration: 2,
           ease: "power2.out",
           onComplete: () => {
@@ -398,19 +412,26 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
     let intervalId: number;
 
     const startSpawning = () => {
-      intervalId = window.setInterval(() => {
-        const corners2 = ["top-right", "bottom-left"];
-        const randomCorner2 = corners2[Math.floor(Math.random() * corners2.length)] as any;
-        spawnFromCorner2(randomCorner2);
-        if (isMobile) {
-          const corners = ["top-right", "bottom-left"];
-          const randomCorner = corners[Math.floor(Math.random() * corners.length)] as any;
-          spawnFromCorner(randomCorner);
-        } else {
-          spawnIcon2(`.${styles.fan1}`, true);
-          spawnIcon(`.${styles.fan2}`, false);
-        }
-      }, isMobile ? 700 : 500);
+      intervalId = window.setInterval(
+        () => {
+          const corners2 = ["top-right", "bottom-left"];
+          const randomCorner2 = corners2[
+            Math.floor(Math.random() * corners2.length)
+          ] as any;
+          spawnFromCorner2(randomCorner2);
+          if (isMobile) {
+            const corners = ["top-right", "bottom-left"];
+            const randomCorner = corners[
+              Math.floor(Math.random() * corners.length)
+            ] as any;
+            spawnFromCorner(randomCorner);
+          } else {
+            spawnIcon2(`.${styles.fan1}`, true);
+            spawnIcon(`.${styles.fan2}`, false);
+          }
+        },
+        isMobile ? 700 : 500
+      );
     };
 
     const stopSpawning = () => {
@@ -431,34 +452,42 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
     };
   }, []);
 
-  const [isMobile, setIsMobile] = useState(window.matchMedia(
-    "(max-width: 1200px) and (max-aspect-ratio: 0.75) "
-  ).matches);
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
+      .matches
+  );
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.matchMedia(
-      "(max-width: 1200px) and (max-aspect-ratio: 0.75) "
-    ).matches);
-    
+    const handleResize = () =>
+      setIsMobile(
+        window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
+          .matches
+      );
+
     window.addEventListener("resize", handleResize);
 
-    return () => {window.removeEventListener("resize", handleResize)};
-  }, [])
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <div className={styles.AboutContainer} ref={AboutRef} style={{backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`}} >
-      <Navbar hideHam variant="about"/>
+    <div
+      className={styles.AboutContainer} ref={AboutRef}
+      style={{
+        backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`,
+      }}
+    >
+      {/* <Navbar hideHam variant="about" /> */}
 
       <div className={styles.header}>
-        <img src=
-          {isMobile ? Reg : Header} alt="About Us" />
+        <img src={isMobile ? Reg : Header} alt="About Us" />
       </div>
 
       <div className={styles.content3D}>
         <div className={styles.wrapper}>
           <button onClick={prevVideo} className={styles.arr}>
-
-            <img src={nextarr} className={styles.prevarr} width="100%"  ></img>
+            <img src={nextarr} className={styles.prevarr} width="100%"></img>
           </button>
           <div className={styles.vid}>
             <div
@@ -468,7 +497,6 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
 
             <img src={fan} alt="fan1" ref={fan1Ref} className={styles.fan1} />
             <img src={fan} alt="fan2" ref={fan2Ref} className={styles.fan2} />
-
           </div>
 
           <button onClick={nextVideo} className={styles.arr}>
@@ -481,7 +509,6 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
           <div className={styles.controls}>
             <div className={styles.a1}></div>
             <div className={styles.buttonContainer}>
-
               <img
                 src={PlayButton}
                 className={styles.background}
@@ -489,11 +516,19 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
               />
               <div className={styles.buttonGroup}>
                 <button onClick={prevVideo}>
-                  <img src={prev} alt="Previous Button" className={styles.btns1} />
+                  <img
+                    src={prev}
+                    alt="Previous Button"
+                    className={styles.btns1}
+                  />
                 </button>
                 <div className={styles.a1}></div>
                 <button onClick={togglePlayPause}>
-                  <img src={isPlaying ? play : pause} alt="Pause Button" className={styles.btns2} />
+                  <img
+                    src={isPlaying ? play : pause}
+                    alt="Pause Button"
+                    className={styles.btns2}
+                  />
                 </button>
                 <div className={styles.a1}></div>
                 <button onClick={nextVideo}>
@@ -506,22 +541,25 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
 
         {/* ABOUT SIDE */}
         <div className={styles.abt}>
-          <div className={styles.aboutback} style={{backgroundImage: isMobile ? "none" : `url("${aboutTextBG}")`}}>
+          <div
+            className={styles.aboutback}
+            style={{
+              backgroundImage: isMobile ? "none" : `url("${aboutTextBG}")`,
+            }}
+          >
             <p>
               Oasis, the annual cultural extravaganza of Birla Institute of
               Technology and Science, Pilani, has been a vibrant part of India's
               cultural tapestry since 1971. Managed entirely by students, it's a
               dazzling showcase of talent in Dance, Drama, Literature, Comedy,
-              Fashion, and Music. It's where dreams come alive, laughter fills the
-              air, and creativity knows no bounds. Step into the world of Oasis,
-              where youth's boundless potential shines.
+              Fashion, and Music. It's where dreams come alive, laughter fills
+              the air, and creativity knows no bounds. Step into the world of
+              Oasis, where youth's boundless potential shines.
             </p>
           </div>
           <div className={styles.abtus}>
             <img src={abtus} alt="ABOUT US" />
-            <h1>
-              ABOUT US
-            </h1>
+            <h1>ABOUT US</h1>
           </div>
         </div>
       </div>
@@ -545,7 +583,6 @@ const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       <BackButton className={styles.aboutBB} />
     </div>
   );
-
 };
 
 export default AboutUs;
