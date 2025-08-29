@@ -138,8 +138,7 @@ export default function LandingRevamp({
   useEffect(() => {
     const lenis = new Lenis({
       smoothWheel: true,
-      lerp: 0.1,
-      // Optimize for better performance with large scroll ranges
+      lerp: window.innerWidth < 730 ? 0.08 : 0.03, // higher lerp for mobile for smoother scroll
       infinite: false,
     });
 
@@ -313,7 +312,7 @@ export default function LandingRevamp({
           landingRef.current,
           {
             y: "-12%",
-            duration: 28,
+            duration: 12,
             // ease: "sine.in",
           },
           4
