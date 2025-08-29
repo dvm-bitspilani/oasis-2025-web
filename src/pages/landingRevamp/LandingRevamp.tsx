@@ -359,7 +359,7 @@ export default function LandingRevamp({
         } ${overlayIsActive ? styles.mask : ""}`}
         ref={wrapperRef}
       >
-        <Navbar goToPage={goToPage} />
+        <Navbar />
         <div
           className={
             isHamOpen
