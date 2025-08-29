@@ -28,7 +28,7 @@ import Ham from "../components/ham/ham";
 import Lenis from "@studio-freight/lenis";
 
 import { useHamStore } from "../../utils/store";
-import { s } from "framer-motion/client";
+// import { s } from "framer-motion/client";
 // import { FaA } from "react-icons/fa6";
 
 gsap.registerPlugin(ScrollTrigger);
