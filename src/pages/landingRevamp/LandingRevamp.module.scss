@@ -2,7 +2,7 @@
 
 html {
   --registerFontSize: 2rem;
-  --counterBigFontSize: 3em;
+  --counterBigFontSize: 2.4em;
   --counterSmallFontSize: 1.2rem;
   scrollbar-width: none;
 
@@ -260,7 +260,7 @@ body {
     position: fixed;
     z-index: 200;
     right: 2svw;
-    top: 4svw;
+    top: 45px;
     width: 15svw;
     min-width: fit-content;
     display: flex;
