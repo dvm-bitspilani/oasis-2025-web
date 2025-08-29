@@ -1,3 +1,4 @@
+@use '../../../assets/global.scss' as *;
 
 .cont {
   position: fixed;
@@ -6,7 +7,7 @@
   height: 100svh;
   overflow: hidden;
   z-index: 9999;
-  pointer-events: none; 
+  // pointer-events: none; 
   background: transparent;
 }
 
@@ -17,7 +18,7 @@
   min-height: 100%;
   object-fit: cover;
   will-change: transform;
-  z-index: 1000000;
+  z-index: 1000000; // what? T^T
   transform: translateX(calc(var(--base, 0%) + var(--dx, 0%)));
 }
 
@@ -26,20 +27,23 @@
   right: 50vw;      
   min-width: 20vw;
   object-position: 100% 0;
+  z-index: 20;
 }
 
 .door2 {
   --base: 0%;   
-  right: 50vw;    
-  min-width: 30vw;
+  right: 50vw; // calc(50vw - 1px);    
+  min-width: calc(30vw + 0.5px);
   object-position: 100% 0;
+  z-index: 10;
 }
 
 .door3 {
   --base: 0%;      
-  left: 50vw;       
-  min-width: 30vw;
+  left: 50vw; // calc(50vw - 1px);       
+  min-width: calc(30vw + 0.5px);
   object-position: 0 0;
+  z-index: 10;
 }
 
 .door4 {
@@ -47,4 +51,35 @@
   left: 50vw;        
   min-width: 20vw;
   object-position: 0 0;
+  z-index: 20;
+}
+
+.loadingText {
+  opacity: 0;
+  font-family: $primaryFont;
+  font-size: 1.8rem;
+  color: #000;
+  backdrop-filter: blur(3px);
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  margin: 3rem;
+  padding: 0.6rem 1.2rem;
+  border: 3px solid black;
+  border-radius: 18px;
+  z-index: 1000001;
+  transition: opacity 0.3s;
+
+  &.loadingShow {opacity: 1;}
+  &.percentageShow {
+    min-width: 18.3rem;
+    @media (max-width: 900px) {min-width: 12.6rem;}
+  }
+
+  @media (max-width: 900px) {
+    font-size: 1.2rem;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+  }
 }

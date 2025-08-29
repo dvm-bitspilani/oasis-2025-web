@@ -4,6 +4,9 @@
     // height: 100vh;
     // overflow-y: scroll;
 
+    --bar-thickness: calc(10*100vw/1920);
+    @media (max-width: 900px) {--bar-thickness: calc(6*100vw/393)}
+
     &::-webkit-scrollbar {
         display: none;
     }
@@ -16,6 +19,7 @@
         .contactContent {
             padding: 1.2rem 1.8rem;
             position: relative;
+            z-index: 10;
 
             @media (max-width: 600px) {
                 padding: 0.6rem 0.4rem;
@@ -54,6 +58,40 @@
         background-repeat: repeat;
         background-position: center;
         min-height: 100vh;
+
+        .contactBB {
+            z-index: 10;
+            margin-left: 3rem;
+
+            @media (max-width: 900px) {
+                margin-left: 2rem;
+                margin-top: 0.6rem;
+            }
+        }
+    }
+
+    .contactPageBg {
+        z-index: 10;
+        height: inherit;
+        overflow-y: hidden;
+        .horiBar {
+            position: absolute;
+            left: 0px;
+            width: 100%;
+            height: var(--bar-thickness);
+            // background-color: #7F5934;
+            z-index: inherit;
+
+            display: grid;
+            grid-template-columns: 1fr calc(83*100vw/1919) 1fr;
+            @media (max-width: 900px) {grid-template-columns: 1fr calc(37*100vw/1919) calc(8*100vw/1919) calc(37*100vw/1919) 1fr;}
+
+            & :nth-child(odd) {
+                background-color: #7F5934;
+                box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
+            }
+            div {height: 100%;}
+        }
     }
 }
 .contactDoors {

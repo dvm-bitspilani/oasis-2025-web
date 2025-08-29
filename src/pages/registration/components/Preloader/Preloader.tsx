@@ -1,47 +1,72 @@
 import { useState, useEffect } from "react";
 import styles from "./Preloader.module.scss";
+import assetList from "../../../../assetList";
+import { useLocation } from "react-router-dom";
 
-const imagesToPreload = [
-  "/images/registration/reg-banner.png",
-  "/svgs/registration/bg-extended.svg",
-  "/svgs/registration/bg-mobile.svg",
-  "/svgs/registration/scrollThumb.svg",
-  "/svgs/registration/scroll-bar.svg",
-  "/svgs/registration/leftarr.svg",
-  "/svgs/registration/rightarr.svg",
-];
+// const imagesToPreload = [
+//   "/images/registration/reg-banner.png",
+//   "/svgs/registration/bg-extended.svg",
+//   "/svgs/registration/bg-mobile.svg",
+//   "/svgs/registration/scrollThumb.svg",
+//   "/svgs/registration/scroll-bar.svg",
+//   "/svgs/registration/leftarr.svg",
+//   "/svgs/registration/rightarr.svg",
+// ];
 
 interface PreloaderProps {
   onEnter: () => void;
+  targetLocation: string | null;
 }
 
-export default function Preloader({ onEnter }: PreloaderProps) {
+export default function Preloader({ onEnter, targetLocation }: PreloaderProps) {
   const [progress, setProgress] = useState(0);
 
+  if (targetLocation) {onEnter(); return}; // if this is not null, means it is coming from animateNavigation, so it will be loaded during door transition
+  const page = useLocation().pathname.replace("/", "") as keyof typeof assetList;
+  if (!Object.keys(assetList).includes(page)) {onEnter(); return}; // nothing to preload
+  
+  const totalAssets = Object.values(assetList[page]).reduce((sum, currentArr) => sum + currentArr.length, 0)
+
   useEffect(() => {
-    let loadedImages = 0;
+    let loadedAssets = 0;
 
     const preloadImage = (src: string) => {
       return new Promise((resolve, reject) => {
         const img = new Image();
         img.src = src;
         img.onload = () => {
-          loadedImages++;
-          setProgress((loadedImages / imagesToPreload.length) * 100);
+          loadedAssets++;
+          setProgress((loadedAssets / totalAssets) * 100);
           resolve(img);
         };
         img.onerror = reject;
       });
     };
 
-    Promise.all(imagesToPreload.map(preloadImage))
+    const preloadVideo = (src: string) => (
+      new Promise((resolve, reject) => {
+        const video = document.createElement("video")
+        video.src = src;
+        video.onloadeddata = () => {
+          loadedAssets++;
+          setProgress((loadedAssets / totalAssets) * 100);
+          resolve(loadedAssets);
+        };
+        video.onerror = reject;
+      })
+    )
+
+    Promise.allSettled([
+      ...assetList[page].images.map(preloadImage),
+      ...assetList[page].videos.map(preloadVideo)
+    ])
       .then(() => {
         onEnter();
       })
-      .catch((err) => {
-        console.error("Error preloading images:", err);
-        onEnter();
-      });
+      // .catch((err) => {
+      //   console.error("Error preloading images:", err);
+      //   onEnter();
+      // });
   }, []);
 
   return (

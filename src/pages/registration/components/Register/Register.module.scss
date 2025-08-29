@@ -11,19 +11,24 @@
   z-index: 3;
   position: relative;
 
-  input:autofill,
-  textarea:autofill,
-  select:autofill,
+  input {
+    caret-color: #fff9e9;
+  }
+
   input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
+    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
     box-shadow: 0 0 0 1000px transparent inset !important;
     -webkit-text-fill-color: #e2dccb !important;
     color: #e2dccb !important;
     font: 100 1.4vw "Abhaya Libre Extrabold" !important;
     background-color: transparent !important;
-    transition: background-color 5000s ease-in-out 0s;
+    transition: background-color 5000s ease-in-out 0s !important;
   }
 
   .registrationForm {
@@ -213,7 +218,7 @@
           position: absolute;
           left: 18%;
           bottom: -0.8vw;
-          color:rgb(255, 0, 0);
+          color: rgb(255, 0, 0);
           font: 400 1vw "Abhaya Libre";
           text-align: left;
         }
@@ -240,14 +245,16 @@
     align-items: center;
     justify-content: space-between;
     width: 22vw;
+    transition: filter 0.3s;
+    
+    &:hover {filter: brightness(0.8)}
+
     span {
       padding-left: 40%;
       text-align: center;
     }
 
     .confirmIcon {
-      width: 7vw;
-      height: 0.5vw;
       &:last-child {
         rotate: 180deg;
       }
@@ -263,9 +270,19 @@
     position: relative;
 
     input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
     textarea:-webkit-autofill,
     select:-webkit-autofill {
-      font: 100 3.2vw "Abhaya Libre Extrabold" !important;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+      box-shadow: 0 0 0 1000px transparent inset !important;
+      -webkit-text-fill-color: #e2dccb !important;
+      color: #e2dccb !important;
+      font: 100 3.2vw "Abhaya Libre Extrabold";
+      background-color: transparent !important;
+      transition: background-color 5000s ease-in-out 0s !important;
     }
 
     .registrationForm {
@@ -357,11 +374,6 @@
       justify-content: center;
       gap: 1vw;
       width: 55vw;
-
-      .confirmIcon {
-        width: 10vw;
-        height: 0.8vw;
-      }
     }
   }
 }
@@ -369,9 +381,19 @@
 @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
   .registerContainer {
     input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
     textarea:-webkit-autofill,
     select:-webkit-autofill {
-      font: 100 3.2vw "Abhaya Libre Extrabold" !important;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+      box-shadow: 0 0 0 1000px transparent inset !important;
+      -webkit-text-fill-color: #e2dccb !important;
+      color: #e2dccb !important;
+      font: 100 4.2vw "Abhaya Libre Extrabold" !important;
+      background-color: transparent !important;
+      transition: background-color 5000s ease-in-out 0s !important;
     }
 
     .registrationForm {
@@ -426,13 +448,10 @@
       }
     }
     .confirmButton {
+      width: 70vw;
+      gap: 1vw;
       bottom: 6vw;
       font: 100 5.2vw "Abhaya Libre Extrabold";
-
-      .confirmIcon {
-        width: 10vw;
-        height: 1.5vw;
-      }
     }
   }
 }

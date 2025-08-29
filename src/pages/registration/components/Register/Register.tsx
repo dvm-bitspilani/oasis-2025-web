@@ -22,10 +22,7 @@ const registrationSchema = yup.object({
   gender: yup.string().required("Gender is required"),
   phone: yup
     .string()
-    .matches(
-      /^((\+|00)91[\-\s]?|0)?(\d{10}|\d{3}[\-\s]?\d{3}[\-\s]?\d{4}|\d{5}[\-\s]?\d{5})$/,
-      "Invalid mobile number"
-    )
+    .matches(/^[1-9]\d{9}$/, "Invalid mobile number")
     .required("Mobile number is required"),
   college_id: yup.string().required("College is required"),
   year: yup.string().required("Year of study is required"),
@@ -454,6 +451,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                       <Select
                         {...field}
                         menuPortalTarget={document.body}
+                        menuPlacement="top"
                         options={availableCities}
                         styles={customStyle}
                         isDisabled={!selectedState}
@@ -485,28 +483,34 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
           onClick={handleSubmit(onSubmit)}
         >
           <svg
+            width="98"
+            height="8"
+            viewBox="0 0 98 8"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={styles.confirmIcon}
           >
             <path
-              d="M0 3.80298C2.50922 3.80298 66.6863 5.62965 83.2277 6.54299L87.8205 3.80298L83.2277 0.925964L0 3.80298Z"
+              d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
               fill="white"
               stroke="white"
-              strokeWidth="0.16"
+              stroke-width="0.16"
             />
           </svg>
           NEXT
           <svg
+            width="98"
+            height="8"
+            viewBox="0 0 98 8"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={styles.confirmIcon}
           >
             <path
-              d="M0 3.80298C2.50922 3.80298 66.6863 5.62965 83.2277 6.54299L87.8205 3.80298L83.2277 0.925964L0 3.80298Z"
+              d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
               fill="white"
               stroke="white"
-              strokeWidth="0.16"
+              stroke-width="0.16"
             />
           </svg>
         </button>

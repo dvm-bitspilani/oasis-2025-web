@@ -78,6 +78,7 @@
         height: 28vw;
         overflow-y: auto;
         padding: 0.5vw 0;
+        scrollbar-width: none;
         &::-webkit-scrollbar {
           display: none;
         }
@@ -130,13 +131,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 22vw;
+        width: 24vw;
         z-index: 1;
 
         .confirmIcon {
-          width: 7vw;
-          height: 0.5vw;
-          transform: translateY(-0.25vw);
           &:last-child {
             rotate: 180deg;
           }
@@ -193,6 +191,21 @@
         line-height: 1.7;
         height: 100%;
         overflow-y: auto;
+        padding: 1vw 0;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 7%,
+          #000 93%,
+          transparent 100%
+        );
+        --webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 7%,
+          #000 93%,
+          transparent 100%
+        );
         scrollbar-width: none;
         &::-webkit-scrollbar {
           display: none;
@@ -307,11 +320,6 @@
           justify-content: center;
           gap: 1vw;
           width: 55vw;
-
-          .confirmIcon {
-            width: 10vw;
-            height: 0.8vw;
-          }
         }
       }
 
@@ -387,12 +395,10 @@
           }
         }
         .confirmButton {
+          width: 70vw;
+          gap: 1vw;
           font: 100 5.2vw "Abhaya Libre Extrabold";
 
-          .confirmIcon {
-            width: 10vw;
-            height: 1.5vw;
-          }
         }
       }
 

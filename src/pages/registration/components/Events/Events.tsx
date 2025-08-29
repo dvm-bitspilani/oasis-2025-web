@@ -91,6 +91,7 @@ const Events = forwardRef<
   const sortedArray = sortBySearch(eventsOptions, search);
 
   useEffect(() => {
+    sessionStorage.removeItem("selectedEvents");
     axios
       .get("https://bits-oasis.org/2025/main/registrations/events_details/")
       .then((response) => {
@@ -381,6 +382,77 @@ const Events = forwardRef<
                   </button>
                 </li>
               ))}
+              {sortedArray.length === 0 && (
+                <li className={styles.eventItem}>
+                  {" "}
+                  <svg
+                    viewBox="0 0 573 95"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clipPath="url(#clip0_350_4)">
+                      <rect
+                        y="0.551514"
+                        width="573"
+                        height="73.8473"
+                        fill="#181818"
+                      />
+                      <rect
+                        x="560"
+                        y="37.0488"
+                        width="18.4537"
+                        height="18.4537"
+                        transform="rotate(-45 560 37.0488)"
+                        fill="#E2DCCB"
+                      />
+                      <rect
+                        x="-13"
+                        y="37.0488"
+                        width="18.4537"
+                        height="18.4537"
+                        transform="rotate(-45 -13 37.0488)"
+                        fill="#E2DCCB"
+                      />
+                    </g>
+                    <rect
+                      x="0.5"
+                      y="1.05151"
+                      width="572"
+                      height="72.8473"
+                      stroke="#E2DCCB"
+                    />
+                    <path
+                      d="M256 74.3823C257.048 78.5084 262.605 87.2106 270.153 84.5099C277.142 98.0134 298.983 98.0134 306.322 84.5099C310.515 84.5099 317.435 81.5842 317.854 74.3823H296.362L287.5 84.51L278.016 74.3823H256Z"
+                      fill="#181818"
+                      stroke="#E2DCCB"
+                      strokeWidth="0.7"
+                    />
+                    <path
+                      d="M287.484 84.01L296.347 74.0099L287.484 64.103L278 73.8823L287.484 84.01Z"
+                      fill="#E2DCCB"
+                      stroke="#E2DCCB"
+                      strokeWidth="0.7"
+                    />
+                    <defs>
+                      <clipPath id="clip0_350_4">
+                        <rect
+                          y="0.551514"
+                          width="573"
+                          height="73.8473"
+                          fill="white"
+                        />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <button
+                    style={{
+                      color: "#fff",
+                    }}
+                  >
+                    No events found
+                  </button>
+                </li>
+              )}
             </ul>
             <button
               className={styles.confirmButton}
@@ -388,28 +460,34 @@ const Events = forwardRef<
               disabled={selectedEvents.length === 0}
             >
               <svg
+                width="98"
+                height="8"
+                viewBox="0 0 98 8"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className={styles.confirmIcon}
               >
                 <path
-                  d="M0 3.80298C2.50922 3.80298 66.6863 5.62965 83.2277 6.54299L87.8205 3.80298L83.2277 0.925964L0 3.80298Z"
+                  d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
                   fill="white"
                   stroke="white"
-                  strokeWidth="0.16"
+                  stroke-width="0.16"
                 />
               </svg>
               SUBMIT
               <svg
+                width="98"
+                height="8"
+                viewBox="0 0 98 8"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className={styles.confirmIcon}
               >
                 <path
-                  d="M0 3.80298C2.50922 3.80298 66.6863 5.62965 83.2277 6.54299L87.8205 3.80298L83.2277 0.925964L0 3.80298Z"
+                  d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
                   fill="white"
                   stroke="white"
-                  strokeWidth="0.16"
+                  stroke-width="0.16"
                 />
               </svg>
             </button>

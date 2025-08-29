@@ -6,8 +6,8 @@
 
 html {
   --registerFontSize: 2rem;
-  --counterBigFontSize: 2rem;
-  --counterSmallFontSize: 1.5rem;
+  --counterBigFontSize: 3em;
+  --counterSmallFontSize: 1.2rem;
   scrollbar-width: none;
 
   img {
@@ -39,8 +39,8 @@ html {
 @media (max-width: 800px) {
   html {
     --registerFontSize: 1rem;
-    --counterBigFontSize: 1.5rem;
-    --counterSmallFontSize: 1rem;
+    --counterBigFontSize: 2.4rem;
+    --counterSmallFontSize: 0.9rem;
   }
 }
 
@@ -291,6 +291,7 @@ body {
                 height: 30%;
                 filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
                 transition: filter 0.1s ease-out;
+                pointer-events: none;
               }
 
               .socialLamp {
@@ -298,6 +299,10 @@ body {
                 grid-column: 1/2;
                 z-index: 99;
                 width: 80%;
+                filter: brightness(1) drop-shadow(0px 0px 3px rgba(255, 213, 3, 0.823));
+                transition: filter 0.3s ease-out;
+
+                &:hover{filter: brightness(1.05) drop-shadow(0px 0px 15px rgba(255, 213, 3, 0.848))}
               }
 
               &:hover {
@@ -442,11 +447,11 @@ body {
       position: fixed;
       z-index: 200;
       right: 2svw;
-      top: 4svw;
+      top: 45px; // 4svw;
       width: 15svw;
       min-width: fit-content;
       display: flex;
-      align-items: center;
+      // align-items: center;
       gap: 0.5svw;
       will-change: auto;
       font-family: $primaryFont;
@@ -465,6 +470,12 @@ body {
           font-size: var(--counterBigFontSize);
           font-weight: bold;
         }
+      }
+
+      div:nth-of-type(even) {
+        font-size: 3rem;
+        
+        @media (max-width: 800px) {font-size: 2.4rem;}
       }
     }
 
@@ -561,6 +572,9 @@ body {
       justify-items: center;
       cursor: pointer;
       user-select: none;
+      transition: filter 0.3s;
+
+      &:hover {filter: brightness(0.8)}
 
       .registerBtn {
         grid-row: 1/2;

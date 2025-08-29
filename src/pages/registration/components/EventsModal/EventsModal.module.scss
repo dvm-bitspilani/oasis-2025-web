@@ -38,6 +38,10 @@
     line-height: 1.5;
     height: 80%;
     overflow-y: scroll;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .confirmButton {

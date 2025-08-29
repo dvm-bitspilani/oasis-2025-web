@@ -7,8 +7,9 @@ import cloud3 from "/svgs/landing/hamClouds/cloud3.min.svg";
 import cloud4 from "/svgs/landing/hamClouds/cloud4.min.svg";
 import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useHamStore } from "../../../utils/store";
+import { navContext } from "../../../App";
 
 const navItems = [
   { label: "Home", katakana: "ホーム", links: "/" },
@@ -18,10 +19,13 @@ const navItems = [
 ];
 
 export default function Navbar({
-  goToPage,
+  hideHam = false,
+  variant = "default",
 }: {
-  goToPage: (path: string) => void;
-}) {
+  hideHam?: boolean;
+  variant?: "default" | "about";
+})  {
+  const { goToPage } = useContext(navContext);
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [isMobile, setIsMobile] = useState(
@@ -50,7 +54,10 @@ export default function Navbar({
     }
   };
   return (
-    <nav className={styles.nav}>
+    <nav className={`${styles.nav} ${
+        variant === "about" ? styles.aboutVariant : ""
+      }`}>
+      {!hideHam &&(
       <div className={styles.hamMenuBtn} onClick={handleHamClick}>
         <img src={moon} alt="" className={styles.moon} />
         <img src={moonHam} alt="" className={styles.moonHam} />
@@ -87,13 +94,15 @@ export default function Navbar({
           />
         </div>
       </div>
+      )}
       <ul className={styles.navList}>
         {navItems.map((item) => (
-          <li key={item.label} className={styles.navItem}>
-            <div
-              className={styles.navLink}
-              onClick={() => goToPage(item.links)}
-            >
+          <li 
+            key={item.label} 
+            className={styles.navItem}
+            onClick={() => goToPage?.(item.links)}
+          >
+            <div className={styles.navLink}>
               <div className={styles.actualLabel}>{item.label}</div>
               <div className={styles.katakana}>{item.katakana}</div>
             </div>

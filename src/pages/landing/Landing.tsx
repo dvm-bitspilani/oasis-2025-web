@@ -32,7 +32,7 @@ import { useHamStore } from "../../utils/store";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
+const TARGET_DATE = new Date("2025-11-07T00:00:00Z");
 
 const socialLinks = [
   {
@@ -305,7 +305,7 @@ export default function Landing({
           } ${overlayIsActive ? styles.mask : ""}`}
           ref={wrapperRef}
         >
-          <Navbar goToPage={goToPage} />
+          <Navbar />
           {/* {isHamOpen && (
             <div className={styles.hamContainer}>
               <div
@@ -408,7 +408,7 @@ export default function Landing({
             <div className={styles.dateCountdown} ref={dateCountdownRef}>
               <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
                 <div className={styles.days}>
-                  {timeLeft.days > 10 ? (
+                  {timeLeft.days >= 10 ? (
                     <span>{timeLeft.days}</span>
                   ) : (
                     <span>0{timeLeft.days}</span>
@@ -416,10 +416,10 @@ export default function Landing({
                 </div>
                 DAYS
               </div>
-              :
+              <div>:</div>
               <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
                 <div className={styles.hours}>
-                  {timeLeft.hours > 10 ? (
+                  {timeLeft.hours >= 10 ? (
                     <span>{timeLeft.hours}</span>
                   ) : (
                     <span>0{timeLeft.hours}</span>
@@ -427,10 +427,10 @@ export default function Landing({
                 </div>
                 HOURS
               </div>
-              :
+              <div>:</div>
               <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
                 <div className={styles.minutes}>
-                  {timeLeft.minutes > 10 ? (
+                  {timeLeft.minutes >= 10 ? (
                     <span>{timeLeft.minutes}</span>
                   ) : (
                     <span>0{timeLeft.minutes}</span>

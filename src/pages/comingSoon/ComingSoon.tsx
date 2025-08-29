@@ -1,7 +1,12 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styles from "./ComingSoon.module.scss";
+import { useContext } from "react";
+import { navContext } from "../../App";
 
 const ComingSoon: React.FC = () => {
+
+  const { goToPage } = useContext(navContext);
+
   return (
     <div className={styles.comingSoon}>
       <div className={styles.overlay}></div>
@@ -9,12 +14,12 @@ const ComingSoon: React.FC = () => {
         <h1>Coming Soon</h1>
         <p>The page you are looking for is still under construction.</p>
         <div className={styles.buttons}>
-          <Link to="/" className={styles.btn}>
+          <span onClick={() => goToPage && goToPage("/")} className={styles.btn}>
             Go Home
-          </Link>
-          <Link to="/events" className={`${styles.btn} ${styles.secondary}`}>
+          </span>
+          <span onClick={() => goToPage && goToPage("/events")} className={`${styles.btn} ${styles.secondary}`}>
             Explore Events
-          </Link>
+          </span>
         </div>
       </div>
     </div>

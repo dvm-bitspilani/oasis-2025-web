@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect, createContext } from "react";
 import Preloader from "./pages/registration/components/Preloader/Preloader";
 import Homepage from "./Homepage";
@@ -7,6 +7,7 @@ import DoorTransition from "./pages/components/page-transition/DoorTransition";
 import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
+import assetList from './assetList';
 
 export const navContext = createContext<{ goToPage?: (page: string) => void }>(
   {}
@@ -39,44 +40,33 @@ export default function App() {
   const [doorPhase, setDoorPhase] = useState<
     "idle" | "closing" | "waiting" | "opening"
   >("idle");
+  const [doorPLPercentageLoaded, setDoorPLPercentageLoaded] = useState<number>(0)
 
   const [isPreloading, setIsPreloading] = useState(location.pathname !== "/");
 
   const nextRoute = useRef<string | null>(null);
 
   useEffect(() => {
-    const path = location.pathname;
+    const path = location.pathname.replace("/", "");
+    const pages = ["register", "events", "aboutus", "contact"]
 
-    if (path === "/") {
-      setCurrentPage("home");
-      setIsPreloading(false);
-    } else if (path === "/register") {
-      setCurrentPage("register");
-      setIsPreloading(true);
-    } else if (path === "/events") {
-      setCurrentPage("events");
-      setIsPreloading(true);
-    } else if (path === "/aboutus") {
-      setCurrentPage("aboutus");
-      setIsPreloading(true);
-    } else if (path === "/contact") {
-      setCurrentPage("contact");
-      setIsPreloading(true);
-    } else {
-      setCurrentPage("comingSoon");
-      setIsPreloading(false);
-    }
+    setCurrentPage(pages.includes(path) ? path as typeof currentPage : (path === "" ? "home" : "comingSoon"))
+    setIsPreloading(Object.keys(assetList).includes(path))
+    
   }, [location.pathname]);
 
-  const handleDoorsClosed = () => {
+  const handleDoorsClosed = async () => {
     setDoorPhase("waiting");
+
+    const page = nextRoute.current?.replace("/", "");
+    if (page && Object.keys(assetList).includes(page)) await loadAssets(page as keyof typeof assetList)
+    // await new Promise((resolve) => setTimeout(resolve, 10000))
 
     if (nextRoute.current) {
       navigate(nextRoute.current, { state: { startAnimation: true } });
     }
 
-    if (nextRoute.current === "/register") {
-    } else {
+    if (nextRoute.current && !(Object.keys(assetList)).includes(nextRoute.current)) {
       setTimeout(() => {
         setDoorPhase("opening");
       }, 500);
@@ -86,6 +76,7 @@ export default function App() {
   const handleDoorsOpened = () => {
     setDoorPhase("idle");
     nextRoute.current = null;
+    setDoorPLPercentageLoaded(0);
   };
 
   const goToPage = (path: string) => {
@@ -105,16 +96,48 @@ export default function App() {
     }
   };
 
+  const loadAssets = async (page: keyof typeof assetList) => {
+
+    const handleLoadedAsset = (callback: (param?: any) => void) => {
+      setDoorPLPercentageLoaded(prev => prev + 100/promises.length);
+      callback()
+    }
+    
+    const promises = [
+      ...assetList[page].images.map((path) => (
+        new Promise((resolve, reject) => {
+          const image = new Image();
+          image.src = path;
+          image.onload = () => handleLoadedAsset(() => resolve(image));
+          image.onerror = () => handleLoadedAsset((error) => reject(error));
+        })
+      )),
+      ...assetList[page].videos.map((path) => (
+        new Promise((resolve, reject) => {
+          const video = document.createElement("video");
+          video.src = path;
+          video.onloadeddata = () => handleLoadedAsset(() => resolve(video));
+          video.onerror = () => handleLoadedAsset((error) => reject(error));
+        })
+      )),
+      
+    ]
+
+    await Promise.allSettled(promises)//.catch((error) => console.log(error))
+    console.log("loaded")
+  }
+
   return (
     <navContext.Provider value={{ goToPage }}>
       <DoorTransition
         phase={doorPhase}
         onClosed={handleDoorsClosed}
         onOpened={handleDoorsOpened}
-        page={location.pathname}
+        percentageLoaded={doorPLPercentageLoaded}
+        targetPageRef={nextRoute}
       />
 
-      {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
+      {isPreloading && <Preloader onEnter={handlePreloaderEnter} targetLocation={nextRoute.current} />}
 
       {!isPreloading && currentPage === "home" && (
         <Homepage goToPage={goToPage} />
@@ -133,15 +156,16 @@ export default function App() {
       {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
-
+{/* 
       <Routes>
         <Route path="/" element={null} errorElement={<ComingSoon />} />
         <Route path="/events" element={null} errorElement={<ComingSoon />} />
         <Route path="/register" element={null} />
         <Route path="/events" element={null} />
+        <Route path="/contact" element={null} />
         <Route path="/aboutus" element={null} />
         <Route path="/comingSoon" element={null} />
-      </Routes>
+      </Routes> */}
     </navContext.Provider>
   );
 }

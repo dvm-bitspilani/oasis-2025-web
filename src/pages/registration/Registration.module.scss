@@ -60,7 +60,7 @@
     left: 2vw;
     width: 4vw;
     height: 4vw;
-    background: black;
+    background: transparent;
     &:focus {
       outline: none;
     }
@@ -128,6 +128,7 @@
       filter: blur(1px);
     }
     .backBtn {
+      background: #070707;
       width: 14vw;
       height: 14vw;
     }

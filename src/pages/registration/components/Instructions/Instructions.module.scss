@@ -36,8 +36,14 @@
       color: #ffffff;
       text-align: left;
       font: 400 1.3vw "Shippori Mincho";
-      line-height: 1.1;
+      line-height: 1.5;
       letter-spacing: 1px;
+
+      span {
+        color: #e2dccb;
+        cursor: pointer;
+        text-decoration: underline;
+      }
 
       &::before {
         content: "";
@@ -61,6 +67,11 @@
     padding: 1vw 3vw 1vw 1vw;
     border: none;
     z-index: 4;
+    transition: filter 0.3s;
+    
+    &:hover {
+      filter: brightness(0.8)
+    }
     &:focus {
       outline: none;
     }
@@ -108,16 +119,15 @@
 
       li {
         padding-left: 2vw;
+        margin-left: 5vw;
         font: 400 clamp(1.2rem, 3vw + 0.1rem, 5rem) "Shippori Mincho";
-        display: grid;
-        grid-template-columns: clamp(1rem, 2vw + 0.5rem, 1.9rem) auto;
-        gap: 1vw;
+        position: relative;
         &::before {
-          position: static;
-          display: block;
-          left: clamp(-1rem, -2vw - 0.5rem, -1.9rem);
-          width: clamp(1rem, 2vw + 0.5rem, 1.9rem);
-          height: clamp(1rem, +2vw + 0.5rem, 1.9rem);
+          top: 0;
+          left: 0;
+          transform: translate(-100%, 50%);
+          width: 3vw;
+          height: 3vw;
         }
       }
     }
@@ -149,9 +159,9 @@
         padding-left: 2vw;
         font: 400 clamp(1rem, 4vw + 0.1rem, 4rem) "Shippori Mincho";
         &::before {
-          left: clamp(-1rem, -2vw - 0.5rem, -1.9rem);
-          width: clamp(1rem, 2vw + 0.5rem, 1.9rem);
-          height: clamp(0.8rem, 2vw, 1.4rem);
+          transform: translate(-100%, 50%);
+          width: 4vw;
+          height: 4vw;
         }
       }
     }

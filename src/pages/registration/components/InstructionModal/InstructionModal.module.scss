@@ -26,6 +26,15 @@
   background-color: #000000e5;
   backdrop-filter: blur(10px);
 
+  .close {
+    cursor: pointer;
+    width: 2vw;
+    height: 2vw;
+    position: absolute;
+    top: 2vw;
+    right: 2vw;
+  }
+
   .heading {
     color: #fff;
     font: 400 1.7vw "DM Serif Text";
@@ -34,10 +43,14 @@
     display: flex;
     justify-content: space-between;
     ul {
-      margin: 1vw 0 2vw 2.5vw;
-      height: 16vw;
+      margin: 1vw 0 2vw 1vw;
+      height: 25vw;
       overflow-y: auto;
-      list-style: inside;
+      list-style: none;
+      padding: 1vw 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.3vw;
       padding: 1vw 0;
       mask-image: linear-gradient(
         to bottom,
@@ -59,13 +72,29 @@
       }
 
       li {
-        margin: 0.2vw 0;
-        color: #fff;
-        font: 400 1.4vw "DM Serif Text";
+        position: relative;
+        color: #ffffff;
+        text-align: left;
+        font: 400 1.3vw "Shippori Mincho";
+        line-height: 1.6;
+        letter-spacing: 1px;
+        margin-left: 3vw;
+
+        &::before {
+          content: "";
+          position: absolute;
+          display: block;
+          top: 6%;
+          left: -2.5vw;
+          width: 1.5vw;
+          height: 1.45vw;
+          background: center / contain no-repeat
+            url("/public/svgs/registration/list-tag.svg");
+        }
       }
     }
     .scrollBarContainer {
-      height: 16vw;
+      height: 25vw;
       width: 10vw;
       display: flex;
       justify-content: center;
@@ -112,19 +141,7 @@
     }
   }
 }
-.error {
-  height: 25vw;
-  align-items: center;
-  justify-content: center;
-  gap: 4vw;
-  p {
-    color: #eb5c5c;
-    font: 400 1.7vw "DM Serif Text";
-  }
-  .buttonsContainer {
-    margin-top: unset;
-  }
-}
+
 @media screen and (max-width: 1200px) and (max-aspect-ratio: 1.45) {
   .selectedEvents {
     position: fixed;
@@ -134,16 +151,32 @@
     padding: 2.3vw 3.7vw;
     width: 80vw;
 
+    .close {
+      top: 4vw;
+      right: 4vw;
+      width: 2.5vw;
+      height: 2.5vw;
+    }
+
     .heading {
       font: 400 4.3vw "DM Serif Text";
     }
     .content {
       ul {
-        margin: 1vw 0 2vw 2.5vw;
+        margin: 1vw 0 2vw 1vw;
         height: 60svh;
-        padding: 4vw 0;
+        padding: 3vw 0;
         li {
+          margin-left: 5vw;
+          padding-left: 2vw;
           font: 400 3vw "DM Serif Text";
+          &::before {
+            top: 0;
+            left: 0;
+            transform: translate(-100%, 20%);
+            width: 3vw;
+            height: 3vw;
+          }
         }
       }
       .scrollBarContainer {
@@ -165,14 +198,6 @@
       }
     }
   }
-  .error {
-    height: 30svh;
-    gap: 4vw;
-    p {
-      color: #fff;
-      font: 400 3.5vw "DM Serif Text";
-    }
-  }
 }
 @media screen and (max-width: 1200px) and (max-aspect-ratio: 0.75) {
   .selectedEvents {
@@ -180,19 +205,33 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 3vw 4.3vw;
+    padding: 5vw 4.3vw;
     width: 80vw;
 
+    .close {
+      top: 4vw;
+      right: 4vw;
+      width: 3.5vw;
+      height: 3.5vw;
+    }
+
     .heading {
-      font: 400 4.3vw "DM Serif Text";
+      font: 400 5.3vw "DM Serif Text";
     }
     .content {
       ul {
-        margin: 1vw 0 2vw 2.5vw;
+        margin: 1vw 0 2vw 1vw;
         height: 60svh;
+        padding: 6vw 0;
 
         li {
+          padding-left: 2vw;
           font: 400 4vw "DM Serif Text";
+          &::before {
+            transform: translate(-100%, 10%);
+            width: 4vw;
+            height: 4vw;
+          }
         }
       }
     }
@@ -206,14 +245,6 @@
         padding: 0.5vw 4vw;
         cursor: pointer;
       }
-    }
-  }
-  .error {
-    height: 30svh;
-    gap: 4vw;
-    p {
-      color: #fff;
-      font: 400 4vw "DM Serif Text";
     }
   }
 }
