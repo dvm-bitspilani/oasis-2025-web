@@ -25,8 +25,10 @@ import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
 import ContactDoors from "../contact/ContactDoors";
 import Ham from "../components/ham/ham";
+import Lenis from "@studio-freight/lenis";
 
 import { useHamStore } from "../../utils/store";
+import { FaA } from "react-icons/fa6";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -132,6 +134,22 @@ export default function LandingRevamp({
     return () => clearInterval(timerId);
   }, []);
 
+  useEffect(() => {
+    const lenis = new Lenis({ smoothWheel: true });
+    lenis.on("scroll", () => {
+      ScrollTrigger.update();
+    });
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+    return () => {
+      lenis.destroy();
+      ScrollTrigger.refresh();
+    };
+  }, []);
+
   useGSAP(() => {
     if (treeImageRef.current && landingRef.current) {
       gsap.set(treeImageRef.current, {
@@ -164,8 +182,8 @@ export default function LandingRevamp({
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: wrapperRef.current,
-          start: "200vh",
-          end: "+=200vh",
+          start: "50vh",
+          end: "+=145vh",
           scrub: true,
         },
       }
@@ -176,7 +194,7 @@ export default function LandingRevamp({
         trigger: wrapperRef.current,
         start: "top top",
         end: "+=800vh",
-        scrub: 1.2,
+        scrub: true,
       },
     });
 
@@ -191,7 +209,7 @@ export default function LandingRevamp({
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "200vh",
+            start: "00vh",
             end: "+=200vh",
             scrub: true,
           },
@@ -204,8 +222,8 @@ export default function LandingRevamp({
           treeImageRef.current,
           {
             scale: 1.2,
-            duration: 4,
-            ease: "sine.inOut",
+            duration: 8,
+            ease: "power2.out",
           },
           0
         )
@@ -213,8 +231,9 @@ export default function LandingRevamp({
         .to(
           landingMobileRef.current,
           {
-            scale: 1.05,
-            duration: 4,
+            scale: 1.1,
+            // y: "8%",
+            duration: 8,
             ease: "power2.out",
           },
           0
@@ -223,22 +242,21 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
+            // y: "-50%",,
             y: "-50%",
-            duration: 6,
-            scale: 1.2,
-            ease: "sine.in",
+            duration: 16,
           },
-          3
+          6
         )
 
         .to(
           landingMobileRef.current,
           {
-            y: "-30%",
-            duration: 6,
+            y: "-35%",
+            duration: 10,
             ease: "sine.in",
           },
-          3
+          2
         );
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
@@ -248,7 +266,7 @@ export default function LandingRevamp({
           treeImageRef.current,
           {
             scale: 1.2,
-            duration: 4,
+            duration: 8,
             ease: "power2.out",
           },
           0
@@ -257,7 +275,8 @@ export default function LandingRevamp({
           landingRef.current,
           {
             scale: 1.1,
-            duration: 4,
+            // y: "8%",
+            duration: 8,
             ease: "power2.out",
           },
           0
@@ -266,21 +285,21 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            y: "-400%",
-            duration: 12,
-            ease: "sine.in",
+            y: "-50%",
+            duration: 16,
+            // ease: "sine.in",
           },
-          1
+          6
         )
 
         .to(
           landingRef.current,
           {
-            y: "120vh",
-            duration: 8,
-            ease: "sine.in",
+            y: "-35%",
+            duration: 20,
+            // ease: "sine.in",
           },
-          1
+          2
         )
 
         .to(
@@ -315,7 +334,7 @@ export default function LandingRevamp({
   //       treeImageRef.current,
   //       {
   //         scale: 1.2,
-  //         y: "12%",
+  //         y: "14%",
   //         duration: 4,
   //         ease: "power2.out",
   //       },
@@ -357,42 +376,70 @@ export default function LandingRevamp({
             <Ham goToPage={goToPage} />
           </div>
         </div>
+        <div className={styles.backgroundContainer}>
+          <div className={styles.logoContainer}>
+            <img src={logo} className={styles.logo} alt="Logo" />
+          </div>
+
+          <div className={styles.desktopBackground} ref={landingRef}>
+            <img src={landingImage} className={styles.landingImage} />
+          </div>
+
+          <div
+            className={styles.mobileBackgroundContainer}
+            ref={landingMobileRef}
+          >
+            <img
+              src={mobileMountains}
+              className={styles.mobileMountains}
+              alt=""
+              ref={landingMobileRef}
+            />
+            <img
+              src={mobileBackground}
+              alt=""
+              className={styles.mobileBackground}
+            />
+
+            <img src={mobileCloud} className={styles.mobileCloud} />
+          </div>
+        </div>
+        <div className={styles.dateCountdown} ref={dateCountdownRef}>
+          <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
+            <div className={styles.days}>
+              {timeLeft.days >= 10 ? (
+                <span>{timeLeft.days}</span>
+              ) : (
+                <span>0{timeLeft.days}</span>
+              )}
+            </div>
+            DAYS
+          </div>
+          :
+          <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
+            <div className={styles.hours}>
+              {timeLeft.hours >= 10 ? (
+                <span>{timeLeft.hours}</span>
+              ) : (
+                <span>0{timeLeft.hours}</span>
+              )}
+            </div>
+            HOURS
+          </div>
+          :
+          <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
+            <div className={styles.minutes}>
+              {timeLeft.minutes >= 10 ? (
+                <span>{timeLeft.minutes}</span>
+              ) : (
+                <span>0{timeLeft.minutes}</span>
+              )}
+            </div>
+            MINUTES
+          </div>
+        </div>
         <div className={styles.scroller} ref={scrollerRef}>
           <div className={styles.landingContainer}>
-            <div className={styles.dateCountdown} ref={dateCountdownRef}>
-              <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
-                <div className={styles.days}>
-                  {timeLeft.days >= 10 ? (
-                    <span>{timeLeft.days}</span>
-                  ) : (
-                    <span>0{timeLeft.days}</span>
-                  )}
-                </div>
-                DAYS
-              </div>
-              :
-              <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
-                <div className={styles.hours}>
-                  {timeLeft.hours >= 10 ? (
-                    <span>{timeLeft.hours}</span>
-                  ) : (
-                    <span>0{timeLeft.hours}</span>
-                  )}
-                </div>
-                HOURS
-              </div>
-              :
-              <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
-                <div className={styles.minutes}>
-                  {timeLeft.minutes >= 10 ? (
-                    <span>{timeLeft.minutes}</span>
-                  ) : (
-                    <span>0{timeLeft.minutes}</span>
-                  )}
-                </div>
-                MINUTES
-              </div>
-            </div>
             <div
               className={styles.registerBtnContainer}
               onClick={() => goToPage("/register")}
@@ -411,38 +458,6 @@ export default function LandingRevamp({
               <div className={styles.registerBtnText}>Register</div>
             </div>
 
-            <div className={styles.backgroundContainer}>
-              <div className={styles.logoContainer}>
-                <img src={logo} className={styles.logo} alt="Logo" />
-              </div>
-
-              <div className={styles.desktopBackground}>
-                <img
-                  src={landingImage}
-                  className={styles.landingImage}
-                  ref={landingRef}
-                />
-              </div>
-
-              <div
-                className={styles.mobileBackgroundContainer}
-                ref={landingMobileRef}
-              >
-                <img
-                  src={mobileMountains}
-                  className={styles.mobileMountains}
-                  alt=""
-                  ref={landingMobileRef}
-                />
-                <img
-                  src={mobileBackground}
-                  alt=""
-                  className={styles.mobileBackground}
-                />
-
-                <img src={mobileCloud} className={styles.mobileCloud} />
-              </div>
-            </div>
             <div className={`${styles.foregroundContainer} ${styles.inviz}`}>
               <div className={styles.treeContainer}>
                 <div className={styles.tree}>

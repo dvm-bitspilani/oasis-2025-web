@@ -104,6 +104,7 @@ body {
   mask-size: cover;
   mask-position: center;
   mask-repeat: no-repeat;
+
   &.mask {
     mask-image: url("/videos/ink-spread-5.gif");
     mask-repeat: no-repeat;
@@ -151,6 +152,174 @@ body {
       }
     }
   }
+  .backgroundContainer {
+    z-index: -1;
+    height: 100svh;
+    width: 100svw;
+    position: fixed;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    translate: 0;
+
+    .logoContainer {
+      position: fixed;
+      left: 3svw;
+      bottom: 2.5svw;
+      width: 30svw;
+      will-change: auto;
+      z-index: 100;
+
+      .logo {
+        width: 100%;
+      }
+    }
+
+    .desktopBackground {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100svh;
+      width: 100svw;
+      z-index: -100;
+      .landingImage {
+        position: fixed;
+        height: 100svh;
+        width: 100svw;
+        object-fit: cover;
+        object-position: center;
+        position: fixed;
+      }
+    }
+    .mobileBackgroundContainer {
+      display: none;
+      width: 100dvw;
+      height: 100dvh;
+      .mobileBackground {
+        width: 100dvw;
+        height: 100dvh;
+        object-fit: cover;
+        object-position: center;
+        position: fixed;
+        bottom: 0;
+        z-index: -1;
+      }
+
+      .mobileMountains {
+        width: 100svw;
+        object-fit: cover;
+        object-position: right;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        height: 70svh;
+        margin-bottom: calc(5svw);
+      }
+
+      .mobileCloud {
+        position: fixed;
+        left: 0;
+        top: 55%;
+        width: 150px;
+        mix-blend-mode: luminosity;
+      }
+    }
+
+    @media (aspect-ratio < 5/8) {
+      .mobileBackgroundContainer {
+        .mobileMountains {
+          right: -10svw;
+          width: auto;
+        }
+      }
+    }
+  }
+  .dateCountdown {
+    user-select: none;
+    position: fixed;
+    z-index: 200;
+    right: 2svw;
+    top: 4svw;
+    width: 15svw;
+    min-width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 0.5svw;
+    will-change: auto;
+    font-family: $primaryFont;
+    color: #ffdfd0;
+    font-size: 2rem;
+    text-align: center;
+    background-color: none;
+
+    .timeLeft {
+      font-size: var(--counterSmallFontSize);
+
+      .days,
+      .hours,
+      .minutes,
+      .seconds {
+        font-size: var(--counterBigFontSize);
+        font-weight: bold;
+      }
+    }
+  }
+  @media (max-width: 1100px) {
+    .dateCountdown {
+      display: none;
+    }
+  }
+
+  @media (aspect-ratio < 8/12), (max-width: 730px) {
+    .backgroundContainer {
+      .mobileBackgroundContainer {
+        display: block;
+      }
+      .desktopBackground {
+        display: none;
+      }
+      .logoContainer {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 150px;
+        width: 300px;
+      }
+    }
+    .dateCountdown {
+      z-index: 50;
+      display: flex;
+      position: fixed;
+      top: 250px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: fit-content;
+      font-size: 1.5rem;
+      padding: 0.5svw;
+      text-align: center;
+      gap: 1.5svw;
+    }
+  }
+  @media (aspect-ratio > 1/1) and (max-width: 730px) {
+    .backgroundContainer {
+      .logoContainer {
+        top: 30px;
+        left: 20px;
+        transform: none;
+      }
+    }
+  }
+  @media (aspect-ratio > 1/1) and (max-width: 730px) {
+    .backgroundContainer {
+      .logoContainer {
+        top: 30px;
+        left: 20px;
+        transform: none;
+      }
+    }
+    .dateCountdown {
+      top: 130px;
+      transform: none;
+    }
+  }
   .scroller {
     overflow-x: hidden;
     .landingContainer {
@@ -159,43 +328,14 @@ body {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr;
       width: 100svw;
-      .dateCountdown {
-        user-select: none;
-        position: fixed;
-        z-index: 200;
-        right: 2svw;
-        top: 4svw;
-        width: 15svw;
-        min-width: fit-content;
-        display: flex;
-        align-items: center;
-        gap: 0.5svw;
-        will-change: auto;
-        font-family: $primaryFont;
-        color: #ffdfd0;
-        font-size: 2rem;
-        text-align: center;
-        background-color: none;
-
-        .timeLeft {
-          font-size: var(--counterSmallFontSize);
-
-          .days,
-          .hours,
-          .minutes,
-          .seconds {
-            font-size: var(--counterBigFontSize);
-            font-weight: bold;
-          }
-        }
-      }
 
       .registerBtnContainer {
         text-decoration: none;
-        position: fixed;
+        position: absolute;
         right: 3svw;
-        bottom: 2.5svw;
-        z-index: 101;
+        top: calc(100svh - 3svw);
+        transform: translateY(-100%);
+        z-index: 1000;
         width: 22svw;
         will-change: auto;
         display: grid;
@@ -231,87 +371,6 @@ body {
         }
       }
 
-      .backgroundContainer {
-        z-index: -1;
-        height: 100svh;
-        width: 100svw;
-        position: fixed;
-        grid-column: 1/2;
-        grid-row: 1/2;
-
-        .logoContainer {
-          position: fixed;
-          left: 3svw;
-          bottom: 2.5svw;
-          width: 30svw;
-          will-change: auto;
-          z-index: 100;
-
-          .logo {
-            width: 100%;
-          }
-        }
-
-        .desktopBackground {
-          position: fixed;
-          top: 0;
-          left: 0;
-          height: 100svh;
-          width: 100svw;
-          z-index: -100;
-          .landingImage {
-            height: 100svh;
-            width: 100svw;
-            object-fit: cover;
-            object-position: center;
-            position: fixed;
-          }
-        }
-        .mobileBackgroundContainer {
-          display: none;
-          .mobileBackground {
-            width: 100dvw;
-            height: 100dvh;
-            object-fit: cover;
-            object-position: center;
-            position: fixed;
-            bottom: 0;
-            z-index: -1;
-          }
-
-          .mobileMountains {
-            width: 100svw;
-            object-fit: cover;
-            object-position: right;
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            height: 70svh;
-            margin-bottom: calc(5svw);
-          }
-
-          .mobileCloud {
-            position: fixed;
-            left: 0;
-            top: 55%;
-            width: 150px;
-            mix-blend-mode: luminosity;
-          }
-        }
-        @media (aspect-ratio < 8/12), (max-width: 730px) {
-          .mobileBackgroundContainer {
-            display: block;
-          }
-        }
-
-        @media (aspect-ratio < 5/8) {
-          .mobileMountains {
-            right: -10svw;
-            width: auto;
-          }
-        }
-      }
-
       .foregroundContainer {
         grid-column: 1/2;
         grid-row: 1/2;
@@ -323,6 +382,7 @@ body {
           right: 0;
           margin-top: -8vw;
           width: 100%;
+          // position: fixed;
           .tree {
             will-change: transform;
             margin-top: clamp(0svh, 100svh - 56.7svw, 100svh);
@@ -494,29 +554,12 @@ body {
           }
         }
       }
-      @media (max-width: 1100px) {
-        .dateCountdown {
-          display: none;
-        }
-      }
 
       @media (aspect-ratio < 8/12), (max-width: 730px) {
-        .dateCountdown {
-          z-index: 50;
-          display: flex;
-          top: 250px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: fit-content;
-          font-size: 1.5rem;
-          padding: 0.5svw;
-          text-align: center;
-          gap: 1.5svw;
-        }
         .registerBtnContainer {
           width: 300px;
           left: 50%;
-          transform: translateX(-50%);
+          transform: translateX(-50%) translateY(-100%);
 
           .registerBtn {
             display: none;
@@ -530,32 +573,8 @@ body {
             font-size: 1.5rem;
           }
         }
-        .backgroundContainer {
-          .desktopBackground {
-            display: none;
-          }
-          .logoContainer {
-            left: 50%;
-            transform: translateX(-50%);
-            top: 150px;
-            width: 300px;
-          }
-        }
       }
 
-      @media (aspect-ratio > 1/1) and (max-width: 730px) {
-        .backgroundContainer {
-          .logoContainer {
-            top: 30px;
-            left: 20px;
-            transform: none;
-          }
-        }
-        .dateCountdown {
-          top: 130px;
-          transform: none;
-        }
-      }
       .inviz {
         opacity: 0;
         pointer-events: none;
