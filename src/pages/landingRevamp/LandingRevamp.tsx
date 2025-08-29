@@ -28,6 +28,7 @@ import Ham from "../components/ham/ham";
 import Lenis from "@studio-freight/lenis";
 
 import { useHamStore } from "../../utils/store";
+// import { s } from "framer-motion/client";
 // import { FaA } from "react-icons/fa6";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -81,6 +82,28 @@ export default function LandingRevamp({
 
   const treeImageRef = useRef<HTMLImageElement>(null);
   const scrollerRef = useRef<HTMLImageElement>(null);
+
+  const [scrollHeight, setScrollHeight] = useState(
+    (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
+  );
+  useEffect(() => {
+    if (removeGif) {
+      setScrollHeight(
+        (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
+      );
+    }
+    const handleResize = () => {
+      if (scrollerRef.current) {
+        setScrollHeight(
+          (scrollerRef.current.scrollHeight ?? 0) - window.innerHeight * 1.4
+        );
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [removeGif]);
 
   useEffect(() => {
     if (overlayIsActive) {
@@ -138,7 +161,7 @@ export default function LandingRevamp({
   useEffect(() => {
     const lenis = new Lenis({
       smoothWheel: true,
-      lerp: window.innerWidth < 730 ? 0.08 : 0.03, // higher lerp for mobile for smoother scroll
+      lerp: window.innerWidth < 730 ? 0.1 : 0.08, // higher lerp for mobile for smoother scroll
       infinite: false,
     });
 
@@ -148,8 +171,6 @@ export default function LandingRevamp({
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
-
-    gsap.ticker.lagSmoothing(0);
 
     return () => {
       gsap.ticker.remove((time) => {
@@ -202,7 +223,7 @@ export default function LandingRevamp({
       scrollTrigger: {
         trigger: wrapperRef.current,
         start: "top top",
-        end: "+=800vh",
+        end: `+=${scrollHeight}px`,
         scrub: true,
       },
     });
@@ -214,7 +235,7 @@ export default function LandingRevamp({
         scrollTrigger: {
           trigger: wrapperRef.current,
           start: "top top",
-          end: "+=140vh",
+          end: `+=${scrollHeight}px`,
           scrub: true,
         },
       });
@@ -239,7 +260,7 @@ export default function LandingRevamp({
           treeImageRef.current,
           {
             scale: 1.2,
-            duration: 24,
+            duration: 4,
             ease: "power2.inOut",
           },
           0
@@ -250,7 +271,7 @@ export default function LandingRevamp({
           {
             scale: 1.1,
             // y: "8%",
-            duration: 24,
+            duration: 4,
             ease: "power2.inOut",
           },
           0
@@ -259,20 +280,20 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            // y: "-50%",,
-            y: "-12.55%",
-            duration: 16,
+            y: "-20%",
+            // y: "-12.55%",
+            duration: 24,
           },
-          6
+          2
         )
 
         .to(
           landingMobileRef.current,
           {
             y: "-10%",
-            duration: 16,
+            duration: 20,
           },
-          6
+          2
         );
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
@@ -282,8 +303,8 @@ export default function LandingRevamp({
           treeImageRef.current,
           {
             scale: 1.2,
-            duration: 16,
-            ease: "power2.inOut",
+            // y: "14%",
+            duration: 2,
           },
           0
         )
@@ -292,8 +313,7 @@ export default function LandingRevamp({
           {
             scale: 1.1,
             // y: "8%",
-            duration: 16,
-            ease: "power2.inOut",
+            duration: 2,
           },
           0
         )
@@ -301,11 +321,11 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            y: "-15%",
-            duration: 20,
+            y: "-20%",
+            duration: 16,
             // ease: "sine.in",
           },
-          6
+          1
         )
 
         .to(
@@ -315,7 +335,7 @@ export default function LandingRevamp({
             duration: 12,
             // ease: "sine.in",
           },
-          4
+          0.5
         )
 
         .to(
@@ -328,7 +348,7 @@ export default function LandingRevamp({
           0
         );
     });
-  }, []);
+  }, [scrollHeight]);
 
   // useGSAP(() => {
   //   const scrollAnimationTimeline = gsap.timeline({
@@ -521,7 +541,7 @@ export default function LandingRevamp({
             </div>
           </div>
           <div className={styles.aboutUsContainer}>
-            <AboutUs />
+            <AboutUs isBackBtn={false} />
           </div>
         </div>
       </main>
