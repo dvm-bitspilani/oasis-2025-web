@@ -260,8 +260,8 @@ export default function LandingRevamp({
           treeImageRef.current,
           {
             scale: 1.2,
-            duration: 4,
-            ease: "power2.inOut",
+            duration: 6,
+            // ease: "power2.inOut",
           },
           0
         )
@@ -271,8 +271,8 @@ export default function LandingRevamp({
           {
             scale: 1.1,
             // y: "8%",
-            duration: 4,
-            ease: "power2.inOut",
+            duration: 6,
+            // ease: "power2.inOut",
           },
           0
         )
@@ -280,7 +280,7 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            y: "-20%",
+            y: "-10%",
             // y: "-12.55%",
             duration: 24,
           },
@@ -293,7 +293,7 @@ export default function LandingRevamp({
             y: "-10%",
             duration: 20,
           },
-          2
+          4
         );
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
@@ -331,7 +331,7 @@ export default function LandingRevamp({
         .to(
           landingRef.current,
           {
-            y: "-12%",
+            y: "-30%",
             duration: 12,
             // ease: "sine.in",
           },
