@@ -66,7 +66,7 @@ export default function LandingRevamp({
   goToPage,
 }: {
   goToPage: (path: string) => void;
-}) {
+      }) {
   //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
@@ -387,6 +387,8 @@ export default function LandingRevamp({
   //     );
   // }, []);
 
+  
+
   return (
     <>
       <main
@@ -395,6 +397,7 @@ export default function LandingRevamp({
         } ${overlayIsActive ? styles.mask : ""}`}
         ref={wrapperRef}
       >
+
         <Navbar />
         <div
           className={
