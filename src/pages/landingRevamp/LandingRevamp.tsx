@@ -28,6 +28,7 @@ import Ham from "../components/ham/ham";
 import Lenis from "@studio-freight/lenis";
 
 import { useHamStore } from "../../utils/store";
+import ContactDoors from "../contact/ContactDoors";
 // import { s } from "framer-motion/client";
 // import { FaA } from "react-icons/fa6";
 
@@ -82,6 +83,9 @@ export default function LandingRevamp({
 
   const treeImageRef = useRef<HTMLImageElement>(null);
   const scrollerRef = useRef<HTMLImageElement>(null);
+
+  const aboutUsContRef = useRef<HTMLDivElement>(null);
+  const bottomSpacerRef = useRef<HTMLDivElement>(null);
 
   const [scrollHeight, setScrollHeight] = useState(
     (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
@@ -280,7 +284,7 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            y: "-10%",
+            // y: "-10%",
             // y: "-12.55%",
             duration: 24,
           },
@@ -321,7 +325,7 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            y: "-20%",
+            // y: "-20%",
             duration: 16,
             // ease: "sine.in",
           },
@@ -540,9 +544,19 @@ export default function LandingRevamp({
               </div>
             </div>
           </div>
-          <div className={styles.aboutUsContainer}>
+        </div>
+        <div className={styles.bottomContainer}>
+          <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
             <AboutUs isBackBtn={false} />
+            {
+              aboutUsContRef.current && bottomSpacerRef.current &&
+              <ContactDoors 
+                pinElemRef={aboutUsContRef} 
+                triggerElemRef={bottomSpacerRef} 
+              />
+            }
           </div>
+          <div className={styles.bottomSpacer} ref={bottomSpacerRef}/>
         </div>
       </main>
     </>
