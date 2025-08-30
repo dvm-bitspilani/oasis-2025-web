@@ -45,15 +45,15 @@ const iconImages: HTMLImageElement[] = icons.map((src) => {
   img.src = src;
   return img;
 });
-const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
+const AboutUs = () => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-const AboutRef = useRef<HTMLDivElement | null>(null);
+  const AboutRef = useRef<HTMLDivElement | null>(null);
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
-  useEffect(()=>{
-   document.body.style.position = "static";
-  },[])
+  useEffect(() => {
+    document.body.style.position = "static";
+  }, []);
   useEffect(() => {
     const initPlayer = () => {
       if (playerRef.current || !playerContainerRef.current || !window.YT)
@@ -64,9 +64,10 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
         width: "100%",
         videoId: videos[0],
         playerVars: {
-          autoplay: 0,
+          autoplay: 1,
           controls: 0,
           rel: 0,
+          playlist: "Ogio7ZJSb9g, 5MtkggVC0w0,krsrGOqnAN0",
           modestbranding: 1,
           playsinline: 1,
         },
@@ -162,9 +163,9 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
       ease: "sine.inOut",
     });
     gsap.to(AboutRef.current, {
-      backgroundPositionY:"-=1000vh",
+      backgroundPositionY: "-=1000vh",
       duration: 200,
-      
+
       repeat: -1,
       ease: "linear",
     });
@@ -173,11 +174,15 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
       const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
       if (!fanEl || !fanEl.parentElement) return;
 
-      //const rect = fanEl.getBoundingClientRect();
-      //const parentRect = fanEl.parentElement.getBoundingClientRect();
+      const rect = fanEl.getBoundingClientRect();
+      const parentRect = fanEl.parentElement.getBoundingClientRect();
 
-      const startX = fanEl.offsetLeft + fanEl.offsetWidth / 2;
-      const startY = fanEl.offsetTop + fanEl.offsetHeight / 2;
+      let startX = fanEl.offsetLeft + fanEl.offsetWidth / 2;
+      let startY = fanEl.offsetTop + fanEl.offsetHeight / 2;
+      if (isFan1) {
+        startX = rect.left - parentRect.left + rect.width / 2;
+        startY = rect.top - parentRect.top + rect.height / 2 - 100;
+      }
 
       // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
       const iconTemplate =
@@ -190,16 +195,17 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
 
       fanEl.parentElement.appendChild(img);
 
+      let distance = 20 + Math.random() * 100;
       let angle: number;
       if (isFan1) {
-        angle = Math.random() * (Math.PI / 2);
+        angle = Math.random() * 2 * (Math.PI / 3);
+        distance = Math.random() * 100;
       } else {
         angle = (-20 * Math.PI) / 180 + Math.PI + Math.random() * (Math.PI / 3);
       }
 
-      const distance = 20 + Math.random() * 100;
-      const dx = Math.cos(angle) * distance;
-      const dy = -Math.sin(angle) * distance;
+      let dx = Math.cos(angle) * distance;
+      let dy = -Math.sin(angle) * distance;
 
       gsap.fromTo(
         img,
@@ -222,59 +228,60 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
       );
     };
 
-    const spawnIcon2 = (fanSelector: string, isFan1: boolean) => {
-      const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
-      if (!fanEl || !fanEl.parentElement) return;
+    // const spawnIcon2 = (fanSelector: string, isFan1: boolean) => {
+    //   const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
+    //   if (!fanEl || !fanEl.parentElement) return;
 
-      const rect = fanEl.getBoundingClientRect();
-      const parentRect = fanEl.parentElement.getBoundingClientRect();
+    //   const rect = fanEl.getBoundingClientRect();
+    //   const parentRect = fanEl.parentElement.getBoundingClientRect();
 
-      const startX = rect.left - parentRect.left + rect.width / 2;
-      const startY = rect.top - parentRect.top + rect.height / 2 - 100;
+    //   const startX = rect.left - parentRect.left + rect.width / 2;
+    //   const startY = rect.top - parentRect.top + rect.height / 2 - 100;
 
-      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      // const img = document.createElement("img");
-      // img.src = iconSrc;
-      const iconTemplate =
-        iconImages[Math.floor(Math.random() * iconImages.length)];
-      const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-      img.className = styles.flyingIcon;
-      img.style.left = `${startX}px`;
-      img.style.top = `${startY}px`;
+    //   // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+    //   // const img = document.createElement("img");
+    //   // img.src = iconSrc;
+    //   const iconTemplate =
+    //     iconImages[Math.floor(Math.random() * iconImages.length)];
+    //   const img = iconTemplate.cloneNode(true) as HTMLImageElement;
+    //   img.className = styles.flyingIcon;
+    //   img.style.left = `${startX}px`;
+    //   img.style.top = `${startY}px`;
 
-      fanEl.parentElement.appendChild(img);
+    //   fanEl.parentElement.appendChild(img);
 
-      let angle: number;
-      if (isFan1) {
-        angle = Math.random() * 2 * (Math.PI / 3);
-      } else {
-        angle = Math.PI + Math.random() * 2 * (Math.PI / 3);
-      }
+    //   let angle: number;
+    //   if (isFan1) {
+    //     angle = Math.random() * 2 * (Math.PI / 3);
+    //   } else {
+    //     angle = Math.PI + Math.random() * 2 * (Math.PI / 3);
+    //   }
 
-      const distance = Math.random() * 100;
-      const dx = Math.cos(angle) * distance;
-      const dy = -Math.sin(angle) * distance;
+    //   const distance = Math.random() * 100;
+    //   const dx = Math.cos(angle) * distance;
+    //   const dy = -Math.sin(angle) * distance;
 
-      gsap.fromTo(
-        img,
-        { opacity: 0, scale: 0, x: 0, y: 0 },
-        {
-          opacity: 1,
-          scale: 1,
-          x: dx,
-          y: dy,
-          duration: 2,
-          ease: "power2.out",
-          onComplete: () => {
-            gsap.to(img, {
-              opacity: 0,
-              duration: 0.5,
-              onComplete: () => img.remove(),
-            });
-          },
-        }
-      );
-    };
+    //   gsap.fromTo(
+    //     img,
+    //     { opacity: 0, scale: 0, x: 0, y: 0 },
+    //     {
+    //       opacity: 1,
+    //       scale: 1,
+    //       x: dx,
+    //       y: dy,
+    //       duration: 2,
+    //       ease: "power2.out",
+    //       onComplete: () => {
+    //         gsap.to(img, {
+    //           opacity: 0,
+    //           duration: 0.5,
+    //           onComplete: () => img.remove(),
+    //         });
+    //       },
+    //     }
+    //   );
+    // };
+
     const spawnFromCorner = (
       corner: "top-left" | "top-right" | "bottom-left" | "bottom-right"
     ) => {
@@ -426,7 +433,7 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
             ] as any;
             spawnFromCorner(randomCorner);
           } else {
-            spawnIcon2(`.${styles.fan1}`, true);
+            spawnIcon(`.${styles.fan1}`, true);
             spawnIcon(`.${styles.fan2}`, false);
           }
         },
@@ -473,7 +480,8 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div
-      className={styles.AboutContainer} ref={AboutRef}
+      className={styles.AboutContainer}
+      ref={AboutRef}
       style={{
         backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`,
       }}
@@ -491,9 +499,24 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
           </button>
           <div className={styles.vid}>
             <div
-              ref={playerContainerRef}
-              style={{ width: "100%", height: "100%", borderRadius: "16px" }}
-            />
+              onClick={togglePlayPause}
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "16px",
+                zIndex: "20",
+              }}
+            >
+              <div
+                ref={playerContainerRef}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "16px",
+                  pointerEvents: "none",
+                }}
+              />
+            </div>
 
             <img src={fan} alt="fan1" ref={fan1Ref} className={styles.fan1} />
             <img src={fan} alt="fan2" ref={fan2Ref} className={styles.fan2} />
@@ -580,7 +603,7 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
           <img src={instaicon} alt="Instagram" />
         </a>
       </div>
-      {isBackBtn && <BackButton className={styles.aboutBB} />}
+      <BackButton className={styles.aboutBB} />
     </div>
   );
 };
