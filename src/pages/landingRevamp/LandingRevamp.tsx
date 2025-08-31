@@ -284,7 +284,7 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            // y: "-10%",
+            y: "-10%",
             // y: "-12.55%",
             duration: 24,
           },
@@ -325,7 +325,7 @@ export default function LandingRevamp({
         .to(
           scrollerRef.current,
           {
-            // y: "-20%",
+            y: "-20%",
             duration: 16,
             // ease: "sine.in",
           },
