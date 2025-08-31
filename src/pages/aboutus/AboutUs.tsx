@@ -48,12 +48,12 @@ const iconImages: HTMLImageElement[] = icons.map((src) => {
 const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-const AboutRef = useRef<HTMLDivElement | null>(null);
+  const AboutRef = useRef<HTMLDivElement | null>(null);
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
-  useEffect(()=>{
-   document.body.style.position = "static";
-  },[])
+  useEffect(() => {
+    document.body.style.position = "static";
+  }, []);
   useEffect(() => {
     const initPlayer = () => {
       if (playerRef.current || !playerContainerRef.current || !window.YT)
@@ -162,9 +162,9 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
       ease: "sine.inOut",
     });
     gsap.to(AboutRef.current, {
-      backgroundPositionY:"-=1000vh",
+      backgroundPositionY: "-=1000vh",
       duration: 200,
-      
+
       repeat: -1,
       ease: "linear",
     });
@@ -479,7 +479,8 @@ const AboutRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div
-      className={styles.AboutContainer} ref={AboutRef}
+      className={styles.AboutContainer}
+      ref={AboutRef}
       style={{
         backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`,
       }}
