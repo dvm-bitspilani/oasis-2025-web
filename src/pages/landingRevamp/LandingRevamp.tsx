@@ -481,69 +481,71 @@ export default function LandingRevamp({
             MINUTES
           </div>
         </div>
-        <div className={styles.scroller} ref={scrollerRef}>
-          <div className={styles.landingContainer}>
-            <div
-              className={styles.registerBtnContainer}
-              onClick={() => goToPage("/register")}
-              ref={registerButtonRef}
-            >
-              <img
-                src={registerBtn}
-                className={styles.registerBtn}
-                alt="Register"
-              />
-              <img
-                src={mobileRegisterBtn}
-                className={styles.mobileRegisterBtn}
-                alt=""
-              />
-              <div className={styles.registerBtnText}>Register</div>
-            </div>
+        <div className={styles.scrollerWrapper}>
+          <div className={styles.scroller} ref={scrollerRef}>
+            <div className={styles.landingContainer}>
+              <div
+                className={styles.registerBtnContainer}
+                onClick={() => goToPage("/register")}
+                ref={registerButtonRef}
+              >
+                <img
+                  src={registerBtn}
+                  className={styles.registerBtn}
+                  alt="Register"
+                />
+                <img
+                  src={mobileRegisterBtn}
+                  className={styles.mobileRegisterBtn}
+                  alt=""
+                />
+                <div className={styles.registerBtnText}>Register</div>
+              </div>
 
-            <div className={styles.foregroundContainer}>
-              <div className={styles.treeContainer} ref={treeContainerRef}>
-                <div className={styles.tree} ref={treeImageRef}>
-                  <div className={styles.socialLinksContainer}>
-                    <div className={styles.wire}>
-                      <img src={wire} alt="" />
-                    </div>
-                    {socialLinks.map((link, index) => (
-                      <div
-                        key={index}
-                        className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
-                      >
-                        <a
-                          key={index}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.socialLink}
-                        >
-                          <img
-                            src={link.icon}
-                            alt=""
-                            className={`${styles.socialIcon} ${link.classNameIcon}`}
-                          />
-                          <img
-                            src={link.lamp}
-                            alt=""
-                            className={`${styles.socialLamp} ${link.classNameLamp}`}
-                          />
-                        </a>
+              <div className={styles.foregroundContainer}>
+                <div className={styles.treeContainer} ref={treeContainerRef}>
+                  <div className={styles.tree} ref={treeImageRef}>
+                    <div className={styles.socialLinksContainer}>
+                      <div className={styles.wire}>
+                        <img src={wire} alt="" />
                       </div>
-                    ))}
+                      {socialLinks.map((link, index) => (
+                        <div
+                          key={index}
+                          className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
+                        >
+                          <a
+                            key={index}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.socialLink}
+                          >
+                            <img
+                              src={link.icon}
+                              alt=""
+                              className={`${styles.socialIcon} ${link.classNameIcon}`}
+                            />
+                            <img
+                              src={link.lamp}
+                              alt=""
+                              className={`${styles.socialLamp} ${link.classNameLamp}`}
+                            />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                    <img
+                      src={tree}
+                      // className={styles.tree}
+                      alt=""
+                      loading="eager"
+                      fetchPriority="high"
+                      style={{ contain: "none" }}
+                    />
                   </div>
-                  <img
-                    src={tree}
-                    // className={styles.tree}
-                    alt=""
-                    loading="eager"
-                    fetchPriority="high"
-                    style={{ contain: "none" }}
-                  />
+                  <div className={styles.treeExtender}></div>
                 </div>
-                <div className={styles.treeExtender}></div>
               </div>
             </div>
           </div>

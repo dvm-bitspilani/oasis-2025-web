@@ -42,7 +42,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         const firstRowRelPos = firstRowItem.getBoundingClientRect().top
 
         const secondRowItem = contactItems[window.innerWidth <= 1300 ? 1 : 3]
-        
+
         if (!secondRowItem) return;
         const secondRowRelPos = secondRowItem.getBoundingClientRect().top
 
@@ -52,19 +52,19 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         barGap = barGap / 2;//Math.round(barGap / 100);
 
         const firstRowAbsPos = firstRowRelPos + (door1Ref.current?.getBoundingClientRect().top || 0);
-        
+
         const firstBarPos = Math.round(firstRowAbsPos % barGap);
-        const numOfBars = Math.round((door1Ref.current?.clientHeight || 0 - firstBarPos || 0)/barGap);
+        const numOfBars = Math.round((door1Ref.current?.clientHeight || 0 - firstBarPos || 0) / barGap);
 
         // if (setHoriBarDetails) setHoriBarDetails({numOfBars, firstBarPos, barGap})
-        horiBarDetailsRef.current = {numOfBars, firstBarPos, barGap};
+        horiBarDetailsRef.current = { numOfBars, firstBarPos, barGap };
     }
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
         console.log(triggerElemRef.current, pinElemRef.current)
 
-        const animateContactBanner = (animation: gsap.TimelineVars) => gsap.to(contactBannerRef.current, {...animation, duration: 0.3})
+        const animateContactBanner = (animation: gsap.TimelineVars) => gsap.to(contactBannerRef.current, { ...animation, duration: 0.3 })
 
         const doorTimeLine = gsap.timeline({
             scrollTrigger: {
@@ -75,8 +75,14 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
                 pin: pinElemRef.current,
                 pinSpacing: false,
                 onEnter: calculateHoriBarPos,
-                onLeave: () => animateContactBanner({y: "0%", autoAlpha: 1}),
-                onEnterBack: () => animateContactBanner({y: "-100%", autoAlpha: 0}),
+                onLeave: () => {
+                    animateContactBanner({ y: "0%", autoAlpha: 1 })
+                    gsap.set(`.${styles.contactSection}`, {pointerEvents: "all"})
+                },
+                onEnterBack: () => {
+                    animateContactBanner({ y: "-100%", autoAlpha: 0 })
+                    gsap.set(`.${styles.contactSection}`, {pointerEvents: "none"})
+                },
                 snap: {
                     snapTo: [0, 1],
                     directional: false
@@ -85,9 +91,9 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         })
 
         doorTimeLine
-            .from(door1Ref.current, {x: "-100%",}, 0)
-            .from(door2Ref.current, {x: "100%",}, 0)
-            // .from(galleryContentRef.current, {autoAlpha: 0})
+            .from(door1Ref.current, { x: "-100%", }, 0)
+            .from(door2Ref.current, { x: "100%", }, 0)
+        // .from(galleryContentRef.current, {autoAlpha: 0})
     });
 
     useEffect(() => {
@@ -103,96 +109,98 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    },[])
+    }, [])
 
     return (
         <div className={styles.contactSection}>
-            <div className={styles.contactHeading}>
-                <img className={styles.contactBanner} src={contactBanner} ref={contactBannerRef}></img>
-            </div>
-            <div className={styles.contactDoors}>
-                <div className={styles.contactDoor} ref={door1Ref} style={{backgroundImage: `url('${isMobile ? door1mobile : door1}')`}}>
-                    {/* <img className={styles.contactDoorImg} src={door1} /> */}
-                    <div className={styles.horiBarContainer}>
-                        {
-                            Array(horiBarDetailsRef.current?.numOfBars).fill(null).map((_, i) => 
-                                <div 
-                                    className={styles.horiBar} 
-                                    key={i} 
-                                    style={{
-                                        top: `${i*(horiBarDetailsRef.current?.barGap || 0) + (horiBarDetailsRef.current?.firstBarPos || 0)}px`
-                                    }} 
-                                >
-                                    {
-                                        Array(isMobile ? 5 : 2).fill(null).map(() => <div />)
-                                    }
-                                </div>
-                            )
-                        }
-                    </div>
-                    <div className={styles.contactsContainer}>
-                        {
-                            (isMobile ? contacts.filter((_, i) => i % 2 === 0) : contacts.slice(0, 4))
-                            .map((contact, index) => (
-                                <div className={styles.contactItem} key={index}>
-                                    <div className={styles.contactCard}>
-                                        <div className={styles.contactImgContainer}>
-                                            <img src={contact.imageURL} alt={contact.name} />
-                                        </div>
-                                        <div className={styles.contactDetails}>
-                                            <div className={styles.contactName} title={contact.name}>{contact.name}</div>
-                                            <div className={styles.contactPosition} title={contact.role}>{contact.role}</div>
-                                            <div className={styles.contactLinks}>
-                                                <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
-                                                <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
+            <div className={styles.contactSectionContent}>
+                <div className={styles.contactHeading}>
+                    <img className={styles.contactBanner} src={contactBanner} ref={contactBannerRef}></img>
                 </div>
-                <div className={styles.contactDoor} ref={door2Ref} style={{backgroundImage: `url('${isMobile ? door2mobile : door2}')`}}>
-                    {/* <img className={styles.contactDoorImg} src={door2} /> */}
-                    <div className={styles.horiBarContainer}>
-                        {
-                            Array(horiBarDetailsRef.current?.numOfBars).fill(null).map((_, i) => 
-                                <div 
-                                    className={styles.horiBar} 
-                                    key={i} 
-                                    style={{
-                                        top: `${i*(horiBarDetailsRef.current?.barGap || 0) + (horiBarDetailsRef.current?.firstBarPos || 0)}px`
-                                    }} 
-                                >
-                                    {
-                                        Array(isMobile ? 5 : 2).fill(null).map(() => <div />)
-                                    }
-                                </div>
-                            )
-                        }
-                    </div>
-                    <div className={styles.contactsContainer}>
-                        {
-                            (isMobile ? contacts.filter((_, i) => i % 2 === 1) : contacts.slice(4, 8))
-                            .map((contact, index) => (
-                                <div className={styles.contactItem} key={index}>
-                                    <div className={styles.contactCard}>
-                                        <div className={styles.contactImgContainer}>
-                                            <img src={contact.imageURL} alt={contact.name} />
-                                        </div>
-                                        <div className={styles.contactDetails}>
-                                            <div className={styles.contactName} title={contact.name}>{contact.name}</div>
-                                            <div className={styles.contactPosition} title={contact.role}>{contact.role}</div>
-                                            <div className={styles.contactLinks}>
-                                                <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
-                                                <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
+                <div className={styles.contactDoors}>
+                    <div className={styles.contactDoor} ref={door1Ref} style={{ backgroundImage: `url('${isMobile ? door1mobile : door1}')` }}>
+                        {/* <img className={styles.contactDoorImg} src={door1} /> */}
+                        <div className={styles.horiBarContainer}>
+                            {
+                                Array(horiBarDetailsRef.current?.numOfBars).fill(null).map((_, i) =>
+                                    <div
+                                        className={styles.horiBar}
+                                        key={i}
+                                        style={{
+                                            top: `${i * (horiBarDetailsRef.current?.barGap || 0) + (horiBarDetailsRef.current?.firstBarPos || 0)}px`
+                                        }}
+                                    >
+                                        {
+                                            Array(2).fill(null).map(() => <div />)
+                                        }
+                                    </div>
+                                )
+                            }
+                        </div>
+                        <div className={styles.contactsContainer}>
+                            {
+                                (isMobile ? contacts.filter((_, i) => i % 2 === 0) : contacts.slice(0, 4))
+                                    .map((contact, index) => (
+                                        <div className={styles.contactItem} key={index}>
+                                            <div className={styles.contactCard}>
+                                                <div className={styles.contactImgContainer}>
+                                                    <img src={contact.imageURL} alt={contact.name} />
+                                                </div>
+                                                <div className={styles.contactDetails}>
+                                                    <div className={styles.contactName} title={contact.name}>{contact.name}</div>
+                                                    <div className={styles.contactPosition} title={contact.role}>{contact.role}</div>
+                                                    <div className={styles.contactLinks}>
+                                                        <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
+                                                        <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                    ))
+                            }
+                        </div>
+                    </div>
+                    <div className={styles.contactDoor} ref={door2Ref} style={{ backgroundImage: `url('${isMobile ? door2mobile : door2}')` }}>
+                        {/* <img className={styles.contactDoorImg} src={door2} /> */}
+                        <div className={styles.horiBarContainer}>
+                            {
+                                Array(horiBarDetailsRef.current?.numOfBars).fill(null).map((_, i) =>
+                                    <div
+                                        className={styles.horiBar}
+                                        key={i}
+                                        style={{
+                                            top: `${i * (horiBarDetailsRef.current?.barGap || 0) + (horiBarDetailsRef.current?.firstBarPos || 0)}px`
+                                        }}
+                                    >
+                                        {
+                                            Array(2).fill(null).map(() => <div />)
+                                        }
                                     </div>
-                                </div>
-                            ))
-                        }
+                                )
+                            }
+                        </div>
+                        <div className={styles.contactsContainer}>
+                            {
+                                (isMobile ? contacts.filter((_, i) => i % 2 === 1) : contacts.slice(4, 8))
+                                    .map((contact, index) => (
+                                        <div className={styles.contactItem} key={index}>
+                                            <div className={styles.contactCard}>
+                                                <div className={styles.contactImgContainer}>
+                                                    <img src={contact.imageURL} alt={contact.name} />
+                                                </div>
+                                                <div className={styles.contactDetails}>
+                                                    <div className={styles.contactName} title={contact.name}>{contact.name}</div>
+                                                    <div className={styles.contactPosition} title={contact.role}>{contact.role}</div>
+                                                    <div className={styles.contactLinks}>
+                                                        <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
+                                                        <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

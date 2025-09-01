@@ -359,6 +359,7 @@ body {
     }
   }
 
+  .scrollerWrapper {background-image: linear-gradient(transparent 60%, black 60%);}
   .scroller {
     overflow-x: hidden;
 
@@ -459,6 +460,11 @@ body {
               height: fit-content;
               width: fit-content;
               z-index: 10;
+
+              + img {
+                mask-image: linear-gradient(black 80%, transparent 90%);
+                mask-size: 100% 100%;
+              }
 
               img {
                 width: 100%;
