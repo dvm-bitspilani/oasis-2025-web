@@ -654,9 +654,7 @@ body {
     }
 
     .bottomContainer {
-      .aboutUsContainer {
-        position: relative;
-      }
+      .aboutUsContainer {position: relative;}
 
       .bottomSpacer {
         height: 100vh;
@@ -665,12 +663,12 @@ body {
   }
 }
 
-.bottomContainer {
-  .aboutUsContainer {
-    position: relative;
-  }
+// .bottomContainer {
+//   .aboutUsContainer {
+//     position: relative;
+//   }
 
-  .bottomSpacer {
-    height: 100vh;
-  }
-}
+//   .bottomSpacer {
+//     height: 100vh;
+//   }
+// }

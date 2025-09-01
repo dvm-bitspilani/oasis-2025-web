@@ -108,10 +108,10 @@
 }
 
 .contactSection {
-    position: absolute;
+    position: relative;
     bottom: 0px;
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
     overflow-x: hidden;
     // overflow-y: scroll;
     pointer-events: none;
@@ -123,15 +123,16 @@
     }
 
     .contactHeading {
-        position: relative;
+        position: absolute;
         padding-top: 6.9rem;
-        width: clamp(12rem, 30vw, 30rem);
-        margin: auto;
+        width: 100%;
         margin-bottom: 3rem;
 
         .contactBanner {
             position: relative;
-            width: 100%;
+            display: block;
+            width: clamp(12rem, 30vw, 30rem);
+            margin: auto;
             z-index: 20;
             opacity: 0;
             pointer-events: none;
@@ -148,7 +149,7 @@
     }
 
     .contactSectionContent {
-        height: 100%;
+        // height: 100%;
         width: 100%;
         overflow: scroll;
         position: relative;
@@ -156,17 +157,17 @@
     }
 
     .contactDoors {
-        position: absolute;
+        position: relative;
         bottom: 0px;
         width: 100%;
-        height: 100%;
+        // height: 100%;
         display: grid;
         grid-template-columns: 50% 50%;
         pointer-events: none;
 
         .contactDoor {
             width: 100%;
-            height: 100%;
+            // height: 100%;
             background-size: 100% auto;
             background-repeat: repeat;
 
@@ -229,7 +230,7 @@
             .contactsContainer {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                height: 100%;
+                // height: 100%;
                 gap: 2.1rem 1.8rem;
 
                 .contactItem {

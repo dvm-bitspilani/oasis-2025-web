@@ -27,6 +27,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
     const door1Ref = useRef<HTMLDivElement>(null);
     const door2Ref = useRef<HTMLDivElement>(null);
     const contactBannerRef = useRef<HTMLImageElement>(null);
+    const contactSectionRef = useRef<HTMLDivElement>(null);
     // const galleryContentRef = useRef<HTMLDivElement>(null);
 
     const horiBarDetailsRef = useRef<HoriBarDetails | null>(null);
@@ -69,12 +70,13 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         const doorTimeLine = gsap.timeline({
             scrollTrigger: {
                 trigger: triggerElemRef.current,
-                start: "top bottom",
+                start: "bottom bottom",
                 end: `+=${window.innerHeight - 1}`,
                 scrub: 0.5,
                 pin: pinElemRef.current,
                 pinSpacing: false,
                 onEnter: calculateHoriBarPos,
+                markers: true,
                 onLeave: () => {
                     animateContactBanner({ y: "0%", autoAlpha: 1 })
                     gsap.set(`.${styles.contactSection}`, {pointerEvents: "all"})
@@ -86,6 +88,9 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
                 snap: {
                     snapTo: [0, 1],
                     directional: false
+                },
+                onUpdate: (self) => {
+                    console.log(self.getVelocity())
                 }
             }
         })
@@ -94,6 +99,9 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
             .from(door1Ref.current, { x: "-100%", }, 0)
             .from(door2Ref.current, { x: "100%", }, 0)
         // .from(galleryContentRef.current, {autoAlpha: 0})
+
+        if (contactSectionRef.current) contactSectionRef.current.style.transform = "translateY(-100vh)"//`translateY(${-((pinElemRef.current?.clientHeight || 0) - (contactSectionRef.current?.clientHeight || 0))})`
+        console.log(contactSectionRef.current?.clientHeight, pinElemRef.current?.clientHeight)
     });
 
     useEffect(() => {
@@ -112,7 +120,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
     }, [])
 
     return (
-        <div className={styles.contactSection}>
+        <div className={styles.contactSection} ref={contactSectionRef}>
             <div className={styles.contactSectionContent}>
                 <div className={styles.contactHeading}>
                     <img className={styles.contactBanner} src={contactBanner} ref={contactBannerRef}></img>

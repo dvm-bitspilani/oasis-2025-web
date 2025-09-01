@@ -85,6 +85,7 @@ export default function LandingRevamp({
   const scrollerRef = useRef<HTMLImageElement>(null);
 
   const aboutUsContRef = useRef<HTMLDivElement>(null);
+  const aboutUsWrapperRef = useRef<HTMLDivElement>(null);
   const bottomSpacerRef = useRef<HTMLDivElement>(null);
 
   const [scrollHeight, setScrollHeight] = useState(
@@ -552,16 +553,18 @@ export default function LandingRevamp({
         </div>
         <div className={styles.bottomContainer}>
           <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
-            <AboutUs isBackBtn={false} />
+            <div ref={aboutUsWrapperRef}>
+              <AboutUs isBackBtn={false} />
+            </div>
             {
-              aboutUsContRef.current && bottomSpacerRef.current &&
+              aboutUsContRef.current && aboutUsWrapperRef && // bottomSpacerRef.current &&
               <ContactDoors 
                 pinElemRef={aboutUsContRef} 
-                triggerElemRef={bottomSpacerRef} 
+                triggerElemRef={aboutUsWrapperRef} 
               />
             }
           </div>
-          <div className={styles.bottomSpacer} ref={bottomSpacerRef}/>
+          {/* <div className={styles.bottomSpacer} ref={bottomSpacerRef}/> */}
         </div>
       </main>
     </>
