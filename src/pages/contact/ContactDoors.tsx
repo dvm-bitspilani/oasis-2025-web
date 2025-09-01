@@ -32,7 +32,8 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
 
     const horiBarDetailsRef = useRef<HoriBarDetails | null>(null);
 
-    const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 1300);
+    const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 900);
+    const [isTab, setIsTab] = useState<boolean>(window.innerWidth <= 1300)
 
     const launchPhone = (phone: string) => window.location.href = `tel:${phone}`;
     const launchEmail = (email: string) => window.location.href = `mailto:${email}`;
@@ -61,6 +62,15 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         horiBarDetailsRef.current = { numOfBars, firstBarPos, barGap };
     }
 
+    const { contextSafe } = useGSAP();
+    const animateContactItems = contextSafe((angle: number) => {
+        const angleLimit = 15;
+        if (Math.abs(angle) >= angleLimit) return;
+
+        gsap.to(`.${styles.contactItemsLeft}`, {rotateZ: angle});
+        gsap.to(`.${styles.contactItemsRight}`, {rotateZ: -angle});            
+    });
+
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
         console.log(triggerElemRef.current, pinElemRef.current)
@@ -76,9 +86,9 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
                 pin: pinElemRef.current,
                 pinSpacing: false,
                 onEnter: calculateHoriBarPos,
-                markers: true,
                 onLeave: () => {
                     animateContactBanner({ y: "0%", autoAlpha: 1 })
+                    animateContactItems(0);
                     gsap.set(`.${styles.contactSection}`, {pointerEvents: "all"})
                 },
                 onEnterBack: () => {
@@ -90,14 +100,17 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
                     directional: false
                 },
                 onUpdate: (self) => {
-                    console.log(self.getVelocity())
-                }
+                    const scrollVelocity = self.getVelocity();
+                    const swingSensitivity = 0.003;
+
+                    animateContactItems(scrollVelocity*swingSensitivity)
+                },
             }
         })
 
         doorTimeLine
-            .from(door1Ref.current, { x: "-100%", }, 0)
-            .from(door2Ref.current, { x: "100%", }, 0)
+            .from(door1Ref.current, { x: "-120%", }, 0)
+            .from(door2Ref.current, { x: "120%", }, 0)
         // .from(galleryContentRef.current, {autoAlpha: 0})
 
         if (contactSectionRef.current) contactSectionRef.current.style.transform = "translateY(-100vh)"//`translateY(${-((pinElemRef.current?.clientHeight || 0) - (contactSectionRef.current?.clientHeight || 0))})`
@@ -107,10 +120,12 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
     useEffect(() => {
 
         const handleResize = () => {
+            setIsTab(window.innerWidth <= 1300);
+            setIsMobile(window.innerWidth <= 900);
+            calculateHoriBarPos();
             ScrollTrigger.refresh();
             ScrollTrigger.update();
-            setIsMobile(window.innerWidth <= 1300);
-            calculateHoriBarPos();
+            animateContactItems(0)
         }
 
         calculateHoriBarPos();
@@ -118,6 +133,11 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, [])
+
+    useEffect(() => {
+        ScrollTrigger.refresh();
+        ScrollTrigger.update();
+    }, [isMobile, isTab])
 
     return (
         <div className={styles.contactSection} ref={contactSectionRef}>
@@ -147,9 +167,9 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
                         </div>
                         <div className={styles.contactsContainer}>
                             {
-                                (isMobile ? contacts.filter((_, i) => i % 2 === 0) : contacts.slice(0, 4))
+                                (isTab ? contacts.filter((_, i) => i % 2 === 0) : contacts.slice(0, 4))
                                     .map((contact, index) => (
-                                        <div className={styles.contactItem} key={index}>
+                                        <div className={`${styles.contactItem} ${styles.contactItemsLeft}`} key={index}>
                                             <div className={styles.contactCard}>
                                                 <div className={styles.contactImgContainer}>
                                                     <img src={contact.imageURL} alt={contact.name} />
@@ -189,9 +209,9 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
                         </div>
                         <div className={styles.contactsContainer}>
                             {
-                                (isMobile ? contacts.filter((_, i) => i % 2 === 1) : contacts.slice(4, 8))
+                                (isTab ? contacts.filter((_, i) => i % 2 === 1) : contacts.slice(4, 8))
                                     .map((contact, index) => (
-                                        <div className={styles.contactItem} key={index}>
+                                        <div className={`${styles.contactItem} ${styles.contactItemsRight}`} key={index}>
                                             <div className={styles.contactCard}>
                                                 <div className={styles.contactImgContainer}>
                                                     <img src={contact.imageURL} alt={contact.name} />

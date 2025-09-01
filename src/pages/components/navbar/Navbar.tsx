@@ -112,10 +112,6 @@ useEffect(() => {
         colorAnimation.scrollTrigger.kill();
       }
       colorAnimation?.kill();
-      // if (colorAnimationAtC?.scrollTrigger) {
-      //   colorAnimationAtC.scrollTrigger.kill();
-      // }
-      // colorAnimationAtC?.kill();
     };
   }, 500);
 

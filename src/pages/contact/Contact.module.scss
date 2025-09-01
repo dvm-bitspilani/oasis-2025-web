@@ -110,7 +110,7 @@
 .contactSection {
     position: relative;
     bottom: 0px;
-    width: 100%;
+    width: 100vw;
     // height: 100vh;
     overflow-x: hidden;
     // overflow-y: scroll;
@@ -138,10 +138,13 @@
             pointer-events: none;
             visibility: hidden;
             transform: translateY(-100%);
+
+            @media (max-width: 900px) {
+                width: clamp(15rem, 72vw, 30rem);
+            }
         }
 
         @media (max-width: 900px) {
-            width: clamp(15rem, 72vw, 30rem);
             margin-top: 4.2rem;
             margin-bottom: 0rem;
             padding-top: 0rem;
@@ -173,7 +176,10 @@
 
             &:nth-of-type(1) {
                 border-right: 0.5px solid #f9c06c;
-                .contactsContainer {padding: 15rem 3rem 3rem 1rem;}
+                .contactsContainer {
+                    padding: 15rem 3rem 3rem 1rem;
+                    @media (max-width: 900px) {padding: 15rem 1.2rem 3rem 0.6rem;}
+                }
                 .horiBarContainer .horiBar {
                     grid-template-columns: 1fr calc(40*50vw/960);
                     
@@ -191,7 +197,10 @@
 
             &:nth-of-type(2) {
                 border-left: 0.5px solid #f9c06c;
-                .contactsContainer {padding: 15rem 1rem 3rem 3rem;}
+                .contactsContainer {
+                    padding: 15rem 1rem 3rem 3rem;
+                    @media (max-width: 900px) {padding: 15rem 0.6rem 3rem 1.2rem;}
+                }
                 .horiBarContainer .horiBar {
                     grid-template-columns: calc(40*100%/960) 1fr;
 
@@ -233,12 +242,12 @@
                 // height: 100%;
                 gap: 2.1rem 1.8rem;
 
+                .contactItemsLeft, .contactItemsRight {transform-origin: 52.5% 1%;}
                 .contactItem {
                     width: 100%;
                     height: 100%;
                     position: relative;
                     display: flex;
-                    transform-origin: 52.5% 1%;
 
                     $template: 1;
                     aspect-ratio: 1.085;
@@ -382,7 +391,6 @@
                     gap: 1rem;
                 }
             }
-
             // .contactDoorImg {
             //     width: 100%;
             //     height: 100%;

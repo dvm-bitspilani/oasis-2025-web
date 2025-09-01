@@ -156,6 +156,8 @@ export default function LandingRevamp({
       setTimeLeft({ days, hours, minutes, seconds });
     };
 
+    document.scrollingElement?.scrollTo({top: 0});
+
     calculateTimeLeft();
     const timerId = setInterval(calculateTimeLeft, 1000);
 
