@@ -86,7 +86,6 @@ export default function LandingRevamp({
 
   const aboutUsContRef = useRef<HTMLDivElement>(null);
   const aboutUsWrapperRef = useRef<HTMLDivElement>(null);
-  const bottomSpacerRef = useRef<HTMLDivElement>(null);
 
   const [scrollHeight, setScrollHeight] = useState(
     (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
