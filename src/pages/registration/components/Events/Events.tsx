@@ -13,6 +13,8 @@ import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import EventsModal from "../EventsModal/EventsModal";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import info from "/images/registration/information.png"
+import info2 from "/images/registration/info3.png"
 
 // const eventsData = [
 //   {
@@ -65,6 +67,11 @@ const Events = forwardRef<
   const scrollBarRef = useRef<HTMLDivElement>(null);
   const eventDescRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLImageElement>(null);
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45) ")
+      .matches
+  );
+  
 
   const [selectedEvents, setSelectedEvents] = useState<
     { id: number; name: string }[]
@@ -89,7 +96,19 @@ const Events = forwardRef<
   };
 
   const sortedArray = sortBySearch(eventsOptions, search);
+  useEffect(() => {
+    const handleResize = () =>
+      setIsMobile(
+        window.matchMedia("(max-width: 1200px) and (max-aspect-ratio:1.45) ")
+          .matches
+      );
 
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useEffect(() => {
     sessionStorage.removeItem("selectedEvents");
     axios
@@ -125,6 +144,10 @@ const Events = forwardRef<
         setActiveEvent(event);
         setEventsModal(true);
       });
+      mm.add("(max-width: 1199px) and (aspect-ratio <= 0.75)", () => {
+        setActiveEvent(event);
+        setEventsModal(true);
+      });
     })();
   };
 
@@ -147,7 +170,7 @@ const Events = forwardRef<
         );
         setSelectedEvents((prev) => [...prev, event]);
       }
-      showEventDescription(event);
+      // showEventDescription(event);
     } else {
       const mm = gsap.matchMedia();
       contextSafe(() => {
@@ -168,7 +191,7 @@ const Events = forwardRef<
           showEventDescription(event);
         });
         mm.add("(max-width: 1199px) and (aspect-ratio <= 1.45)", () => {
-          showEventDescription(event);
+          // showEventDescription(event);
         });
       })();
     }
@@ -257,7 +280,27 @@ const Events = forwardRef<
     }));
     setConfirmModal(true);
   };
-
+  const handleEventsResponsive=(event:any)=>{
+    if(isMobile)
+    {
+      handleEvent(event, true)
+      
+    }
+    else{
+      handleEvent(event, false)
+    }
+  }
+  const showEventResponsive=(event:any)=>{
+    if(isMobile)
+    {
+      
+    }
+    else{
+      showEventDescription(event);
+    }
+  }
+  
+  
   return (
     <>
       <div className={styles.eventsContainer} ref={ref}>
@@ -291,10 +334,14 @@ const Events = forwardRef<
                 <li
                   key={index}
                   onMouseEnter={() => {
-                    showEventDescription(event);
+                    showEventResponsive(event);
                   }}
-                  onClick={() => handleEvent(event, false)}
+                  //  onClick={() => handleEvent(event, false)}
+                   
                   className={styles.eventItem}
+                  
+                  onClick={()=> handleEventsResponsive(event)}
+                  
                 >
                   <svg
                     viewBox="0 0 573 95"
@@ -371,6 +418,10 @@ const Events = forwardRef<
                       </clipPath>
                     </defs>
                   </svg>
+                 <div className={styles.info}>
+                   <img src={selectedEvents.some((e) => e.id === event.id) ? info : info2}  alt=""  onClick={(e)=>{showEventDescription(event),e.stopPropagation()}}  
+                />
+                 </div>
                   <button
                     style={{
                       color: selectedEvents.some((e) => e.id === event.id)
@@ -457,7 +508,6 @@ const Events = forwardRef<
             <button
               className={styles.confirmButton}
               onClick={handleSubmit}
-              disabled={selectedEvents.length === 0}
             >
               <svg
                 width="98"

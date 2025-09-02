@@ -97,7 +97,31 @@
             top: 0;
             object-fit: contain;
           }
-
+          .info{
+            height: 10vw;
+            width: 5vw;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 4vw;
+            img{
+              width: 100%;
+            position: absolute;
+             @media (min-width: 1200px) {
+              display: none;
+             }
+            
+          }
+          @media (max-width: 1200px) and (min-aspect-ratio: 0.75) 
+            {
+              
+            height: 6vw;
+            img{
+              width: 80%;
+            }
+            }
+          }
+         
           button {
             cursor: pointer;
             width: fit-content;
