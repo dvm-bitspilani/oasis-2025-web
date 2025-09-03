@@ -72,14 +72,14 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         gsap.to(`.${styles.contactItemsRight}`, {rotateZ: -angle});            
     });
 
-    //! will cause continous reloads on load in dev env, temp fix for now
-    useEffect(() => {
-        if (!hasRunOnce.current) {
-            hasRunOnce.current = true;
-            return;
-        }
-        location.reload()
-    }, [window.innerWidth])
+    // //! will cause continous reloads on load in dev env, temp fix for now
+    // useEffect(() => {
+    //     if (!hasRunOnce.current) {
+    //         hasRunOnce.current = true;
+    //         return;
+    //     }
+    //     location.reload()
+    // }, [window.innerWidth])
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
