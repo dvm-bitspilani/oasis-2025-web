@@ -44,6 +44,9 @@
         cursor: pointer;
         text-decoration: underline;
       }
+      a{
+        color: #e2dccb;
+      }
 
       &::before {
         content: "";

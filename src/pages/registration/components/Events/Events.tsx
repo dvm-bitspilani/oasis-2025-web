@@ -521,7 +521,7 @@ const Events = forwardRef<
                   d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
                   fill="white"
                   stroke="white"
-                  stroke-width="0.16"
+                  strokeWidth="0.16"
                 />
               </svg>
               SUBMIT
@@ -537,7 +537,7 @@ const Events = forwardRef<
                   d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
                   fill="white"
                   stroke="white"
-                  stroke-width="0.16"
+                  strokeWidth="0.16"
                 />
               </svg>
             </button>
