@@ -33,6 +33,10 @@
   .content {
     display: flex;
     justify-content: space-between;
+    p{
+      
+        font: 400 4vw "DM Serif Text";
+    }
     ul {
       margin: 1vw 0 2vw 2.5vw;
       height: 16vw;

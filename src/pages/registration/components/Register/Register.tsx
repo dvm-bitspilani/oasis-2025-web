@@ -157,7 +157,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
       indicatorSeparator: () => ({
         display: "none",
       }),
-      placeholder: (provided: any) => ({
+      placeholder: (provided: any, state: any) => ({
         ...provided,
         width: "100%",
         height: "100%",
@@ -165,7 +165,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         font: `100 ${
           isMobile ? 4.2 : isTablet ? 3.2 : 1.5
         }vw Abhaya Libre Extrabold`,
-        display: "flex",
+        display: state.isFocused ? "none" : "flex",
         alignItems: "center",
         justifyContent: "center",
       }),
@@ -174,6 +174,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         position: "absolute",
         top: "50%",
         left: "50%",
+        maxWidth: "90%",
+        overflow: "hidden",
         transform: "translate(-50%, -50%)",
       }),
       singleValue: (provided: any) => ({
@@ -182,6 +184,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
+        width: "90%",
       }),
       valueContainer: () => ({
         width: "100%",
@@ -248,6 +251,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
     return (
       <div className={styles.registerContainer} ref={ref}>
         <form
+          autoComplete="off"
           onSubmit={handleSubmit(onSubmit)}
           className={styles.registrationForm}
         >
@@ -494,7 +498,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
               d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
               fill="white"
               stroke="white"
-              stroke-width="0.16"
+              strokeWidth="0.16"
             />
           </svg>
           NEXT
@@ -510,7 +514,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
               d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
               fill="white"
               stroke="white"
-              stroke-width="0.16"
+              strokeWidth="0.16"
             />
           </svg>
         </button>

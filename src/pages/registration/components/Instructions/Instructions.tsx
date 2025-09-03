@@ -33,8 +33,8 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
             <li>All team members are required to register separately.</li>
             <li>All prof shows are free. </li>
             <li>
-              For further details contact, Ujjwal Kansal: +91 99915 20330,
-              Sneha: +91 90268 55597
+              For further details contact, Ujjwal Kansal: <a href="tel:+919991520330">+91 99915 20330</a>,
+              Sneha: <a href="tel:+919026855597">+91 90268 55597</a>
             </li>
             <li>
               For detailed Instructions{" "}
