@@ -175,7 +175,7 @@
             background-repeat: repeat;
 
             &:nth-of-type(1) {
-                border-right: 0.5px solid #f9c06c;
+                border-right: 0.5px solid #be9963;
                 .contactsContainer {
                     padding: 15rem 3rem 3rem 1rem;
                     @media (max-width: 900px) {padding: 15rem 1.2rem 3rem 0.6rem;}
@@ -192,11 +192,11 @@
                         box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
                     }
                 }
-                @media (max-width: 900px) {border-color: #be9963;}
+                // @media (max-width: 900px) {border-color: #be9963;}
             }
 
             &:nth-of-type(2) {
-                border-left: 0.5px solid #f9c06c;
+                border-left: 0.5px solid #be9963;
                 .contactsContainer {
                     padding: 15rem 1rem 3rem 3rem;
                     @media (max-width: 900px) {padding: 15rem 0.6rem 3rem 1.2rem;}
@@ -213,7 +213,7 @@
                         box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
                     }
                 }
-                @media (max-width: 900px) {border-color: #be9963;}
+                // @media (max-width: 900px) {border-color: #be9963;}
             }
 
             .horiBarContainer {
