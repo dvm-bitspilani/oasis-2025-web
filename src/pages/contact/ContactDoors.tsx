@@ -79,7 +79,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
             return;
         }
         location.reload()
-    }, [window.innerHeight])
+    }, [window.innerWidth])
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
