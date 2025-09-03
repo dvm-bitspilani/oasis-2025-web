@@ -29,7 +29,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
     const contactBannerRef = useRef<HTMLImageElement>(null);
     const contactSectionRef = useRef<HTMLDivElement>(null);
     // const galleryContentRef = useRef<HTMLDivElement>(null);
-
+    const hasRunOnce = useRef<boolean>(false);
     const horiBarDetailsRef = useRef<HoriBarDetails | null>(null);
 
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 900);
@@ -71,6 +71,15 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         gsap.to(`.${styles.contactItemsLeft}`, {rotateZ: angle});
         gsap.to(`.${styles.contactItemsRight}`, {rotateZ: -angle});            
     });
+
+    //! will cause continous reloads on load in dev env, temp fix for now
+    useEffect(() => {
+        if (!hasRunOnce.current) {
+            hasRunOnce.current = true;
+            return;
+        }
+        location.reload()
+    }, [window.innerHeight])
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -121,7 +130,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
     useEffect(() => {
 
         const handleResize = () => {
-            location.reload()
+            // location.reload()
             setIsTab(window.innerWidth <= 1300);
             setIsMobile(window.innerWidth <= 900);
             calculateHoriBarPos();
@@ -136,10 +145,10 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         return () => window.removeEventListener('resize', handleResize);
     }, [])
 
-    useEffect(() => {
-        ScrollTrigger.refresh();
-        // ScrollTrigger.update();
-    }, [isMobile, isTab])
+    // useEffect(() => {
+    //     ScrollTrigger.refresh();
+    //     // ScrollTrigger.update();
+    // }, [isMobile, isTab])
 
     return (
         <div className={styles.contactSection} ref={contactSectionRef}>
