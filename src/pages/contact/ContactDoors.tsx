@@ -53,7 +53,8 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         // if (barGap > barGapThreshold) 
         barGap = barGap / 2;//Math.round(barGap / 100);
 
-        const firstRowAbsPos = firstRowRelPos + (door1Ref.current?.getBoundingClientRect().top || 0);
+        const firstRowAbsPos = firstRowRelPos - (door1Ref.current?.getBoundingClientRect().top || 0);
+        console.log(firstRowAbsPos, firstRowRelPos, contactSectionRef.current?.getBoundingClientRect().top)
 
         const firstBarPos = Math.round(firstRowAbsPos % barGap);
         const numOfBars = Math.round((door1Ref.current?.clientHeight || 0 - firstBarPos || 0) / barGap);
@@ -64,7 +65,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
 
     const { contextSafe } = useGSAP();
     const animateContactItems = contextSafe((angle: number) => {
-        const angleLimit = 15;
+        const angleLimit = 30;
         if (Math.abs(angle) >= angleLimit) return;
 
         gsap.to(`.${styles.contactItemsLeft}`, {rotateZ: angle});
@@ -85,7 +86,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
                 scrub: 0.5,
                 pin: pinElemRef.current,
                 pinSpacing: false,
-                onEnter: calculateHoriBarPos,
+                // onEnter: calculateHoriBarPos,
                 onLeave: () => {
                     animateContactBanner({ y: "0%", autoAlpha: 1 })
                     animateContactItems(0);
@@ -113,19 +114,20 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
             .from(door2Ref.current, { x: "120%", }, 0)
         // .from(galleryContentRef.current, {autoAlpha: 0})
 
-        if (contactSectionRef.current) contactSectionRef.current.style.transform = "translateY(-100vh)"//`translateY(${-((pinElemRef.current?.clientHeight || 0) - (contactSectionRef.current?.clientHeight || 0))})`
+        // if (contactSectionRef.current) contactSectionRef.current.style.transform = "translateY(-100vh)"//`translateY(${-((pinElemRef.current?.clientHeight || 0) - (contactSectionRef.current?.clientHeight || 0))})`
         console.log(contactSectionRef.current?.clientHeight, pinElemRef.current?.clientHeight)
     });
 
     useEffect(() => {
 
         const handleResize = () => {
+            location.reload()
             setIsTab(window.innerWidth <= 1300);
             setIsMobile(window.innerWidth <= 900);
             calculateHoriBarPos();
             ScrollTrigger.refresh();
-            ScrollTrigger.update();
-            animateContactItems(0)
+            // ScrollTrigger.update();
+            animateContactItems(0);
         }
 
         calculateHoriBarPos();
@@ -136,7 +138,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
 
     useEffect(() => {
         ScrollTrigger.refresh();
-        ScrollTrigger.update();
+        // ScrollTrigger.update();
     }, [isMobile, isTab])
 
     return (

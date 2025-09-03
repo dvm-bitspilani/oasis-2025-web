@@ -115,6 +115,7 @@
     overflow-x: hidden;
     // overflow-y: scroll;
     pointer-events: none;
+    transform: translateY(-100vh);
 
     --bar-thickness: calc(10*100vw/1920);
 
@@ -152,9 +153,7 @@
     }
 
     .contactSectionContent {
-        // height: 100%;
         width: 100%;
-        overflow: scroll;
         position: relative;
         pointer-events: all;
     }
@@ -163,6 +162,7 @@
         position: relative;
         bottom: 0px;
         width: 100%;
+        min-height: 100vh;
         // height: 100%;
         display: grid;
         grid-template-columns: 50% 50%;
@@ -192,7 +192,7 @@
                         box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
                     }
                 }
-                @media (max-width: 900px) {border-color: #efd0a1;}
+                @media (max-width: 900px) {border-color: #be9963;}
             }
 
             &:nth-of-type(2) {
@@ -213,7 +213,7 @@
                         box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
                     }
                 }
-                @media (max-width: 900px) {border-color: #efd0a1;}
+                @media (max-width: 900px) {border-color: #be9963;}
             }
 
             .horiBarContainer {

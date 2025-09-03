@@ -87,7 +87,7 @@ useEffect(() => {
 
     ScrollTrigger.refresh();
 
-    const colorAnimation = gsap.to(targets, {
+    const colorAnimation = gsap.to(document.body, {
       scrollTrigger: {
         trigger: triggerElement,
         start: "top center", 
@@ -97,7 +97,8 @@ useEffect(() => {
         onLeave: () => console.log("Color change ENDED"),
         onUpdate: (self) => console.log("Scroll progress:", self.progress),
       },
-      color: "#C0B063",
+      //color: "#C0B063",
+      "--navlin-color": "#C0B063",
       ease: "none"
     });
 

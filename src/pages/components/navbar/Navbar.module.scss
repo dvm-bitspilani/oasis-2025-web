@@ -1,5 +1,9 @@
 @use "../../../assets/global.scss" as *;
 
+body {
+  --navlink-color: #ffdfd0; //will be changed via gsap later
+}
+
 .nav {
   user-select: none;
   position: fixed;
@@ -155,7 +159,7 @@
     li {
       font-family: $primaryFont;
       font-size: 1.25rem;
-      color: #ffdfd0;
+      color: var(--navlink-color); //#ffdfd0;
       cursor: pointer;
       display: flex;
       align-items: center;
