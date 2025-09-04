@@ -29,7 +29,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
     const contactBannerRef = useRef<HTMLImageElement>(null);
     const contactSectionRef = useRef<HTMLDivElement>(null);
     // const galleryContentRef = useRef<HTMLDivElement>(null);
-    const hasRunOnce = useRef<boolean>(false);
+   // const hasRunOnce = useRef<boolean>(false);
     const horiBarDetailsRef = useRef<HoriBarDetails | null>(null);
 
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 900);
