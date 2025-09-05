@@ -157,7 +157,7 @@ export default function App() {
         percentageLoaded={doorPLPercentageLoaded}
         targetPageRef={nextRoute}
       />
-
+    <h1 style={{display:"none" }}>Oasis 2025</h1>
       {isPreloading && (
         <Preloader
           onEnter={handlePreloaderEnter}

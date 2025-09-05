@@ -10,17 +10,22 @@
   overflow-y: hidden;
   // background: url("/svgs/aboutus/background.svg");
   background-size: cover;
+  background-repeat: repeat;
+  min-height: 100svh;
+  height: fit-content;
   background-color: black;
 
   .aboutBB {
-    background-image: url('/svgs/registration/back.svg');
-    filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.828)) sepia() saturate(4.5) hue-rotate(-10deg);
+    background-image: url("/svgs/registration/back.svg");
+    filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.828)) sepia()
+      saturate(4.5) hue-rotate(-10deg);
     transition: filter 0.3s;
     margin: 2.1rem;
     z-index: 1000;
 
     &:hover {
-      filter: drop-shadow(0px 0px 9px rgba(255, 255, 255, 1)) sepia() saturate(4.5) hue-rotate(-10deg);
+      filter: drop-shadow(0px 0px 9px rgba(255, 255, 255, 1)) sepia()
+        saturate(4.5) hue-rotate(-10deg);
     }
 
     @media (max-width: 700px) {
@@ -49,9 +54,8 @@
     gap: clamp(10px, 4vw, 100px);
 
     width: 90vw;
-    margin: 0 auto;
+    margin: 5vh auto;
     padding-top: 25vh;
-    margin-top: 5vh;
 
     perspective: 600px;
     perspective-origin: center;
@@ -72,9 +76,13 @@
       transform-style: preserve-3d;
 
       .vid {
-        img, iframe, > div{display:block;}
+        img,
+        iframe,
+        > div {
+          display: block;
+        }
         width: 100%;
-
+        // pointer-events: none;
         aspect-ratio: 16 / 9;
         border: 0.2vw solid #f2dd7c;
         box-shadow: 0px 0px 24px 0px #f2dd7c;
@@ -87,7 +95,6 @@
         border-radius: 16px;
 
         div {
-
           border-radius: 16px;
         }
 
@@ -124,7 +131,6 @@
         transform-style: preserve-3d;
 
         .buttonContainer {
-
           top: -30px;
           position: relative;
           width: 100%;
@@ -181,10 +187,8 @@
             }
           }
         }
-
       }
     }
-
 
     .abt {
       width: 40vw;
@@ -194,7 +198,7 @@
       .abtus {
         position: relative;
         // top: -((9 / 16) * 53vw);
-        top:-29.8125vw;
+        top: -29.8125vw;
         width: 100%;
         left: 30%;
 
@@ -214,7 +218,6 @@
           margin: 0;
           text-align: center;
           font: 1.6vw $abtusHeadFont;
-
         }
       }
 
@@ -242,7 +245,6 @@
           font-size: 1.5vw;
           width: 80%;
           text-align: center;
-
         }
       }
     }
@@ -273,29 +275,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background:
-      linear-gradient(black, black) padding-box,
-      /* inner background */
-      linear-gradient(90deg, #BFAF62, #BFAF62) border-box;
+    background: linear-gradient(black, black) padding-box,
+      /* inner background */ linear-gradient(90deg, #bfaf62, #bfaf62) border-box;
     /* border gradient */
     border: 5.25px solid transparent;
     border-radius: 12px;
     /* or whatever radius you want */
-    color: #BFAF62;
+    color: #bfaf62;
     border-radius: 8px;
 
     h3 {
-      color: #FFFFFF;
+      color: #ffffff;
       font: 1.2vw $abtusHeadFont;
       /* Replace with real font */
-      text-shadow:
-        -0.7px -0.7px 0 #BFAF62,
-        0.7px -0.7px 0 #BFAF62,
-        -0.7px 0.7px 0 #BFAF62,
-        0.7px 0.7px 0 #BFAF62;
+      text-shadow: -0.7px -0.7px 0 #bfaf62, 0.7px -0.7px 0 #bfaf62,
+        -0.7px 0.7px 0 #bfaf62, 0.7px 0.7px 0 #bfaf62;
     }
-
-
   }
 
   .social {
@@ -303,9 +298,8 @@
   }
 
   @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
-
     overflow-y: auto;
-
+    background-size: 180%;
     .content3D {
       flex-direction: column;
       align-items: center;
@@ -353,7 +347,6 @@
   @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
     // background: url("/svgs/aboutus/backg.svg");
     background-size: cover;
-    background-position: top;
 
     .aboutBB {
       filter: none;
@@ -361,7 +354,6 @@
       &:hover {
         filter: none;
       }
-
     }
 
     .theme {
@@ -370,14 +362,12 @@
 
     //overflow-y: auto;
     .abt {
-
       .abtus {
         display: none;
       }
 
       .aboutback {
         transform: none;
-
 
         p {
           font-size: 4vw;
@@ -420,15 +410,12 @@
           aspect-ratio: 16 / 9;
           width: 80vw;
 
-
           p {
-            color: #FFE8E8;
+            color: #ffe8e8;
             font-size: clamp(13px, 3.2vw, 40px);
             width: 80vw;
-
           }
         }
-
       }
 
       .wrapper {
@@ -438,12 +425,19 @@
         padding-left: 2vw;
         gap: 20px;
         margin-top: -2vh;
-
+        .vid {
+          img,
+          iframe,
+          > div {
+            display: block;
+          }
+          width: 100%;
+        }
         .vid {
           width: 80vw;
           aspect-ratio: 16 / 9;
-          border: 0.7px solid #E2DCCB;
-          box-shadow: 0px 0px 20.16px 4.03px #CBAE5780;
+          border: 0.7px solid #e2dccb;
+          box-shadow: 0px 0px 20.16px 4.03px #cbae5780;
 
           .fan1,
           .fan2 {

@@ -1,4 +1,4 @@
-import { FaEnvelope, FaPhone } from 'react-icons/fa6';
+// import { FaEnvelope, FaPhone } from 'react-icons/fa6';
 import styles from './ContactGallery.module.scss';
 import contacts from './contacts';
 import contactBanner from '/images/contact/contact-banner.png'
@@ -14,8 +14,8 @@ export default function ContactGallery({ setHoriBarDetails }: { setHoriBarDetail
 
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 1300);
 
-    const launchPhone = (phone: string) => window.location.href = `tel:${phone}`;
-    const launchEmail = (email: string) => window.location.href = `mailto:${email}`;
+    // const launchPhone = (phone: string) => window.location.href = `tel:${phone}`;
+    // const launchEmail = (email: string) => window.location.href = `mailto:${email}`;
 
     useEffect(() => {
         const calculateHoriBarPos = () => {
@@ -70,10 +70,10 @@ export default function ContactGallery({ setHoriBarDetails }: { setHoriBarDetail
                                     <div className={styles.contactDetails}>
                                         <div className={styles.contactName} title={contact.name}>{contact.name}</div>
                                         <div className={styles.contactPosition} title={contact.role}>{contact.role}</div>
-                                        <div className={styles.contactLinks}>
+                                        {/* <div className={styles.contactLinks}>
                                             <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
                                             <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -92,10 +92,10 @@ export default function ContactGallery({ setHoriBarDetails }: { setHoriBarDetail
                                     <div className={styles.contactDetails}>
                                         <div className={styles.contactName} title={contact.name}>{contact.name}</div>
                                         <div className={styles.contactPosition} title={contact.role}>{contact.role}</div>
-                                        <div className={styles.contactLinks}>
+                                        {/* <div className={styles.contactLinks}>
                                             <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
                                             <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

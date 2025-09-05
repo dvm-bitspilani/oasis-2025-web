@@ -1,6 +1,7 @@
-import Landing from "./pages/landing/Landing";
+// import Landing from "./pages/landingRevamp/LandingRevamp";
 import DrawingPreloader from "./pages/components/drawingPreloader/DrawingPreloader";
 import useOverlayStore from "./utils/store";
+import LandingRevamp from "./pages/landingRevamp/LandingRevamp";
 
 export default function Homepage({
   goToPage,
@@ -18,7 +19,7 @@ export default function Homepage({
         <DrawingPreloader />
       </div>
       <div style={{ zIndex: 100, position: "relative" }}>
-        <Landing goToPage={goToPage} />
+        <LandingRevamp goToPage={goToPage} />
       </div>
     </div>
   );

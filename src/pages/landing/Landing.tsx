@@ -135,8 +135,8 @@ export default function Landing({
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "200vh",
-            end: "+=200vh",
+            start: "0vh",
+            end: "+=100vh",
             scrub: true,
           },
         }
