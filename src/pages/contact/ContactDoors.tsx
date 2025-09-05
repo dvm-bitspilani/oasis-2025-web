@@ -112,7 +112,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         doorTimeLine
             .from(door1Ref.current, { x: "-120%", }, 0)
             .from(door2Ref.current, { x: "120%", }, 0)
-            .to(document.body, { "--navlink-color": "#ffdfd0" }, 0)
+            .to(document.body, { "--navlink-color": "#ffdfd0ff" }, 0)
         // .from(galleryContentRef.current, {autoAlpha: 0})
 
         // if (contactSectionRef.current) contactSectionRef.current.style.transform = "translateY(-100vh)"//`translateY(${-((pinElemRef.current?.clientHeight || 0) - (contactSectionRef.current?.clientHeight || 0))})`
