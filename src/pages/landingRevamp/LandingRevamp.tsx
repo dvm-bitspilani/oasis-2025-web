@@ -109,6 +109,8 @@ export default function LandingRevamp({
         if (document.body.style.position === "fixed") location.reload()
       }
     };
+
+    handleResize()
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
