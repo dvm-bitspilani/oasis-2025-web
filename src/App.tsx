@@ -15,7 +15,10 @@ export const navContext = createContext<{ goToPage?: (page: string) => void }>(
 import ReactGA from "react-ga4";
 
 const TRACKING_ID = "G-57YBBH7RXW";
-ReactGA.initialize(TRACKING_ID);
+if (window.location.hostname.search("bits-oasis.org") !== -1) {
+  ReactGA.initialize(TRACKING_ID);
+  console.log("Hey :)")
+}
 
 export default function App() {
   const navigate = useNavigate();
