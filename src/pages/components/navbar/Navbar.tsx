@@ -47,6 +47,7 @@ export default function Navbar({
       setViewportWidth(window.innerWidth);
       setViewportHeight(window.innerHeight);
       ScrollTrigger.refresh();
+      ScrollTrigger.update()
     };
     window.addEventListener("resize", handleResize);
     return () => {
@@ -77,7 +78,9 @@ useEffect(() => {
 
     ScrollTrigger.refresh();
 
-    const colorAnimation = gsap.to(document.body, {
+    const colorAnimation = gsap.fromTo(document.body, {
+      "--navlink-color": "#ffdfd0",
+    }, {
       scrollTrigger: {
         trigger: document.body,
         start: `+=${window.innerHeight*1.5}`, 
@@ -90,7 +93,7 @@ useEffect(() => {
       //color: "#C0B063",
       "--navlink-color": "#c0b063",
       ease: "none",
-      markers: "true",
+      // markers: "true",
     });
 
     return () => {
