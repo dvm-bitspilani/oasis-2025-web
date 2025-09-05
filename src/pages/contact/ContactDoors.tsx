@@ -29,7 +29,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
     const contactBannerRef = useRef<HTMLImageElement>(null);
     const contactSectionRef = useRef<HTMLDivElement>(null);
     // const galleryContentRef = useRef<HTMLDivElement>(null);
-    const hasRunOnce = useRef<boolean>(false);
+    const windowWidth = useRef<number>(window.innerWidth);
     const horiBarDetailsRef = useRef<HoriBarDetails | null>(null);
 
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 900);
@@ -112,6 +112,7 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
         doorTimeLine
             .from(door1Ref.current, { x: "-120%", }, 0)
             .from(door2Ref.current, { x: "120%", }, 0)
+            .to(document.body, { "--navlink-color": "#ffdfd0" }, 0)
         // .from(galleryContentRef.current, {autoAlpha: 0})
 
         // if (contactSectionRef.current) contactSectionRef.current.style.transform = "translateY(-100vh)"//`translateY(${-((pinElemRef.current?.clientHeight || 0) - (contactSectionRef.current?.clientHeight || 0))})`
@@ -128,6 +129,9 @@ export default function ContactDoors({ pinElemRef, triggerElemRef }: ContactDoor
             ScrollTrigger.refresh();
             // ScrollTrigger.update();
             animateContactItems(0);
+
+            console.log("Uhh", windowWidth.current, window.innerWidth);
+            // if (windowWidth.current !== window.innerWidth) location.reload();
         }
 
         calculateHoriBarPos();
