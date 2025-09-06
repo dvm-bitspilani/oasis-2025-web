@@ -43,11 +43,21 @@ const imagesToPreload = [
   "/svgs/registration/scroll-bar.svg",
   "/svgs/registration/leftarr.svg",
   "/svgs/registration/rightarr.svg",
+  '/images/contact/contact-banner.png',
+  '/images/contact/Aryan.png',
+  '/images/contact/Ahan.png',
+  '/images/contact/Arshita.png',
+  '/images/contact/Ayushmaan.png',
+  '/images/contact/Dhruv.png',
+  '/images/contact/Ishita.png',
+  '/images/contact/Pranav.png',
+  '/images/contact/Rahul.png',
+  '/images/contact/ContactCard1.png',
+  '/images/contact/DoorsCombined.png',
+  '/images/contact/DoorsMobile.png',
 ];
 
-const soundsToPreload = [
-  "./sounds/door-close.mp3"
-]
+const soundsToPreload = (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? [] : ["./sounds/door-close.mp3"]
 
 export default function DrawingPreloader({
   className,
