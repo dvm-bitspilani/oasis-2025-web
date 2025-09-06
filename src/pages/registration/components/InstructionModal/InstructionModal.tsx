@@ -105,6 +105,7 @@ const Confirmation = (props: PropsType) => {
         xmlns="http://www.w3.org/2000/svg"
         className={styles.close}
         onClick={onCancel}
+        aria-label="Selected Events"
       >
         <path
           fill-rule="evenodd"

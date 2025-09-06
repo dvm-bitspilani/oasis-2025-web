@@ -8,17 +8,11 @@ import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import assetList from "./assetList";
+// import Events from "./pages/events/Events";
 
 export const navContext = createContext<{ goToPage?: (page: string) => void }>(
   {}
 );
-import ReactGA from "react-ga4";
-
-const TRACKING_ID = "G-57YBBH7RXW";
-if (window.location.hostname.search("bits-oasis.org") !== -1) {
-  ReactGA.initialize(TRACKING_ID);
-  console.log("Hey :)")
-}
 
 export default function App() {
   const navigate = useNavigate();
@@ -27,13 +21,6 @@ export default function App() {
   interface LocationState {
     startAnimation?: boolean;
   }
-
-  useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: location.pathname + location.search,
-    });
-  }, [location]);
 
   const [currentPage, setCurrentPage] = useState<
     "home" | "register" | "events" | "aboutus" | "contact" | "comingSoon"
@@ -160,7 +147,7 @@ export default function App() {
         percentageLoaded={doorPLPercentageLoaded}
         targetPageRef={nextRoute}
       />
-    <h1 style={{display:"none" }}>Oasis 2025</h1>
+      <h1 style={{ display: "none" }}>Oasis 2025</h1>
       {isPreloading && (
         <Preloader
           onEnter={handlePreloaderEnter}
