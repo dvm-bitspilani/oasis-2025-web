@@ -169,6 +169,37 @@ body {
     }
   }
 
+.mainHamContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+
+  .showMainHam {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    pointer-events: none;
+  }
+
+  &.mainHamOpen {
+    .showMainHam {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  @media (max-width: 730px), (aspect-ratio < 8/12) {
+    display: none;
+  }
+}
+
   .backgroundContainer {
     z-index: -1;
     height: 100svh;

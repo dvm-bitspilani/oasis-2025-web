@@ -24,3 +24,12 @@ export const useHamStore = create<ham>((set) => ({
     isHamOpen: false,
     setHamOpen: (isOpen) => set({ isHamOpen: isOpen })
 }));
+
+type mainHam = {
+    isMainHamOpen: boolean;
+    setMainHamOpen: (isOpen: boolean) => void;
+}
+export const useMainHamStore = create<mainHam>((set) => ({
+    isMainHamOpen: false,
+    setMainHamOpen: (isOpen) => set({ isMainHamOpen: isOpen })
+}));

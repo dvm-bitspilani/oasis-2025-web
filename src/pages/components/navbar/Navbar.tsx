@@ -8,7 +8,7 @@ import cloud4 from "/svgs/landing/hamClouds/cloud4.min.svg";
 import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
 import { useState, useEffect, useContext, useRef } from "react";
-import { useHamStore } from "../../../utils/store";
+import { useHamStore, useMainHamStore } from "../../../utils/store";
 import { navContext } from "../../../App";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -40,6 +40,7 @@ export default function Navbar({
   );
 
   const setHamOpen = useHamStore((state) => state.setHamOpen);
+  const setMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
   const navRef =  useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -123,6 +124,8 @@ useEffect(() => {
   const handleHamClick = () => {
     if (isMobile) {
       setHamOpen(true);
+    } else {
+      setMainHamOpen(true);
     }
   };
   return (
