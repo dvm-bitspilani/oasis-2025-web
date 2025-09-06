@@ -290,7 +290,7 @@ export default function LandingRevamp({
           landingMobileRef.current,
           {
             y: "-10%",
-            duration: 20,
+            // duration: 20,
           },
           ">"
         );
