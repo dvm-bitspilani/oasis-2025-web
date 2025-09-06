@@ -45,9 +45,9 @@ const imagesToPreload = [
   "/svgs/registration/rightarr.svg",
 ];
 
-const soundsToPreload = [
-  "./sounds/door-close.mp3"
-]
+const soundsToPreload: [] = [
+  // "./sounds/door-close.mp3"
+];
 
 export default function DrawingPreloader({
   className,
@@ -76,7 +76,10 @@ export default function DrawingPreloader({
         img.src = src;
         img.onload = () => {
           loadedAssets++;
-          setProgress((loadedAssets / (imagesToPreload.length + soundsToPreload.length)) * 99);
+          setProgress(
+            (loadedAssets / (imagesToPreload.length + soundsToPreload.length)) *
+              99
+          );
           const canvas = document.createElement("canvas");
           canvas.width = img.naturalWidth;
           canvas.height = img.naturalHeight;
@@ -97,7 +100,10 @@ export default function DrawingPreloader({
         const audio = new Audio(src);
         audio.onloadeddata = () => {
           loadedAssets++;
-          setProgress((loadedAssets / (imagesToPreload.length + soundsToPreload.length)) * 99);
+          setProgress(
+            (loadedAssets / (imagesToPreload.length + soundsToPreload.length)) *
+              99
+          );
           resolve(audio);
         };
         audio.onerror = (err) => {
@@ -107,22 +113,20 @@ export default function DrawingPreloader({
       });
     };
 
-    Promise.all(
-      [
-        ...imagesToPreload.map((src, i) =>
-          preloadImage(src).then(async (img) => {
-            await new Promise((resolve) => setTimeout(resolve, 1000 * i));
-            return img;
-          })
-        ),
-        ...soundsToPreload.map((src, i) => 
-          preloadSound(src).then(async (audio) => {
-            await new Promise((resolve) => setTimeout(resolve, 1000 * i));
-            return audio;
-          })
-        )
-      ]
-    )
+    Promise.all([
+      ...imagesToPreload.map((src, i) =>
+        preloadImage(src).then(async (img) => {
+          await new Promise((resolve) => setTimeout(resolve, 1000 * i));
+          return img;
+        })
+      ),
+      ...soundsToPreload.map((src, i) =>
+        preloadSound(src).then(async (audio) => {
+          await new Promise((resolve) => setTimeout(resolve, 1000 * i));
+          return audio;
+        })
+      ),
+    ])
       .then(() => {})
       .catch((err) => {
         console.error("Error preloading images:", err);
