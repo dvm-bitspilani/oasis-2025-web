@@ -174,22 +174,20 @@ export default function LandingRevamp({
   useEffect(() => {
     const lenis = new Lenis({
       smoothWheel: true,
-      lerp: window.innerWidth < 730 ? 0.08 : 0.08, // higher lerp for mobile for smoother scroll
+      lerp: window.innerWidth < 730 ? 0.08 : 0.08,
       infinite: false,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    // Use GSAP ticker for better sync with ScrollTrigger
-    gsap.ticker.add((time) => {
+    const updateLenis = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
+
+    gsap.ticker.add(updateLenis);
 
     return () => {
-      gsap.ticker.remove((time) => {
-        lenis.raf(time);
-      });
-      lenis.destroy();
+      gsap.ticker.remove(updateLenis);
     };
   }, []);
 
@@ -249,7 +247,7 @@ export default function LandingRevamp({
           trigger: wrapperRef.current,
           start: "top top",
           end: `+=300svh`,
-          scrub: true,
+          scrub: 1.5,
         },
       });
       gsap.fromTo(
