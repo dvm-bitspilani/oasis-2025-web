@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { navContext } from "../../App";
 
 const ComingSoon: React.FC = () => {
-
   const { goToPage } = useContext(navContext);
 
   return (
@@ -14,10 +13,16 @@ const ComingSoon: React.FC = () => {
         <h1>Coming Soon</h1>
         <p>The page you are looking for is still under construction.</p>
         <div className={styles.buttons}>
-          <span onClick={() => goToPage && goToPage("/")} className={styles.btn}>
+          <span
+            onClick={() => goToPage && goToPage("/")}
+            className={styles.btn}
+          >
             Go Home
           </span>
-          <span onClick={() => goToPage && goToPage("/events")} className={`${styles.btn} ${styles.secondary}`}>
+          <span
+            onClick={() => goToPage && goToPage("/events")}
+            className={`${styles.btn} ${styles.secondary}`}
+          >
             Explore Events
           </span>
         </div>

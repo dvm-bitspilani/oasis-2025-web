@@ -81,10 +81,8 @@ export default function LandingRevamp({
   const treeContainerRef = useRef<HTMLDivElement>(null);
   const isHamOpen = useHamStore((state) => state.isHamOpen);
   const setIsHamOpen = useHamStore((state) => state.setHamOpen);
-
   const treeImageRef = useRef<HTMLImageElement>(null);
   const scrollerRef = useRef<HTMLImageElement>(null);
-
   const aboutUsContRef = useRef<HTMLDivElement>(null);
   const aboutUsWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -176,7 +174,7 @@ export default function LandingRevamp({
   useEffect(() => {
     const lenis = new Lenis({
       smoothWheel: true,
-      lerp: window.innerWidth < 730 ? 0.1 : 0.08, // higher lerp for mobile for smoother scroll
+      lerp: window.innerWidth < 730 ? 0.08 : 0.08, // higher lerp for mobile for smoother scroll
       infinite: false,
     });
 
