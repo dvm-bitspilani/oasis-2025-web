@@ -171,27 +171,27 @@ export default function LandingRevamp({
     return () => clearInterval(timerId);
   }, []);
 
-  useEffect(() => {
-    const lenis = new Lenis({
-      smoothWheel: true,
-      lerp: window.innerWidth < 730 ? 0.08 : 0.08, // higher lerp for mobile for smoother scroll
-      infinite: false,
-    });
+  // useEffect(() => {
+  //   const lenis = new Lenis({
+  //     smoothWheel: true,
+  //     lerp: window.innerWidth < 730 ? 0.08 : 0.08, // higher lerp for mobile for smoother scroll
+  //     infinite: false,
+  //   });
 
-    lenis.on("scroll", ScrollTrigger.update);
+  //   lenis.on("scroll", ScrollTrigger.update);
 
-    // Use GSAP ticker for better sync with ScrollTrigger
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+  //   // Use GSAP ticker for better sync with ScrollTrigger
+  //   gsap.ticker.add((time) => {
+  //     lenis.raf(time * 1000);
+  //   });
 
-    return () => {
-      gsap.ticker.remove((time) => {
-        lenis.raf(time * 1000);
-      });
-      lenis.destroy();
-    };
-  }, []);
+  //   return () => {
+  //     gsap.ticker.remove((time) => {
+  //       lenis.raf(time * 1000);
+  //     });
+  //     lenis.destroy();
+  //   };
+  // }, []);
 
   useGSAP(() => {
     if (treeImageRef.current && landingRef.current) {
