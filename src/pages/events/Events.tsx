@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import styles from "./Events.module.scss";
 import EventBack from "/svgs/events/eventsback.svg";
 import Text from "/images/events/text.png";

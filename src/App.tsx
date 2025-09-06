@@ -8,7 +8,7 @@ import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import assetList from "./assetList";
-import Events from "./pages/events/Events";
+// import Events from "./pages/events/Events";
 
 export const navContext = createContext<{ goToPage?: (page: string) => void }>(
   {}
