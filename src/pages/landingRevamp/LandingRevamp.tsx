@@ -67,7 +67,7 @@ export default function LandingRevamp({
   goToPage,
 }: {
   goToPage: (path: string) => void;
-      }) {
+}) {
   //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
@@ -103,14 +103,14 @@ export default function LandingRevamp({
         );
       }
       if (window.innerWidth <= 730) {
-        document.scrollingElement?.scrollTo({top: 0, behavior: "instant"});
+        document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
         document.body.style.position = "fixed";
       } else {
-        if (document.body.style.position === "fixed") location.reload()
+        if (document.body.style.position === "fixed") location.reload();
       }
     };
 
-    handleResize()
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -164,7 +164,7 @@ export default function LandingRevamp({
       setTimeLeft({ days, hours, minutes, seconds });
     };
 
-    document.scrollingElement?.scrollTo({top: 0});
+    document.scrollingElement?.scrollTo({ top: 0 });
 
     calculateTimeLeft();
     const timerId = setInterval(calculateTimeLeft, 1000);
@@ -401,8 +401,6 @@ export default function LandingRevamp({
   //     );
   // }, []);
 
-  
-
   return (
     <>
       <main
@@ -411,7 +409,6 @@ export default function LandingRevamp({
         } ${overlayIsActive ? styles.mask : ""}`}
         ref={wrapperRef}
       >
-
         <Navbar />
         <div
           className={
@@ -435,7 +432,7 @@ export default function LandingRevamp({
           </div>
 
           <div className={styles.desktopBackground} ref={landingRef}>
-            <img src={landingImage} className={styles.landingImage} />
+            <img src={landingImage} className={styles.landingImage} alt="Landing Image" />
           </div>
 
           <div
@@ -445,7 +442,7 @@ export default function LandingRevamp({
             <img
               src={mobileMountains}
               className={styles.mobileMountains}
-              alt=""
+              alt="Mountains"
               ref={landingMobileRef}
             />
             <img
@@ -454,7 +451,7 @@ export default function LandingRevamp({
               className={styles.mobileBackground}
             />
 
-            <img src={mobileCloud} className={styles.mobileCloud} />
+            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud"/>
           </div>
         </div>
         <div className={styles.dateCountdown} ref={dateCountdownRef}>
@@ -507,7 +504,7 @@ export default function LandingRevamp({
                 <img
                   src={mobileRegisterBtn}
                   className={styles.mobileRegisterBtn}
-                  alt=""
+                  alt="Register"
                 />
                 <div className={styles.registerBtnText}>Register</div>
               </div>
@@ -533,12 +530,12 @@ export default function LandingRevamp({
                           >
                             <img
                               src={link.icon}
-                              alt=""
+                              alt="Icon"
                               className={`${styles.socialIcon} ${link.classNameIcon}`}
                             />
                             <img
                               src={link.lamp}
-                              alt=""
+                              alt="Lamp"
                               className={`${styles.socialLamp} ${link.classNameLamp}`}
                             />
                           </a>
@@ -548,7 +545,7 @@ export default function LandingRevamp({
                     <img
                       src={tree}
                       // className={styles.tree}
-                      alt=""
+                      alt="Tree"
                       loading="eager"
                       fetchPriority="high"
                       style={{ contain: "none" }}
@@ -565,13 +562,13 @@ export default function LandingRevamp({
             <div ref={aboutUsWrapperRef}>
               <AboutUs isBackBtn={false} />
             </div>
-            {
-              aboutUsContRef.current && aboutUsWrapperRef && // bottomSpacerRef.current &&
-              <ContactDoors 
-                pinElemRef={aboutUsContRef} 
-                triggerElemRef={aboutUsWrapperRef} 
-              />
-            }
+            {aboutUsContRef.current &&
+              aboutUsWrapperRef && ( // bottomSpacerRef.current &&
+                <ContactDoors
+                  pinElemRef={aboutUsContRef}
+                  triggerElemRef={aboutUsWrapperRef}
+                />
+              )}
           </div>
           {/* <div className={styles.bottomSpacer} ref={bottomSpacerRef}/> */}
         </div>

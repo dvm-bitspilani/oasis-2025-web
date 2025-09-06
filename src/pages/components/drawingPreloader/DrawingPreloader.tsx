@@ -211,6 +211,7 @@ export default function DrawingPreloader({
           width="100%"
           height="100%"
           ref={svgEl}
+          aria-label="Overlay"
           className={
             className
               ? `${styles.drawingPreloader} ${className} ${styles.sketchImage}`
@@ -331,6 +332,7 @@ export default function DrawingPreloader({
           width="100%"
           height="100%"
           ref={svgEl}
+          aria-label="Preloader"
           className={
             className
               ? `${styles.drawingPreloader} ${styles.mobilePreloader} ${className} ${styles.sketchImage}`

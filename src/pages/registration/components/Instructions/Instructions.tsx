@@ -22,7 +22,7 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
         <div className={styles.content} ref={ref}>
           <div className={styles.headingCont}>
             <img src={Left} alt="left" />
-            <h1 className={styles.heading}>INSTRUCTIONS</h1>
+            <h3 className={styles.heading}>INSTRUCTIONS</h3>
             <img src={Right} alt="right" />
           </div>
           <ul className={styles.instr}>
