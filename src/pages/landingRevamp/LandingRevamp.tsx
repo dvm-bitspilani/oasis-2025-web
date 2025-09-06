@@ -237,7 +237,7 @@ export default function LandingRevamp({
         trigger: wrapperRef.current,
         start: "top top",
         end: `+=${scrollHeight}px`,
-        scrub: true,
+        scrub: 1.5,
       },
     });
 
@@ -288,14 +288,11 @@ export default function LandingRevamp({
           0
         )
 
-        .to(
-          landingMobileRef.current,
-          {
-            y: "-10%",
-            duration: 20,
-          },
-          ">"
-        );
+        .to(landingMobileRef.current, {
+          y: "-10%",
+          // duration: 20,
+          ease: "sine.inOut",
+        });
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
       masterTimeline
