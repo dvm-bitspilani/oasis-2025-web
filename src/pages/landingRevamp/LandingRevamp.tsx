@@ -291,6 +291,7 @@ export default function LandingRevamp({
           {
             y: "-10%",
             // duration: 20,
+            ease: "power2.inOut",
           },
           ">"
         );
