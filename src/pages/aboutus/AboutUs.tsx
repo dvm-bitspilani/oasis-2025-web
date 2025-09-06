@@ -43,6 +43,7 @@ const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
 const iconImages: HTMLImageElement[] = icons.map((src) => {
   const img = new Image();
   img.src = src;
+  img.alt ="Letters";
   return img;
 });
 const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
@@ -581,7 +582,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
           </div>
           <div className={styles.abtus}>
             <img src={abtus} alt="ABOUT US" />
-            <h1>ABOUT US</h1>
+            <h3>ABOUT US</h3>
           </div>
         </div>
       </div>

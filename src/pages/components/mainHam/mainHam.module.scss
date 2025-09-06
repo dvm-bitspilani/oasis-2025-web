@@ -1,0 +1,205 @@
+@use "../../../assets/global.scss" as *;
+
+.mainHam {
+  height: 100dvh;
+  width: 100dvw;
+  background-color: #340d0d;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  color: white;
+  background-image: url("/svgs/landing/crumpled-black-paper-texture.svg");
+  background-size: cover;
+  background-position: center;
+  pointer-events: all;
+  display: flex;
+
+  .hamDragonContainer {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+
+    .hamDragon {
+      transform: scale(0.8);
+      transform-origin: center;
+    }
+
+    .devDiv {
+      position: absolute;
+      top: 24%;
+      left: 31%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .devCloud {
+        width: auto;
+        height: 210px;
+      }
+
+      .devText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -30%);
+        font-family: $primaryFont;
+        font-size: 1.5em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+      }
+    }
+
+    .mediaPartnersDiv {
+      position: absolute;
+      top: 27.5%;
+      right: 29%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .mediaPartnersCloud {
+        width: auto;
+        height: 200px;
+      }
+
+      .mediaPartnersText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -50%);
+        font-family: $primaryFont;
+        font-size: 1.5em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+        line-height: 1.1;
+      }
+    }
+
+    .galleryDiv {
+      position: absolute;
+      top: 50%;
+      right: 35%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+
+      .galleryCloud {
+        width: auto;
+        height: 190px;
+      }
+
+      .galleryText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -30%);
+        font-family: $primaryFont;
+        font-size: 1.5em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+      }
+    }
+
+    .sponsDiv {
+      position: absolute;
+      bottom: 21%;
+      left: 32%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .sponsCloud {
+        width: auto;
+        height: 200px;
+      }
+
+      .sponsText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -50%);
+        font-family: $primaryFont;
+        font-size: 1.5em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+      }
+    }
+
+    .wallMagDiv {
+      position: absolute;
+      bottom: 29%;
+      right: 22.5%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .wallMagCloud {
+        width: auto;
+        height: 200px;
+      }
+
+      .wallMagText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -50%);
+        font-family: $primaryFont;
+        font-size: 1.5em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .backBtn {
+    cursor: pointer;
+    position: relative;
+    .backIcon {
+      z-index: 5;
+      position: absolute;
+      top: 2.8vw;
+      left: 1.8vw;
+      width: 4vw;
+      height: 4vw;
+      background: transparent;
+      transition: filter 0.3s ease;
+
+      &:hover {
+        filter: drop-shadow(1px 0px 9px  rgba(208, 176, 99, 0.4));
+      }
+    }
+  }
+
+  .mwd {
+    position: absolute;
+    bottom: 1vw;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d69b65;
+    font-size: 1.2em;
+    font-family: $hamFooterFont;
+  }
+}

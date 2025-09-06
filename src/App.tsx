@@ -8,6 +8,7 @@ import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import assetList from "./assetList";
+// import Events from "./pages/events/Events";
 
 export const navContext = createContext<{ goToPage?: (page: string) => void }>(
   {}
@@ -146,7 +147,7 @@ export default function App() {
         percentageLoaded={doorPLPercentageLoaded}
         targetPageRef={nextRoute}
       />
-
+      <h1 style={{ display: "none" }}>Oasis 2025</h1>
       {isPreloading && (
         <Preloader
           onEnter={handlePreloaderEnter}

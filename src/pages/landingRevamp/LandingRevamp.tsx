@@ -29,6 +29,7 @@ import MainHam from "../components/mainHam/mainHam";
 import Lenis from "@studio-freight/lenis";
 
 import { useHamStore, useMainHamStore } from "../../utils/store";
+import ContactDoors from "../contact/ContactDoors";
 // import { s } from "framer-motion/client";
 // import { FaA } from "react-icons/fa6";
 
@@ -67,7 +68,7 @@ export default function LandingRevamp({
   goToPage,
 }: {
   goToPage: (path: string) => void;
-      }) {
+}) {
   //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
@@ -86,6 +87,9 @@ export default function LandingRevamp({
   const treeImageRef = useRef<HTMLImageElement>(null);
   const scrollerRef = useRef<HTMLImageElement>(null);
 
+  const aboutUsContRef = useRef<HTMLDivElement>(null);
+  const aboutUsWrapperRef = useRef<HTMLDivElement>(null);
+
   const [scrollHeight, setScrollHeight] = useState(
     (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
   );
@@ -101,7 +105,15 @@ export default function LandingRevamp({
           (scrollerRef.current.scrollHeight ?? 0) - window.innerHeight * 1.4
         );
       }
+      if (window.innerWidth <= 730) {
+        document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
+        document.body.style.position = "fixed";
+      } else {
+        if (document.body.style.position === "fixed") location.reload();
+      }
     };
+
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -154,6 +166,8 @@ export default function LandingRevamp({
 
       setTimeLeft({ days, hours, minutes, seconds });
     };
+
+    document.scrollingElement?.scrollTo({ top: 0 });
 
     calculateTimeLeft();
     const timerId = setInterval(calculateTimeLeft, 1000);
@@ -391,8 +405,6 @@ export default function LandingRevamp({
   //     );
   // }, []);
 
-  
-
   return (
     <>
       <main
@@ -401,7 +413,6 @@ export default function LandingRevamp({
         } ${overlayIsActive ? styles.mask : ""}`}
         ref={wrapperRef}
       >
-
         <Navbar />
         <div
           className={
@@ -442,7 +453,7 @@ export default function LandingRevamp({
           </div>
 
           <div className={styles.desktopBackground} ref={landingRef}>
-            <img src={landingImage} className={styles.landingImage} />
+            <img src={landingImage} className={styles.landingImage} alt="Landing Image" />
           </div>
 
           <div
@@ -452,7 +463,7 @@ export default function LandingRevamp({
             <img
               src={mobileMountains}
               className={styles.mobileMountains}
-              alt=""
+              alt="Mountains"
               ref={landingMobileRef}
             />
             <img
@@ -461,7 +472,7 @@ export default function LandingRevamp({
               className={styles.mobileBackground}
             />
 
-            <img src={mobileCloud} className={styles.mobileCloud} />
+            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud"/>
           </div>
         </div>
         <div className={styles.dateCountdown} ref={dateCountdownRef}>
@@ -498,75 +509,89 @@ export default function LandingRevamp({
             MINUTES
           </div>
         </div>
-        <div className={styles.scroller} ref={scrollerRef}>
-          <div className={styles.landingContainer}>
-            <div
-              className={styles.registerBtnContainer}
-              onClick={() => goToPage("/register")}
-              ref={registerButtonRef}
-            >
-              <img
-                src={registerBtn}
-                className={styles.registerBtn}
-                alt="Register"
-              />
-              <img
-                src={mobileRegisterBtn}
-                className={styles.mobileRegisterBtn}
-                alt=""
-              />
-              <div className={styles.registerBtnText}>Register</div>
-            </div>
+        <div className={styles.scrollerWrapper}>
+          <div className={styles.scroller} ref={scrollerRef}>
+            <div className={styles.landingContainer}>
+              <div
+                className={styles.registerBtnContainer}
+                onClick={() => goToPage("/register")}
+                ref={registerButtonRef}
+              >
+                <img
+                  src={registerBtn}
+                  className={styles.registerBtn}
+                  alt="Register"
+                />
+                <img
+                  src={mobileRegisterBtn}
+                  className={styles.mobileRegisterBtn}
+                  alt="Register"
+                />
+                <div className={styles.registerBtnText}>Register</div>
+              </div>
 
-            <div className={styles.foregroundContainer}>
-              <div className={styles.treeContainer} ref={treeContainerRef}>
-                <div className={styles.tree} ref={treeImageRef}>
-                  <div className={styles.socialLinksContainer}>
-                    <div className={styles.wire}>
-                      <img src={wire} alt="" />
-                    </div>
-                    {socialLinks.map((link, index) => (
-                      <div
-                        key={index}
-                        className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
-                      >
-                        <a
-                          key={index}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.socialLink}
-                        >
-                          <img
-                            src={link.icon}
-                            alt=""
-                            className={`${styles.socialIcon} ${link.classNameIcon}`}
-                          />
-                          <img
-                            src={link.lamp}
-                            alt=""
-                            className={`${styles.socialLamp} ${link.classNameLamp}`}
-                          />
-                        </a>
+              <div className={styles.foregroundContainer}>
+                <div className={styles.treeContainer} ref={treeContainerRef}>
+                  <div className={styles.tree} ref={treeImageRef}>
+                    <div className={styles.socialLinksContainer}>
+                      <div className={styles.wire}>
+                        <img src={wire} alt="" />
                       </div>
-                    ))}
+                      {socialLinks.map((link, index) => (
+                        <div
+                          key={index}
+                          className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
+                        >
+                          <a
+                            key={index}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.socialLink}
+                          >
+                            <img
+                              src={link.icon}
+                              alt="Icon"
+                              className={`${styles.socialIcon} ${link.classNameIcon}`}
+                            />
+                            <img
+                              src={link.lamp}
+                              alt="Lamp"
+                              className={`${styles.socialLamp} ${link.classNameLamp}`}
+                            />
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                    <img
+                      src={tree}
+                      // className={styles.tree}
+                      alt="Tree"
+                      loading="eager"
+                      fetchPriority="high"
+                      style={{ contain: "none" }}
+                    />
                   </div>
-                  <img
-                    src={tree}
-                    // className={styles.tree}
-                    alt=""
-                    loading="eager"
-                    fetchPriority="high"
-                    style={{ contain: "none" }}
-                  />
+                  <div className={styles.treeExtender}></div>
                 </div>
-                <div className={styles.treeExtender}></div>
               </div>
             </div>
           </div>
-          <div className={styles.aboutUsContainer}>
-            <AboutUs isBackBtn={false} />
+        </div>
+        <div className={styles.bottomContainer}>
+          <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
+            <div ref={aboutUsWrapperRef}>
+              <AboutUs isBackBtn={false} />
+            </div>
+            {aboutUsContRef.current &&
+              aboutUsWrapperRef && ( // bottomSpacerRef.current &&
+                <ContactDoors
+                  pinElemRef={aboutUsContRef}
+                  triggerElemRef={aboutUsWrapperRef}
+                />
+              )}
           </div>
+          {/* <div className={styles.bottomSpacer} ref={bottomSpacerRef}/> */}
         </div>
       </main>
     </>

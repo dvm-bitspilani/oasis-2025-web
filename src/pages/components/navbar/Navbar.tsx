@@ -11,7 +11,7 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { useHamStore, useMainHamStore } from "../../../utils/store";
 import { navContext } from "../../../App";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import _ScrollTrigger, { ScrollTrigger } from "gsap/ScrollTrigger";
 // import { rect } from "framer-motion/client";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -47,6 +47,8 @@ export default function Navbar({
     const handleResize = () => {
       setViewportWidth(window.innerWidth);
       setViewportHeight(window.innerHeight);
+      ScrollTrigger.refresh();
+      ScrollTrigger.update()
     };
     window.addEventListener("resize", handleResize);
     return () => {
@@ -75,31 +77,24 @@ useEffect(() => {
 
     console.log("Found targets:", targets.length);
 
-    const triggerElement = document.createElement('div');
-    triggerElement.style.position = 'absolute';
-    triggerElement.style.top = '150vh'; 
-    triggerElement.style.left = '0';
-    triggerElement.style.width = '1px';
-    triggerElement.style.height = '1px';
-    triggerElement.style.visibility = 'hidden';
-    triggerElement.id = 'navbar-scroll-trigger';
-    
-    document.body.appendChild(triggerElement);
-
     ScrollTrigger.refresh();
 
-    const colorAnimation = gsap.to(targets, {
+    const colorAnimation = gsap.fromTo(document.body, {
+      "--navlink-color": "#ffdfd0",
+    }, {
       scrollTrigger: {
-        trigger: triggerElement,
-        start: "top center", 
-        end: "top top", 
+        trigger: document.body,
+        start: `+=${window.innerHeight*1.5}`, 
+        end: `+=${window.innerHeight*0.5}`, 
         scrub: 1,
         onEnter: () => console.log("Color change TRIGGERED at 150vh"),
         onLeave: () => console.log("Color change ENDED"),
         onUpdate: (self) => console.log("Scroll progress:", self.progress),
       },
-      color: "#C0B063",
-      ease: "none"
+      //color: "#C0B063",
+      "--navlink-color": "#c0b063",
+      ease: "none",
+      // markers: "true",
     });
 
     return () => {
@@ -112,6 +107,7 @@ useEffect(() => {
       if (colorAnimation?.scrollTrigger) {
         colorAnimation.scrollTrigger.kill();
       }
+      
       colorAnimation?.kill();
     };
   }, 500);

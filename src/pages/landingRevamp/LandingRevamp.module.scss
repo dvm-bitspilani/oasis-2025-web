@@ -56,7 +56,8 @@ body {
   }
 }
 
-@media (max-width: 730px), (aspect-ratio < 8/12) {
+@media (max-width: 730px),
+(aspect-ratio < 8/12) {
   body {
     background-image: linear-gradient(to right, #d36f66, #be5964);
   }
@@ -330,7 +331,8 @@ body {
     }
   }
 
-  @media (aspect-ratio < 8/12), (max-width: 730px) {
+  @media (aspect-ratio < 8/12),
+  (max-width: 730px) {
     .backgroundContainer {
       .mobileBackgroundContainer {
         display: block;
@@ -388,6 +390,10 @@ body {
     }
   }
 
+  .scrollerWrapper {
+    background-image: linear-gradient(transparent 60%, black 60%);
+    @media (max-width: 600px) {background-image: linear-gradient(transparent 80%, black 80%);}
+  }
   .scroller {
     overflow-x: hidden;
 
@@ -489,6 +495,11 @@ body {
               width: fit-content;
               z-index: 10;
 
+              + img {
+                mask-image: linear-gradient(black 80%, transparent 90%);
+                mask-size: 100% 100%;
+              }
+
               img {
                 width: 100%;
                 height: 100%;
@@ -535,13 +546,11 @@ body {
                     grid-column: 1/2;
                     z-index: 99;
                     width: 80%;
-                    filter: brightness(1)
-                      drop-shadow(0px 0px 3px rgba(255, 213, 3, 0.823));
+                    filter: brightness(1) drop-shadow(0px 0px 3px rgba(255, 213, 3, 0.823));
                     transition: filter 0.3s ease-out;
 
                     &:hover {
-                      filter: brightness(1.1)
-                        drop-shadow(0px 0px 18px rgba(255, 213, 3, 0.848));
+                      filter: brightness(1.1) drop-shadow(0px 0px 18px rgba(255, 213, 3, 0.848));
                     }
                   }
 
@@ -608,7 +617,8 @@ body {
           // }
         }
 
-        @media (aspect-ratio < 8/12), (max-width: 730px) {
+        @media (aspect-ratio < 8/12),
+        (max-width: 730px) {
           .treeContainer {
             .tree {
               margin-top: clamp(0svh, 100svh - 80svw, 100svh);
@@ -644,7 +654,8 @@ body {
         }
       }
 
-      @media (aspect-ratio < 8/12), (max-width: 730px) {
+      @media (aspect-ratio < 8/12),
+      (max-width: 730px) {
         .registerBtnContainer {
           width: 300px;
           left: 50%;
@@ -675,9 +686,9 @@ body {
         }
       }
     }
-  }
-}
 
-.aboutUsContainer{
-  height: 100vh;
+    .bottomContainer {
+      .aboutUsContainer {position: relative;}
+    }
+  }
 }

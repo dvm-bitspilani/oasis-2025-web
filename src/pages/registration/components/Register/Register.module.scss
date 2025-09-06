@@ -73,9 +73,11 @@
           padding: 0;
           margin: 0;
           z-index: 0;
+          display: flex;
 
           input {
-            width: 100%;
+            margin: 0 auto;
+            width: 90%;
             height: 100%;
             color: #e2dccb;
             box-sizing: border-box;
@@ -218,7 +220,7 @@
           position: absolute;
           left: 18%;
           bottom: -0.8vw;
-          color: rgb(255, 0, 0);
+          color: hwb(0 0% 0%);
           font: 400 1vw "Abhaya Libre";
           text-align: left;
         }
@@ -236,7 +238,7 @@
     text-align: center;
     cursor: pointer;
     margin: 2vw 0;
-    background: center / cover no-repeat
+    background: center / contain no-repeat
       url("/svgs/registration/button-banner.svg");
     padding: 1vw;
     color: #fff;
@@ -246,8 +248,10 @@
     justify-content: space-between;
     width: 22vw;
     transition: filter 0.3s;
-    
-    &:hover {filter: brightness(0.8)}
+
+    &:hover {
+      filter: brightness(0.8);
+    }
 
     span {
       padding-left: 40%;

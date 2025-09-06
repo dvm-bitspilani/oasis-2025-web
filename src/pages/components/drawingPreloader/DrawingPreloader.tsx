@@ -43,11 +43,21 @@ const imagesToPreload = [
   "/svgs/registration/scroll-bar.svg",
   "/svgs/registration/leftarr.svg",
   "/svgs/registration/rightarr.svg",
+  '/images/contact/contact-banner.png',
+  '/images/contact/Aryan.png',
+  '/images/contact/Ahan.png',
+  '/images/contact/Arshita.png',
+  '/images/contact/Ayushmaan.png',
+  '/images/contact/Dhruv.png',
+  '/images/contact/Ishita.png',
+  '/images/contact/Pranav.png',
+  '/images/contact/Rahul.png',
+  '/images/contact/ContactCard1.png',
+  '/images/contact/DoorsCombined.png',
+  '/images/contact/DoorsMobile.png',
 ];
 
-const soundsToPreload = [
-  "./sounds/door-close.mp3"
-]
+const soundsToPreload = (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? [] : ["./sounds/door-close.mp3"]
 
 export default function DrawingPreloader({
   className,
@@ -76,7 +86,10 @@ export default function DrawingPreloader({
         img.src = src;
         img.onload = () => {
           loadedAssets++;
-          setProgress((loadedAssets / (imagesToPreload.length + soundsToPreload.length)) * 99);
+          setProgress(
+            (loadedAssets / (imagesToPreload.length + soundsToPreload.length)) *
+              99
+          );
           const canvas = document.createElement("canvas");
           canvas.width = img.naturalWidth;
           canvas.height = img.naturalHeight;
@@ -97,7 +110,10 @@ export default function DrawingPreloader({
         const audio = new Audio(src);
         audio.onloadeddata = () => {
           loadedAssets++;
-          setProgress((loadedAssets / (imagesToPreload.length + soundsToPreload.length)) * 99);
+          setProgress(
+            (loadedAssets / (imagesToPreload.length + soundsToPreload.length)) *
+              99
+          );
           resolve(audio);
         };
         audio.onerror = (err) => {
@@ -107,22 +123,20 @@ export default function DrawingPreloader({
       });
     };
 
-    Promise.all(
-      [
-        ...imagesToPreload.map((src, i) =>
-          preloadImage(src).then(async (img) => {
-            await new Promise((resolve) => setTimeout(resolve, 1000 * i));
-            return img;
-          })
-        ),
-        ...soundsToPreload.map((src, i) => 
-          preloadSound(src).then(async (audio) => {
-            await new Promise((resolve) => setTimeout(resolve, 1000 * i));
-            return audio;
-          })
-        )
-      ]
-    )
+    Promise.all([
+      ...imagesToPreload.map((src, i) =>
+        preloadImage(src).then(async (img) => {
+          await new Promise((resolve) => setTimeout(resolve, 1000 * i));
+          return img;
+        })
+      ),
+      ...soundsToPreload.map((src, i) =>
+        preloadSound(src).then(async (audio) => {
+          await new Promise((resolve) => setTimeout(resolve, 1000 * i));
+          return audio;
+        })
+      ),
+    ])
       .then(() => {})
       .catch((err) => {
         console.error("Error preloading images:", err);
@@ -211,6 +225,7 @@ export default function DrawingPreloader({
           width="100%"
           height="100%"
           ref={svgEl}
+          aria-label="Overlay"
           className={
             className
               ? `${styles.drawingPreloader} ${className} ${styles.sketchImage}`
@@ -331,6 +346,7 @@ export default function DrawingPreloader({
           width="100%"
           height="100%"
           ref={svgEl}
+          aria-label="Preloader"
           className={
             className
               ? `${styles.drawingPreloader} ${styles.mobilePreloader} ${className} ${styles.sketchImage}`

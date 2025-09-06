@@ -26,7 +26,7 @@ export default function Contact() {
 
     return (
         <div className={styles.contactPageWrapper}>
-            <div className={styles.contactPageBg} >
+            <div className={styles.contactPageBg}>
                 {
                     Array(horiBarDetails?.numOfBars).fill(null).map((_, i) => 
                         <div 

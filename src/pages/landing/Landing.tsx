@@ -343,17 +343,18 @@ export default function Landing({
               src={landingImage}
               className={styles.landingImage}
               ref={landingRef}
+              alt="landingImage"
             />
 
             <img
               src={mobileMountains}
               className={styles.mobileMountains}
-              alt=""
+              alt="Mountains"
               ref={landingMobileRef}
             />
             <img
               src={mobileBackground}
-              alt=""
+              alt="Background"
               className={styles.mobileBackground}
             />
 
@@ -363,7 +364,7 @@ export default function Landing({
               <div className={styles.tree}>
                 <div className={styles.socialLinksContainer}>
                   <div className={styles.wire}>
-                    <img src={wire} alt="" />
+                    <img src={wire} alt=" Wire" />
                   </div>
                   {socialLinks.map((link, index) => (
                     <div
@@ -379,12 +380,12 @@ export default function Landing({
                       >
                         <img
                           src={link.icon}
-                          alt=""
+                          alt="Icon"
                           className={`${styles.socialIcon} ${link.classNameIcon}`}
                         />
                         <img
                           src={link.lamp}
-                          alt=""
+                          alt="Lamp"
                           className={`${styles.socialLamp} ${link.classNameLamp}`}
                         />
                       </a>
@@ -394,7 +395,7 @@ export default function Landing({
                 <img
                   src={tree}
                   // className={styles.tree}
-                  alt=""
+                  alt="Tree"
                   loading="eager"
                   fetchPriority="high"
                   style={{ contain: "none" }}
