@@ -247,7 +247,7 @@ export default function LandingRevamp({
           trigger: wrapperRef.current,
           start: "top top",
           end: `+=300svh`,
-          scrub: 1.5,
+          scrub: 1.2,
         },
       });
       gsap.fromTo(
