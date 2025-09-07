@@ -57,7 +57,7 @@ const imagesToPreload = [
   '/images/contact/DoorsMobile.png',
 ];
 
-const soundsToPreload = (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? [] : ["./sounds/door-close.mp3"]
+const soundsToPreload: string[] = []// (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? [] : ["./sounds/door-close.mp3"]
 
 export default function DrawingPreloader({
   className,
