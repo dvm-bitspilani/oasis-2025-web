@@ -25,9 +25,10 @@ import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
 // import ContactDoors from "../contact/ContactDoors";
 import Ham from "../components/ham/ham";
+import MainHam from "../components/mainHam/mainHam";
 import Lenis from "@studio-freight/lenis";
 
-import { useHamStore } from "../../utils/store";
+import { useHamStore, useMainHamStore } from "../../utils/store";
 import ContactDoors from "../contact/ContactDoors";
 // import { s } from "framer-motion/client";
 // import { FaA } from "react-icons/fa6";
@@ -79,7 +80,9 @@ export default function LandingRevamp({
   const landingMobileRef = useRef<HTMLImageElement>(null);
   const treeContainerRef = useRef<HTMLDivElement>(null);
   const isHamOpen = useHamStore((state) => state.isHamOpen);
+  const isMainHamOpen = useMainHamStore((state) => state.isMainHamOpen);
   const setIsHamOpen = useHamStore((state) => state.setHamOpen);
+  const setIsMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
 
   const treeImageRef = useRef<HTMLImageElement>(null);
   const scrollerRef = useRef<HTMLImageElement>(null);
@@ -364,6 +367,7 @@ export default function LandingRevamp({
     });
   }, [scrollHeight]);
 
+
   // useGSAP(() => {
   //   const scrollAnimationTimeline = gsap.timeline({
   //     scrollTrigger: {
@@ -424,6 +428,23 @@ export default function LandingRevamp({
 
           <div className={styles.translateHam}>
             <Ham goToPage={goToPage} />
+          </div>
+
+        </div>
+
+        <div
+          className={
+            isMainHamOpen
+              ? `${styles.mainHamContainer} ${styles.mainHamOpen}`
+              : styles.mainHamContainer
+          }
+        >
+          <div
+            className={styles.blur}
+            onClick={() => setIsMainHamOpen(false)}
+          ></div>
+          <div className={styles.showMainHam}>
+            <MainHam goToPage={goToPage} />
           </div>
         </div>
         <div className={styles.backgroundContainer}>
