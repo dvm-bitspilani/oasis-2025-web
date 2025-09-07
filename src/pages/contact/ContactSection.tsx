@@ -7,7 +7,7 @@ export default function ContactSection() {
         <div className={styles.contactSection}>
             <div className={styles.contactContent}>
                 <div className={styles.contactBanner}>
-                    <img className={styles.contactBanner} src={contactBanner} />
+                    <img className={styles.contactBanner} src={contactBanner} alt="banner" />
                 </div>
                 <ContactGallery />
             </div>

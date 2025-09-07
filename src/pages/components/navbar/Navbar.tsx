@@ -130,37 +130,37 @@ useEffect(() => {
       }`}>
       {!hideHam &&(
       <div className={styles.hamMenuBtn} onClick={handleHamClick}>
-        <img src={moon} alt="" className={styles.moon} />
-        <img src={moonHam} alt="" className={styles.moonHam} />
+        <img src={moon} alt="moon" className={styles.moon} />
+        <img src={moonHam} alt="moonHam" className={styles.moonHam} />
         <div className={styles.clouds}>
           <img
             src={cloud1}
-            alt=""
+            alt="Cloud1"
             className={`${styles.cloud1} ${styles.cloud}`}
           />
           <img
             src={cloud2}
-            alt=""
+            alt="Cloud2"
             className={`${styles.cloud2} ${styles.cloud}`}
           />
           <img
             src={cloud3}
-            alt=""
+            alt="Cloud3"
             className={`${styles.cloud3} ${styles.cloud}`}
           />
           <img
             src={cloud4}
-            alt=""
+            alt="Cloud4"
             className={`${styles.cloud4} ${styles.cloud}`}
           />
           <img
             src={cloud5}
-            alt=""
+            alt="Cloud5"
             className={`${styles.cloud5} ${styles.cloud}`}
           />
           <img
             src={cloud6}
-            alt=""
+            alt="Cloud6"
             className={`${styles.cloud6} ${styles.cloud}`}
           />
         </div>

@@ -259,12 +259,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             <div className={styles.left}>
               <div className={styles.name}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>NAME</label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" />
                   <input {...register("name")} />
                 </div>
                 <p className={styles.error}>{errors.name?.message}</p>
@@ -272,12 +272,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.email}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>EMAIL </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" />
                   <input value={userEmail} disabled placeholder={userEmail} />
                 </div>
                 <p className={styles.error}>{errors.email_id?.message}</p>
@@ -285,12 +285,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.gender}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>GENDER</label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" />
 
                   <Controller
                     name="gender"
@@ -320,12 +320,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.mobile}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>MOBILE NUMBER </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" />
                   <input {...register("phone")} />
                 </div>
                 <p className={styles.error}>{errors.phone?.message}</p>
@@ -335,12 +335,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             <div className={styles.right}>
               <div className={styles.college}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>COLLEGE NAME </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" />
                   <Controller
                     name="college_id"
                     control={control}
@@ -371,12 +371,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.year}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>YEAR OF STUDY </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" className={styles.rightselect} />
+                  <img src={Field} alt="Field" className={styles.rightselect} />
                   <fieldset
                     className={styles.radioGroup}
                     aria-label="Year of Study"
@@ -399,12 +399,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.states}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>STATE</label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" />
                   <Controller
                     name="state"
                     control={control}
@@ -442,12 +442,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.city}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>CITY </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" />
                   <Controller
                     name="city"
                     control={control}

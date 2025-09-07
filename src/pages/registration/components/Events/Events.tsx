@@ -417,7 +417,7 @@ const Events = forwardRef<
                           ? info
                           : info2
                       }
-                      alt=""
+                      alt="Information"
                       onClick={(e) => {
                         showEventDescription(event), e.stopPropagation();
                       }}

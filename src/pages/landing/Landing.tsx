@@ -358,7 +358,7 @@ export default function Landing({
               className={styles.mobileBackground}
             />
 
-            <img src={mobileCloud} className={styles.mobileCloud} />
+            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud"/>
 
             <div className={styles.treeContainer} ref={treeImageRef}>
               <div className={styles.tree}>
@@ -454,7 +454,7 @@ export default function Landing({
               <img
                 src={mobileRegisterBtn}
                 className={styles.mobileRegisterBtn}
-                alt=""
+                alt="Register"
               />
               <div className={styles.registerBtnText}>Register</div>
             </div>
