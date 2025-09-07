@@ -468,7 +468,7 @@ export default function LandingRevamp({
             />
             <img
               src={mobileBackground}
-              alt=""
+              alt="mobile"
               className={styles.mobileBackground}
             />
 
@@ -535,7 +535,7 @@ export default function LandingRevamp({
                   <div className={styles.tree} ref={treeImageRef}>
                     <div className={styles.socialLinksContainer}>
                       <div className={styles.wire}>
-                        <img src={wire} alt="" />
+                        <img src={wire} alt="Wire" />
                       </div>
                       {socialLinks.map((link, index) => (
                         <div
