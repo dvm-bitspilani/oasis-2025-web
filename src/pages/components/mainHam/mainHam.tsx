@@ -228,7 +228,7 @@ export default function mainHam({
             className={item.classNameDiv}
             onClick={() => {
               goToPage(item.url);
-              setMainHamOpen(false);
+              // setMainHamOpen(false);
             }}
           >
             <div className={item.classNameText}>{item.title}</div>
