@@ -33,9 +33,16 @@
   .content {
     display: flex;
     justify-content: space-between;
-    p{
-      
-        font: 400 4vw "DM Serif Text";
+
+    .noEventsSelected {
+      height: 16vw;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        font: 400 2vw "DM Serif Text";
+      }
     }
     ul {
       margin: 1vw 0 2vw 2.5vw;
@@ -142,6 +149,12 @@
       font: 400 4.3vw "DM Serif Text";
     }
     .content {
+      .noEventsSelected {
+        height: 60svh;
+        p {
+          font: 400 4vw "DM Serif Text";
+        }
+      }
       ul {
         margin: 1vw 0 2vw 2.5vw;
         height: 60svh;
@@ -191,6 +204,12 @@
       font: 400 4.3vw "DM Serif Text";
     }
     .content {
+      .noEventsSelected {
+        height: 60svh;
+        p {
+          font: 400 5vw "DM Serif Text";
+        }
+      }
       ul {
         margin: 1vw 0 2vw 2.5vw;
         height: 60svh;
