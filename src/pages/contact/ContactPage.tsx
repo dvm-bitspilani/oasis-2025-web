@@ -26,6 +26,11 @@ export default function Contact() {
 
     return (
         <div className={styles.contactPageWrapper}>
+             <title>Contact Us</title>
+            <meta
+                name="description"
+                content="Contact the organizers of Oasis 2025. Find key contact information for team members, and get in touch with us for partnerships, queries, or support."
+            />
             <div className={styles.contactPageBg}>
                 {
                     Array(horiBarDetails?.numOfBars).fill(null).map((_, i) => 
