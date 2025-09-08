@@ -264,9 +264,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
               <div className={styles.name}>
                 <div className={styles.sameline}>
                   <img src={Left} alt="Glow" />
-                  <img src={Left} alt="Glow" />
                   <label>NAME</label>
-                  <img src={Right} alt="Glow" />
                   <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
@@ -279,9 +277,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
               <div className={styles.email}>
                 <div className={styles.sameline}>
                   <img src={Left} alt="Glow" />
-                  <img src={Left} alt="Glow" />
                   <label>EMAIL </label>
-                  <img src={Right} alt="Glow" />
                   <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
