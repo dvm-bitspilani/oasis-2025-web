@@ -350,7 +350,7 @@ export default function LandingRevamp({
           {
             y: "-30%",
             duration: 12,
-            // ease: "sine.in",
+            ease: "power1.in",
           },
           0.5
         )
