@@ -163,14 +163,17 @@ const Confirmation = (props: PropsType) => {
         <>
           <h2 className={styles.heading}>Your Selected Events :</h2>
           <div className={styles.content}>
-             {selectedEvents.length === 0 ? (
-  <div style={{height:"50vh",width:"90vw",display:"flex",justifyContent:"center",alignItems:"center"}}> <p style= {{color:"white",scale:""}}>No Selected Events</p></div>
-) : (
-            <ul ref={mainContainerRef}>
-              {selectedEvents.map((event) => (
-                <li key={event.id}>{event.name}</li>
-              ))}
-            </ul>)}
+            {selectedEvents.length === 0 ? (
+              <div className={styles.noEventsSelected}>
+                <p style={{ color: "white", scale: "" }}>No Selected Events</p>
+              </div>
+            ) : (
+              <ul ref={mainContainerRef}>
+                {selectedEvents.map((event) => (
+                  <li key={event.id}>{event.name}</li>
+                ))}
+              </ul>
+            )}
             <div
               className={styles.scrollBarContainer}
               ref={scrollBarRef}

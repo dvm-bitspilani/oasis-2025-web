@@ -4,9 +4,10 @@ import Instructions from "../../pages/registration/components/Instructions/Instr
 import Register from "../../pages/registration/components/Register/Register";
 import Events from "../../pages/registration/components/Events/Events";
 
+import bgExtend from "/images/registration/bg-extended.png";
 import banner from "/svgs/registration/reg-banner.svg";
-import bgExtend from "/svgs/registration/bg-extended.svg";
 import bgMobile from "/svgs/registration/bg-mobile.svg";
+import Back from "/svgs/registration/back.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -14,7 +15,6 @@ import { useRef, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import Back from "/svgs/registration/back.svg";
 
 interface RegistrationProps {
   startAnimation: boolean;
