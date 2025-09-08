@@ -22,7 +22,10 @@ const Events = () => {
           alt="Photography"
           className={styles.photography}
         />
-        <img src={dance} alt="Dance" className={styles.dance} />
+        <div className={styles.danceWrapper}>
+  <img src={dance} alt="Dance" className={styles.dance} />
+</div>
+
         <img src={music} alt="Music" className={styles.music} />
         <img src={Text} alt="Text" className={styles.text} />
         {/* <div className={styles.}></div>

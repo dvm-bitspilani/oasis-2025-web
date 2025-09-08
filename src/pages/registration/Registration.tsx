@@ -312,6 +312,11 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     <div className={styles.instrback}>
       {/* <img src={sun} alt="sun" className={styles.sun} ref={sunRef} /> */}
       {/* <div className={styles.overlay}></div> */}
+      <title>Registration</title>
+      <meta
+        name="description"
+        content="Register for Oasis 2025, the annual cultural festival of BITS Pilani. Follow our simple instructions to sign up and start participating in events."
+      />
       <img
         src={
           window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45) ")

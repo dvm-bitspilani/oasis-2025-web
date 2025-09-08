@@ -36,12 +36,14 @@
     overflow: hidden;
     transform-origin: bottom left;
     transition: transform 0.3s ease, filter 0.3s ease;
+    
   }
 
   .dance:hover {
     transform: scale(1.1);
     filter: saturate(1.5);
   }
+  
 
   .photography {
     position: absolute;
