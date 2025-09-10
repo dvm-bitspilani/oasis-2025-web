@@ -13,20 +13,20 @@ export default function mainHam({
 
   const hamItems = [
     {
-      title: "DEVELOPERS",
+      title: "ROCTAVES",
       cloud: hamCloud,
       classNameDiv: styles.devDiv,
       classNameText: styles.devText,
       classNameCloud: styles.devCloud,
-      url: "/developers", // Replace with actual URL
+      url: "https://rocktaves.bits-oasis.org/",
     },
     {
-      title: "SPONSORS",
+      title: "PRE REGISTRATIONS",
       cloud: hamCloud,
       classNameDiv: styles.sponsDiv,
       classNameText: styles.sponsText,
       classNameCloud: styles.sponsCloud,
-      url: "/sponsors", // Replace with actual URL
+      url: "https://preregistrations.bits-oasis.org/", // Replace with actual URL
     },
     {
       title: "GALLERY",
@@ -59,6 +59,12 @@ export default function mainHam({
       <div className={styles.backBtn} onClick={() => setMainHamOpen(false)}>
         <img src={backButton} alt="Back" className={styles.backIcon} />
       </div>
+
+      <img
+        src="svgs/landing/topRightDragon.svg"
+        alt=""
+        className={styles.topRightDragon}
+      />
 
       <div className={styles.hamDragonContainer}>
         <svg
@@ -227,8 +233,12 @@ export default function mainHam({
             key={index}
             className={item.classNameDiv}
             onClick={() => {
-              goToPage(item.url);
-              // setMainHamOpen(false);
+              if (item.url.startsWith("http")) {
+                window.open(item.url, "_blank");
+              } else {
+                goToPage(item.url);
+                // setMainHamOpen(false);
+              }
             }}
           >
             <div className={item.classNameText}>{item.title}</div>
@@ -236,6 +246,12 @@ export default function mainHam({
           </div>
         ))}
       </div>
+
+      <img
+        src="svgs/landing/bottomLeftDragon.svg"
+        alt=""
+        className={styles.bottomLeftDragon}
+      />
 
       <div className={styles.mwd}>
         Made with{" "}

@@ -440,7 +440,6 @@ export default function LandingRevamp({
           }
         >
           <div
-            className={styles.blur}
             onClick={() => setIsMainHamOpen(false)}
           ></div>
           <div className={styles.showMainHam}>
