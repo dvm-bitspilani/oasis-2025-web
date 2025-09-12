@@ -293,7 +293,6 @@ export default function LandingRevamp({
         });
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
-      
       const masterTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: wrapperRef.current,
@@ -455,7 +454,7 @@ export default function LandingRevamp({
               src={mobileMountains}
               className={styles.mobileMountains}
               alt="Mountains"
-              ref={landingMobileRef}
+              // ref={landingMobileRef}
             />
             <img
               src={mobileBackground}
