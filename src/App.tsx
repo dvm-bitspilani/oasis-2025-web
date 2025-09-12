@@ -9,6 +9,9 @@ import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import assetList from "./assetList";
 import useCanonicalUrl from "./UseCanonicalUrl";
+
+// import Eventspage from "./pages/events/components/Eventspage";
+
 // import Events from "./pages/events/Events";
 
 export const navContext = createContext<{ goToPage?: (page: string) => void }>(
