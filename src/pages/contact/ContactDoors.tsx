@@ -97,6 +97,7 @@ export default function ContactDoors({
         scrub: 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,
+        anticipatePin: 1,
         // onEnter: calculateHoriBarPos,
         onLeave: () => {
           animateContactBanner({ y: "0%", autoAlpha: 1 });
