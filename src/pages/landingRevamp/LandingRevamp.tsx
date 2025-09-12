@@ -10,7 +10,7 @@ import Navbar from "../components/navbar/Navbar";
 import landingImage from "/images/landing/background1.png";
 import mobileMountains from "/images/landing/mobileMountains.png";
 import tree from "/images/landing/tree1.png";
-import treeMob from "/images/landing/treeMob.png"
+import treeMob from "/images/landing/treeMob.png";
 import insta from "/svgs/landing/insta.svg";
 import instaLamp from "/svgs/landing/instaLamp.svg";
 import linkden from "/svgs/landing/linkden.svg";
@@ -198,7 +198,7 @@ export default function LandingRevamp({
     };
   }, []);
 
-    useGSAP(() => {
+  useGSAP(() => {
     if (treeImageRef.current && landingRef.current) {
       gsap.set(treeImageRef.current, {
         // autoAlpha: 1,
@@ -237,15 +237,6 @@ export default function LandingRevamp({
       }
     );
 
-    const masterTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: wrapperRef.current,
-        start: "top top",
-        end: `+=${scrollHeight}px`,
-        scrub: 1.5,
-      },
-    });
-
     const mm = gsap.matchMedia();
 
     mm.add("(max-width: 730px) or (aspect-ratio < 8/12)", () => {
@@ -255,6 +246,7 @@ export default function LandingRevamp({
           start: "top top",
           end: `+=300svh`,
           scrub: true,
+          invalidateOnRefresh: true,
         },
       });
       gsap.fromTo(
@@ -268,6 +260,7 @@ export default function LandingRevamp({
             start: "00vh",
             end: "+=60vh",
             scrub: true,
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -300,6 +293,15 @@ export default function LandingRevamp({
         });
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
+      const masterTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          end: `+=${scrollHeight}px`,
+          scrub: 1.5,
+          invalidateOnRefresh: true,
+        },
+      });
       masterTimeline
 
         .to(
@@ -353,11 +355,8 @@ export default function LandingRevamp({
     });
     return () => {
       mm.revert();
-      masterTimeline.scrollTrigger?.kill();
-      masterTimeline.kill();
     };
   }, [scrollHeight]);
-
 
   // useGSAP(() => {
   //   const scrollAnimationTimeline = gsap.timeline({
@@ -420,7 +419,6 @@ export default function LandingRevamp({
           <div className={styles.translateHam}>
             <Ham goToPage={goToPage} />
           </div>
-
         </div>
 
         <div
@@ -430,9 +428,7 @@ export default function LandingRevamp({
               : styles.mainHamContainer
           }
         >
-          <div
-            onClick={() => setIsMainHamOpen(false)}
-          ></div>
+          <div onClick={() => setIsMainHamOpen(false)}></div>
           <div className={styles.showMainHam}>
             <MainHam goToPage={goToPage} />
           </div>
@@ -443,7 +439,11 @@ export default function LandingRevamp({
           </div>
 
           <div className={styles.desktopBackground} ref={landingRef}>
-            <img src={landingImage} className={styles.landingImage} alt="Landing Image" />
+            <img
+              src={landingImage}
+              className={styles.landingImage}
+              alt="Landing Image"
+            />
           </div>
 
           <div
@@ -462,7 +462,7 @@ export default function LandingRevamp({
               className={styles.mobileBackground}
             />
 
-            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud"/>
+            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud" />
           </div>
         </div>
         <div className={styles.dateCountdown} ref={dateCountdownRef}>
@@ -553,7 +553,7 @@ export default function LandingRevamp({
                         </div>
                       ))}
                     </div>
-                     <img
+                    <img
                       src={tree}
                       // className={styles.tree}
                       className={styles.treeDesktop}
