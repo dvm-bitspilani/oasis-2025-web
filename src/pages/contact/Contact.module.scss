@@ -421,3 +421,6 @@
     //     padding-top: 5rem;
     // }
 }
+
+// yeah, this single line is the solution of the whole scroll bug :skull:
+:global(.pin-spacer) {overflow: hidden !important;}
