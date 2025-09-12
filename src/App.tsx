@@ -9,8 +9,8 @@ import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import assetList from "./assetList";
 import useCanonicalUrl from "./UseCanonicalUrl";
-import Events from "./pages/events/Events";
-import Eventspage from "./pages/events/components/Eventspage";
+// import Events from "./pages/events/Events";
+// import Eventspage from "./pages/events/components/Eventspage";
 
 // import Events from "./pages/events/Events";
 
@@ -175,7 +175,7 @@ export default function App() {
         />
       )}
 
-      {!isPreloading && currentPage === "events" && <Eventspage />}
+      {!isPreloading && currentPage === "events" && <ComingSoon />}
       {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}

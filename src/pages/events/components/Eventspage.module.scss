@@ -2,6 +2,7 @@
 .page{
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
     position: relative;
     background-size: cover;
     background-color: rgba(00,0,0,1);
@@ -18,11 +19,13 @@
         position: absolute;
         top:0;
         right: 0;
+        width:25vw;
     }
     .cl2{
         position: absolute;
         left: 0;
         bottom: 0;
+        width:25vw;
     }
     .bar1{
         position: absolute;
@@ -108,6 +111,22 @@ border-image-slice: 40; /* or appropriate value */
             color: #F2DD7C;
             
             text-align: center;
+        }
+        .controls{
+            display: flex;
+            position: absolute;
+            right: 5vw;
+            bottom: 0;
+            gap:10px;
+            cursor: pointer;
+            .left{
+                transform: scaleX(-1);
+            }
+            .left,.right{
+                img{
+                width: 4vw;
+                }
+            }
         }
     }
   }

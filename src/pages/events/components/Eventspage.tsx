@@ -7,6 +7,7 @@ import BackButton from "../../components/backButton/BackButton";
 import down from "/images/events/down.jpg";
 import gsap from "gsap";
 import { useEffect } from "react";
+import Right from "/svgs/events/Next1.svg"
 
 const Eventspage = () => {
   const icons = [
@@ -62,20 +63,20 @@ const Eventspage = () => {
       const centerX = container.clientWidth / 2;
       const centerY = container.clientHeight / 2;
 
-      const dx = (centerX - startX)*Math.random()/4;
-      const dy = (centerY - startY)*Math.random()/5;
+      const dx = (centerX - startX)*Math.random()/1.25;
+      const dy = (centerY - startY)*Math.random()/2;
 
       // Animate from 0 to dx, dy with scale and opacity
       gsap.fromTo(
         img,
-        { opacity: 0, scale: 0, x: 0, y: 0 },
+        { opacity: 1, scale: 1, x: 0, y: 0 },
         {
-          opacity: 1,
-          scale: 1,
+          opacity: 0,
+          scale: Math.random(),
           x: dx,
           y: dy,
-          duration: 2,
-          ease: "power2.out",
+          duration: 4,
+          ease: "linear",
           onComplete: () => {
             gsap.to(img, {
               opacity: 0,
@@ -95,7 +96,8 @@ const Eventspage = () => {
         const randomCorner = corners[
           Math.floor(Math.random() * corners.length)
         ] as "top-right" | "bottom-left";
-        spawnFromCorner(randomCorner);
+        spawnFromCorner("top-right");
+         spawnFromCorner("bottom-left");
       }, 400);
     };
 
@@ -120,16 +122,16 @@ const Eventspage = () => {
   return (
     <div>
       <div className={styles.page} style={{ backgroundImage: `url("${Back}")` }}>
-        <img src={cl1} alt="" className={styles.cl1} />
-        <img src={cl2} alt="" className={styles.cl2} />
-        <img src={topright} alt="" className={styles.bar1} />
-        <img src={topright} alt="" className={styles.bar2} />
+        <img src={cl1} alt="Clouds" className={styles.cl1} />
+        <img src={cl2} alt="Clouds" className={styles.cl2} />
+        <img src={topright} alt="Borders" className={styles.bar1} />
+        <img src={topright} alt="Borders" className={styles.bar2} />
         <div>
           <BackButton className={styles.aboutBB} />
         </div>
         <div className={styles.evntcontainer}>
           <div className={styles.leftevent}>
-            <img src={down} alt="" className={styles.imagenew} />
+            <img src={down} alt="Image" className={styles.imagenew} />
             <p>Madhur Jain</p>
           </div>
           <div className={styles.rightevent}>
@@ -140,6 +142,10 @@ const Eventspage = () => {
               entirely by students, it's a dazzling showcase of talent in and Music. It's where
               dreams come alive, laughter fills the air, and creativity knows no bounds.
             </p>
+            <div className={styles.controls}>
+              <div className={styles.left} > <img src={Right} alt="Prev" /></div>
+              <div className={styles.right} > <img src={Right} alt="Next" /></div>
+            </div>
           </div>
         </div>
       </div>
