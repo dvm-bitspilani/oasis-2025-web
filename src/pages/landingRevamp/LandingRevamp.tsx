@@ -197,26 +197,26 @@ export default function LandingRevamp({
     };
   }, []);
 
-  useGSAP(() => {
+    useGSAP(() => {
     if (treeImageRef.current && landingRef.current) {
       gsap.set(treeImageRef.current, {
-        autoAlpha: 1,
-        scale: 1,
-        y: 0,
+        // autoAlpha: 1,
+        // scale: 1,
+        // y: 0,
         force3D: true,
       });
 
       gsap.set(landingRef.current, {
-        autoAlpha: 1,
-        scale: 1,
-        y: 0,
+        // autoAlpha: 1,
+        // scale: 1,
+        // y: 0,
         force3D: true,
       });
 
       gsap.set(scrollerRef.current, {
-        autoAlpha: 1,
-        scale: 1,
-        y: 0,
+        // autoAlpha: 1,
+        // scale: 1,
+        // y: 0,
         force3D: true,
       });
     }
@@ -241,7 +241,7 @@ export default function LandingRevamp({
         trigger: wrapperRef.current,
         start: "top top",
         end: `+=${scrollHeight}px`,
-        scrub: true,
+        scrub: 1.5,
       },
     });
 
@@ -252,7 +252,7 @@ export default function LandingRevamp({
         scrollTrigger: {
           trigger: wrapperRef.current,
           start: "top top",
-          end: `+=${scrollHeight}px`,
+          end: `+=300svh`,
           scrub: true,
         },
       });
@@ -276,9 +276,8 @@ export default function LandingRevamp({
         .to(
           treeImageRef.current,
           {
-            scale: 1.2,
-            duration: 6,
-            // ease: "power2.inOut",
+            scale: 1.15,
+            ease: "power2.inOut",
           },
           0
         )
@@ -286,32 +285,18 @@ export default function LandingRevamp({
         .to(
           landingMobileRef.current,
           {
-            scale: 1.1,
+            scale: 1.08,
             // y: "8%",
-            duration: 6,
-            // ease: "power2.inOut",
+            ease: "power2.inOut",
           },
           0
         )
 
-        .to(
-          scrollerRef.current,
-          {
-            y: "-10%",
-            // y: "-12.55%",
-            duration: 24,
-          },
-          2
-        )
-
-        .to(
-          landingMobileRef.current,
-          {
-            y: "-10%",
-            duration: 20,
-          },
-          4
-        );
+        .to(landingMobileRef.current, {
+          y: "-10%",
+          // duration: 20,
+          ease: "sine.inOut",
+        });
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
       masterTimeline
@@ -350,7 +335,7 @@ export default function LandingRevamp({
           {
             y: "-30%",
             duration: 12,
-            ease: "power1.in",
+            // ease: "sine.in",
           },
           0.5
         )
@@ -365,6 +350,11 @@ export default function LandingRevamp({
           0
         );
     });
+    return () => {
+      mm.revert();
+      masterTimeline.scrollTrigger?.kill();
+      masterTimeline.kill();
+    };
   }, [scrollHeight]);
 
 
