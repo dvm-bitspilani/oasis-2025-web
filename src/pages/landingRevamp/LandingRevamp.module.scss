@@ -417,7 +417,7 @@ body {
         text-decoration: none;
         position: absolute;
         right: 3svw;
-        top: calc(100vh - 3svw);
+        top: calc(100svh - 3svw);
         transform: translateY(-100%);
         z-index: 1000;
         width: 22svw;
@@ -639,7 +639,7 @@ body {
         (max-width: 730px) {
           .treeContainer {
             .tree {
-              margin-top: clamp(0vh, 100vh - 80svw, 100vh);
+              margin-top: clamp(0svh, 100svh - 80svw, 100svh);
 
               img {
                 scale: 1.2;
@@ -666,7 +666,7 @@ body {
         @media (max-width: 500px) {
           .treeContainer {
             .tree {
-              margin-top: clamp(0vh, 100vh - 85svw, 100vh);
+              margin-top: clamp(0svh, 100svh - 85svw, 100svh);
             }
           }
         }
