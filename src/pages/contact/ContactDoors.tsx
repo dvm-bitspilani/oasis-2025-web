@@ -34,6 +34,7 @@ export default function ContactDoors({
   // const galleryContentRef = useRef<HTMLDivElement>(null);
   const windowWidth = useRef<number>(window.innerWidth);
   const horiBarDetailsRef = useRef<HoriBarDetails | null>(null);
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 900);
   const [isTab, setIsTab] = useState<boolean>(window.innerWidth <= 1300);
@@ -93,7 +94,7 @@ export default function ContactDoors({
       scrollTrigger: {
         trigger: triggerElemRef.current,
         start: "bottom bottom",
-        end: `+=${window.innerHeight - 1}`,
+        end: `+=${screenHeight - 1}`,
         scrub: 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,
@@ -139,7 +140,7 @@ export default function ContactDoors({
       contactSectionRef.current?.clientHeight,
       pinElemRef.current?.clientHeight
     );
-  });
+  },[screenHeight]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -150,6 +151,7 @@ export default function ContactDoors({
       ScrollTrigger.refresh();
       // ScrollTrigger.update();
       animateContactItems(0);
+      setScreenHeight(screenHeight);
 
       console.log("Uhh", windowWidth.current, window.innerWidth);
       // if (windowWidth.current !== window.innerWidth) location.reload();
