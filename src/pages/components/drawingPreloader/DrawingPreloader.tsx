@@ -43,10 +43,24 @@ const imagesToPreload = [
   "/svgs/registration/scroll-bar.svg",
   "/svgs/registration/leftarr.svg",
   "/svgs/registration/rightarr.svg",
+  '/images/contact/contact-banner.png',
+  '/images/contact/Aryan.png',
+  '/images/contact/Ahan.png',
+  '/images/contact/Arshita.png',
+  '/images/contact/Ayushmaan.png',
+  '/images/contact/Dhruv.png',
+  '/images/contact/Ishita.png',
+  '/images/contact/Pranav.png',
+  '/images/contact/Rahul.png',
+  '/images/contact/ContactCard1.png',
+  '/images/contact/DoorsCombined.png',
+  '/images/contact/DoorsMobile.png',
   "/images/landing/treeMob.png",
 ];
 
-const soundsToPreload = ["./sounds/door-close.mp3"];
+const soundsToPreload = [
+  "./sounds/door-close.mp3"
+]
 
 export default function DrawingPreloader({
   className,
@@ -214,6 +228,7 @@ export default function DrawingPreloader({
           width="100%"
           height="100%"
           ref={svgEl}
+          aria-label="Overlay"
           className={
             className
               ? `${styles.drawingPreloader} ${className} ${styles.sketchImage}`
@@ -334,6 +349,7 @@ export default function DrawingPreloader({
           width="100%"
           height="100%"
           ref={svgEl}
+          aria-label="Preloader"
           className={
             className
               ? `${styles.drawingPreloader} ${styles.mobilePreloader} ${className} ${styles.sketchImage}`

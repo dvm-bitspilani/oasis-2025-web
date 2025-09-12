@@ -3,13 +3,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
 import Field from "/svgs/registration/field2.svg";
 import styles from "./Register.module.scss";
-import { useEffect, useState, forwardRef } from "react";
+import { useEffect, useState, forwardRef, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
-
 import statesData from "./cities.json";
 import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
+import DropDown from "/svgs/registration/dropdown.svg";
 
 const stateOptions = statesData.map((item) => ({
   value: item.state,
@@ -22,10 +22,10 @@ const registrationSchema = yup.object({
   gender: yup.string().required("Gender is required"),
   phone: yup
     .string()
-    .matches(/^[1-9]\d{9}$/, "Invalid mobile number")
+    .matches(/^[1-9]\d{9}$/, "Invalid number")
     .required("Mobile number is required"),
   college_id: yup.string().required("College is required"),
-  year: yup.string().required("Year of study is required"),
+  year: yup.string().required("Field is required"),
   state: yup.string().required("State is required"),
   city: yup.string().required("City is required"),
 });
@@ -49,7 +49,7 @@ const genderOptions: GenderOption[] = [
   { value: "O", label: "Other" },
 ];
 
-const Register = forwardRef<HTMLDivElement, PropsType>(
+const Register = forwardRef<HTMLDivElement, PropsType>(  
   function RegisterComponent(props, ref) {
     const { onClickNext, userEmail, setUserData } = props;
     const [selectedState, setSelectedState] = useState("");
@@ -61,6 +61,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
     >([]);
     const [inputValue, setInputValue] = useState("");
 
+    const dropDownRef = useRef<(HTMLImageElement | null)[]>([]);
+    
     useEffect(() => {
       axios
         .get("https://bits-oasis.org/2025/main/registrations/get_college/")
@@ -90,6 +92,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
       formState: { errors },
       setValue,
       control,
+      reset,
+      watch,
     } = useForm<FormData>({
       resolver: yupResolver(registrationSchema as any),
       defaultValues: {
@@ -103,6 +107,32 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         city: "",
       },
     });
+
+useEffect(() => {
+  const savedData = localStorage.getItem("registrationFormData");
+  if (savedData) {
+    try {
+      const parsedData = JSON.parse(savedData);
+      reset({
+        ...parsedData,
+        email_id: userEmail,
+      });
+      if (parsedData.state) {
+        setSelectedState(parsedData.state);
+      }
+    } catch (err) {
+      console.error("Failed to parse local storage data:", err);
+      localStorage.removeItem("registrationFormData");
+    }
+  }
+}, [reset, userEmail]);
+    useEffect(() => {
+  const subscription = watch((value) => {
+    localStorage.setItem("registrationFormData", JSON.stringify(value));
+  });
+
+  return () => subscription.unsubscribe();
+}, [watch]);
 
     const getFilteredOptions = (input: string) => {
       if (!input) return stateOptions;
@@ -133,6 +163,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         textAlign: "center",
         borderRadius: "0",
         boxShadow: "none",
+        cursor: "pointer",
       }),
       noOptionsMessage: (provided: any, state: any) => ({
         ...provided,
@@ -165,7 +196,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         font: `100 ${
           isMobile ? 4.2 : isTablet ? 3.2 : 1.5
         }vw Abhaya Libre Extrabold`,
-        display: state.isFocused ? "none" : "flex",
+        display: state.hasValue || state.isFocused ? "none" : "flex",
         alignItems: "center",
         justifyContent: "center",
       }),
@@ -174,7 +205,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         position: "absolute",
         top: "50%",
         left: "50%",
-        maxWidth: "90%",
+        maxWidth: "65%",
         overflow: "hidden",
         transform: "translate(-50%, -50%)",
       }),
@@ -184,7 +215,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: "90%",
+        width: "65%",
       }),
       valueContainer: () => ({
         width: "100%",
@@ -246,6 +277,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         email_id: userEmail,
       });
       onClickNext();
+      
+      localStorage.removeItem("registrationFormData");
     };
 
     return (
@@ -259,12 +292,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             <div className={styles.left}>
               <div className={styles.name}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>NAME</label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" className={styles.fieldImg} />
                   <input {...register("name")} />
                 </div>
                 <p className={styles.error}>{errors.name?.message}</p>
@@ -272,12 +305,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.email}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>EMAIL </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" className={styles.fieldImg} />
                   <input value={userEmail} disabled placeholder={userEmail} />
                 </div>
                 <p className={styles.error}>{errors.email_id?.message}</p>
@@ -285,12 +318,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.gender}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>GENDER</label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" className={styles.fieldImg} />
 
                   <Controller
                     name="gender"
@@ -311,8 +344,27 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                         placeholder="--SELECT--"
                         className={styles["react-select-container"]}
                         classNamePrefix="react-select"
+                        onMenuOpen={() => {
+                          dropDownRef.current[0]!.classList.add(
+                            styles.rotateDropDown
+                          );
+                        }}
+                        onMenuClose={() => {
+                          dropDownRef.current[0]!.classList.remove(
+                            styles.rotateDropDown
+                          );
+                        }}
                       />
                     )}
+                  />
+
+                  <img
+                    src={DropDown}
+                    alt="dropDown"
+                    className={styles.dropDown}
+                    ref={(el) => {
+                      dropDownRef.current[0] = el;
+                    }}
                   />
                 </div>
                 <p className={styles.error}>{errors.gender?.message}</p>
@@ -320,12 +372,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.mobile}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>MOBILE NUMBER </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" className={styles.fieldImg} />
                   <input {...register("phone")} />
                 </div>
                 <p className={styles.error}>{errors.phone?.message}</p>
@@ -335,12 +387,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             <div className={styles.right}>
               <div className={styles.college}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>COLLEGE NAME </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" className={styles.fieldImg} />
                   <Controller
                     name="college_id"
                     control={control}
@@ -362,8 +414,28 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                         placeholder="--SELECT--"
                         className={styles["react-select-container"]}
                         classNamePrefix="react-select"
+                        onMenuOpen={() => {
+                          setTimeout(() => {
+                            dropDownRef.current[1]!.classList.add(
+                              styles.rotateDropDown
+                            );
+                          }, 100);
+                        }}
+                        onMenuClose={() => {
+                          dropDownRef.current[1]!.classList.remove(
+                            styles.rotateDropDown
+                          );
+                        }}
                       />
                     )}
+                  />
+                  <img
+                    src={DropDown}
+                    alt="dropDown"
+                    className={styles.dropDown}
+                    ref={(el) => {
+                      dropDownRef.current[1] = el;
+                    }}
                   />
                 </div>
                 <p className={styles.error}>{errors.college_id?.message}</p>
@@ -371,12 +443,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.year}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>YEAR OF STUDY </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" className={styles.rightselect} />
+                  <img src={Field} alt="Field" className={styles.fieldImg} />
                   <fieldset
                     className={styles.radioGroup}
                     aria-label="Year of Study"
@@ -399,12 +471,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.states}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>STATE</label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" className={styles.fieldImg} />
                   <Controller
                     name="state"
                     control={control}
@@ -433,8 +505,26 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                         placeholder="--SELECT--"
                         className={styles["react-select-container"]}
                         classNamePrefix="react-select"
+                        onMenuOpen={() => {
+                          dropDownRef.current[2]!.classList.add(
+                            styles.rotateDropDown
+                          );
+                        }}
+                        onMenuClose={() => {
+                          dropDownRef.current[2]!.classList.remove(
+                            styles.rotateDropDown
+                          );
+                        }}
                       />
                     )}
+                  />
+                  <img
+                    src={DropDown}
+                    alt="dropDown"
+                    className={styles.dropDown}
+                    ref={(el) => {
+                      dropDownRef.current[2] = el;
+                    }}
                   />
                 </div>
                 <p className={styles.error}>{errors.state?.message}</p>
@@ -442,12 +532,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
               <div className={styles.city}>
                 <div className={styles.sameline}>
-                  <img src={Left} alt="" />
+                  <img src={Left} alt="Glow" />
                   <label>CITY </label>
-                  <img src={Right} alt="" />
+                  <img src={Right} alt="Glow" />
                 </div>
                 <div className={styles.clouds}>
-                  <img src={Field} alt="" />
+                  <img src={Field} alt="Field" className={styles.fieldImg} />
                   <Controller
                     name="city"
                     control={control}
@@ -471,8 +561,26 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                         placeholder="--SELECT--"
                         className={styles["react-select-container"]}
                         classNamePrefix="react-select"
+                        onMenuOpen={() => {
+                          dropDownRef.current[3]!.classList.add(
+                            styles.rotateDropDown
+                          );
+                        }}
+                        onMenuClose={() => {
+                          dropDownRef.current[3]!.classList.remove(
+                            styles.rotateDropDown
+                          );
+                        }}
                       />
                     )}
+                  />
+                  <img
+                    src={DropDown}
+                    alt="dropDown"
+                    className={styles.dropDown}
+                    ref={(el) => {
+                      dropDownRef.current[3] = el;
+                    }}
                   />
                 </div>
                 <p className={styles.error}>{errors.city?.message}</p>
@@ -493,6 +601,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={styles.confirmIcon}
+            aria-label="Next"
           >
             <path
               d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"
@@ -509,6 +618,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={styles.confirmIcon}
+            aria-label="Next"
           >
             <path
               d="M-0.000976562 4.07317C2.77052 4.07317 73.6558 6.02439 91.9262 7L96.999 4.07317L91.9262 1L-0.000976562 4.07317Z"

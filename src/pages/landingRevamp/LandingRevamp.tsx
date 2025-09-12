@@ -25,10 +25,11 @@ import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
 // import ContactDoors from "../contact/ContactDoors";
 import Ham from "../components/ham/ham";
+import MainHam from "../components/mainHam/mainHam";
 import Lenis from "@studio-freight/lenis";
 import treeMob from "/images/landing/treeMob.png";
 
-import { useHamStore } from "../../utils/store";
+import { useHamStore, useMainHamStore } from "../../utils/store";
 import ContactDoors from "../contact/ContactDoors";
 // import { s } from "framer-motion/client";
 // import { FaA } from "react-icons/fa6";
@@ -80,7 +81,13 @@ export default function LandingRevamp({
   const landingMobileRef = useRef<HTMLImageElement>(null);
   const treeContainerRef = useRef<HTMLDivElement>(null);
   const isHamOpen = useHamStore((state) => state.isHamOpen);
+  const isMainHamOpen = useMainHamStore((state) => state.isMainHamOpen);
   const setIsHamOpen = useHamStore((state) => state.setHamOpen);
+<<<<<<< HEAD
+=======
+  const setIsMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
+
+>>>>>>> main
   const treeImageRef = useRef<HTMLImageElement>(null);
   const scrollerRef = useRef<HTMLImageElement>(null);
   const aboutUsContRef = useRef<HTMLDivElement>(null);
@@ -101,12 +108,21 @@ export default function LandingRevamp({
           (scrollerRef.current.scrollHeight ?? 0) - window.innerHeight * 1.4
         );
       }
+<<<<<<< HEAD
       // if (window.innerWidth <= 730) {
       //   document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
       //   document.body.style.position = "fixed";
       // } else {
       //   if (document.body.style.position === "fixed") location.reload();
       // }
+=======
+      if (window.innerWidth <= 730) {
+        document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
+        document.body.style.position = "fixed";
+      } else {
+        document.body.style.position = "static";
+      }
+>>>>>>> main
     };
 
     handleResize();
@@ -331,7 +347,7 @@ export default function LandingRevamp({
           {
             y: "-30%",
             duration: 12,
-            // ease: "sine.in",
+            ease: "power1.in",
           },
           0.5
         )
@@ -353,6 +369,47 @@ export default function LandingRevamp({
     };
   }, [scrollHeight]);
 
+<<<<<<< HEAD
+=======
+
+  // useGSAP(() => {
+  //   const scrollAnimationTimeline = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: wrapperRef.current,
+  //       scrub: true,
+  //       start: "top top",
+  //       end: "+=800vh",
+  //       onEnter: (self) => console.log("ENTERED:", self.trigger),
+  //       onLeave: (self) => console.log("LEFT:", self.trigger),
+  //       onUpdate: (self) => {
+  //         console.log("ACTIVE:", self.trigger, "Progress:", self.progress);
+  //       },
+  //     },
+  //   });
+
+  //   scrollAnimationTimeline
+  //     .to(
+  //       treeImageRef.current,
+  //       {
+  //         scale: 1.2,
+  //         y: "14%",
+  //         duration: 4,
+  //         ease: "power2.out",
+  //       },
+  //       0
+  //     )
+  //     .to(
+  //       landingRef.current,
+  //       {
+  //         scale: 1.1,
+  //         duration: 4,
+  //         ease: "power2.out",
+  //       },
+  //       0
+  //     );
+  // }, []);
+
+>>>>>>> main
   return (
     <>
       <main
@@ -377,6 +434,22 @@ export default function LandingRevamp({
           <div className={styles.translateHam}>
             <Ham goToPage={goToPage} />
           </div>
+
+        </div>
+
+        <div
+          className={
+            isMainHamOpen
+              ? `${styles.mainHamContainer} ${styles.mainHamOpen}`
+              : styles.mainHamContainer
+          }
+        >
+          <div
+            onClick={() => setIsMainHamOpen(false)}
+          ></div>
+          <div className={styles.showMainHam}>
+            <MainHam goToPage={goToPage} />
+          </div>
         </div>
         <div className={styles.backgroundContainer}>
           <div className={styles.logoContainer}>
@@ -384,7 +457,7 @@ export default function LandingRevamp({
           </div>
 
           <div className={styles.desktopBackground} ref={landingRef}>
-            <img src={landingImage} className={styles.landingImage} />
+            <img src={landingImage} className={styles.landingImage} alt="Landing Image" />
           </div>
 
           <div
@@ -394,16 +467,16 @@ export default function LandingRevamp({
             <img
               src={mobileMountains}
               className={styles.mobileMountains}
-              alt=""
+              alt="Mountains"
               ref={landingMobileRef}
             />
             <img
               src={mobileBackground}
-              alt=""
+              alt="mobile"
               className={styles.mobileBackground}
             />
 
-            <img src={mobileCloud} className={styles.mobileCloud} />
+            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud"/>
           </div>
         </div>
         <div className={styles.dateCountdown} ref={dateCountdownRef}>
@@ -456,7 +529,7 @@ export default function LandingRevamp({
                 <img
                   src={mobileRegisterBtn}
                   className={styles.mobileRegisterBtn}
-                  alt=""
+                  alt="Register"
                 />
                 <div className={styles.registerBtnText}>Register</div>
               </div>
@@ -466,7 +539,7 @@ export default function LandingRevamp({
                   <div className={styles.tree} ref={treeImageRef}>
                     <div className={styles.socialLinksContainer}>
                       <div className={styles.wire}>
-                        <img src={wire} alt="" />
+                        <img src={wire} alt="Wire" />
                       </div>
                       {socialLinks.map((link, index) => (
                         <div
@@ -482,12 +555,12 @@ export default function LandingRevamp({
                           >
                             <img
                               src={link.icon}
-                              alt=""
+                              alt="Icon"
                               className={`${styles.socialIcon} ${link.classNameIcon}`}
                             />
                             <img
                               src={link.lamp}
-                              alt=""
+                              alt="Lamp"
                               className={`${styles.socialLamp} ${link.classNameLamp}`}
                             />
                           </a>
@@ -497,8 +570,12 @@ export default function LandingRevamp({
                     <img
                       src={tree}
                       // className={styles.tree}
+<<<<<<< HEAD
                       className={styles.treeDesktop}
                       alt=""
+=======
+                      alt="Tree"
+>>>>>>> main
                       loading="eager"
                       fetchPriority="high"
                       style={{ contain: "none" }}

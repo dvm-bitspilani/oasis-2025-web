@@ -4,9 +4,10 @@ import Instructions from "../../pages/registration/components/Instructions/Instr
 import Register from "../../pages/registration/components/Register/Register";
 import Events from "../../pages/registration/components/Events/Events";
 
+import bgExtend from "/images/registration/bg-extended.png";
 import banner from "/svgs/registration/reg-banner.svg";
-import bgExtend from "/svgs/registration/bg-extended.svg";
 import bgMobile from "/svgs/registration/bg-mobile.svg";
+import Back from "/svgs/registration/back.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -14,7 +15,6 @@ import { useRef, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import Back from "/svgs/registration/back.svg";
 
 interface RegistrationProps {
   startAnimation: boolean;
@@ -312,6 +312,11 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     <div className={styles.instrback}>
       {/* <img src={sun} alt="sun" className={styles.sun} ref={sunRef} /> */}
       {/* <div className={styles.overlay}></div> */}
+      <title>Registration</title>
+      <meta
+        name="description"
+        content="Register for Oasis 2025, the annual cultural festival of BITS Pilani. Follow our simple instructions to sign up and start participating in events."
+      />
       <img
         src={
           window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45) ")

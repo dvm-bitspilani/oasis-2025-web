@@ -31,7 +31,7 @@ const Confirmation = (props: PropsType) => {
           : "Add"}
       </button>
       <div className={styles.close} onClick={props.closeModal}>
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Close">
           <path
             fillRule="evenodd"
             clipRule="evenodd"

@@ -1,0 +1,411 @@
+@use "../../../assets/global.scss" as *;
+
+.mainHam {
+  height: 100dvh;
+  width: 100dvw;
+  background-color: #340d0d;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  color: white;
+  background-image: url("/svgs/landing/crumpled-black-paper-texture.svg");
+  background-size: cover;
+  background-position: center;
+  pointer-events: all;
+  display: flex;
+  overflow: hidden;
+
+  .topRightDragon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 130px;
+    width: auto;
+
+    @media (max-width: 1200px) {
+      height: 100px;
+    }
+
+    @media (max-width: 1000px) {
+      height: 80px;
+    }
+  }
+
+  .bottomLeftDragon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    width: auto;
+
+    @media (max-width: 1200px) {
+      height: 80px;
+    }
+
+    @media (max-width: 1000px) {
+      height: 60px;
+    }
+  }
+
+  .hamDragonContainer {
+    position: absolute;
+    top: 48%;
+    left: 54.5%;
+    transform: translate(-50%, -50%);
+
+    .hamDragon {
+      transform: scale(0.8);
+      transform-origin: center;
+    }
+
+    .devDiv {
+      position: absolute;
+      top: 24%;
+      left: 31%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .devCloud {
+        width: auto;
+        height: 210px;
+      }
+
+      .devText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -30%);
+        font-family: $primaryFont;
+        font-size: 1.5em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+      }
+    }
+
+    .mediaPartnersDiv {
+      position: absolute;
+      top: 27.5%;
+      right: 29%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .mediaPartnersCloud {
+        width: auto;
+        height: 200px;
+      }
+
+      .mediaPartnersText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-62%, -50%);
+        font-family: $primaryFont;
+        font-size: 1.5em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+        line-height: 1.1;
+      }
+    }
+
+    .galleryDiv {
+      position: absolute;
+      top: 50%;
+      right: 35%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+
+      .galleryCloud {
+        width: auto;
+        height: 190px;
+      }
+
+      .galleryText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -30%);
+        font-family: $primaryFont;
+        font-size: 1.5em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+      }
+    }
+
+    .sponsDiv {
+      position: absolute;
+      bottom: 21%;
+      left: 32.5%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .sponsCloud {
+        width: auto;
+        height: 200px;
+      }
+
+      .sponsText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -50%);
+        font-family: $primaryFont;
+        font-size: 1.3em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+      }
+    }
+
+    .wallMagDiv {
+      position: absolute;
+      bottom: 29%;
+      right: 22.5%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .wallMagCloud {
+        width: auto;
+        height: 200px;
+      }
+
+      .wallMagText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-60%, -50%);
+        font-family: $primaryFont;
+        font-size: 1.5em;
+        color: #2d1810;
+        text-align: center;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .hamDragon {
+        transform: scale(0.7);
+      }
+
+      .devDiv {
+        top: 27.5%;
+        left: 33.5%;
+
+        .devCloud {
+          width: auto;
+          height: 180px;
+        }
+
+        .devText {
+          font-family: $primaryFont;
+          font-size: 1.3em;
+        }
+      }
+
+      .mediaPartnersDiv {
+        top: 30%;
+        right: 32%;
+
+        .mediaPartnersCloud {
+          width: auto;
+          height: 175px;
+        }
+
+        .mediaPartnersText {
+          transform: translate(-62%, -50%);
+          font-size: 1.3em;
+        }
+      }
+
+      .galleryDiv {
+        top: 51%;
+        right: 36%;
+        transform: translate(-50%, -50%);
+
+        &:hover {
+          transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .galleryCloud {
+          width: auto;
+          height: 170px;
+        }
+
+        .galleryText {
+          transform: translate(-65%, -30%);
+          font-size: 1.3em;
+        }
+      }
+
+      .sponsDiv {
+        bottom: 25%;
+        left: 34.5%;
+
+        .sponsCloud {
+          width: auto;
+          height: 175px;
+        }
+
+        .sponsText {
+          transform: translate(-60%, -40%);
+          font-size: 1.2em;
+        }
+      }
+
+      .wallMagDiv {
+        bottom: 32%;
+        right: 26%;
+
+        .wallMagCloud {
+          width: auto;
+          height: 175px;
+        }
+
+        .wallMagText {
+          transform: translate(-60%, -50%);
+          font-size: 1.3em;
+        }
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .hamDragon {
+        transform: scale(0.5);
+      }
+
+      .devDiv {
+        top: 33%;
+        left: 38%;
+
+        .devCloud {
+          width: auto;
+          height: 135px;
+        }
+
+        .devText {
+          font-family: $primaryFont;
+          font-size: 1em;
+        }
+      }
+
+      .mediaPartnersDiv {
+        top: 35.5%;
+        right: 37%;
+
+        .mediaPartnersCloud {
+          width: auto;
+          height: 130px;
+        }
+
+        .mediaPartnersText {
+          font-size: 1em;
+        }
+      }
+
+      .galleryDiv {
+        top: 50%;
+        right: 40%;
+        transform: translate(-50%, -50%);
+
+        &:hover {
+          transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .galleryCloud {
+          width: auto;
+          height: 125px;
+        }
+
+        .galleryText {
+          font-size: 1em;
+        }
+      }
+
+      .sponsDiv {
+        bottom: 32%;
+        left: 38.5%;
+
+        .sponsCloud {
+          width: auto;
+          height: 130px;
+        }
+
+        .sponsText {
+          font-size: 0.9em;
+        }
+      }
+
+      .wallMagDiv {
+        bottom: 36.5%;
+        right: 32.5%;
+
+        .wallMagCloud {
+          width: auto;
+          height: 130px;
+        }
+
+        .wallMagText {
+          transform: translate(-65%, -40%);
+          font-size: 1em;
+        }
+      }
+    }
+  }
+
+  .backBtn {
+    cursor: pointer;
+    position: relative;
+    .backIcon {
+      z-index: 5;
+      position: absolute;
+      top: 45px;
+      left: 30px;
+      width: 58px;
+      height: 58px;
+      background: transparent;
+      transition: filter 0.3s ease;
+
+      &:hover {
+        filter: drop-shadow(1px 0px 9px rgba(208, 176, 99, 0.4));
+      }
+    }
+  }
+
+  .mwd {
+    position: absolute;
+    bottom: 1vw;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d69b65;
+    font-size: 1.4em;
+    font-family: $hamFooterFont;
+
+    @media screen and (max-width: 1200px) {
+      bottom: 1.5vw;
+    }
+  }
+}

@@ -43,6 +43,7 @@ const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
 const iconImages: HTMLImageElement[] = icons.map((src) => {
   const img = new Image();
   img.src = src;
+  img.alt = "Letters";
   return img;
 });
 const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
@@ -486,7 +487,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       }}
     >
       {/* <Navbar hideHam variant="about" /> */}
-
+      
       <div className={styles.header}>
         <img src={isMobile ? Reg : Header} alt="About Us" />
       </div>
@@ -494,7 +495,12 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       <div className={styles.content3D}>
         <div className={styles.wrapper}>
           <button onClick={prevVideo} className={styles.arr}>
-            <img src={nextarr} className={styles.prevarr} width="100%"></img>
+            <img
+              src={nextarr}
+              className={styles.prevarr}
+              width="100%"
+              alt="Next Arrow"
+            ></img>
           </button>
           <div className={styles.vid}>
             <div
@@ -522,7 +528,12 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
           </div>
 
           <button onClick={nextVideo} className={styles.arr}>
-            <img src={nextarr} className={styles.nextarr} width="100%"></img>
+            <img
+              src={nextarr}
+              className={styles.nextarr}
+              width="100%"
+              alt="Next Arrow"
+            ></img>
           </button>
 
           <div></div>
@@ -581,7 +592,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
           </div>
           <div className={styles.abtus}>
             <img src={abtus} alt="ABOUT US" />
-            <h1>ABOUT US</h1>
+            <h3>ABOUT US</h3>
           </div>
         </div>
       </div>

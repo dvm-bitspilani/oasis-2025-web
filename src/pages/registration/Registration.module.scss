@@ -1,7 +1,11 @@
 @use "/src/assets/global.scss" as *;
 
 .instrback {
-  background: linear-gradient(to bottom, #000 0%, #666666 100%);
+  background: linear-gradient(
+    to bottom,
+    rgb(0, 0, 0) 12%,
+    rgb(120, 120, 120) 100%
+  );
   height: 100svh;
   width: 100vw;
   display: flex;

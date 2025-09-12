@@ -8,7 +8,7 @@ import cloud4 from "/svgs/landing/hamClouds/cloud4.min.svg";
 import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
 import { useState, useEffect, useContext, useRef } from "react";
-import { useHamStore } from "../../../utils/store";
+import { useHamStore, useMainHamStore } from "../../../utils/store";
 import { navContext } from "../../../App";
 import { gsap } from "gsap";
 import _ScrollTrigger, { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -40,6 +40,7 @@ export default function Navbar({
   );
 
   const setHamOpen = useHamStore((state) => state.setHamOpen);
+  const setMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
   const navRef =  useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -119,6 +120,8 @@ useEffect(() => {
   const handleHamClick = () => {
     if (isMobile) {
       setHamOpen(true);
+    } else {
+      setMainHamOpen(true);
     }
   };
   return (
@@ -127,37 +130,37 @@ useEffect(() => {
       }`}>
       {!hideHam &&(
       <div className={styles.hamMenuBtn} onClick={handleHamClick}>
-        <img src={moon} alt="" className={styles.moon} />
-        <img src={moonHam} alt="" className={styles.moonHam} />
+        <img src={moon} alt="moon" className={styles.moon} />
+        <img src={moonHam} alt="moonHam" className={styles.moonHam} />
         <div className={styles.clouds}>
           <img
             src={cloud1}
-            alt=""
+            alt="Cloud1"
             className={`${styles.cloud1} ${styles.cloud}`}
           />
           <img
             src={cloud2}
-            alt=""
+            alt="Cloud2"
             className={`${styles.cloud2} ${styles.cloud}`}
           />
           <img
             src={cloud3}
-            alt=""
+            alt="Cloud3"
             className={`${styles.cloud3} ${styles.cloud}`}
           />
           <img
             src={cloud4}
-            alt=""
+            alt="Cloud4"
             className={`${styles.cloud4} ${styles.cloud}`}
           />
           <img
             src={cloud5}
-            alt=""
+            alt="Cloud5"
             className={`${styles.cloud5} ${styles.cloud}`}
           />
           <img
             src={cloud6}
-            alt=""
+            alt="Cloud6"
             className={`${styles.cloud6} ${styles.cloud}`}
           />
         </div>

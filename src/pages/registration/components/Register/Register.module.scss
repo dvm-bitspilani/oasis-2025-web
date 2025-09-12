@@ -75,6 +75,20 @@
           z-index: 0;
           display: flex;
 
+          .rotateDropDown {
+            transform: translateY(-50%) rotate(90deg) !important;
+          }
+
+          .dropDown {
+            height: 3vw;
+            width: 3vw;
+            position: absolute;
+            right: 7%;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.6s ease;
+          }
+
           input {
             margin: 0 auto;
             width: 90%;
@@ -91,7 +105,7 @@
             }
           }
 
-          img {
+          .fieldImg {
             position: absolute;
             overflow-x: visible;
             overflow-y: hidden;
@@ -220,8 +234,13 @@
           position: absolute;
           left: 18%;
           bottom: -0.8vw;
-          color: hwb(0 0% 0%);
-          font: 400 1vw "Abhaya Libre";
+          // text-shadow: 0px 0px 2px rgb(0, 0, 0);
+          color: rgb(255, 0, 0);
+          // text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+          //   1px 1px 0 black;
+          -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+          // stroke: 0.25px white;
+          font: 400 1.2vw "Abhaya Libre";
           text-align: left;
         }
       }
@@ -333,6 +352,10 @@
           }
           .clouds {
             width: 70vw;
+            .dropDown {
+              height: 6vw;
+              width: 6vw;
+            }
             input {
               font: 100 3.2vw "Abhaya Libre Extrabold";
             }
@@ -399,10 +422,9 @@
       background-color: transparent !important;
       transition: background-color 5000s ease-in-out 0s !important;
     }
-
     .registrationForm {
       max-height: 75svh;
-      padding: 7vw 0;
+      padding: 7vw 0 18vw 0;
 
       .formColumns {
         gap: 9vw;
@@ -412,6 +434,10 @@
           gap: 9vw;
           .clouds {
             width: 87vw;
+            .dropDown {
+              height: 6.5vw;
+              width: 6.5vw;
+            }
             input {
               font: 100 4.2vw "Abhaya Libre Extrabold";
             }
