@@ -277,7 +277,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
 
   const onGoogleSignIn = useGoogleLogin({
     onSuccess: (response) => {
-      console.log(response.access_token);
+      // console.log(response.access_token);
       axios
         .post("https://bits-oasis.org/2025/main/registrations/google-reg/", {
           access_token: response.access_token,
