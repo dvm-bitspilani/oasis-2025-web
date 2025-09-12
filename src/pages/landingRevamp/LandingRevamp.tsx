@@ -293,6 +293,7 @@ export default function LandingRevamp({
         });
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
+      
       const masterTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: wrapperRef.current,
