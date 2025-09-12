@@ -244,7 +244,7 @@ export default function LandingRevamp({
         scrollTrigger: {
           trigger: wrapperRef.current,
           start: "top top",
-          end: `+=300svh`,
+          end: `+=300vh`,
           scrub: true,
           invalidateOnRefresh: true,
         },
