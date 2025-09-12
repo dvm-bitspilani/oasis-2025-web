@@ -66,7 +66,6 @@ const Eventspage = () => {
       const dx = (centerX - startX)*Math.random()/1.25;
       const dy = (centerY - startY)*Math.random()/2;
 
-      // Animate from 0 to dx, dy with scale and opacity
       gsap.fromTo(
         img,
         { opacity: 1, scale: 1, x: 0, y: 0 },
