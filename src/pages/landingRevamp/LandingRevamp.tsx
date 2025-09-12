@@ -10,6 +10,7 @@ import Navbar from "../components/navbar/Navbar";
 import landingImage from "/images/landing/background1.png";
 import mobileMountains from "/images/landing/mobileMountains.png";
 import tree from "/images/landing/tree1.png";
+import treeMob from "/images/landing/treeMob.png"
 import insta from "/svgs/landing/insta.svg";
 import instaLamp from "/svgs/landing/instaLamp.svg";
 import linkden from "/svgs/landing/linkden.svg";
@@ -105,12 +106,12 @@ export default function LandingRevamp({
           (scrollerRef.current.scrollHeight ?? 0) - window.innerHeight * 1.4
         );
       }
-      if (window.innerWidth <= 730) {
-        document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
-        document.body.style.position = "fixed";
-      } else {
-        document.body.style.position = "static";
-      }
+      // if (window.innerWidth <= 730) {
+      //   document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
+      //   document.body.style.position = "fixed";
+      // } else {
+      //   document.body.style.position = "static";
+      // }
     };
 
     handleResize();
@@ -552,13 +553,21 @@ export default function LandingRevamp({
                         </div>
                       ))}
                     </div>
-                    <img
+                     <img
                       src={tree}
                       // className={styles.tree}
-                      alt="Tree"
+                      className={styles.treeDesktop}
+                      alt=""
                       loading="eager"
                       fetchPriority="high"
                       style={{ contain: "none" }}
+                    />
+                    <img
+                      src={treeMob}
+                      alt=""
+                      className={styles.treeMob}
+                      loading="eager"
+                      fetchPriority="high"
                     />
                   </div>
                   <div className={styles.treeExtender}></div>
