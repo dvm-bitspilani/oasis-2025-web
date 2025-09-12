@@ -94,7 +94,7 @@ export default function ContactDoors({
       scrollTrigger: {
         trigger: triggerElemRef.current,
         start: "bottom bottom",
-        end: `+=${screenHeight - 1}`,
+        end: `+=${document.documentElement.clientHeight - 1}`,
         scrub: 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,
