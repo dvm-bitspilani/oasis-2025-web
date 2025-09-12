@@ -161,11 +161,17 @@
         position: relative;
         bottom: 0px;
         width: 100%;
-        min-height: 100vh;
+        min-height: 100dvh;
         // height: 100%;
         display: grid;
         grid-template-columns: 50% 50%;
         pointer-events: none;
+        overflow: visible;
+
+        @media (max-width: 730px) {
+            height: calc(100% - 100dvh + 200px);
+            min-height: 0px;
+        }
 
         .contactDoor {
             width: 100%;

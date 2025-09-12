@@ -93,7 +93,7 @@ export default function ContactDoors({
       scrollTrigger: {
         trigger: triggerElemRef.current,
         start: "bottom bottom",
-        end: `+=${window.innerHeight - 1}`,
+        end: () => `+=${window.innerHeight <= 730 ? 200 : window.innerHeight - 1}`,
         scrub: 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,

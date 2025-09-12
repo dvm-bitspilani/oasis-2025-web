@@ -105,11 +105,11 @@ export default function LandingRevamp({
           (scrollerRef.current.scrollHeight ?? 0) - window.innerHeight * 1.4
         );
       }
-      if (window.innerWidth <= 730) {
+      if (false && window.innerWidth <= 730) {
         document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
         document.body.style.position = "fixed";
       } else {
-        document.body.style.position = "static";
+        //document.body.style.position = "static";
       }
     };
 
