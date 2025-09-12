@@ -91,7 +91,7 @@ const Eventspage = () => {
 
     const startSpawning = () => {
       intervalId = window.setInterval(() => {
-        const corners = ["top-right", "bottom-left"];
+        // const corners = ["top-right", "bottom-left"];
         // const randomCorner = corners[
         //   Math.floor(Math.random() * corners.length)
         // ] as "top-right" | "bottom-left";
