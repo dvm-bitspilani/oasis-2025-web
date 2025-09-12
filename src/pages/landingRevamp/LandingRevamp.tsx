@@ -10,6 +10,7 @@ import Navbar from "../components/navbar/Navbar";
 import landingImage from "/images/landing/background1.png";
 import mobileMountains from "/images/landing/mobileMountains.png";
 import tree from "/images/landing/tree1.png";
+import treeMob from "/images/landing/treeMob.png";
 import insta from "/svgs/landing/insta.svg";
 import instaLamp from "/svgs/landing/instaLamp.svg";
 import linkden from "/svgs/landing/linkden.svg";
@@ -105,12 +106,12 @@ export default function LandingRevamp({
           (scrollerRef.current.scrollHeight ?? 0) - window.innerHeight * 1.4
         );
       }
-      if (window.innerWidth <= 730) {
-        document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
-        document.body.style.position = "fixed";
-      } else {
-        document.body.style.position = "static";
-      }
+      // if (window.innerWidth <= 730) {
+      //   document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
+      //   document.body.style.position = "fixed";
+      // } else {
+      //   document.body.style.position = "static";
+      // }
     };
 
     handleResize();
@@ -200,23 +201,23 @@ export default function LandingRevamp({
   useGSAP(() => {
     if (treeImageRef.current && landingRef.current) {
       gsap.set(treeImageRef.current, {
-        autoAlpha: 1,
-        scale: 1,
-        y: 0,
+        // autoAlpha: 1,
+        // scale: 1,
+        // y: 0,
         force3D: true,
       });
 
       gsap.set(landingRef.current, {
-        autoAlpha: 1,
-        scale: 1,
-        y: 0,
+        // autoAlpha: 1,
+        // scale: 1,
+        // y: 0,
         force3D: true,
       });
 
       gsap.set(scrollerRef.current, {
-        autoAlpha: 1,
-        scale: 1,
-        y: 0,
+        // autoAlpha: 1,
+        // scale: 1,
+        // y: 0,
         force3D: true,
       });
     }
@@ -236,15 +237,6 @@ export default function LandingRevamp({
       }
     );
 
-    const masterTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: wrapperRef.current,
-        start: "top top",
-        end: `+=${scrollHeight}px`,
-        scrub: true,
-      },
-    });
-
     const mm = gsap.matchMedia();
 
     mm.add("(max-width: 730px) or (aspect-ratio < 8/12)", () => {
@@ -252,8 +244,9 @@ export default function LandingRevamp({
         scrollTrigger: {
           trigger: wrapperRef.current,
           start: "top top",
-          end: `+=${scrollHeight}px`,
+          end: `+=300vh`,
           scrub: true,
+          invalidateOnRefresh: true,
         },
       });
       gsap.fromTo(
@@ -267,6 +260,7 @@ export default function LandingRevamp({
             start: "00vh",
             end: "+=60vh",
             scrub: true,
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -276,9 +270,8 @@ export default function LandingRevamp({
         .to(
           treeImageRef.current,
           {
-            scale: 1.2,
-            duration: 6,
-            // ease: "power2.inOut",
+            scale: 1.15,
+            ease: "power2.inOut",
           },
           0
         )
@@ -286,34 +279,29 @@ export default function LandingRevamp({
         .to(
           landingMobileRef.current,
           {
-            scale: 1.1,
+            scale: 1.08,
             // y: "8%",
-            duration: 6,
-            // ease: "power2.inOut",
+            ease: "power2.inOut",
           },
           0
         )
 
-        .to(
-          scrollerRef.current,
-          {
-            y: "-10%",
-            // y: "-12.55%",
-            duration: 24,
-          },
-          2
-        )
-
-        .to(
-          landingMobileRef.current,
-          {
-            y: "-10%",
-            duration: 20,
-          },
-          4
-        );
+        .to(landingMobileRef.current, {
+          y: "-10%",
+          // duration: 20,
+          ease: "sine.inOut",
+        });
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
+      const masterTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          end: `+=${scrollHeight}px`,
+          scrub: 1.5,
+          invalidateOnRefresh: true,
+        },
+      });
       masterTimeline
 
         .to(
@@ -350,7 +338,7 @@ export default function LandingRevamp({
           {
             y: "-30%",
             duration: 12,
-            ease: "power1.in",
+            // ease: "sine.in",
           },
           0.5
         )
@@ -365,8 +353,10 @@ export default function LandingRevamp({
           0
         );
     });
+    return () => {
+      mm.revert();
+    };
   }, [scrollHeight]);
-
 
   // useGSAP(() => {
   //   const scrollAnimationTimeline = gsap.timeline({
@@ -429,7 +419,6 @@ export default function LandingRevamp({
           <div className={styles.translateHam}>
             <Ham goToPage={goToPage} />
           </div>
-
         </div>
 
         <div
@@ -439,9 +428,7 @@ export default function LandingRevamp({
               : styles.mainHamContainer
           }
         >
-          <div
-            onClick={() => setIsMainHamOpen(false)}
-          ></div>
+          <div onClick={() => setIsMainHamOpen(false)}></div>
           <div className={styles.showMainHam}>
             <MainHam goToPage={goToPage} />
           </div>
@@ -452,7 +439,11 @@ export default function LandingRevamp({
           </div>
 
           <div className={styles.desktopBackground} ref={landingRef}>
-            <img src={landingImage} className={styles.landingImage} alt="Landing Image" />
+            <img
+              src={landingImage}
+              className={styles.landingImage}
+              alt="Landing Image"
+            />
           </div>
 
           <div
@@ -463,7 +454,7 @@ export default function LandingRevamp({
               src={mobileMountains}
               className={styles.mobileMountains}
               alt="Mountains"
-              ref={landingMobileRef}
+              // ref={landingMobileRef}
             />
             <img
               src={mobileBackground}
@@ -471,7 +462,7 @@ export default function LandingRevamp({
               className={styles.mobileBackground}
             />
 
-            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud"/>
+            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud" />
           </div>
         </div>
         <div className={styles.dateCountdown} ref={dateCountdownRef}>
@@ -565,10 +556,18 @@ export default function LandingRevamp({
                     <img
                       src={tree}
                       // className={styles.tree}
-                      alt="Tree"
+                      className={styles.treeDesktop}
+                      alt=""
                       loading="eager"
                       fetchPriority="high"
                       style={{ contain: "none" }}
+                    />
+                    <img
+                      src={treeMob}
+                      alt=""
+                      className={styles.treeMob}
+                      loading="eager"
+                      fetchPriority="high"
                     />
                   </div>
                   <div className={styles.treeExtender}></div>
