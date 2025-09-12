@@ -109,7 +109,7 @@ export default function LandingRevamp({
         document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
         document.body.style.position = "fixed";
       } else {
-        if (document.body.style.position === "fixed") location.reload();
+        document.body.style.position = "static";
       }
     };
 

@@ -10,7 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import contactBanner from "/images/contact/contact-banner.png";
 import contacts from "./components/contactGallery/contacts";
 // import ContactGallery from './components/contactGallery/ContactGallery';
-// import { FaEnvelope, FaPhone } from 'react-icons/fa6';
+import { FaEnvelope } from 'react-icons/fa6';
 
 interface ContactDoorsProps {
   pinElemRef: React.RefObject<HTMLDivElement | null>;
@@ -39,7 +39,7 @@ export default function ContactDoors({
   const [isTab, setIsTab] = useState<boolean>(window.innerWidth <= 1300);
 
   // const launchPhone = (phone: string) => window.location.href = `tel:${phone}`;
-  // const launchEmail = (email: string) => window.location.href = `mailto:${email}`;
+  const launchEmail = (email: string) => window.location.href = `mailto:${email}`;
 
   const calculateHoriBarPos = () => {
     const contactItems = document.getElementsByClassName(styles.contactItem);
@@ -193,10 +193,9 @@ export default function ContactDoors({
                     className={styles.horiBar}
                     key={i}
                     style={{
-                      top: `${
-                        i * (horiBarDetailsRef.current?.barGap || 0) +
+                      top: `${i * (horiBarDetailsRef.current?.barGap || 0) +
                         (horiBarDetailsRef.current?.firstBarPos || 0)
-                      }px`,
+                        }px`,
                     }}
                   >
                     {Array(2)
@@ -230,10 +229,10 @@ export default function ContactDoors({
                       >
                         {contact.role}
                       </div>
-                      {/* <div className={styles.contactLinks}>
-                                                        <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
-                                                        <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
-                                                    </div> */}
+                      <div className={styles.contactLinks}>
+                          {/* <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div> */}
+                          <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -256,10 +255,9 @@ export default function ContactDoors({
                     className={styles.horiBar}
                     key={i}
                     style={{
-                      top: `${
-                        i * (horiBarDetailsRef.current?.barGap || 0) +
+                      top: `${i * (horiBarDetailsRef.current?.barGap || 0) +
                         (horiBarDetailsRef.current?.firstBarPos || 0)
-                      }px`,
+                        }px`,
                     }}
                   >
                     {Array(2)
@@ -293,10 +291,10 @@ export default function ContactDoors({
                       >
                         {contact.role}
                       </div>
-                      {/* <div className={styles.contactLinks}>
-                                                        <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
-                                                        <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
-                                                    </div> */}
+                      <div className={styles.contactLinks}>
+                          {/* <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div> */}
+                          <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
+                      </div>
                     </div>
                   </div>
                 </div>
