@@ -139,7 +139,7 @@ export default function ContactDoors({
       contactSectionRef.current?.clientHeight,
       pinElemRef.current?.clientHeight
     );
-  });
+  },[]);
 
   useEffect(() => {
     const handleResize = () => {
