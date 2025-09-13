@@ -298,7 +298,7 @@ useEffect(() => {
                 </div>
                 <div className={styles.clouds}>
                   <img src={Field} alt="Field" className={styles.fieldImg} />
-                  <input {...register("name")} />
+                  <input autoComplete="off" {...register("name")} />
                 </div>
                 <p className={styles.error}>{errors.name?.message}</p>
               </div>
@@ -378,7 +378,7 @@ useEffect(() => {
                 </div>
                 <div className={styles.clouds}>
                   <img src={Field} alt="Field" className={styles.fieldImg} />
-                  <input {...register("phone")} />
+                  <input autoComplete="off" {...register("phone")} />
                 </div>
                 <p className={styles.error}>{errors.phone?.message}</p>
               </div>

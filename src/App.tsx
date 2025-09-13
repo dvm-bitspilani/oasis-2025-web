@@ -10,6 +10,9 @@ import ComingSoon from "./pages/comingSoon/ComingSoon";
 import assetList from "./assetList";
 import useCanonicalUrl from "./UseCanonicalUrl";
 
+import styles from "./App.module.scss";
+import petal from "/images/landing/petal.png";
+
 // import Eventspage from "./pages/events/components/Eventspage";
 
 // import Events from "./pages/events/Events";
@@ -51,7 +54,33 @@ export default function App() {
 
   const [isPreloading, setIsPreloading] = useState(location.pathname !== "/");
 
+  const [mouseCoords, setMouseCoords] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMouseCoords({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+  useEffect(() => {
+    if (!cursorPetal.current) return;
+    if (mouseCoords.x === 0 && mouseCoords.y === 0) {
+      cursorPetal.current.style.opacity = "0";
+      return;
+    }
+    cursorPetal.current.style.opacity = "1";
+    cursorPetal.current.style.left = `${mouseCoords.x + 30}px`;
+    cursorPetal.current.style.top = `${mouseCoords.y + 30}px`;
+  }, [mouseCoords]);
+
   const nextRoute = useRef<string | null>(null);
+  const cursorPetal = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     const path = location.pathname.replace("/", "");
@@ -155,6 +184,12 @@ export default function App() {
       <h1 style={{ display: "none" }}>
         OASIS 2025 | BITS Pilani's Annual Cultural Fest
       </h1>
+      <img
+        src={petal}
+        alt="petal"
+        className={styles.cursorPetal}
+        ref={cursorPetal}
+      />
       {isPreloading && (
         <Preloader
           onEnter={handlePreloaderEnter}

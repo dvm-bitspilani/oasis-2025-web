@@ -617,6 +617,125 @@ body {
                 }
               }
             }
+
+            .petalsBox {
+              // background-color: rgb(234, 0, 0);
+              position: absolute;
+              transform: rotate(45deg) translate(-2%, -12vw);
+              top: 8vw;
+              left: 0;
+              width: 100vw;
+              height: 200vh;
+              pointer-events: none;
+              // z-index: -1;
+              // display: flex;
+              // align-items: center;
+              // justify-content: center;
+              // position: relative;
+              padding: 0 30%;
+              overflow: hidden;
+
+              .petal {
+                width: 2vw;
+                height: 2vw;
+                // transform: translate(-50vw, 280vh);
+                animation: leafFlow linear infinite;
+                animation-duration: calc(555s / var(--i));
+                animation-delay: -500s;
+
+                @keyframes leafFlow {
+                  0% {
+                    transform: translate(0, 0) rotate(0deg);
+                  }
+                  100% {
+                    transform: translate(-50vw, 320vh)
+                      rotate(
+                        calc(
+                          (var(--i) - 10) * ((-200deg - -360deg) / (20 - 10)) +
+                            -360deg
+                        )
+                      );
+                  }
+                }
+              }
+            }
+
+            .petalsBox2 {
+              // background-color: rgb(234, 0, 0);
+              position: absolute;
+              transform: rotate(45deg) translate(-2%, -12vw);
+              top: 8vw;
+              left: 0;
+              width: 100vw;
+              height: 200vh;
+              pointer-events: none;
+              z-index: -1;
+              // display: flex;
+              // align-items: center;
+              // justify-content: center;
+              // position: relative;
+              padding: 0 30%;
+              overflow: hidden;
+
+              .petal2 {
+                width: 2vw;
+                height: 2vw;
+                // transform: translate(-50vw, 280vh);
+                animation: leafFlow2 linear infinite;
+                animation-duration: calc(555s / var(--i));
+                animation-delay: -500s;
+
+                @keyframes leafFlow2 {
+                  0% {
+                    transform: translate(0, 0) rotate(0deg);
+                  }
+
+                  100% {
+                    transform: translate(-20px, 280vh)
+                      rotate(
+                        calc(
+                          (var(--i) - 10) * (360deg - 200deg) / (20 - 10) +
+                            200deg
+                        )
+                      );
+                  }
+                }
+              }
+            }
+            @media screen and (max-width: 1350px) and (aspect-ratio < 1.1) {
+              .petalsBox {
+                transform: rotate(45deg) translate(-35vw, -12vw);
+                .petal {
+                  width: 3vw;
+                  height: 3vw;
+                }
+              }
+              .petalsBox2 {
+                transform: rotate(45deg) translate(-35vw, -12vw);
+                .petal2 {
+                  width: 3vw;
+                  height: 3vw;
+                }
+              }
+            }
+            @media (aspect-ratio < 8/12), (max-width: 730px) {
+              .petalsBox {
+                transform: rotate(60deg) translate(-65vw, -12vw);
+                height: 200vw;
+                .petal {
+                  width: 3vw;
+                  height: 3vw;
+                }
+              }
+              .petalsBox2 {
+                transform: rotate(60deg) translate(-65vw, -12vw);
+                height: 200vw;
+                .petal2 {
+                  width: 3vw;
+                  height: 3vw;
+                }
+              }
+            }
           }
 
           .treeExtender {

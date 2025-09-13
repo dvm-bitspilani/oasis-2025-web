@@ -21,6 +21,7 @@ import registerBtn from "/svgs/landing/registerBtn.svg";
 import wire from "/svgs/landing/wire.svg";
 import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
+import petal from "/images/landing/petal.png";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
@@ -90,6 +91,19 @@ export default function LandingRevamp({
 
   const aboutUsContRef = useRef<HTMLDivElement>(null);
   const aboutUsWrapperRef = useRef<HTMLDivElement>(null);
+
+  const randomValuesRef = useRef<number[]>(
+    Array.from(
+      {
+        length: window.matchMedia(
+          "(max-width: 730px) and (aspect-ratio < 8/12) "
+        ).matches
+          ? 70
+          : 30,
+      },
+      () => Math.random() * (20 - 10) + 10
+    )
+  );
 
   const [scrollHeight, setScrollHeight] = useState(
     (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
@@ -563,6 +577,38 @@ export default function LandingRevamp({
                       loading="eager"
                       fetchPriority="high"
                     />
+                    <div className={styles.petalsBox}>
+                      {randomValuesRef.current.map((val, index) => (
+                        <img
+                          src={petal}
+                          alt="petal"
+                          key={index}
+                          className={styles.petal}
+                          style={
+                            {
+                              "--i": val,
+                              // filter: `blur(1px)`,
+                            } as React.CSSProperties
+                          }
+                        />
+                      ))}
+                    </div>
+                    <div className={styles.petalsBox2}>
+                      {randomValuesRef.current.map((val, index) => (
+                        <img
+                          src={petal}
+                          alt="petal"
+                          key={index}
+                          className={styles.petal2}
+                          style={
+                            {
+                              "--i": val,
+                              scale: val / 25,
+                            } as React.CSSProperties
+                          }
+                        />
+                      ))}
+                    </div>
                   </div>
                   <div className={styles.treeExtender}></div>
                 </div>
