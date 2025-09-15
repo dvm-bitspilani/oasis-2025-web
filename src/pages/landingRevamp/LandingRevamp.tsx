@@ -230,15 +230,15 @@ export default function LandingRevamp({
     const mm = gsap.matchMedia();
 
     mm.add("(max-width: 730px) or (aspect-ratio < 8/12)", () => {
-      const masterTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top top",
-          end: `+=300vh`,
-          scrub: true,
-          invalidateOnRefresh: true,
-        },
-      });
+      // const masterTimeline = gsap.timeline({
+      //   scrollTrigger: {
+      //     trigger: wrapperRef.current,
+      //     start: "top top",
+      //     end: `+=300vh`,
+      //     scrub: true,
+      //     invalidateOnRefresh: true,
+      //   },
+      // });
       gsap.fromTo(
         dateCountdownRef.current,
         { autoAlpha: 1 },
@@ -248,39 +248,60 @@ export default function LandingRevamp({
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "00vh",
-            end: "+=60vh",
+            end: "+=120vh",
             scrub: true,
             invalidateOnRefresh: true,
           },
         }
       );
 
-      masterTimeline
+      // masterTimeline
 
-        .to(
-          treeImageRef.current,
-          {
-            scale: 1.15,
-            ease: "power2.inOut",
+      gsap.to(
+        treeImageRef.current,
+        {
+          scale: 1.15,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top top",
+            end: `+=300vh`,
+            scrub: true,
+            invalidateOnRefresh: true,
           },
-          0
-        )
+        }
+        // 0
+      );
 
-        .to(
-          landingMobileRef.current,
-          {
-            scale: 1.08,
-            // y: "8%",
-            ease: "power2.inOut",
+      gsap.to(
+        landingMobileRef.current,
+        {
+          scale: 1.08,
+          // y: "8%",
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top top",
+            end: `+=300vh`,
+            scrub: true,
+            invalidateOnRefresh: true,
           },
-          0
-        )
+        }
+        // 0
+      );
 
-        .to(landingMobileRef.current, {
-          y: "-10%",
-          // duration: 20,
-          ease: "sine.inOut",
-        });
+      gsap.to(landingMobileRef.current, {
+        y: "-10%",
+        // duration: 20,
+        ease: "sine.inOut",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          end: `+=300vh`,
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
       const masterTimeline = gsap.timeline({
