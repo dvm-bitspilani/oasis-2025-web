@@ -28,6 +28,6 @@ jobs:
                 echo  "${{ secrets.SSH_ENTRY_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
             - run: echo "currently here"
             - name: Deploy to server
-              run: scp -o StrictHostKeyChecking=no -r ./dist/* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:{{ secrets.DEPLOY_PATH  }}
+              run: scp -o StrictHostKeyChecking=no -r ./dist/* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH  }}
 
 
