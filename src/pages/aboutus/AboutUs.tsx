@@ -17,7 +17,7 @@ import linkedin from "/svgs/aboutus/linkedin.svg";
 import yticon from "/svgs/aboutus/yticon.svg";
 import abtus from "/svgs/aboutus/abtus.svg";
 import aboutPageBG from "/images/aboutus/background.jpg";
-import aboutPageBGMobile from "/svgs/aboutus/backg.svg";
+import aboutPageBGMobile from "/images/aboutus/backg.png";
 import aboutTextBG from "/images/aboutus/abtbck.png";
 // import Navbar from "../components/navbar/Navbar";
 
@@ -487,7 +487,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       }}
     >
       {/* <Navbar hideHam variant="about" /> */}
-      
+
       <div className={styles.header}>
         <img src={isMobile ? Reg : Header} alt="About Us" />
       </div>

@@ -24,15 +24,12 @@ import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
-// import ContactDoors from "../contact/ContactDoors";
 import Ham from "../components/ham/ham";
 import MainHam from "../components/mainHam/mainHam";
 import Lenis from "@studio-freight/lenis";
 
 import { useHamStore, useMainHamStore } from "../../utils/store";
 import ContactDoors from "../contact/ContactDoors";
-// import { s } from "framer-motion/client";
-// import { FaA } from "react-icons/fa6";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,7 +67,6 @@ export default function LandingRevamp({
 }: {
   goToPage: (path: string) => void;
 }) {
-  //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
   const setRemoveGif = useOverlayStore((state) => state.setRemoveGif);
