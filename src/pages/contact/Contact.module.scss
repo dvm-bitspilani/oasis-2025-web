@@ -1,432 +1,441 @@
 // body {position: static;}
 
 .contactPageWrapper {
-    // height: 100vh;
-    // overflow-y: scroll;
+  // height: 100vh;
+  // overflow-y: scroll;
 
-    --bar-thickness: calc(10*100vw/1920);
+  --bar-thickness: calc(10 * 100vw / 1920);
 
-    @media (max-width: 900px) {
-        --bar-thickness: calc(6*100vw/393)
+  @media (max-width: 900px) {
+    --bar-thickness: calc(6 * 100vw / 393);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .contactSection,
+  .contactPage {
+    position: relative;
+    width: 100svw;
+
+    .contactContent {
+      padding: 1.2rem 1.8rem;
+      position: relative;
+      z-index: 10;
+
+      @media (max-width: 600px) {
+        padding: 0.6rem 0.4rem;
+      }
     }
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    .contactBg {
+      position: absolute;
+      top: 0px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100%;
+      overflow: hidden;
 
-    .contactSection,
-    .contactPage {
-        position: relative;
-        width: 100svw;
+      .contactBgImg {
+        width: 100%;
+        height: 100%;
 
-        .contactContent {
-            padding: 1.2rem 1.8rem;
-            position: relative;
-            z-index: 10;
+        // height: 100%;
+        // max-height: 100%;
+        // object-fit: cover;
 
-            @media (max-width: 600px) {
-                padding: 0.6rem 0.4rem;
-            }
+        &:nth-of-type(1) {
+          object-position: right;
         }
 
-        .contactBg {
-            position: absolute;
-            top: 0px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            height: 100%;
-            overflow: hidden;
-
-            .contactBgImg {
-                width: 100%;
-                height: 100%;
-
-                // height: 100%;
-                // max-height: 100%;
-                // object-fit: cover;
-
-                &:nth-of-type(1) {
-                    object-position: right;
-                }
-
-                &:nth-of-type(2) {
-                    object-position: left;
-                }
-            }
+        &:nth-of-type(2) {
+          object-position: left;
         }
+      }
     }
+  }
 
-    .contactPage {
-        background-size: 100vw auto;
-        background-repeat: repeat;
-        background-position: center;
-        min-height: 100vh;
+  .contactPage {
+    background-size: 100vw auto;
+    background-repeat: repeat;
+    background-position: center;
+    min-height: 100vh;
 
-        .contactBB {
-            z-index: 10;
-            margin-left: 3rem;
+    .contactBB {
+      z-index: 10;
+      margin-left: 3rem;
 
-            @media (max-width: 900px) {
-                margin-left: 2rem;
-                margin-top: 0.6rem;
-            }
-        }
+      @media (max-width: 900px) {
+        margin-left: 2rem;
+        margin-top: 0.6rem;
+      }
     }
+  }
 
-    .contactPageBg {
-        z-index: 10;
-        height: inherit;
-        overflow-y: hidden;
+  .contactPageBg {
+    z-index: 10;
+    height: inherit;
+    overflow-y: hidden;
 
-        .horiBar {
-            position: absolute;
-            left: 0px;
-            width: 100%;
-            height: var(--bar-thickness);
-            // background-color: #7F5934;
-            z-index: inherit;
+    .horiBar {
+      position: absolute;
+      left: 0px;
+      width: 100%;
+      height: var(--bar-thickness);
+      // background-color: #7F5934;
+      z-index: inherit;
 
-            display: grid;
-            grid-template-columns: 1fr calc(83*100vw/1919) 1fr;
+      display: grid;
+      grid-template-columns: 1fr calc(83 * 100vw / 1919) 1fr;
 
-            @media (max-width: 900px) {
-                grid-template-columns: 1fr calc(37*100vw/1919) calc(8*100vw/1919) calc(37*100vw/1919) 1fr;
-            }
+      @media (max-width: 900px) {
+        grid-template-columns:
+          1fr calc(37 * 100vw / 1919) calc(8 * 100vw / 1919)
+          calc(37 * 100vw / 1919) 1fr;
+      }
 
-            & :nth-child(odd) {
-                background-color: #7F5934;
-                box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
-            }
+      & :nth-child(odd) {
+        background-color: #7f5934;
+        box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
+      }
 
-            div {
-                height: 100%;
-            }
-        }
+      div {
+        height: 100%;
+      }
     }
-
-    ;
+  }
 }
 
 .contactSection {
-    position: relative;
-    bottom: 0px;
-    width: 100vw;
-    // height: 100vh;
-    overflow-x: hidden;
-    // overflow-y: scroll;
-    pointer-events: none;
-    transform: translateY(-100vh);
+  position: relative;
+  bottom: 0px;
+  width: 100vw;
+  // height: 100vh;
+  overflow-x: hidden;
+  // overflow-y: scroll;
+  pointer-events: none;
+  transform: translateY(-100vh);
 
-    --bar-thickness: calc(10*100vw/1920);
+  --bar-thickness: calc(10 * 100vw / 1920);
+
+  @media (max-width: 900px) {
+    --bar-thickness: calc(6 * 100vw / 393);
+  }
+
+  .contactHeading {
+    position: absolute;
+    padding-top: 6.9rem;
+    width: 100%;
+    margin-bottom: 3rem;
+
+    .contactBanner {
+      position: relative;
+      display: block;
+      width: clamp(12rem, 30vw, 30rem);
+      margin: auto;
+      z-index: 20;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transform: translateY(-100%);
+
+      @media (max-width: 900px) {
+        width: clamp(15rem, 72vw, 30rem);
+      }
+    }
 
     @media (max-width: 900px) {
-        --bar-thickness: calc(6*100vw/393)
+      margin-top: 4.2rem;
+      margin-bottom: 0rem;
+      padding-top: 0rem;
+    }
+  }
+
+  .contactSectionContent {
+    width: 100%;
+    position: relative;
+  }
+
+  .contactDoors {
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+    min-height: 100vh;
+    // height: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    pointer-events: none;
+    overflow: visible;
+
+    @media (max-width: 730px) {
+      height: calc(100% - 100vh + 200px);
+      min-height: 0px;
     }
 
-    .contactHeading {
+    .contactDoor {
+      width: 100%;
+      // height: 100%;
+      background-size: 100% auto;
+      background-repeat: repeat;
+      pointer-events: all;
+
+      &:nth-of-type(1) {
+        border-right: 0.5px solid #be9963;
+        .contactsContainer {
+          padding: 15rem 3rem 3rem 1rem;
+          @media (max-width: 900px) {
+            padding: 15rem 1.2rem 3rem 0.6rem;
+          }
+        }
+        .horiBarContainer .horiBar {
+          grid-template-columns: 1fr calc(40 * 50vw / 960);
+
+          @media (max-width: 900px) {
+            grid-template-columns: 1fr calc(8 * 100% / 196);
+          }
+
+          & :nth-child(odd) {
+            background-color: #7f5934;
+            box-shadow: 0px calc(var(--bar-thickness) - 1px)
+              rgba(0, 0, 0, 0.215);
+          }
+        }
+        // @media (max-width: 900px) {border-color: #be9963;}
+      }
+
+      &:nth-of-type(2) {
+        border-left: 0.5px solid #be9963;
+        .contactsContainer {
+          padding: 15rem 1rem 3rem 3rem;
+          @media (max-width: 900px) {
+            padding: 15rem 0.6rem 3rem 1.2rem;
+          }
+        }
+        .horiBarContainer .horiBar {
+          grid-template-columns: calc(40 * 100% / 960) 1fr;
+
+          @media (max-width: 900px) {
+            grid-template-columns: calc(7.5 * 100% / 196) 1fr;
+          }
+
+          & :nth-child(even) {
+            background-color: #7f5934;
+            box-shadow: 0px calc(var(--bar-thickness) - 1px)
+              rgba(0, 0, 0, 0.215);
+          }
+        }
+        // @media (max-width: 900px) {border-color: #be9963;}
+      }
+
+      .horiBarContainer {
         position: absolute;
-        padding-top: 6.9rem;
+        height: 100%;
         width: 100%;
-        margin-bottom: 3rem;
 
-        .contactBanner {
-            position: relative;
-            display: block;
-            width: clamp(12rem, 30vw, 30rem);
-            margin: auto;
-            z-index: 20;
-            opacity: 0;
-            pointer-events: none;
-            visibility: hidden;
-            transform: translateY(-100%);
+        .horiBar {
+          position: absolute;
+          left: 0px;
+          width: 100%;
+          height: var(--bar-thickness);
+          z-index: inherit;
 
-            @media (max-width: 900px) {
-                width: clamp(15rem, 72vw, 30rem);
-            }
+          display: grid;
+
+          div {
+            height: 100%;
+          }
         }
+      }
 
-        @media (max-width: 900px) {
-            margin-top: 4.2rem;
-            margin-bottom: 0rem;
-            padding-top: 0rem;
-        }
-    }
-
-    .contactSectionContent {
-        width: 100%;
-        position: relative;
-    }
-
-    .contactDoors {
-        position: relative;
-        bottom: 0px;
-        width: 100%;
-        min-height: 100dvh;
-        // height: 100%;
+      .contactsContainer {
         display: grid;
-        grid-template-columns: 50% 50%;
-        pointer-events: none;
-        overflow: visible;
+        grid-template-columns: 1fr 1fr;
+        // height: 100%;
+        gap: 2.1rem 1.8rem;
 
-        @media (max-width: 730px) {
-            height: calc(100% - 100dvh + 200px);
-            min-height: 0px;
+        .contactItemsLeft,
+        .contactItemsRight {
+          transform-origin: 52.5% 1%;
         }
+        .contactItem {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          display: flex;
 
-        .contactDoor {
-            width: 100%;
-            // height: 100%;
-            background-size: 100% auto;
-            background-repeat: repeat;
+          $template: 1;
+          aspect-ratio: 1.085;
+          background-image: url("/images/contact/ContactCard" + $template + ".png");
+          background-size: cover;
+
+          .contactCard {
+            display: flex;
+            gap: 0.1rem;
+            height: 54%;
+            width: 84%;
+            position: relative;
+            left: 50%;
+            margin-top: auto;
+            margin-bottom: 3%;
+            transform: translateX(-46.5%) rotateZ(-2deg);
             pointer-events: all;
 
-            &:nth-of-type(1) {
-                border-right: 0.5px solid #be9963;
-                .contactsContainer {
-                    padding: 15rem 3rem 3rem 1rem;
-                    @media (max-width: 900px) {padding: 15rem 1.2rem 3rem 0.6rem;}
-                }
-                .horiBarContainer .horiBar {
-                    grid-template-columns: 1fr calc(40*50vw/960);
-                    
-                    @media (max-width: 900px) {
-                        grid-template-columns: 1fr calc(8*100%/196);
-                    }
+            .contactImgContainer {
+              display: flex;
+              align-items: center;
+              min-width: 27%;
+              max-width: 36%;
+              max-height: 100%;
 
-                    & :nth-child(odd) {
-                        background-color: #7F5934;
-                        box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
-                    }
-                }
-                // @media (max-width: 900px) {border-color: #be9963;}
-            }
-
-            &:nth-of-type(2) {
-                border-left: 0.5px solid #be9963;
-                .contactsContainer {
-                    padding: 15rem 1rem 3rem 3rem;
-                    @media (max-width: 900px) {padding: 15rem 0.6rem 3rem 1.2rem;}
-                }
-                .horiBarContainer .horiBar {
-                    grid-template-columns: calc(40*100%/960) 1fr;
-
-                    @media (max-width: 900px) {
-                        grid-template-columns: calc(7.5*100%/196) 1fr;
-                    }
-
-                    & :nth-child(even) {
-                        background-color: #7F5934;
-                        box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
-                    }
-                }
-                // @media (max-width: 900px) {border-color: #be9963;}
-            }
-
-            .horiBarContainer {
-                position: absolute;
-                height: 100%;
+              img {
                 width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+              }
 
-                .horiBar {
-                    position: absolute;
-                    left: 0px;
-                    width: 100%;
-                    height: var(--bar-thickness);
-                    z-index: inherit;
-
-                    display: grid;
-
-                    div {
-                        height: 100%;
-                    }
-                }
+              @media (max-width: 600px) {
+                min-width: 30%;
+              }
             }
 
-            .contactsContainer {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                // height: 100%;
-                gap: 2.1rem 1.8rem;
+            .contactDetails {
+              flex: 1;
+              display: flex;
+              gap: 0.5rem;
+              flex-direction: column;
+              justify-content: center;
 
-                .contactItemsLeft, .contactItemsRight {transform-origin: 52.5% 1%;}
-                .contactItem {
-                    width: 100%;
-                    height: 100%;
-                    position: relative;
-                    display: flex;
+              .contactName {
+                font-size: 1.8rem;
+                font-weight: 600;
+                font-family: "Averia Serif Libre", serif;
+                text-align: center;
+              }
 
-                    $template: 1;
-                    aspect-ratio: 1.085;
-                    background-image: url("/images/contact/ContactCard" + $template + ".png");
-                    background-size: cover;
+              .contactPosition {
+                font-size: 1.2rem;
+                font-weight: 100;
+                font-family: "Averia Serif Libre", serif;
+                text-align: center;
+                -webkit-line-clamp: 3;
+                line-clamp: 3;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
+              }
 
-                    .contactCard {
-                        display: flex;
-                        gap: 0.1rem;
-                        height: 54%;
-                        width: 84%;
-                        position: relative;
-                        left: 50%;
-                        margin-top: auto;
-                        margin-bottom: 3%;
-                        transform: translateX(-46.5%) rotateZ(-2deg);
-                        pointer-events: all;
+              .contactLinks {
+                display: flex;
+                justify-content: center;
+                gap: 3rem;
 
-                        .contactImgContainer {
-                            display: flex;
-                            align-items: center;
-                            min-width: 27%;
-                            max-width: 36%;
-                            max-height: 100%;
+                .contactIcon {
+                  font-size: 1.8rem;
+                  transition: 0.3s color;
 
-                            img {
-                                width: 100%;
-                                max-height: 100%;
-                                object-fit: contain;
-                            }
+                  &:hover {
+                    color: rgb(129, 0, 0);
+                  }
+                }
+              }
 
-                            @media (max-width: 600px) {
-                                min-width: 30%;
-                            }
-                        }
+              @media (max-width: 1700px) {
+                gap: 0.3rem;
 
-                        .contactDetails {
-                            flex: 1;
-                            display: flex;
-                            gap: 0.5rem;
-                            flex-direction: column;
-                            justify-content: center;
+                .contactName {
+                  font-size: 1.2rem;
+                  line-height: 1.2rem;
+                }
 
-                            .contactName {
-                                font-size: 1.8rem;
-                                font-weight: 600;
-                                font-family: 'Averia Serif Libre', serif;
-                                text-align: center;
-                            }
+                .contactPosition {
+                  font-size: 0.9rem;
+                  line-height: 0.9rem;
+                }
 
-                            .contactPosition {
-                                font-size: 1.2rem;
-                                font-weight: 100;
-                                font-family: 'Averia Serif Libre', serif;
-                                text-align: center;
-                                -webkit-line-clamp: 3;
-                                line-clamp: 3;
-                                overflow: hidden;
-                                display: -webkit-box;
-                                -webkit-box-orient: vertical;
-                                text-overflow: ellipsis;
-                            }
+                .contactLinks {
+                  gap: 1rem;
 
-                            .contactLinks {
-                                display: flex;
-                                justify-content: center;
-                                gap: 3rem;
+                  div {
+                    height: 1.5rem;
 
-                                .contactIcon {
-                                    font-size: 1.8rem;
-                                    transition: 0.3s color;
-
-                                    &:hover {
-                                        color: rgb(129, 0, 0)
-                                    }
-                                }
-                            }
-
-                            @media (max-width: 1700px) {
-                                gap: 0.3rem;
-
-                                .contactName {
-                                    font-size: 1.2rem;
-                                    line-height: 1.2rem;
-                                }
-
-                                .contactPosition {
-                                    font-size: 0.9rem;
-                                    line-height: 0.9rem;
-                                }
-
-                                .contactLinks {
-                                    gap: 1rem;
-
-                                    div {
-                                        height: 1.5rem;
-
-                                        .contactIcon {
-                                            font-size: 1.5rem;
-                                            height: 1.5rem;
-                                            position: relative;
-                                        }
-                                    }
-                                }
-                            }
-
-                            @media (max-width: 600px) {
-                                gap: 0.1rem;
-
-                                .contactName {
-                                    font-size: 0.7rem;
-                                    line-height: 0.7rem;
-                                    text-wrap: nowrap;
-                                }
-
-                                .contactPosition {
-                                    font-size: 0.6rem;
-                                    line-height: 0.6rem;
-                                }
-
-                                .contactLinks {
-                                    gap: 1rem;
-
-                                    div {
-
-                                        // height: 0.8rem;
-                                        .contactIcon {
-                                            font-size: 0.8rem;
-                                            // height: 0.8rem;
-                                            position: relative;
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    .contactIcon {
+                      font-size: 1.5rem;
+                      height: 1.5rem;
+                      position: relative;
                     }
+                  }
+                }
+              }
+
+              @media (max-width: 600px) {
+                gap: 0.1rem;
+
+                .contactName {
+                  font-size: 0.7rem;
+                  line-height: 0.7rem;
+                  text-wrap: nowrap;
                 }
 
-                @media (max-width: 1300px) {
-                    grid-template-columns: 1fr;
-                    gap: 1rem;
+                .contactPosition {
+                  font-size: 0.6rem;
+                  line-height: 0.6rem;
                 }
+
+                .contactLinks {
+                  gap: 1rem;
+
+                  div {
+                    // height: 0.8rem;
+                    .contactIcon {
+                      font-size: 0.8rem;
+                      // height: 0.8rem;
+                      position: relative;
+                    }
+                  }
+                }
+              }
             }
-            // .contactDoorImg {
-            //     width: 100%;
-            //     height: 100%;
-            //     max-height: 100%;
-            //     object-fit: cover;
-            // }
-
-            // &:nth-of-type(1) .contactBgImg {
-            //     object-position: right;
-            // }
-
-            // &:nth-of-type(2) .contactBgImg {
-            //     object-position: left;
-            // }
+          }
         }
 
+        @media (max-width: 1300px) {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+      }
+      // .contactDoorImg {
+      //     width: 100%;
+      //     height: 100%;
+      //     max-height: 100%;
+      //     object-fit: cover;
+      // }
+
+      // &:nth-of-type(1) .contactBgImg {
+      //     object-position: right;
+      // }
+
+      // &:nth-of-type(2) .contactBgImg {
+      //     object-position: left;
+      // }
     }
+  }
 
-    // &::-webkit-scrollbar {
-    //     display: none;
-    // }
+  // &::-webkit-scrollbar {
+  //     display: none;
+  // }
 
-    // .contactSectionContent {
-    //     position: absolute;
-    //     padding: 1.5rem;
-    //     opacity: 0;
-    //     visibility: hidden;
-    //     padding-top: 5rem;
-    // }
+  // .contactSectionContent {
+  //     position: absolute;
+  //     padding: 1.5rem;
+  //     opacity: 0;
+  //     visibility: hidden;
+  //     padding-top: 5rem;
+  // }
 }
 
 // yeah, this single line is the solution of the whole scroll bug :skull:
-:global(.pin-spacer) {overflow: hidden !important;}
+:global(.pin-spacer) {
+  overflow: hidden !important;
+}

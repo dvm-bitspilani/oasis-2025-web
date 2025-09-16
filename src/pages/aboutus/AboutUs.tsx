@@ -19,6 +19,14 @@ import abtus from "/svgs/aboutus/abtus.svg";
 import aboutPageBG from "/images/aboutus/background.jpg";
 import aboutPageBGMobile from "/images/aboutus/backg.png";
 import aboutTextBG from "/images/aboutus/abtbck.png";
+import letter1 from "/svgs/aboutus/letter1.svg";
+import letter2 from "/svgs/aboutus/letter2.svg";
+import letter3 from "/svgs/aboutus/letter3.svg";
+import letter4 from "/svgs/aboutus/letter4.svg";
+import letter5 from "/svgs/aboutus/letter5.svg";
+import letter6 from "/svgs/aboutus/letter6.svg";
+import letter7 from "/svgs/aboutus/letter7.svg";
+import letter8 from "/svgs/aboutus/letter8.svg";
 // import Navbar from "../components/navbar/Navbar";
 
 declare global {
@@ -29,14 +37,14 @@ declare global {
 }
 
 const icons = [
-  "/svgs/aboutus/letter1.svg",
-  "/svgs/aboutus/letter2.svg",
-  "/svgs/aboutus/letter3.svg",
-  "/svgs/aboutus/letter4.svg",
-  "/svgs/aboutus/letter5.svg",
-  "/svgs/aboutus/letter6.svg",
-  "/svgs/aboutus/letter7.svg",
-  "/svgs/aboutus/letter8.svg",
+  letter1,
+  letter2,
+  letter3,
+  letter4,
+  letter5,
+  letter6,
+  letter7,
+  letter8,
 ];
 
 const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
