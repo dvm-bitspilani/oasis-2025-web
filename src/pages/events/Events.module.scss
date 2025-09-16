@@ -1,18 +1,16 @@
-// src/components/Events/Events.module.scss
-
 .eventsmaincontainer {
   width: 100vw;
   height: 100vh;
   position: relative;
+  overflow: hidden;
   background-size: cover;
   .text {
-      position: absolute;
-      left: 35vw;
-      width: 30.625vw;
-      height: 26.74vh;
-      bottom: 2vh;
-      
-    }
+    position: absolute;
+    left: 35vw;
+    width: 30.625vw;
+    height: 26.74vh;
+    bottom: 2vh;
+  }
   .eventscontainer {
     width: 100vw;
     overflow: hidden;
@@ -22,91 +20,88 @@
     background-repeat: no-repeat;
     z-index: 2;
     position: relative;
-   mask-image: url("/svgs/events/Exclude.svg");
-   mask-composite: exclude;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  // mask-size:cover;
-  mask-size:  cover;
+    mask-image: url("/svgs/events/Exclude.svg");
+
+    mask-composite: exclude;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    // mask-size:cover;
+    mask-size: cover;
     scale: 1.01;
 
-//   -webkit-mask-image: url("/svgs/events/Exclude.svg");
-// -webkit-mask-size: 100% 100%;
-// -webkit-mask-position: bottom;
-// -webkit-mask-repeat: no-repeat;
+    //   -webkit-mask-image: url("/svgs/events/Exclude.svg");
+    // -webkit-mask-size: 100% 100%;
+    // -webkit-mask-position: bottom;
+    // -webkit-mask-repeat: no-repeat;
 
-
-  
-  
     .quizzes {
       position: absolute;
-      width: 32.6vw;
-      height: 52.3vh;
+      width: 34.6vw;
+      // height: 52.3vh;
       left: 0;
-      bottom: 0;
-     transform-origin: center;
+      bottom: -2vh;
+      transform-origin: center;
       transition: transform 0.3s ease, filter 0.3s ease;
       z-index: 1;
       &:hover {
-        transform: scale(1.05);
+        transform: scale(1.05) !important;
         filter: saturate(1.5);
       }
-      @media (min-width:1950px){bottom: -20px;
-         padding-top:20px;
-        
+      @media (min-width: 1950px) {
+        bottom: -20px;
+        padding-top: 20px;
       }
     }
 
     .music {
       position: absolute;
-      top: 0;
+      top: -9vh;
       left: 0;
       width: 42vw;
-      height: 80vh;
-      z-index: -5;transform-origin:center;
+      // height: 80vh;
+      transform-origin: center;
       transition: transform 0.3s ease, filter 0.3s ease;
-      z-index: 1;
+      z-index: 2;
       object-fit: fill;
       object-position: center;
       &:hover {
-        transform: scale(1.1);
+        transform: scale(1.1) !important;
         filter: saturate(1.5);
       }
     }
 
     .misc {
       position: absolute;
-      width: 32.8vw;
-      height: 56.3vh;
-      bottom: -2vh;
+      width: 34.8vw;
+      // height: 56.3vh;
+      bottom: -2.5vh;
       right: 0;
-      z-index: -5;
-      transform-origin: center;
+      // transform-origin: center;
       transition: transform 0.3s ease, filter 0.3s ease;
       z-index: 1;
       &:hover {
-        transform: scale(1.07);
+        transform: scale(1.07) !important;
         filter: saturate(1.5);
       }
-    
     }
 
     .dance {
       position: absolute;
-      width: 45vw;
-      height: 80vh;
-      
-      top: -2vh;
-      right: -2vw;
+      width: 42vw;
+
+      // height: 80vh;
+      z-index: 2;
+      top: -9vh;
+      right: 0vw;
       overflow: hidden;
       transform-origin: center;
-     
-      rotate: -3deg;
+
+      // rotate: -3deg;
       object-position: center;
-      transition: transform 0.3s ease, filter 0.3s ease;
-      z-index: 1;
+      transition: transform 0.1s, filter 0.1s ease;
+      // z-index: 1;
       &:hover {
-        transform: scale(1.05);
+        transform: scale(1.05) !important;
         filter: saturate(1.5);
       }
     }
@@ -127,24 +122,17 @@
     // }
 
     .photography {
-       position: absolute;
-      left: 35vw;
-      width: 30.2vw;
-      height: 67.8vh;
+      position: absolute;
+      left: 36vw;
+      width: 28.2vw;
+      // height: 67.8vh;
       top: 0;
-      // Make the image fill its parent container
-      // width: 100%;
-      // height: 100%;
-      // THIS IS THE KEY TO RESPONSIVENESS. It scales the image to fit the container.
-      // object-fit: cover;
 
-      // Add a transition for a smooth hover effect
       transition: transform 0.3s ease, filter 0.3s ease;
     }
 
-    // Apply the hover effects directly to the image inside the wrapper
-    .photographyWrapper:hover .photography {
-      transform: scale(1.1);
+    .photography:hover {
+      transform: scale(1.1) !important;
       filter: saturate(1.5);
     }
 
@@ -154,7 +142,178 @@
       width: 30.625vw;
       height: 26.74vh;
       bottom: 2vh;
-      
+    }
+    @media (max-aspect-ratio: 1.7) {
+      .quizzes {
+        height: 50.3vh;
+        width: 31vw;
+        left: -2vw;
+      }
+      .music {
+        top: 0;
+        height: 80vh;
+        width: 40vw;
+      }
+      .photography {
+        width: 30vw;
+        height: 67.8vh;
+      }
+      .dance {
+        height: 80vh;
+        width: 40vw;
+        top: 0;
+      }
+      .misc {
+        height: 50.3vh;
+        width: 31vw;
+        right: -2vw;
+      }
     }
   }
+}
+@keyframes collapseToCenter {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.fan {
+  animation: collapseToCenter 0.1s ease forwards;
+  pointer-events: none;
+}
+.fanContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  transform: rotate(-90deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fanImage {
+  position: absolute;
+  width: 15vw;
+  height: auto;
+  transform-origin: bottom center;
+  // transition: transform 0.8s ease-in-out, left 0.8s ease, top 0.8s ease;
+  cursor: pointer;
+
+  &:nth-child(1) {
+    transform: rotate(-40deg);
+  }
+  &:nth-child(2) {
+    transform: rotate(-20deg);
+  }
+  &:nth-child(3) {
+    transform: rotate(0deg);
+  }
+  &:nth-child(4) {
+    transform: rotate(20deg);
+  }
+  &:nth-child(5) {
+    transform: rotate(40deg);
+  }
+}
+
+.fanCollapse {
+  transform: rotate(0deg) scale(0.8) translateY(-50%);
+  z-index: 2;
+}
+.eventsmaincontainer {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-size: cover;
+
+  .text {
+    position: absolute;
+    left: 35vw;
+    width: 30.625vw;
+    height: 26.74vh;
+    bottom: 2vh;
+    z-index: 10;
+  }
+
+  .eventscontainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: visible;
+    .folding {
+      pointer-events: none;
+      &:hover {
+        transform: none !important;
+        filter: none !important;
+      }
+    }
+  }
+
+  // .music,
+  // .quizzes,
+  // .photography,
+  // .dance,
+  // .misc {
+  //   position: absolute;
+  //   bottom: 15vh; // roughly bottom area
+  //   left: 50vw; // centered horizontally start
+  //   width: 20vw;
+  //   height: auto;
+  //   cursor: pointer;
+  //   user-select: none;
+  //   transform-origin: bottom center;
+  //   transition: transform 0.9s ease, opacity 0.9s ease;
+  // }
+
+  // Left to right (index 0 to 4)
+  // .music {
+  //   left: 15vw;
+  //   bottom: 10vh;
+  //   // transform: rotate(-40deg);
+  // }
+  // .quizzes {
+  //   left: 28vw;
+  //   bottom: 8vh;
+  //   // transform: rotate(-20deg);
+  // }
+  // .photography {
+  //   left: 42vw;
+  //   bottom: 15vh;
+  //   // transform: rotate(0deg);
+  // }
+  // .dance {
+  //   left: 56vw;
+  //   bottom: 8vh;
+  //   // transform: rotate(20deg);
+  // }
+  // .misc {
+  //   left: 70vw;
+  //   bottom: 10vh;
+  //   // transform: rotate(40deg);
+  // }
+
+  .eventscontainer img.fold:nth-child(5) {
+    transform: rotate(-40deg);
+  }
+
+  .eventscontainer img.fold:nth-child(4) {
+    transform: rotate(-120deg);
+  }
+
+  .eventscontainer img.fold:nth-child(3) {
+    transform: rotate(-50deg);
+  }
+
+  .eventscontainer img.fold:nth-child(2) {
+    transform: rotate(-20deg);
+  }
+
+  // .eventscontainer img.fold:nth-child(1) {
+  // transform: rotate(40deg);
+  // }
 }
