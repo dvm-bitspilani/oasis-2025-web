@@ -169,7 +169,7 @@ export default function LandingRevamp({
   useEffect(() => {
     const lenis = new Lenis({
       smoothWheel: true,
-      lerp: window.innerWidth < 730 ? 0.1 : 0.08, // higher lerp for mobile for smoother scroll
+      lerp: window.innerWidth < 730 ? 0.1 : 0.1, // higher lerp for mobile for smoother scroll
       infinite: false,
     });
 
