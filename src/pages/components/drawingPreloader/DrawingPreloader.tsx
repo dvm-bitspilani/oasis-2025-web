@@ -6,7 +6,7 @@ import useOverlayStore from "../../../utils/store";
 // import { set } from "react-hook-form";
 
 const imagesToPreload = [
-  "/svgs/logo.svg",
+  // "/svgs/logo.svg",
   "/images/doors/Door1.png",
   "/images/doors/Door2.png",
   "/images/doors/Door3.png",
