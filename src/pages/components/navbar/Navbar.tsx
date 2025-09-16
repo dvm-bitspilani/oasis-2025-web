@@ -63,7 +63,7 @@ export default function Navbar({
 useEffect(() => {
   if (!navRef.current) return;
 
-  console.log("Setting up scroll-based color change");
+  // console.log("Setting up scroll-based color change");
 
   const timer = setTimeout(() => {
     const targets = navRef.current?.querySelectorAll(
@@ -75,7 +75,7 @@ useEffect(() => {
       return;
     }
 
-    console.log("Found targets:", targets.length);
+    // console.log("Found targets:", targets.length);
 
     ScrollTrigger.refresh();
 
@@ -87,9 +87,9 @@ useEffect(() => {
         start: `+=${window.innerHeight*1.5}`, 
         end: `+=${window.innerHeight*0.5}`, 
         scrub: 1,
-        onEnter: () => console.log("Color change TRIGGERED at 150vh"),
-        onLeave: () => console.log("Color change ENDED"),
-        onUpdate: (self) => console.log("Scroll progress:", self.progress),
+        // onEnter: () => console.log("Color change TRIGGERED at 150vh"),
+        // onLeave: () => console.log("Color change ENDED"),
+        // onUpdate: (self) => console.log("Scroll progress:", self.progress),
       },
       //color: "#C0B063",
       "--navlink-color": "#c0b063",
@@ -98,7 +98,7 @@ useEffect(() => {
     });
 
     return () => {
-      console.log("Cleaning up scroll trigger");
+      // console.log("Cleaning up scroll trigger");
       const element = document.getElementById('navbar-scroll-trigger');
       if (element) {
         element.remove();

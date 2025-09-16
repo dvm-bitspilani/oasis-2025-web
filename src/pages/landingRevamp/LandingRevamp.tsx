@@ -589,7 +589,7 @@ export default function LandingRevamp({
         </div>
         <div className={styles.bottomContainer}>
           <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
-            <div ref={aboutUsWrapperRef}>
+            <div ref={aboutUsWrapperRef} style={{minHeight: "100dvh"}}>
               <AboutUs isBackBtn={false} />
             </div>
             {aboutUsContRef.current &&

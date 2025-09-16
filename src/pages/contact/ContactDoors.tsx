@@ -42,8 +42,8 @@ export default function ContactDoors({
   const launchEmail = (email: string) =>
     (window.location.href = `mailto:${email}`);
 
-  const calculateHoriBarPos = () => {
-    const contactItems = document.getElementsByClassName(styles.contactItem);
+  const calculateHoriBarPos = (contactItems: HTMLCollection) => {
+    // const contactItems = document.getElementsByClassName(styles.contactItem);
     const firstRowItem = contactItems[0];
     const firstRowRelPos = firstRowItem.getBoundingClientRect().top;
 
@@ -59,11 +59,6 @@ export default function ContactDoors({
 
     const firstRowAbsPos =
       firstRowRelPos - (door1Ref.current?.getBoundingClientRect().top || 0);
-    console.log(
-      firstRowAbsPos,
-      firstRowRelPos,
-      contactSectionRef.current?.getBoundingClientRect().top
-    );
 
     const firstBarPos = Math.round(firstRowAbsPos % barGap);
     const numOfBars = Math.round(
@@ -85,7 +80,6 @@ export default function ContactDoors({
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
-    console.log(triggerElemRef.current, pinElemRef.current);
 
     const animateContactBanner = (animation: gsap.TimelineVars) =>
       gsap.to(contactBannerRef.current, { ...animation, duration: 0.3 });
@@ -95,11 +89,12 @@ export default function ContactDoors({
         trigger: triggerElemRef.current,
         start: "bottom bottom",
         end: () =>
-          `+=${window.innerHeight <= 730 ? 200 : window.innerHeight - 1}`,
+          `+=${window.innerHeight <= 730 ? 60 : window.innerHeight - 1}`,
         scrub: isMobile ? true : 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,
-        anticipatePin: 1,
+        anticipatePin: 5,
+        // fastScrollEnd: 100,
         // onEnter: calculateHoriBarPos,
         onLeave: () => {
           animateContactBanner({ y: "0%", autoAlpha: 1 });
@@ -117,7 +112,7 @@ export default function ContactDoors({
         onUpdate: (self) => {
           const scrollVelocity = self.getVelocity();
           const swingSensitivity = 0.003;
-
+          
           animateContactItems(scrollVelocity * swingSensitivity);
         },
       },
@@ -137,18 +132,18 @@ export default function ContactDoors({
     // .from(galleryContentRef.current, {autoAlpha: 0})
 
     // if (contactSectionRef.current) contactSectionRef.current.style.transform = "translateY(-100vh)"//`translateY(${-((pinElemRef.current?.clientHeight || 0) - (contactSectionRef.current?.clientHeight || 0))})`
-    console.log(
-      contactSectionRef.current?.clientHeight,
-      pinElemRef.current?.clientHeight
-    );
   }, []);
 
   useEffect(() => {
+    const contactItems = document.getElementsByClassName(styles.contactItem);
+    
     const handleResize = () => {
       // location.reload()
-      setIsTab(window.innerWidth <= 1300);
-      setIsMobile(window.innerWidth <= 900);
-      calculateHoriBarPos();
+      const newIsTab = window.innerWidth <= 1300;
+      const newIsMobile = window.innerWidth <= 900;
+      if (newIsTab !== isTab) setIsTab(newIsTab);
+      if (newIsMobile !== isMobile) setIsMobile(newIsMobile);
+      calculateHoriBarPos(contactItems);
       // ScrollTrigger.update();
       animateContactItems(0);
 
@@ -156,12 +151,20 @@ export default function ContactDoors({
       // if (windowWidth.current !== window.innerWidth) location.reload();
     };
 
-    calculateHoriBarPos();
+    const deboundedHandleResize = () => {
+      let timer;
+      clearTimeout(timer);
+      timer = setTimeout(handleResize, 200);
+    }
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    calculateHoriBarPos(contactItems);
+
+    window.addEventListener("resize", deboundedHandleResize);
+    return () => window.removeEventListener("resize", deboundedHandleResize);
   }, []);
 
+
+  useEffect(() => console.log(window,innerWidth), [window.innerWidth])
   // useEffect(() => {
   //     ScrollTrigger.refresh();
   //     // ScrollTrigger.update();
