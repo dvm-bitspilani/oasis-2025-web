@@ -50,7 +50,7 @@ const assetList = {
             './svgs/aboutus/letter3.svg',
             // './svgs/aboutus/text-frame.svg',
             // './svgs/aboutus/Mask2.svg',
-            './svgs/aboutus/bord.svg',
+            // './svgs/aboutus/bord.svg',
             './svgs/aboutus/fan.png',
             './svgs/aboutus/letter4.svg',
             './svgs/aboutus/letter5.svg',
