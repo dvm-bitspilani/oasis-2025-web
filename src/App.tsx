@@ -12,7 +12,7 @@ import useCanonicalUrl from "./UseCanonicalUrl";
 
 // import Eventspage from "./pages/events/components/Eventspage";
 
-import Events from "./pages/events/Events";
+// import Events from "./pages/events/Events";
 
 export const navContext = createContext<{ goToPage?: (page: string) => void }>(
   {}
@@ -190,7 +190,7 @@ export default function App() {
         />
       )}
 
-      {!isPreloading && currentPage === "events" && <Events />}
+      {!isPreloading && currentPage === "events" && <ComingSoon />}
       {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
