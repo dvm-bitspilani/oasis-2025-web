@@ -7,8 +7,8 @@ import cloud3 from "/svgs/landing/hamClouds/cloud3.min.svg";
 import cloud4 from "/svgs/landing/hamClouds/cloud4.min.svg";
 import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
-import { useState, useEffect, useContext, useRef } from "react";
-import { useHamStore, useMainHamStore } from "../../../utils/store";
+import { useEffect, useContext, useRef } from "react";
+import { useMainHamStore } from "../../../utils/store";
 import { navContext } from "../../../App";
 import { gsap } from "gsap";
 import _ScrollTrigger, { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -31,13 +31,6 @@ export default function Navbar({
   variant?: "default" | "about";
 })  {
   const { goToPage } = useContext(navContext);
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
-  const [isMobile, setIsMobile] = useState(
-    viewportWidth / viewportHeight < 8 / 12 || viewportWidth < 730
-      ? true
-      : false
-  );
 
   // const setHamOpen = useHamStore((state) => state.setHamOpen);
   const setMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
@@ -45,8 +38,6 @@ export default function Navbar({
 
   useEffect(() => {
     const handleResize = () => {
-      setViewportWidth(window.innerWidth);
-      setViewportHeight(window.innerHeight);
       ScrollTrigger.refresh();
       ScrollTrigger.update()
     };
@@ -55,10 +46,6 @@ export default function Navbar({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  useEffect(() => {
-    setIsMobile(viewportWidth / viewportHeight < 8 / 12 || viewportWidth < 730);
-  }, [viewportHeight, viewportWidth]);
 
 useEffect(() => {
   if (!navRef.current) return;
