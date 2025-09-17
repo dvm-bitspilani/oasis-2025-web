@@ -10,7 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import contactBanner from "/images/contact/contact-banner.png";
 import contacts from "./components/contactGallery/contacts";
 // import ContactGallery from './components/contactGallery/ContactGallery';
-// import { FaEnvelope, FaPhone } from 'react-icons/fa6';
+import { FaEnvelope } from "react-icons/fa6";
 
 interface ContactDoorsProps {
   pinElemRef: React.RefObject<HTMLDivElement | null>;
@@ -39,7 +39,8 @@ export default function ContactDoors({
   const [isTab, setIsTab] = useState<boolean>(window.innerWidth <= 1300);
 
   // const launchPhone = (phone: string) => window.location.href = `tel:${phone}`;
-  // const launchEmail = (email: string) => window.location.href = `mailto:${email}`;
+  const launchEmail = (email: string) =>
+    (window.location.href = `mailto:${email}`);
 
   const calculateHoriBarPos = () => {
     const contactItems = document.getElementsByClassName(styles.contactItem);
@@ -93,10 +94,12 @@ export default function ContactDoors({
       scrollTrigger: {
         trigger: triggerElemRef.current,
         start: "bottom bottom",
-        end: `+=${window.innerHeight - 1}`,
-        scrub: 0.5,
+        end: () =>
+          `+=${window.innerHeight <= 730 ? 200 : window.innerHeight - 1}`,
+        scrub: isMobile ? true : 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,
+        anticipatePin: 1,
         // onEnter: calculateHoriBarPos,
         onLeave: () => {
           animateContactBanner({ y: "0%", autoAlpha: 1 });
@@ -121,8 +124,8 @@ export default function ContactDoors({
     });
 
     doorTimeLine
-      .from(door1Ref.current, { x: "-120%" }, 0)
-      .from(door2Ref.current, { x: "120%" }, 0)
+      .from(door1Ref.current, { x: "-150%" }, 0)
+      .from(door2Ref.current, { x: "150%" }, 0)
       .to(
         document.body,
         {
@@ -138,7 +141,7 @@ export default function ContactDoors({
       contactSectionRef.current?.clientHeight,
       pinElemRef.current?.clientHeight
     );
-  });
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -146,7 +149,6 @@ export default function ContactDoors({
       setIsTab(window.innerWidth <= 1300);
       setIsMobile(window.innerWidth <= 900);
       calculateHoriBarPos();
-      ScrollTrigger.refresh();
       // ScrollTrigger.update();
       animateContactItems(0);
 
@@ -230,10 +232,15 @@ export default function ContactDoors({
                       >
                         {contact.role}
                       </div>
-                      {/* <div className={styles.contactLinks}>
-                                                        <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
-                                                        <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
-                                                    </div> */}
+                      <div className={styles.contactLinks}>
+                        {/* <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div> */}
+                        <div
+                          className={styles.contactEmail}
+                          onClick={() => launchEmail(contact.email)}
+                        >
+                          <FaEnvelope className={styles.contactIcon} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -293,10 +300,15 @@ export default function ContactDoors({
                       >
                         {contact.role}
                       </div>
-                      {/* <div className={styles.contactLinks}>
-                                                        <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
-                                                        <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
-                                                    </div> */}
+                      <div className={styles.contactLinks}>
+                        {/* <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div> */}
+                        <div
+                          className={styles.contactEmail}
+                          onClick={() => launchEmail(contact.email)}
+                        >
+                          <FaEnvelope className={styles.contactIcon} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

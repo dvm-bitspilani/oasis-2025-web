@@ -1,0 +1,34 @@
+name: Deploy website
+
+on:
+    push:
+        branches:
+            - prod
+    pull_request:
+        branches:
+            - prod
+      
+
+    
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        container:
+            image: node:20
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                node-version: 20
+            - run: npm ci
+            - run: npm run build
+            - name: Get SSH key and run commands
+              run: |
+                mkdir -p ~/.ssh
+                echo  "${{ secrets.SSH_ENTRY_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+                echo "${{ secrets.PUBLIC_SSH_KEY }}" >> ~/.ssh/id_rsa.pub && chmod 600 ~/.ssh/id_rsa.pub
+            - run: echo "currently here"
+            - name: Deploy to server
+              run: scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r ./dist/* ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH  }}
+
+

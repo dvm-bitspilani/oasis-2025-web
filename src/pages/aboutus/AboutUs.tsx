@@ -17,8 +17,16 @@ import linkedin from "/svgs/aboutus/linkedin.svg";
 import yticon from "/svgs/aboutus/yticon.svg";
 import abtus from "/svgs/aboutus/abtus.svg";
 import aboutPageBG from "/images/aboutus/background.jpg";
-import aboutPageBGMobile from "/svgs/aboutus/backg.svg";
+import aboutPageBGMobile from "/images/aboutus/backg.png";
 import aboutTextBG from "/images/aboutus/abtbck.png";
+import letter1 from "/svgs/aboutus/letter1.svg";
+import letter2 from "/svgs/aboutus/letter2.svg";
+import letter3 from "/svgs/aboutus/letter3.svg";
+import letter4 from "/svgs/aboutus/letter4.svg";
+import letter5 from "/svgs/aboutus/letter5.svg";
+import letter6 from "/svgs/aboutus/letter6.svg";
+import letter7 from "/svgs/aboutus/letter7.svg";
+import letter8 from "/svgs/aboutus/letter8.svg";
 // import Navbar from "../components/navbar/Navbar";
 
 declare global {
@@ -29,14 +37,14 @@ declare global {
 }
 
 const icons = [
-  "/svgs/aboutus/letter1.svg",
-  "/svgs/aboutus/letter2.svg",
-  "/svgs/aboutus/letter3.svg",
-  "/svgs/aboutus/letter4.svg",
-  "/svgs/aboutus/letter5.svg",
-  "/svgs/aboutus/letter6.svg",
-  "/svgs/aboutus/letter7.svg",
-  "/svgs/aboutus/letter8.svg",
+  letter1,
+  letter2,
+  letter3,
+  letter4,
+  letter5,
+  letter6,
+  letter7,
+  letter8,
 ];
 
 const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
@@ -355,77 +363,77 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       );
     };
 
-    const spawnFromCorner2 = (corner: "top-right" | "bottom-left") => {
-      const container = document.querySelector(
-        `.${styles.theme}`
-      ) as HTMLElement | null;
-      if (!container) return;
+    // const spawnFromCorner2 = (corner: "top-right" | "bottom-left") => {
+    //   const container = document.querySelector(
+    //     `.${styles.theme}`
+    //   ) as HTMLElement | null;
+    //   if (!container) return;
 
-      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      // const img = document.createElement("img");
-      // img.src = iconSrc;
-      const iconTemplate =
-        iconImages[Math.floor(Math.random() * iconImages.length)];
-      const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-      img.className = styles.flyingIcon;
+    //   // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+    //   // const img = document.createElement("img");
+    //   // img.src = iconSrc;
+    //   const iconTemplate =
+    //     iconImages[Math.floor(Math.random() * iconImages.length)];
+    //   const img = iconTemplate.cloneNode(true) as HTMLImageElement;
+    //   img.className = styles.flyingIcon;
 
-      // Set start position
-      let startX = 0,
-        startY = 0;
-      const padding = 0;
+    //   // Set start position
+    //   let startX = 0,
+    //     startY = 0;
+    //   const padding = 0;
 
-      switch (corner) {
-        case "top-right":
-          startX = container.clientWidth - padding - 25;
-          startY = padding - 30;
-          break;
-        case "bottom-left":
-          startX = padding - 20;
-          startY = container.clientHeight - padding - 15;
-          break;
-      }
+    //   switch (corner) {
+    //     case "top-right":
+    //       startX = container.clientWidth - padding - 25;
+    //       startY = padding - 30;
+    //       break;
+    //     case "bottom-left":
+    //       startX = padding - 20;
+    //       startY = container.clientHeight - padding - 15;
+    //       break;
+    //   }
 
-      img.style.left = `${startX}px`;
-      img.style.top = `${startY}px`;
+    //   img.style.left = `${startX}px`;
+    //   img.style.top = `${startY}px`;
 
-      container.appendChild(img);
+    //   container.appendChild(img);
 
-      const centerX = container.clientWidth / 2;
-      const centerY = container.clientHeight / 2;
+    //   const centerX = container.clientWidth / 2;
+    //   const centerY = container.clientHeight / 2;
 
-      const dx = ((centerX - startX) * Math.random()) / 4;
-      const dy = ((centerY - startY) * Math.random()) / 2;
+    //   const dx = ((centerX - startX) * Math.random()) / 4;
+    //   const dy = ((centerY - startY) * Math.random()) / 2;
 
-      gsap.fromTo(
-        img,
-        { opacity: 0, scale: 0, x: 0, y: 0 },
-        {
-          opacity: 1,
-          scale: 0.5,
-          x: -dx,
-          y: -dy,
-          duration: 2,
-          ease: "power2.out",
-          onComplete: () => {
-            gsap.to(img, {
-              opacity: 0,
-              duration: 0.5,
-              onComplete: () => img.remove(),
-            });
-          },
-        }
-      );
-    };
+    //   gsap.fromTo(
+    //     img,
+    //     { opacity: 0, scale: 0, x: 0, y: 0 },
+    //     {
+    //       opacity: 1,
+    //       scale: 0.5,
+    //       x: -dx,
+    //       y: -dy,
+    //       duration: 2,
+    //       ease: "power2.out",
+    //       onComplete: () => {
+    //         gsap.to(img, {
+    //           opacity: 0,
+    //           duration: 0.5,
+    //           onComplete: () => img.remove(),
+    //         });
+    //       },
+    //     }
+    //   );
+    // };
     let intervalId: number;
 
     const startSpawning = () => {
       intervalId = window.setInterval(
         () => {
-          const corners2 = ["top-right", "bottom-left"];
-          const randomCorner2 = corners2[
-            Math.floor(Math.random() * corners2.length)
-          ] as any;
-          spawnFromCorner2(randomCorner2);
+          // const corners2 = ["top-right", "bottom-left"];
+          // const randomCorner2 = corners2[
+          //   Math.floor(Math.random() * corners2.length)
+          // ] as any;
+          // spawnFromCorner2(randomCorner2);
           if (isMobile) {
             const corners = ["top-right", "bottom-left"];
             const randomCorner = corners[
@@ -487,7 +495,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       }}
     >
       {/* <Navbar hideHam variant="about" /> */}
-      
+
       <div className={styles.header}>
         <img src={isMobile ? Reg : Header} alt="About Us" />
       </div>

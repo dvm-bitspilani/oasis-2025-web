@@ -9,11 +9,22 @@ import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import assetList from "./assetList";
 import useCanonicalUrl from "./UseCanonicalUrl";
+
+// import Eventspage from "./pages/events/components/Eventspage";
+
 // import Events from "./pages/events/Events";
 
 export const navContext = createContext<{ goToPage?: (page: string) => void }>(
   {}
 );
+
+import ReactGA from "react-ga4";
+
+const TRACKING_ID = "G-57YBBH7RXW";
+if (window.location.hostname.search("bits-oasis.org") !== -1) {
+  ReactGA.initialize(TRACKING_ID);
+  console.log("Hey :)");
+}
 
 export default function App() {
   useCanonicalUrl("https://www.bits-oasis.org");
@@ -23,6 +34,13 @@ export default function App() {
   interface LocationState {
     startAnimation?: boolean;
   }
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname + location.search,
+    });
+  }, [location]);
 
   const [currentPage, setCurrentPage] = useState<
     "home" | "register" | "events" | "aboutus" | "contact" | "comingSoon"

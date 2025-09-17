@@ -244,11 +244,11 @@ body {
     .mobileBackgroundContainer {
       display: none;
       width: 100dvw;
-      height: 100dvh;
+      height: 100vh;
 
       .mobileBackground {
         width: 100dvw;
-        height: 100dvh;
+        height: 100vh;
         object-fit: cover;
         object-position: center;
         position: fixed;
@@ -263,7 +263,7 @@ body {
         position: fixed;
         bottom: 0;
         right: 0;
-        height: 70svh;
+        height: 70vh;
         margin-bottom: calc(5svw);
       }
 
@@ -488,6 +488,12 @@ body {
               width: 100%;
             }
 
+            .treeDesktop {
+              display: block;
+            }
+            .treeMob {
+              display: none;
+            }
             .socialLinksContainer {
               position: absolute;
               top: 2%;
@@ -692,6 +698,7 @@ body {
     }
 
     .bottomContainer {
+      overflow: hidden;
       .aboutUsContainer {
         position: relative;
       }

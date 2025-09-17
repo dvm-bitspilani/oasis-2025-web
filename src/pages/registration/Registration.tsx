@@ -277,7 +277,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
 
   const onGoogleSignIn = useGoogleLogin({
     onSuccess: (response) => {
-      console.log(response.access_token);
+      // console.log(response.access_token);
       axios
         .post("https://bits-oasis.org/2025/main/registrations/google-reg/", {
           access_token: response.access_token,
@@ -312,7 +312,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     <div className={styles.instrback}>
       {/* <img src={sun} alt="sun" className={styles.sun} ref={sunRef} /> */}
       {/* <div className={styles.overlay}></div> */}
-      <title>Registration</title>
+      <title>Registration | Oasis 2025 Bits Pilani</title>
       <meta
         name="description"
         content="Register for Oasis 2025, the annual cultural festival of BITS Pilani. Follow our simple instructions to sign up and start participating in events."
