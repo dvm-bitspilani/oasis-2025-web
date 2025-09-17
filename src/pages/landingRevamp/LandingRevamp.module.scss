@@ -56,8 +56,7 @@ body {
   }
 }
 
-@media (max-width: 730px),
-(aspect-ratio < 8/12) {
+@media (max-width: 730px), (aspect-ratio < 8/12) {
   body {
     background-image: linear-gradient(to right, #d36f66, #be5964);
   }
@@ -129,86 +128,78 @@ body {
     position: fixed;
   }
 
-  .hamContainer {
+  // .hamContainer {
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   z-index: 10000;
+
+  //   .blur {
+  //     position: fixed;
+  //     top: 0;
+  //     left: 0;
+  //     height: 100dvh;
+  //     width: 100dvw;
+  //     background-color: rgba(0, 0, 0, 0.5);
+  //     backdrop-filter: blur(5px);
+  //     opacity: 0;
+  //     transition: opacity 0.5s ease-in-out;
+  //     pointer-events: none;
+  //   }
+
+  //   &.hamOpen {
+  //     .blur {
+  //       opacity: 1;
+  //       pointer-events: auto;
+  //     }
+
+  //     .translateHam {
+  //       transform: translateX(0);
+  //     }
+  //   }
+  // }
+
+  .mainHamContainer {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 10000;
 
-    .blur {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100dvh;
-      width: 100dvw;
-      background-color: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      pointer-events: none;
-    }
-
-    .translateHam {
+    .showMainHam {
       position: fixed;
       height: 100%;
-      width: 70svw;
-      right: 0;
+      width: 100%;
       top: 0;
-      transform: translateX(100svw);
-      transition: transform 0.5s ease-in-out;
+      left: 0;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+      pointer-events: none;
+
+      clip-path: circle(0% at 60px 60px);
+      transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 0.6s ease-in-out, visibility 0s linear 0.6s;
+
+      @media (max-width: 730px), (aspect-ratio < 8/12) {
+        clip-path: circle(0% at calc(100vw - 48px) 70px);
+      }
     }
 
-    &.hamOpen {
-      .blur {
+    &.mainHamOpen {
+      .showMainHam {
+        visibility: visible;
         opacity: 1;
-        pointer-events: auto;
-      }
+        pointer-events: all;
+        clip-path: circle(150% at 60px 60px);
+        transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          opacity 0.4s ease-in-out, visibility 0s linear 0s;
 
-      .translateHam {
-        transform: translateX(0);
+        @media (max-width: 730px), (aspect-ratio < 8/12) {
+          clip-path: circle(150% at calc(100vw - 48px) 70px);
+        }
       }
     }
   }
-
-.mainHamContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-
-  .showMainHam {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
-    pointer-events: none;
-    
-    clip-path: circle(0% at 60px 60px); 
-    transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                opacity 0.6s ease-in-out,
-                visibility 0s linear 0.6s; 
-  }
-
-  &.mainHamOpen {
-    .showMainHam {
-      visibility: visible;
-      opacity: 1;
-      pointer-events: all;
-      clip-path: circle(150% at 60px 60px); 
-      transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                  opacity 0.4s ease-in-out,
-                  visibility 0s linear 0s; 
-    }
-  }
-
-  @media (max-width: 730px), (aspect-ratio < 8/12) {
-    display: none;
-  }
-}
 
   .backgroundContainer {
     z-index: -1;
@@ -340,8 +331,7 @@ body {
     }
   }
 
-  @media (aspect-ratio < 8/12),
-  (max-width: 730px) {
+  @media (aspect-ratio < 8/12), (max-width: 730px) {
     .backgroundContainer {
       .mobileBackgroundContainer {
         display: block;
@@ -401,7 +391,9 @@ body {
 
   .scrollerWrapper {
     background-image: linear-gradient(transparent 60%, black 60%);
-    @media (max-width: 600px) {background-image: linear-gradient(transparent 95%, black 95%);}
+    @media (max-width: 600px) {
+      background-image: linear-gradient(transparent 95%, black 95%);
+    }
   }
   .scroller {
     overflow-x: hidden;
@@ -558,11 +550,13 @@ body {
                     grid-column: 1/2;
                     z-index: 99;
                     width: 80%;
-                    filter: brightness(1) drop-shadow(0px 0px 3px rgba(255, 213, 3, 0.823));
+                    filter: brightness(1)
+                      drop-shadow(0px 0px 3px rgba(255, 213, 3, 0.823));
                     transition: filter 0.3s ease-out;
 
                     &:hover {
-                      filter: brightness(1.1) drop-shadow(0px 0px 18px rgba(255, 213, 3, 0.848));
+                      filter: brightness(1.1)
+                        drop-shadow(0px 0px 18px rgba(255, 213, 3, 0.848));
                     }
                   }
 
@@ -629,8 +623,7 @@ body {
           // }
         }
 
-        @media (aspect-ratio < 8/12),
-        (max-width: 730px) {
+        @media (aspect-ratio < 8/12), (max-width: 730px) {
           .treeContainer {
             .tree {
               margin-top: clamp(0svh, 100svh - 80svw, 100svh);
@@ -666,8 +659,7 @@ body {
         }
       }
 
-      @media (aspect-ratio < 8/12),
-      (max-width: 730px) {
+      @media (aspect-ratio < 8/12), (max-width: 730px) {
         .registerBtnContainer {
           width: 300px;
           left: 50%;
@@ -700,7 +692,9 @@ body {
     }
 
     .bottomContainer {
-      .aboutUsContainer {position: relative;}
+      .aboutUsContainer {
+        position: relative;
+      }
     }
   }
 }
