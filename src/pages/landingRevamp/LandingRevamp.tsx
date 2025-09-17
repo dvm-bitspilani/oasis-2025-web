@@ -24,11 +24,12 @@ import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
-import Ham from "../components/ham/ham";
+// import ContactDoors from "../contact/ContactDoors";
+// import Ham from "../components/ham/ham";
 import MainHam from "../components/mainHam/mainHam";
 import Lenis from "@studio-freight/lenis";
 
-import { useHamStore, useMainHamStore } from "../../utils/store";
+import { useMainHamStore } from "../../utils/store";
 import ContactDoors from "../contact/ContactDoors";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -76,9 +77,9 @@ export default function LandingRevamp({
   const landingRef = useRef<HTMLImageElement>(null);
   const landingMobileRef = useRef<HTMLImageElement>(null);
   const treeContainerRef = useRef<HTMLDivElement>(null);
-  const isHamOpen = useHamStore((state) => state.isHamOpen);
+  // const isHamOpen = useHamStore((state) => state.isHamOpen);
   const isMainHamOpen = useMainHamStore((state) => state.isMainHamOpen);
-  const setIsHamOpen = useHamStore((state) => state.setHamOpen);
+  // const setIsHamOpen = useHamStore((state) => state.setHamOpen);
   const setIsMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
 
   const treeImageRef = useRef<HTMLImageElement>(null);
@@ -415,22 +416,6 @@ export default function LandingRevamp({
         ref={wrapperRef}
       >
         <Navbar />
-        <div
-          className={
-            isHamOpen
-              ? `${styles.hamContainer} ${styles.hamOpen}`
-              : styles.hamContainer
-          }
-        >
-          <div
-            className={styles.blur}
-            onClick={() => setIsHamOpen(false)}
-          ></div>
-
-          <div className={styles.translateHam}>
-            <Ham goToPage={goToPage} />
-          </div>
-        </div>
 
         <div
           className={

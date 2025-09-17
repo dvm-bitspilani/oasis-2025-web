@@ -39,7 +39,7 @@ export default function Navbar({
       : false
   );
 
-  const setHamOpen = useHamStore((state) => state.setHamOpen);
+  // const setHamOpen = useHamStore((state) => state.setHamOpen);
   const setMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
   const navRef =  useRef<HTMLElement>(null);
 
@@ -118,11 +118,7 @@ useEffect(() => {
 }, []); 
 
   const handleHamClick = () => {
-    if (isMobile) {
-      setHamOpen(true);
-    } else {
-      setMainHamOpen(true);
-    }
+    setMainHamOpen(true);
   };
   return (
     <nav ref={navRef} className={`${styles.nav} ${

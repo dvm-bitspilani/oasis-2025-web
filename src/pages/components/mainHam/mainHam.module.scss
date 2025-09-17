@@ -30,6 +30,10 @@
     @media (max-width: 1000px) {
       height: 80px;
     }
+
+    @media (max-width: 730px) {
+      height: 60px;
+    }
   }
 
   .bottomLeftDragon {
@@ -45,6 +49,10 @@
 
     @media (max-width: 1000px) {
       height: 60px;
+    }
+
+    @media (max-width: 730px) {
+      height: 40px;
     }
   }
 
@@ -212,7 +220,7 @@
       }
 
       .devDiv {
-        top: 27.5%;
+        top: 21%;
         left: 33.5%;
 
         .devCloud {
@@ -374,11 +382,185 @@
         }
       }
     }
+
+    @media (max-width: 730px) {
+      .hamDragon {
+        rotate: 40deg;
+        scale: 0.8;
+      }
+
+      .devDiv {
+        top: 32%;
+        left: 45.5%;
+
+        .devCloud {
+          width: auto;
+          height: 110px;
+        }
+
+        .devText {
+          font-family: $primaryFont;
+          font-size: 1em;
+        }
+      }
+
+      .mediaPartnersDiv {
+        top: 48%;
+        right: 38%;
+
+        .mediaPartnersCloud {
+          width: auto;
+          height: 105px;
+        }
+
+        .mediaPartnersText {
+          transform: translate(-62%, -50%);
+          font-size: 1em;
+        }
+      }
+
+      .galleryDiv {
+        top: 50%;
+        right: 42.25%;
+        transform: translate(-50%, -50%);
+
+        &:hover {
+          transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .galleryCloud {
+          width: auto;
+          height: 100px;
+        }
+
+        .galleryText {
+          transform: translate(-65%, -30%);
+          font-size: 1em;
+        }
+      }
+
+      .sponsDiv {
+        bottom: 42%;
+        left: 37.5%;
+
+        .sponsCloud {
+          width: auto;
+          height: 115px;
+        }
+
+        .sponsText {
+          transform: translate(-60%, -40%);
+          font-size: 0.8em;
+        }
+      }
+
+      .wallMagDiv {
+        bottom: 30.5%;
+        right: 40%;
+
+        .wallMagCloud {
+          width: auto;
+          height: 105px;
+        }
+
+        .wallMagText {
+          transform: translate(-60%, -50%);
+          font-size: 1em;
+        }
+      }
+    }
+
+    @media (max-width: 550px) {
+      .hamDragon {
+        rotate: 50deg;
+        scale: 0.6;
+      }
+
+      .devDiv {
+        top: 35.5%;
+        left: 47.5%;
+
+        .devCloud {
+          width: auto;
+          height: 90px;
+        }
+
+        .devText {
+          font-family: $primaryFont;
+          font-size: 0.8em;
+        }
+      }
+
+      .mediaPartnersDiv {
+        top: 49%;
+        right: 41%;
+
+        .mediaPartnersCloud {
+          width: auto;
+          height: 85px;
+        }
+
+        .mediaPartnersText {
+          transform: translate(-62%, -50%);
+          font-size: 0.8em;
+        }
+      }
+
+      .galleryDiv {
+        top: 49.5%;
+        right: 44.5%;
+        transform: translate(-50%, -50%);
+
+        &:hover {
+          transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .galleryCloud {
+          width: auto;
+          height: 80px;
+        }
+
+        .galleryText {
+          transform: translate(-65%, -30%);
+          font-size: 0.8em;
+        }
+      }
+
+      .sponsDiv {
+        bottom: 43%;
+        left: 40%;
+
+        .sponsCloud {
+          width: auto;
+          height: 90px;
+        }
+
+        .sponsText {
+          transform: translate(-60%, -50%);
+          font-size: 0.65em;
+        }
+      }
+
+      .wallMagDiv {
+        bottom: 33.75%;
+        right: 44%;
+
+        .wallMagCloud {
+          width: auto;
+          height: 85px;
+        }
+
+        .wallMagText {
+          transform: translate(-60%, -50%);
+          font-size: 0.8em;
+        }
+      }
+    }
   }
 
   .backBtn {
     cursor: pointer;
-    position: relative;
+
     .backIcon {
       z-index: 5;
       position: absolute;
@@ -388,6 +570,13 @@
       height: 58px;
       background: transparent;
       transition: filter 0.3s ease;
+
+      @media (max-width: 730px) {
+        top: 45px;
+        right: 22px;
+        left: auto;
+        z-index: 4001;
+      }
 
       &:hover {
         filter: drop-shadow(1px 0px 9px rgba(208, 176, 99, 0.4));
@@ -406,6 +595,11 @@
 
     @media screen and (max-width: 1200px) {
       bottom: 1.5vw;
+    }
+
+    @media screen and (max-width: 550px) {
+      bottom: 5vw;
+      font-size: 1em;
     }
   }
 }

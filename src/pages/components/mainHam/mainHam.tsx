@@ -3,6 +3,9 @@ import backButton from "/svgs/landing/hamBack.svg";
 import { useMainHamStore } from "../../../utils/store";
 import hamCloud from "/images/landing/hamCloud.png";
 import heartIcon from "/svgs/landing/heartIcon.svg";
+// import { useRef } from "react";
+// import { gsap } from "gsap";
+// import { useGSAP } from "@gsap/react";
 
 export default function mainHam({
   goToPage,
@@ -10,6 +13,7 @@ export default function mainHam({
   goToPage: (path: string) => void;
 }) {
   const setMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
+  // const isMainHamOpen = useMainHamStore((state) => state.isMainHamOpen);
 
   const hamItems = [
     {
