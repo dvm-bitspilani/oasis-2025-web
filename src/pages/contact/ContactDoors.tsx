@@ -80,6 +80,7 @@ export default function ContactDoors({
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.normalizeScroll(true);
 
     const animateContactBanner = (animation: gsap.TimelineVars) =>
       gsap.to(contactBannerRef.current, { ...animation, duration: 0.3 });
@@ -87,13 +88,15 @@ export default function ContactDoors({
     const doorTimeLine = gsap.timeline({
       scrollTrigger: {
         trigger: triggerElemRef.current,
+        // start: `+=${(triggerElemRef.current?.clientHeight || 0) - window.innerHeight}`,
         start: "bottom bottom",
-        end: () =>
-          `+=${window.innerHeight <= 730 ? 60 : window.innerHeight - 1}`,
+        end: () => `+=${window.innerHeight <= 730 ? 60 : window.innerHeight - 1}`,
         scrub: isMobile ? true : 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,
-        anticipatePin: 5,
+        markers: true,
+        invalidateOnRefresh: true,
+        // anticipatePin: 1,
         // fastScrollEnd: 100,
         // onEnter: calculateHoriBarPos,
         onLeave: () => {
@@ -119,8 +122,8 @@ export default function ContactDoors({
     });
 
     doorTimeLine
-      .from(door1Ref.current, { x: "-150%" }, 0)
-      .from(door2Ref.current, { x: "150%" }, 0)
+      .from(door1Ref.current, { x: "-120%" }, 0)
+      .from(door2Ref.current, { x: "120%" }, 0)
       .to(
         document.body,
         {
@@ -145,6 +148,7 @@ export default function ContactDoors({
       if (newIsMobile !== isMobile) setIsMobile(newIsMobile);
       calculateHoriBarPos(contactItems);
       // ScrollTrigger.update();
+      ScrollTrigger.refresh();
       animateContactItems(0);
 
       console.log("Uhh", windowWidth.current, window.innerWidth);
@@ -159,8 +163,8 @@ export default function ContactDoors({
 
     calculateHoriBarPos(contactItems);
 
-    window.addEventListener("resize", deboundedHandleResize);
-    return () => window.removeEventListener("resize", deboundedHandleResize);
+    (window.visualViewport || window).addEventListener("resize", deboundedHandleResize);
+    return () => (window.visualViewport || window).removeEventListener("resize", deboundedHandleResize);
   }, []);
 
 

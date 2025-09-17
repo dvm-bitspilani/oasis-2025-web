@@ -72,7 +72,7 @@
             }
         }
     }
-
+ 
     .contactPageBg {
         z-index: 10;
         height: inherit;
@@ -115,7 +115,7 @@
     overflow-x: hidden;
     // overflow-y: scroll;
     pointer-events: none;
-    transform: translateY(-100vh);
+    transform: translateY(-100dvh);
 
     --bar-thickness: calc(10*100vw/1920);
 
@@ -169,7 +169,7 @@
         overflow: visible;
 
         @media (max-width: 730px) {
-            height: calc(100% - 100vh + 200px);
+            height: calc(100% - 100vh + 60px);
             min-height: 0px;
         }
 
