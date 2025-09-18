@@ -52,7 +52,7 @@ body {
   /* CSS class-based scroll control instead of position changes */
   &.scroll-locked {
     overflow: hidden;
-    height: 100vh;
+    height: 100svh;
   }
 }
 
@@ -244,11 +244,11 @@ body {
     .mobileBackgroundContainer {
       display: none;
       width: 100dvw;
-      height: 100vh;
+      height: 100svh;
 
       .mobileBackground {
         width: 100dvw;
-        height: 100vh;
+        height: 100svh;
         object-fit: cover;
         object-position: center;
         position: fixed;
@@ -263,7 +263,7 @@ body {
         position: fixed;
         bottom: 0;
         right: 0;
-        height: 70vh;
+        height: 70svh;
         margin-bottom: calc(5svw);
       }
 
