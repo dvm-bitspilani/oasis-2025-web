@@ -1,7 +1,7 @@
 @use "../../../assets/global.scss" as *;
 .page {
   width: 100vw;
-  height: 100vh;
+  height: 100ssvh;
   overflow: hidden;
   position: relative;
   background-size: cover;
@@ -30,15 +30,15 @@
   .bar1 {
     position: absolute;
     transform: scaleY(-1);
-    right: 2vh;
-    bottom: 2vh;
+    right: 2svh;
+    bottom: 2svh;
     width: 25vw;
   }
   .bar2 {
     position: absolute;
     left: 0;
-    top: 2vh;
-    left: 2vh;
+    top: 2svh;
+    left: 2svh;
     width: 25vw;
     transform: scaleX(-1);
   }
@@ -56,21 +56,21 @@
     }
 
     @media (max-width: 700px) {
-      margin: 1.2rem 0.6rem;
+      margin: 2.2rem 1.6rem;
     }
   }
- 
+
   .eventContentWrapper {
     width: 80vw;
-    height: 80vh;
+    height: 80svh;
     // background-color: red;
     position: relative;
-    top: 10vh;
+    top: 10svh;
     left: 10vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap:10vw;
+    gap: 10vw;
     .leftevent,
     .rightevent {
       width: 30vw;
@@ -86,7 +86,7 @@
       img {
         position: absolute;
         // left: 4vw;
-        // top: 10vh;
+        // top: 10svh;
         width: 20vw;
         border-style: solid;
         border-width: 20px;
@@ -95,7 +95,7 @@
       }
       p {
         position: absolute;
-        bottom: 10vh;
+        bottom: 10svh;
       }
     }
     .rightevent {
@@ -145,9 +145,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  transform: translateY(100%)  rotateZ(180deg); 
+  transform: translateY(100%) rotateZ(180deg);
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   background-size: cover;
   z-index: 1001;
   transform-origin: center bottom;
@@ -173,107 +173,106 @@
     // opacity: 1;
   }
 }
-@media( (max-width:1200px) and (max-aspect-ratio: 1.45)
-){
+@media ((max-width: 1200px) and (max-aspect-ratio: 1.45)) {
   .page {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transform: translateX(-100%)  rotateZ(180deg); 
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  z-index: 1001;
-  transform-origin: center bottom;
-  animation: rotateInFromBottom 1.5s linear forwards;
-  animation-delay: 0.1s;
-}
-
-@keyframes rotateInFromBottom {
-  0% {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     transform: translateX(-100%) rotateZ(180deg);
-    // opacity: 0;
+    // width: 100vw;
+    // height: 100svh;
+    background-size: cover;
+    z-index: 1001;
+    transform-origin: center bottom;
+    animation: rotateInFromBottom 0.8s linear forwards;
+    animation-delay: 0.1s;
   }
-  40% {
-    transform: translateX(-80%) rotateZ(135deg);
-    // opacity: 0.5;
-  }
-  70% {
-    transform: translateX(-50%) rotateZ(70deg);
-    // opacity: 0.7;
-  }
-  100% {
-    transform: translateX(-0%) rotateZ(0deg);
-    // opacity: 1;
-  }
-}
-   .evntcontainer{
-      margin: 10vh 10vw;
-      width: 80vw;
-      height: 80vh;
-      overflow: hidden;
-    .mobileEvents{
-      overflow: hidden;
-      
-      .mobileCard{
-      width: 80vw;
-      // background-color: red;
-      height: 80vh;
-      h4,p{
-        text-align: center;
-      }
-      h4 {
-        color: white;
-        font: 10vw $primaryFont;
-        font-weight: 400;
-        text-align: center;
-      }
-      p {
-        font: 5vw $regFont;
-        font-weight: 800;
-        color: #f2dd7c;
 
-        text-align: center;
-      }
-      .mobileImage{
-        width: 70vw;
-         border-style: solid;
-        border-width: 5vw;
-        border-image-source: url("/images/events/image.png");
-        border-image-slice: 40; 
-       
-       margin: 3vw 5vw;
-      }
-      .eventdesc{
-        margin: 3vw 5vw;
-        p{
+  @keyframes rotateInFromBottom {
+    0% {
+      transform: translateX(-100%) rotateZ(180deg);
+      // opacity: 0;
+    }
+    40% {
+      transform: translateX(-80%) rotateZ(135deg);
+      // opacity: 0.5;
+    }
+    70% {
+      transform: translateX(-50%) rotateZ(70deg);
+      // opacity: 0.7;
+    }
+    100% {
+      transform: translateX(-0%) rotateZ(0deg);
+      // opacity: 1;
+    }
+  }
+  .evntcontainer {
+    margin: 10svh 10vw;
+    width: 80vw;
+    height: 80svh;
+    overflow: hidden;
+    .mobileEvents {
+      overflow: hidden;
+
+      .mobileCard {
+        width: 80vw;
+        // background-color: red;
+        height: 80svh;
+        h4,
+        p {
           text-align: center;
-          font-size: 3vw;
         }
-      }
-      .controls2 {
-        display: flex;
-        position: absolute;
-        margin: 0vw 22.5vw ;
-        gap: 5vw;
-        cursor: pointer;
-        .left2 {
-          transform: scaleX(-1);
-          // img {
-          //   //  box-shadow: 0px 0px 12px 0px #f2dd7c;
-          // }
-          // .prev {
-          // }
+        h4 {
+          color: white;
+          font: 10vw $primaryFont;
+          font-weight: 400;
+          text-align: center;
         }
-        .left2,
-        .right2 {
-          img {
-            width: 15vw;
+        p {
+          font: 5vw $regFont;
+          font-weight: 800;
+          color: #f2dd7c;
+
+          text-align: center;
+        }
+        .mobileImage {
+          width: 70vw;
+          border-style: solid;
+          border-width: 5vw;
+          border-image-source: url("/images/events/image.png");
+          border-image-slice: 40;
+
+          margin: 3vw 5vw;
+        }
+        .eventdesc {
+          margin: 3vw 5vw;
+          p {
+            text-align: center;
+            font-size: 3.5vw;
+          }
+        }
+        .controls2 {
+          display: flex;
+          position: absolute;
+          margin: 0vw 22.5vw;
+          gap: 5vw;
+          cursor: pointer;
+          .left2 {
+            transform: scaleX(-1);
+            // img {
+            //   //  box-shadow: 0px 0px 12px 0px #f2dd7c;
+            // }
+            // .prev {
+            // }
+          }
+          .left2,
+          .right2 {
+            img {
+              width: 15vw;
+            }
           }
         }
       }
-      }
     }
-
   }
 }

@@ -9,6 +9,8 @@ import gsap from "gsap";
 import { useEffect, useState } from "react";
 import Right from "/svgs/events/Next1.svg";
 import { motion, AnimatePresence } from "framer-motion";
+import Star from "/svgs/events/star.svg";
+import Star2 from "/svgs/events/star.svg";
 
 interface EventspageProps {
   category: string; 
@@ -30,7 +32,7 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
-  const icons = ["/svgs/events/star.svg", "/svgs/events/star2.svg"];
+  const icons = [Star, Star2];
   const [events, setEvents] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
