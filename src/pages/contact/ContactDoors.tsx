@@ -90,11 +90,11 @@ export default function ContactDoors({
         trigger: triggerElemRef.current,
         // start: `+=${(triggerElemRef.current?.clientHeight || 0) - window.innerHeight}`,
         start: "bottom bottom",
-        end: () => `+=${window.innerHeight <= 730 ? 60 : window.innerHeight - 1}`,
+        end: () =>
+          `+=${window.innerHeight <= 730 ? 60 : window.innerHeight - 1}`,
         scrub: isMobile ? true : 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,
-        markers: true,
         invalidateOnRefresh: true,
         // anticipatePin: 1,
         // fastScrollEnd: 100,
@@ -115,7 +115,7 @@ export default function ContactDoors({
         onUpdate: (self) => {
           const scrollVelocity = self.getVelocity();
           const swingSensitivity = 0.003;
-          
+
           animateContactItems(scrollVelocity * swingSensitivity);
         },
       },
@@ -139,7 +139,7 @@ export default function ContactDoors({
 
   useEffect(() => {
     const contactItems = document.getElementsByClassName(styles.contactItem);
-    
+
     const handleResize = () => {
       // location.reload()
       const newIsTab = window.innerWidth <= 1300;
@@ -159,16 +159,22 @@ export default function ContactDoors({
       let timer;
       clearTimeout(timer);
       timer = setTimeout(handleResize, 200);
-    }
+    };
 
     calculateHoriBarPos(contactItems);
 
-    (window.visualViewport || window).addEventListener("resize", deboundedHandleResize);
-    return () => (window.visualViewport || window).removeEventListener("resize", deboundedHandleResize);
+    (window.visualViewport || window).addEventListener(
+      "resize",
+      deboundedHandleResize
+    );
+    return () =>
+      (window.visualViewport || window).removeEventListener(
+        "resize",
+        deboundedHandleResize
+      );
   }, []);
 
-
-  useEffect(() => console.log(window,innerWidth), [window.innerWidth])
+  useEffect(() => console.log(window, innerWidth), [window.innerWidth]);
   // useEffect(() => {
   //     ScrollTrigger.refresh();
   //     // ScrollTrigger.update();
