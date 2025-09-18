@@ -90,7 +90,7 @@ export default function ContactDoors({
         trigger: triggerElemRef.current,
         // start: `+=${(triggerElemRef.current?.clientHeight || 0) - window.innerHeight}`,
         start: "bottom bottom",
-        end: () => `+=${window.innerHeight <= 730 ? 60 : window.innerHeight - 1}`,
+        end: () => `+=${window.innerHeight}`,
         scrub: isMobile ? true : 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,
