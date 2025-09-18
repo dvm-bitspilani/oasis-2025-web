@@ -27,7 +27,6 @@ import letter5 from "/svgs/aboutus/letter5.svg";
 import letter6 from "/svgs/aboutus/letter6.svg";
 import letter7 from "/svgs/aboutus/letter7.svg";
 import letter8 from "/svgs/aboutus/letter8.svg";
-// import Navbar from "../components/navbar/Navbar";
 
 declare global {
   interface Window {
@@ -170,13 +169,13 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       repeat: -1,
       ease: "sine.inOut",
     });
-    gsap.to(AboutRef.current, {
-      backgroundPositionY: "-=1000vh",
-      duration: 200,
+    // gsap.to(AboutRef.current, {
+    //   backgroundPositionY: "-=1000vh",
+    //   duration: 200,
 
-      repeat: -1,
-      ease: "linear",
-    });
+    //   repeat: -1,
+    //   ease: "linear",
+    // });
 
     const spawnIcon = (fanSelector: string, isFan1: boolean) => {
       const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
@@ -192,11 +191,9 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
         startY = rect.top - parentRect.top + rect.height / 2 - 100;
       }
 
-      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
       const iconTemplate =
         iconImages[Math.floor(Math.random() * iconImages.length)];
       const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-      // img.src = iconSrc;
       img.className = styles.flyingIcon;
       img.style.left = `${startX}px`;
       img.style.top = `${startY}px`;
@@ -236,60 +233,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       );
     };
 
-    // const spawnIcon2 = (fanSelector: string, isFan1: boolean) => {
-    //   const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
-    //   if (!fanEl || !fanEl.parentElement) return;
-
-    //   const rect = fanEl.getBoundingClientRect();
-    //   const parentRect = fanEl.parentElement.getBoundingClientRect();
-
-    //   const startX = rect.left - parentRect.left + rect.width / 2;
-    //   const startY = rect.top - parentRect.top + rect.height / 2 - 100;
-
-    //   // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-    //   // const img = document.createElement("img");
-    //   // img.src = iconSrc;
-    //   const iconTemplate =
-    //     iconImages[Math.floor(Math.random() * iconImages.length)];
-    //   const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-    //   img.className = styles.flyingIcon;
-    //   img.style.left = `${startX}px`;
-    //   img.style.top = `${startY}px`;
-
-    //   fanEl.parentElement.appendChild(img);
-
-    //   let angle: number;
-    //   if (isFan1) {
-    //     angle = Math.random() * 2 * (Math.PI / 3);
-    //   } else {
-    //     angle = Math.PI + Math.random() * 2 * (Math.PI / 3);
-    //   }
-
-    //   const distance = Math.random() * 100;
-    //   const dx = Math.cos(angle) * distance;
-    //   const dy = -Math.sin(angle) * distance;
-
-    //   gsap.fromTo(
-    //     img,
-    //     { opacity: 0, scale: 0, x: 0, y: 0 },
-    //     {
-    //       opacity: 1,
-    //       scale: 1,
-    //       x: dx,
-    //       y: dy,
-    //       duration: 2,
-    //       ease: "power2.out",
-    //       onComplete: () => {
-    //         gsap.to(img, {
-    //           opacity: 0,
-    //           duration: 0.5,
-    //           onComplete: () => img.remove(),
-    //         });
-    //       },
-    //     }
-    //   );
-    // };
-
     const spawnFromCorner = (
       corner: "top-left" | "top-right" | "bottom-left" | "bottom-right"
     ) => {
@@ -298,24 +241,16 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       ) as HTMLElement | null;
       if (!container) return;
 
-      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      // const img = document.createElement("img");
-      // img.src = iconSrc;
       const iconTemplate =
         iconImages[Math.floor(Math.random() * iconImages.length)];
       const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
 
-      // Set start position
       let startX = 0,
         startY = 0;
       const padding = 10;
 
       switch (corner) {
-        // case "top-left":
-        //   startX = padding;
-        //   startY = padding;
-        //   break;
         case "top-right":
           startX = container.clientWidth - padding;
           startY = padding;
@@ -324,10 +259,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
           startX = padding;
           startY = container.clientHeight - padding;
           break;
-        // case "bottom-right":
-        //   startX = container.clientWidth - padding -40;
-        //   startY = container.clientHeight - padding - 40;
-        //   break;
       }
 
       img.style.left = `${startX}px`;
@@ -335,7 +266,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
 
       container.appendChild(img);
 
-      // Move towards center
       const centerX = container.clientWidth / 2;
       const centerY = container.clientHeight / 2;
 
@@ -363,77 +293,12 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       );
     };
 
-    // const spawnFromCorner2 = (corner: "top-right" | "bottom-left") => {
-    //   const container = document.querySelector(
-    //     `.${styles.theme}`
-    //   ) as HTMLElement | null;
-    //   if (!container) return;
-
-    //   // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-    //   // const img = document.createElement("img");
-    //   // img.src = iconSrc;
-    //   const iconTemplate =
-    //     iconImages[Math.floor(Math.random() * iconImages.length)];
-    //   const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-    //   img.className = styles.flyingIcon;
-
-    //   // Set start position
-    //   let startX = 0,
-    //     startY = 0;
-    //   const padding = 0;
-
-    //   switch (corner) {
-    //     case "top-right":
-    //       startX = container.clientWidth - padding - 25;
-    //       startY = padding - 30;
-    //       break;
-    //     case "bottom-left":
-    //       startX = padding - 20;
-    //       startY = container.clientHeight - padding - 15;
-    //       break;
-    //   }
-
-    //   img.style.left = `${startX}px`;
-    //   img.style.top = `${startY}px`;
-
-    //   container.appendChild(img);
-
-    //   const centerX = container.clientWidth / 2;
-    //   const centerY = container.clientHeight / 2;
-
-    //   const dx = ((centerX - startX) * Math.random()) / 4;
-    //   const dy = ((centerY - startY) * Math.random()) / 2;
-
-    //   gsap.fromTo(
-    //     img,
-    //     { opacity: 0, scale: 0, x: 0, y: 0 },
-    //     {
-    //       opacity: 1,
-    //       scale: 0.5,
-    //       x: -dx,
-    //       y: -dy,
-    //       duration: 2,
-    //       ease: "power2.out",
-    //       onComplete: () => {
-    //         gsap.to(img, {
-    //           opacity: 0,
-    //           duration: 0.5,
-    //           onComplete: () => img.remove(),
-    //         });
-    //       },
-    //     }
-    //   );
-    // };
+    
     let intervalId: number;
 
     const startSpawning = () => {
       intervalId = window.setInterval(
         () => {
-          // const corners2 = ["top-right", "bottom-left"];
-          // const randomCorner2 = corners2[
-          //   Math.floor(Math.random() * corners2.length)
-          // ] as any;
-          // spawnFromCorner2(randomCorner2);
           if (isMobile) {
             const corners = ["top-right", "bottom-left"];
             const randomCorner = corners[
@@ -494,7 +359,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
         backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`,
       }}
     >
-      {/* <Navbar hideHam variant="about" /> */}
 
       <div className={styles.header}>
         <img src={isMobile ? Reg : Header} alt="About Us" />
@@ -546,7 +410,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
 
           <div></div>
 
-          {/* CONTROLS */}
           <div className={styles.controls}>
             <div className={styles.a1}></div>
             <div className={styles.buttonContainer}>
@@ -580,7 +443,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
           </div>
         </div>
 
-        {/* ABOUT SIDE */}
         <div className={styles.abt}>
           <div
             className={styles.aboutback}
@@ -604,9 +466,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
           </div>
         </div>
       </div>
-      {/* <button className={styles.theme} onClick={() => { }}>
-        <h3>ABOUT THEME</h3>
-      </button> */}
+     
       <div className={styles.social}>
         <a href="https://www.linkedin.com/company/oasis24-bits-pilani/">
           <img src={linkedin} alt="Linkedin" />
