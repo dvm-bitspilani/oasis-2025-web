@@ -59,16 +59,18 @@
       margin: 1.2rem 0.6rem;
     }
   }
+ 
   .eventContentWrapper {
     width: 80vw;
-    height: 60vh;
+    height: 80vh;
     // background-color: red;
     position: relative;
-    top: 20vh;
+    top: 10vh;
     left: 10vw;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap:10vw;
     .leftevent,
     .rightevent {
       width: 30vw;
@@ -77,10 +79,14 @@
       gap: 10px;
     }
     .leftevent {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       img {
         position: absolute;
-        left: 4vw;
-        top: 10vh;
+        // left: 4vw;
+        // top: 10vh;
         width: 20vw;
         border-style: solid;
         border-width: 20px;
@@ -112,9 +118,9 @@
       }
       .controls {
         display: flex;
-        position: absolute;
-        right: 5vw;
-        bottom: 0;
+        // position: absolute;
+        // right: 5vw;
+        // bottom: 0;
         gap: 10px;
         cursor: pointer;
         .left {
@@ -138,32 +144,136 @@
 .page {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) rotateZ(90deg); 
+  left: 0;
+  transform: translateY(100%)  rotateZ(180deg); 
   width: 100vw;
   height: 100vh;
   background-size: cover;
-  z-index: 10;
-  transform-origin: bottom left;
-  animation: rotateInFromBottom 0.8s linear forwards;
-  animation-delay: 0.3s;
+  z-index: 1001;
+  transform-origin: center bottom;
+  animation: rotateInFromBottom 1s linear forwards;
+  animation-delay: 0s;
 }
 
 @keyframes rotateInFromBottom {
   0% {
-    transform: translateX(20%) rotateZ(90deg);
+    transform: translateY(100%) rotateZ(180deg);
     // opacity: 0;
   }
-  50% {
-    transform: translateX(-10%) rotateZ(45deg);
+  40% {
+    transform: translateY(80%) rotateZ(135deg);
     // opacity: 0.5;
   }
   70% {
-    transform: translateX(-20%) rotateZ(30deg);
+    transform: translateY(50%) rotateZ(70deg);
     // opacity: 0.7;
   }
   100% {
-    transform: translateX(-50%) rotateZ(0deg);
+    transform: translateY(0%) rotateZ(0deg);
     // opacity: 1;
+  }
+}
+@media( (max-width:1200px) and (max-aspect-ratio: 1.45)
+){
+  .page {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%)  rotateZ(180deg); 
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  z-index: 1001;
+  transform-origin: center bottom;
+  animation: rotateInFromBottom 1.5s linear forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes rotateInFromBottom {
+  0% {
+    transform: translateX(-100%) rotateZ(180deg);
+    // opacity: 0;
+  }
+  40% {
+    transform: translateX(-80%) rotateZ(135deg);
+    // opacity: 0.5;
+  }
+  70% {
+    transform: translateX(-50%) rotateZ(70deg);
+    // opacity: 0.7;
+  }
+  100% {
+    transform: translateX(-0%) rotateZ(0deg);
+    // opacity: 1;
+  }
+}
+   .evntcontainer{
+      margin: 10vh 10vw;
+      width: 80vw;
+      height: 80vh;
+      overflow: hidden;
+    .mobileEvents{
+      overflow: hidden;
+      
+      .mobileCard{
+      width: 80vw;
+      // background-color: red;
+      height: 80vh;
+      h4,p{
+        text-align: center;
+      }
+      h4 {
+        color: white;
+        font: 10vw $primaryFont;
+        font-weight: 400;
+        text-align: center;
+      }
+      p {
+        font: 5vw $regFont;
+        font-weight: 800;
+        color: #f2dd7c;
+
+        text-align: center;
+      }
+      .mobileImage{
+        width: 70vw;
+         border-style: solid;
+        border-width: 5vw;
+        border-image-source: url("/images/events/image.png");
+        border-image-slice: 40; 
+       
+       margin: 3vw 5vw;
+      }
+      .eventdesc{
+        margin: 3vw 5vw;
+        p{
+          text-align: center;
+          font-size: 3vw;
+        }
+      }
+      .controls2 {
+        display: flex;
+        position: absolute;
+        margin: 0vw 22.5vw ;
+        gap: 5vw;
+        cursor: pointer;
+        .left2 {
+          transform: scaleX(-1);
+          // img {
+          //   //  box-shadow: 0px 0px 12px 0px #f2dd7c;
+          // }
+          // .prev {
+          // }
+        }
+        .left2,
+        .right2 {
+          img {
+            width: 15vw;
+          }
+        }
+      }
+      }
+    }
+
   }
 }
