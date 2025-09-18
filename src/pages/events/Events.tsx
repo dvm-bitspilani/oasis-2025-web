@@ -23,6 +23,7 @@ interface FanImage {
   className: string;
 }
 
+
 const fanImages: FanImage[] = [
   {
     src: quizzes,
@@ -61,6 +62,8 @@ const Events: React.FC = () => {
     window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45)")
       .matches
   );
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(
@@ -84,6 +87,33 @@ const Events: React.FC = () => {
 
   const EventRef = useRef<HTMLDivElement>(null);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+useEffect(() => {
+  if (!canHover) return; // skip for mobile/touch
+
+  imageRefs.current.forEach((img) => {
+    if (!img) return;
+
+    const hoverTween = gsap.to(img, {
+      scale: 1.05,
+      paused: true,
+      duration: 0.2,
+      ease: "power1.out",
+      //  filter: "saturate(1.5)",
+    });
+
+    img.addEventListener("mouseenter", () => hoverTween.play());
+    // img.addEventListener("mouseleave", () => hoverTween.reverse());
+  });
+
+  // Cleanup
+  return () => {
+    imageRefs.current.forEach((img) => {
+      if (!img) return;
+      img.removeEventListener("mouseenter", () => {});
+      img.removeEventListener("mouseleave", () => {});
+    });
+  };
+}, []);
 
   useEffect(() => {
     const radius = isMobile ? window.innerHeight / 2 : window.innerWidth / 2;
@@ -110,44 +140,37 @@ const Events: React.FC = () => {
   }, []);
 
   const handleImageClick = (alt: string) => {
-    setSelectedCategory(alt);
-    setFoldFan(true);
-    setShowEventPage(true);
-    setTimeout(() => {
-      setShowImages(false);
-    }, 1500);
-    const mm = gsap.matchMedia();
+  setSelectedCategory(alt);
+  setFoldFan(true);
+  setShowEventPage(true);
+  setTimeout(() => {
+    setShowImages(false);
+  }, 1500);
 
-    mm.add("(max-width: 1200px) and (max-aspect-ratio: 1.45)", () => {
-      // reordering indexes for mobile
-      const mobileOrder = [1, 0, 4, 3, 2];
+  const mm = gsap.matchMedia();
 
-      const newOrigins = mobileOrder.map((originalIndex) => {
-        const imgEl = imageRefs.current[originalIndex];
-        const even = EventRef.current;
-        if (!even || !imgEl) return { x: 0, y: 0 };
+  // MOBILE
+  mm.add("(max-width: 1200px) and (max-aspect-ratio: 1.45)", () => {
+    const mobileOrder = [1, 0, 4, 3, 2];
 
-        const rect = imgEl.getBoundingClientRect();
-        const imgInitialX = rect.left;
-        const imgInitialY = rect.top;
-
-        const rec = even.getBoundingClientRect();
-        const imgX = rec.left;
-        const imgY = rec.top + rec.height / 2; // mobile origin (left center)
-
-        const offsetX = imgX - imgInitialX;
-        const offsetY = imgY - imgInitialY;
-
-        return { x: offsetX, y: offsetY };
-      });
-
-      // setOrigins(newOrigins);
-
+    requestAnimationFrame(() => {
       mobileOrder.forEach((originalIndex, orderIndex) => {
         const imgEl = imageRefs.current[originalIndex];
         if (!imgEl) return;
 
-        const origin = newOrigins[orderIndex];
+        const origin = (() => {
+          const rect = imgEl.getBoundingClientRect();
+          const rec = EventRef.current?.getBoundingClientRect();
+          if (!rec) return { x: 0, y: 0 };
+          return {
+            x: rec.left - rect.left,
+            y: rec.top + rec.height / 2 - rect.top,
+          };
+        })();
+
+        //  reset transforms before animation
+        gsap.killTweensOf(imgEl);
+        gsap.set(imgEl, { scale: 1 });
         imgEl.style.transformOrigin = `${origin.x}px ${origin.y}px`;
 
         gsap.to(imgEl, {
@@ -155,40 +178,31 @@ const Events: React.FC = () => {
           duration: durations[orderIndex],
           delay: delays[orderIndex],
           ease: "linear",
-          scale: 1,
-          zIndex: 2,
+          zIndex: alt === fanImages[originalIndex].alt ? 5 : 2, // clicked image on top
         });
       });
     });
+  });
 
-    //  Desktop
-    mm.add("(min-width: 1201px), (min-aspect-ratio: 1.46)", () => {
-      const newOrigins = fanImages.map((_, i) => {
-        const imgEl = imageRefs.current[i];
-        const even = EventRef.current;
-        if (!even || !imgEl) return { x: 0, y: 0 };
-
-        const rect = imgEl.getBoundingClientRect();
-        const imgInitialX = rect.left;
-        const imgInitialY = rect.top;
-
-        const rec = even.getBoundingClientRect();
-        const imgX = rec.left + rec.width / 2;
-        const imgY = rec.bottom; // desktop origin (center bottom)
-
-        const offsetX = imgX - imgInitialX;
-        const offsetY = imgY - imgInitialY;
-
-        return { x: offsetX, y: offsetY };
-      });
-
-      // setOrigins(newOrigins);
-
+  // DESKTOP
+  mm.add("(min-width: 1201px), (min-aspect-ratio: 1.46)", () => {
+    requestAnimationFrame(() => {
       fanImages.forEach((_, i) => {
         const imgEl = imageRefs.current[i];
         if (!imgEl) return;
 
-        const origin = newOrigins[i];
+        const origin = (() => {
+          const rect = imgEl.getBoundingClientRect();
+          const rec = EventRef.current?.getBoundingClientRect();
+          if (!rec) return { x: 0, y: 0 };
+          return {
+            x: rec.left + rec.width / 2 - rect.left,
+            y: rec.bottom - rect.top,
+          };
+        })();
+
+        gsap.killTweensOf(imgEl);
+        gsap.set(imgEl, { scale: 1 });
         imgEl.style.transformOrigin = `${origin.x}px ${origin.y}px`;
 
         gsap.to(imgEl, {
@@ -196,12 +210,13 @@ const Events: React.FC = () => {
           duration: durations[i],
           delay: delays[i],
           ease: "linear",
-          scale: 1,
           zIndex: 2,
         });
       });
     });
-  };
+  });
+};
+
 
   return (
     <div
