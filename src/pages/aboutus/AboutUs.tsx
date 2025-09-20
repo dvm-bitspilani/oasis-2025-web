@@ -27,6 +27,7 @@ import letter5 from "/svgs/aboutus/letter5.svg";
 import letter6 from "/svgs/aboutus/letter6.svg";
 import letter7 from "/svgs/aboutus/letter7.svg";
 import letter8 from "/svgs/aboutus/letter8.svg";
+import { useGSAP } from "@gsap/react";
 
 declare global {
   interface Window {
@@ -59,10 +60,45 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
   const AboutRef = useRef<HTMLDivElement | null>(null);
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
+  
+  const fan2Ref = useRef<HTMLImageElement>(null);
+  const fan1Ref = useRef<HTMLImageElement>(null);
+
+  const [isMobile, setIsMobile] = useState(
+    window
+      .matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
+      .matches
+  );
+
+  const loadByIndex = (index: number) => {
+    if (!playerRef.current) return;
+    setCurrent(index);
+    playerRef.current.loadVideoById(videos[index]);
+  };
+
+  const nextVideo = () => {
+    const newIdx = (current + 1) % videos.length;
+    loadByIndex(newIdx);
+  };
+
+  const prevVideo = () => {
+    const newIdx = (current - 1 + videos.length) % videos.length;
+    loadByIndex(newIdx);
+  };
+
+  const togglePlayPause = () => {
+    if (!playerRef.current || !window.YT) return;
+    const state = playerRef.current.getPlayerState();
+    const YTState = window.YT.PlayerState;
+    if (state === YTState.PLAYING) {
+      playerRef.current.pauseVideo();
+    } else {
+      playerRef.current.playVideo();
+    }
+  };
+
   useEffect(() => {
     document.body.style.position = "static";
-  }, []);
-  useEffect(() => {
     const initPlayer = () => {
       if (playerRef.current || !playerContainerRef.current || !window.YT)
         return;
@@ -118,64 +154,29 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
     };
   }, []);
 
-  const loadByIndex = (index: number) => {
-    if (!playerRef.current) return;
-    setCurrent(index);
-    playerRef.current.loadVideoById(videos[index]);
-  };
 
-  const nextVideo = () => {
-    const newIdx = (current + 1) % videos.length;
-    loadByIndex(newIdx);
-  };
+  useGSAP(() => {
+    if (!isMobile) {
+      gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
 
-  const prevVideo = () => {
-    const newIdx = (current - 1 + videos.length) % videos.length;
-    loadByIndex(newIdx);
-  };
+      gsap.to(fan1Ref.current, {
+        rotateX: -5,
+        rotateY: -5,
+        duration: 0.5,
+        yoyo: true,
+        repeat: -1,
+        ease: "power1.inOut",
+      });
 
-  const togglePlayPause = () => {
-    if (!playerRef.current || !window.YT) return;
-    const state = playerRef.current.getPlayerState();
-    const YTState = window.YT.PlayerState;
-    if (state === YTState.PLAYING) {
-      playerRef.current.pauseVideo();
-    } else {
-      playerRef.current.playVideo();
+      gsap.to(fan2Ref.current, {
+        rotateX: -9,
+        rotateY: -9,
+        duration: 0.5,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+      });
     }
-  };
-
-  const fan2Ref = useRef<HTMLImageElement>(null);
-  const fan1Ref = useRef<HTMLImageElement>(null);
-  useEffect(() => {
-    gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
-  }, []);
-
-  useEffect(() => {
-    gsap.to(fan1Ref.current, {
-      rotateX: -5,
-      rotateY: -5,
-      duration: 0.5,
-      yoyo: true,
-      repeat: -1,
-      ease: "power1.inOut",
-    });
-
-    gsap.to(fan2Ref.current, {
-      rotateX: -9,
-      rotateY: -9,
-      duration: 0.5,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-    // gsap.to(AboutRef.current, {
-    //   backgroundPositionY: "-=1000vh",
-    //   duration: 200,
-
-    //   repeat: -1,
-    //   ease: "linear",
-    // });
 
     const spawnIcon = (fanSelector: string, isFan1: boolean) => {
       const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
@@ -293,7 +294,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       );
     };
 
-    
     let intervalId: number;
 
     const startSpawning = () => {
@@ -330,12 +330,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       stopSpawning();
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  }, []);
-
-  const [isMobile, setIsMobile] = useState(
-    window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
-      .matches
-  );
+  });
 
   useEffect(() => {
     const handleResize = () =>

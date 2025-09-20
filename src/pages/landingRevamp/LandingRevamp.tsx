@@ -181,7 +181,16 @@ export default function LandingRevamp({
       lenis.raf(time * 1000);
     });
 
+    // const breakPointDetector = gsap.to("#aboutUsBottom", {
+    //   scrollTrigger: {
+    //     trigger: "#aboutUsBottom",
+    //     start: "top bottom",
+    //     // onEnter: () => {lenis.stop(), console.log("Here")},
+    //   }
+    // })
+
     return () => {
+      // breakPointDetector.kill()
       gsap.ticker.remove((time) => {
         lenis.raf(time);
       });
@@ -492,7 +501,7 @@ export default function LandingRevamp({
                 <span>0{timeLeft.minutes}</span>
               )}
             </div>
-            MINUTES
+          MINUTES
           </div>
         </div>
         <div className={styles.scrollerWrapper}>
@@ -574,8 +583,9 @@ export default function LandingRevamp({
         </div>
         <div className={styles.bottomContainer}>
           <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
-            <div ref={aboutUsWrapperRef} style={{minHeight: "100vh", backgroundImage: "url(./imagesdoors/Door3.png)", backgroundSize: "100vw 100vh", minWidth: "100vw"}}>
+            <div className={styles.aboutUsWrapper} ref={aboutUsWrapperRef}>
               <AboutUs isBackBtn={false} />
+              <div className={styles.aboutUsBottom} id="aboutUsBottom" />
             </div>
             {aboutUsContRef.current &&
               aboutUsWrapperRef && ( // bottomSpacerRef.current &&

@@ -98,7 +98,7 @@ export default function ContactDoors({
         // anticipatePin: 1,
         // fastScrollEnd: 100,
         // onEnter: calculateHoriBarPos,
-        onLeave: () => {
+         onLeave: () => {
           animateContactBanner({ y: "0%", autoAlpha: 1 });
           animateContactItems(0);
           gsap.set(`.${styles.contactSection}`, { pointerEvents: "all" });
@@ -166,6 +166,7 @@ export default function ContactDoors({
       "resize",
       deboundedHandleResize
     );
+    
     return () =>
       (window.visualViewport || window).removeEventListener(
         "resize",
