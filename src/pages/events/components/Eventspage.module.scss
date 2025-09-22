@@ -214,34 +214,43 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    transform: translateX(-100%) rotateZ(180deg);
+    // transform: translateX(-100%) rotateZ(180deg);
     // width: 100vw;
     // height: 100svh;
     background-size: cover;
     z-index: 1001;
-    transform-origin: center bottom;
-    animation: rotateInFromBottom 0.8s linear forwards;
-    animation-delay: 0.1s;
+    // transform-origin: center bottom;
+    // animation: rotateInFromBottom 0.8s linear forwards;
+    // animation-delay: 0.1s;
+     animation: fadeIn 0.5s linear forwards;
+  animation-delay: 0s;
   }
+@keyframes fadeIn{
+  0% {opacity: 0;
+}
+100% {
+  opacity: 1;
+}
+}
 
-  @keyframes rotateInFromBottom {
-    0% {
-      transform: translateX(-100%) rotateZ(180deg);
-      // opacity: 0;
-    }
-    40% {
-      transform: translateX(-80%) rotateZ(135deg);
-      // opacity: 0.5;
-    }
-    70% {
-      transform: translateX(-50%) rotateZ(70deg);
-      // opacity: 0.7;
-    }
-    100% {
-      transform: translateX(-0%) rotateZ(0deg);
-      // opacity: 1;
-    }
-  }
+  // @keyframes rotateInFromBottom {
+  //   0% {
+  //     transform: translateX(-100%) rotateZ(180deg);
+  //     // opacity: 0;
+  //   }
+  //   40% {
+  //     transform: translateX(-80%) rotateZ(135deg);
+  //     // opacity: 0.5;
+  //   }
+  //   70% {
+  //     transform: translateX(-50%) rotateZ(70deg);
+  //     // opacity: 0.7;
+  //   }
+  //   100% {
+  //     transform: translateX(-0%) rotateZ(0deg);
+  //     // opacity: 1;
+  //   }
+  // }
   .evntcontainer {
     margin: 10svh 10vw;
     width: 80vw;
@@ -321,34 +330,36 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    transform: translateX(-100%) rotateZ(180deg);
+    // transform: translateX(-100%) rotateZ(180deg);
     // width: 100vw;
     // height: 100svh;
     background-size: cover;
     z-index: 1001;
     transform-origin: center bottom;
-    animation: rotateInFromBottom 0.8s linear forwards;
-    animation-delay: 0.1s;
+    // animation: rotateInFromBottom 0.8s linear forwards;
+    // animation-delay: 0.1s;
+     animation: fadeIn 0.5s linear forwards;
+    animation-delay: 0s;
   }
 
-  @keyframes rotateInFromBottom {
-    0% {
-      transform: translateX(-100%) rotateZ(180deg);
-      // opacity: 0;
-    }
-    40% {
-      transform: translateX(-80%) rotateZ(135deg);
-      // opacity: 0.5;
-    }
-    70% {
-      transform: translateX(-50%) rotateZ(70deg);
-      // opacity: 0.7;
-    }
-    100% {
-      transform: translateX(-0%) rotateZ(0deg);
-      // opacity: 1;
-    }
-  }
+  // @keyframes rotateInFromBottom {
+  //   0% {
+  //     transform: translateX(-100%) rotateZ(180deg);
+  //     // opacity: 0;
+  //   }
+  //   40% {
+  //     transform: translateX(-80%) rotateZ(135deg);
+  //     // opacity: 0.5;
+  //   }
+  //   70% {
+  //     transform: translateX(-50%) rotateZ(70deg);
+  //     // opacity: 0.7;
+  //   }
+  //   100% {
+  //     transform: translateX(-0%) rotateZ(0deg);
+  //     // opacity: 1;
+  //   }
+  // }
   .evntcontainer {
     margin: 10svh 10vw;
     width: 80vw;

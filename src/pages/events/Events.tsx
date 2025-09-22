@@ -129,7 +129,7 @@ useEffect(() => {
     const radius = isMobile ? window.innerHeight / 2 : window.innerWidth / 2;
 
     // const delayAngleFactor = isMobile ? 0.0016 : 0.01505;
-    const delayAngleFactor = 1000;
+    // const delayAngleFactor = 1000;
     const speed = isMobile ? 800 : 1000;
     const computedDurations = rotationAngles.map((angle) => {
       const angleRad = Math.abs((angle * Math.PI) / 180);
@@ -142,10 +142,10 @@ useEffect(() => {
     const angleDiffs = rotationAngles.map((angle) =>
       Math.abs(angle - rotationAngles[0])
     );
-    const maxDiff = Math.max(...angleDiffs);
+    // const maxDiff = Math.max(...angleDiffs);
     const computedDelays = angleDiffs.map(
       // (diff) => (maxDiff - diff) * delayAngleFactor
-        (diff) => 10000
+        (diff) => diff+10000
     );
 
     setDelays(computedDelays);
