@@ -13,7 +13,7 @@ import Star from "/svgs/events/star.svg";
 import Star2 from "/svgs/events/star.svg";
 
 interface EventspageProps {
-  category: string; 
+  category: string;
 }
 
 const Eventspage: React.FC<EventspageProps> = ({ category }) => {
@@ -45,7 +45,8 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
         const data = await res.json();
 
         const catData = data.data.find(
-          (cat: any) => cat.category_name.toLowerCase() === category.toLowerCase()
+          (cat: any) =>
+            cat.category_name.toLowerCase() === category.toLowerCase()
         );
 
         if (catData) {
@@ -161,94 +162,107 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
   }, []);
 
   return (
-  <div>
-    <div
-      className={styles.page}
-      style={{
-        backgroundImage: `url("${isMobile ? MobileBack : Back}")`,
-      }}
-    >
-      <img src={cl1} alt="Clouds" className={styles.cl1} />
-      <img src={cl2} alt="Clouds" className={styles.cl2} />
-      <img src={topright} alt="Borders" className={styles.bar1} />
-      <img src={topright} alt="Borders" className={styles.bar2} />
-      <BackButton className={styles.aboutBB}  onClick={() => window.location.reload()}  />
+    <div>
+      <div
+        className={styles.page}
+        style={{
+          backgroundImage: `url("${isMobile ? MobileBack : Back}")`,
+        }}
+      >
+        <img src={cl1} alt="Clouds" className={styles.cl1} />
+        <img src={cl2} alt="Clouds" className={styles.cl2} />
+        <img src={topright} alt="Borders" className={styles.bar1} />
+        <img src={topright} alt="Borders" className={styles.bar2} />
+        <BackButton
+          className={styles.aboutBB}
+          onClick={() => window.location.reload()}
+        />
 
-      <div className={styles.evntcontainer}>
-        {isMobile ? (
-          //  Mobile Layout
-          <div className={styles.mobileEvents}>
-           <AnimatePresence mode="wait">
-            {events.length > 0 ? (
-  <motion.div
-    key={currentIndex}
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -50 }}
-    transition={{ duration: 0.3 }}
-    className={styles.mobileCard}
-  >
-    <div className={styles.mobileContent}>
-      <h4>{events[currentIndex].name}</h4>
-      <p className={styles.club}>{events[currentIndex].club_name}</p>
-      <p><strong>Venue:</strong> {events[currentIndex].venue}</p>
-    </div>
+        <div className={styles.evntcontainer}>
+          {isMobile ? (
+            //  Mobile Layout
+            <div className={styles.mobileEvents}>
+              <AnimatePresence mode="wait">
+                {events.length > 0 ? (
+                  <div className={styles.mobileCard}>
+                    <motion.div
+                      key={currentIndex}
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -50 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className={styles.mobileContent}>
+                        <h4>{events[currentIndex].name}</h4>
+                        <p className={styles.club}>
+                          {events[currentIndex].club_name}
+                        </p>
+                        <p>
+                          <strong>Venue:</strong> {events[currentIndex].venue}
+                        </p>
+                      </div>
 
-    <img
-      src={events[currentIndex].image_url || "/images/events/down.jpg"}
-      alt={events[currentIndex].name}
-      className={styles.mobileImage}
-    />
+                      <img
+                        src={
+                          events[currentIndex].image_url ||
+                          "/images/events/down.jpg"
+                        }
+                        alt={events[currentIndex].name}
+                        className={styles.mobileImage}
+                      />
 
-    <div className={styles.eventdesc}>
-      <p>{events[currentIndex].description}</p>
-    </div>
+                      <div className={styles.eventdesc}>
+                        <p>{events[currentIndex].description}</p>
+                      </div>
+                    </motion.div>
+                    <div className={styles.controls2}>
+                      <div className={styles.left2} onClick={handlePrev}>
+                        <img src={Right} alt="Prev" className={styles.prev} />
+                      </div>
+                      <div className={styles.right2} onClick={handleNext}>
+                        <img src={Right} alt="Next" className={styles.next} />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <p className={styles.loading}>
+                    {`No events found in "${category}"`}
+                  </p>
+                )}
+              </AnimatePresence>
+            </div>
+          ) : (
+            //  Desktop Layout
+            <AnimatePresence mode="wait">
+              {events.length > 0 ? (
+                <div className={styles.eventdesktop} >
+                  <motion.div className={styles.eventContentWrapper}
+                    key={currentIndex}
+                    initial={{ opacity: 0, x: 150 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -150 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                  >
+                    <div className={styles.leftevent}>
+                      <img
+                        src={
+                          events[currentIndex].image_url ||
+                          "/images/events/down.jpg"
+                        }
+                        alt={events[currentIndex].name}
+                        className={styles.imagenew}
+                      />
+                      <p>{events[currentIndex].club_name}</p>
+                    </div>
 
-    <div className={styles.controls2}>
-      <div className={styles.left2} onClick={handlePrev}>
-        <img src={Right} alt="Prev" className={styles.prev} />
-      </div>
-      <div className={styles.right2} onClick={handleNext}>
-        <img src={Right} alt="Next" className={styles.next} />
-      </div>
-    </div>
-  </motion.div>
-) : (
-  <p className={styles.loading}>
-    {`No events found in "${category}"`}
-  </p>
-)}
-</AnimatePresence>
-          </div>
-        ) : (
-          //  Desktop Layout
-          <AnimatePresence mode="wait">
-            {events.length > 0 ? (
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 150 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -150 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className={styles.eventContentWrapper}
-              >
-                <div className={styles.leftevent}>
-                  <img
-                    src={
-                      events[currentIndex].image_url ||
-                      "/images/events/down.jpg"
-                    }
-                    alt={events[currentIndex].name}
-                    className={styles.imagenew}
-                  />
-                  <p>{events[currentIndex].club_name}</p>
-                </div>
-
-                <div className={styles.rightevent}>
-                  <h4>{events[currentIndex].name}</h4>
-                  <p>{events[currentIndex].description}</p>
-                  <p><strong>Venue:</strong> {events[currentIndex].venue}</p>
-
+                    <div className={styles.rightevent}>
+                      <h4>{events[currentIndex].name}</h4>
+                      <p>{events[currentIndex].description}</p>
+                      <p>
+                        <strong>Venue:</strong> {events[currentIndex].venue}
+                      </p>
+                    </div>
+                  </motion.div>
                   <div className={styles.controls}>
                     <div className={styles.left} onClick={handlePrev}>
                       <img src={Right} alt="Prev" className={styles.prev} />
@@ -258,19 +272,17 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            ) : (
-              <p className={styles.loading}>
-                {`No events found in "${category}"`}
-              </p>
-            )}
-          </AnimatePresence>
-        )}
+              ) : (
+                <p className={styles.loading}>
+                  {`No events found in "${category}"`}
+                </p>
+              )}
+            </AnimatePresence>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-);
-
+  );
 };
 
 export default Eventspage;
