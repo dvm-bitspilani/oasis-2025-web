@@ -25,12 +25,12 @@ export default function mainHam({
       url: "https://rocktaves.bits-oasis.org/",
     },
     {
-      title: "PRE REGISTRATIONS",
+      title: "EVENTS",
       cloud: hamCloud,
       classNameDiv: styles.sponsDiv,
       classNameText: styles.sponsText,
       classNameCloud: styles.sponsCloud,
-      url: "https://preregistrations.bits-oasis.org/", // Replace with actual URL
+      url: "/events", // Replace with actual URL
     },
     {
       title: "GALLERY",
@@ -49,12 +49,12 @@ export default function mainHam({
       url: "/media-partners", // Replace with actual URL
     },
     {
-      title: "WALL MAG",
+      title: "BROCHURE",
       cloud: hamCloud,
       classNameDiv: styles.wallMagDiv,
       classNameText: styles.wallMagText,
       classNameCloud: styles.wallMagCloud,
-      url: "/wall-mag", // Replace with actual URL
+      url: "/brochure", // Replace with actual URL
     },
   ];
 
