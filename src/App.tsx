@@ -168,7 +168,7 @@ export default function App() {
         targetPageRef={nextRoute}
       />
       <h1 style={{ display: "none" }}>
-        OASIS 2025 | BITS Pilani's Annual Cultural Fest
+        OASIS 2025 | Whispers Of Edo
       </h1>
       {isPreloading && (
         <Preloader
