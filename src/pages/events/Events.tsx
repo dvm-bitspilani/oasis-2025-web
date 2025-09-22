@@ -90,30 +90,40 @@ const Events: React.FC = () => {
 useEffect(() => {
   if (!canHover) return; // skip for mobile/touch
 
+  const cleanups: (() => void)[] = [];
+
   imageRefs.current.forEach((img) => {
     if (!img) return;
 
     const hoverTween = gsap.to(img, {
       scale: 1.05,
-      paused: true,
+      filter: "saturate(1.5)",
       duration: 0.2,
       ease: "power1.out",
-      //  filter: "saturate(1.5)",
+      paused: true,
+      overwrite: true,
+      startAt: { filter: "saturate(1)" }, // initial value
     });
 
-    img.addEventListener("mouseenter", () => hoverTween.play());
-    // img.addEventListener("mouseleave", () => hoverTween.reverse());
+    const onEnter = () => hoverTween.play();
+    const onLeave = () => hoverTween.reverse();
+
+    img.addEventListener("mouseenter", onEnter);
+    img.addEventListener("mouseleave", onLeave);
+
+    // push cleanup for this img
+    cleanups.push(() => {
+      img.removeEventListener("mouseenter", onEnter);
+      img.removeEventListener("mouseleave", onLeave);
+    });
   });
 
-  // Cleanup
+  // Cleanup all listeners
   return () => {
-    imageRefs.current.forEach((img) => {
-      if (!img) return;
-      img.removeEventListener("mouseenter", () => {});
-      img.removeEventListener("mouseleave", () => {});
-    });
+    cleanups.forEach((fn) => fn());
   };
-}, []);
+}, [canHover]);
+
 
   useEffect(() => {
     const radius = isMobile ? window.innerHeight / 2 : window.innerWidth / 2;
