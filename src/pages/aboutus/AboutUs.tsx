@@ -36,6 +36,11 @@ declare global {
   }
 }
 
+interface AboutUsProps {
+  isBackBtn?: boolean;
+  contactDoorsClosed?: boolean;
+}
+
 const icons = [
   letter1,
   letter2,
@@ -54,7 +59,8 @@ const iconImages: HTMLImageElement[] = icons.map((src) => {
   img.alt = "Letters";
   return img;
 });
-const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
+
+const AboutUs = ({ isBackBtn = true, contactDoorsClosed = false }: AboutUsProps) => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const AboutRef = useRef<HTMLDivElement | null>(null);
@@ -156,6 +162,9 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
 
 
   useGSAP(() => {
+    console.log("contactDoorsClosed", contactDoorsClosed);
+    if (contactDoorsClosed) return;
+    console.log("hereeeee")
     if (!isMobile) {
       gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
 
@@ -315,6 +324,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
     };
 
     const stopSpawning = () => {
+      console.log("Cleared interval: ", intervalId)
       if (intervalId) window.clearInterval(intervalId);
     };
 
@@ -327,10 +337,11 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
     startSpawning();
 
     return () => {
+      console.log("Cleanup function reached!")
       stopSpawning();
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  });
+  }, {dependencies: [isMobile, contactDoorsClosed]});
 
   useEffect(() => {
     const handleResize = () =>
