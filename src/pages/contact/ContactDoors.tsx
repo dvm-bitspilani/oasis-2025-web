@@ -15,7 +15,6 @@ import { FaEnvelope } from "react-icons/fa6";
 interface ContactDoorsProps {
   pinElemRef: React.RefObject<HTMLDivElement | null>;
   triggerElemRef: React.RefObject<HTMLDivElement | null>;
-  setContactDoorsClosed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface HoriBarDetails {
@@ -27,7 +26,6 @@ interface HoriBarDetails {
 export default function ContactDoors({
   pinElemRef,
   triggerElemRef,
-  setContactDoorsClosed,
 }: ContactDoorsProps) {
   const door1Ref = useRef<HTMLDivElement>(null);
   const door2Ref = useRef<HTMLDivElement>(null);
@@ -98,19 +96,17 @@ export default function ContactDoors({
         pinSpacing: false,
         invalidateOnRefresh: true,
         // anticipatePin: 1,
-        // fastScrollEnd: 100,
+        // fastScrollEnd: 1,
         // onEnter: calculateHoriBarPos,
         onLeave: () => {
           animateContactBanner({ y: "0%", autoAlpha: 1 });
           animateContactItems(0);
           gsap.set(`.${styles.contactSection}`, { pointerEvents: "all" });
-          setContactDoorsClosed(true);
         },
         onEnterBack: () => {
           animateContactBanner({ y: "-100%", autoAlpha: 0 });
           gsap.set(`.${styles.contactSection}`, { pointerEvents: "none" });
         },
-        onLeaveBack: () => setContactDoorsClosed(false),
         snap: {
           snapTo: [0, 1],
           directional: false,

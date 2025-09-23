@@ -87,7 +87,6 @@ export default function LandingRevamp({
 
   const aboutUsContRef = useRef<HTMLDivElement>(null);
   const aboutUsWrapperRef = useRef<HTMLDivElement>(null);
-  const [contactDoorsClosed, setContactDoorsClosed] = useState<boolean>(false);
 
   const [scrollHeight, setScrollHeight] = useState(
     (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
@@ -585,13 +584,12 @@ export default function LandingRevamp({
         <div className={styles.bottomContainer}>
           <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
             <div className={styles.aboutUsWrapper} ref={aboutUsWrapperRef}>
-              <AboutUs isBackBtn={false} contactDoorsClosed={contactDoorsClosed} />
+              <AboutUs isBackBtn={false}/>
               <div className={styles.aboutUsBottom} id="aboutUsBottom" />
             </div>
             {aboutUsContRef.current &&
               aboutUsWrapperRef && ( // bottomSpacerRef.current &&
                 <ContactDoors
-                  setContactDoorsClosed={setContactDoorsClosed}
                   pinElemRef={aboutUsContRef}
                   triggerElemRef={aboutUsWrapperRef}
                 />

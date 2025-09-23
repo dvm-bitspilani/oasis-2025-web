@@ -38,7 +38,6 @@ declare global {
 
 interface AboutUsProps {
   isBackBtn?: boolean;
-  contactDoorsClosed?: boolean;
 }
 
 const icons = [
@@ -60,7 +59,7 @@ const iconImages: HTMLImageElement[] = icons.map((src) => {
   return img;
 });
 
-const AboutUs = ({ isBackBtn = true, contactDoorsClosed = false }: AboutUsProps) => {
+const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const AboutRef = useRef<HTMLDivElement | null>(null);
@@ -162,9 +161,6 @@ const AboutUs = ({ isBackBtn = true, contactDoorsClosed = false }: AboutUsProps)
 
 
   useGSAP(() => {
-    console.log("contactDoorsClosed", contactDoorsClosed);
-    if (contactDoorsClosed) return;
-    console.log("hereeeee")
     if (!isMobile) {
       gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
 
@@ -337,11 +333,10 @@ const AboutUs = ({ isBackBtn = true, contactDoorsClosed = false }: AboutUsProps)
     startSpawning();
 
     return () => {
-      console.log("Cleanup function reached!")
       stopSpawning();
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  }, {dependencies: [isMobile, contactDoorsClosed]});
+  })
 
   useEffect(() => {
     const handleResize = () =>
@@ -413,8 +408,6 @@ const AboutUs = ({ isBackBtn = true, contactDoorsClosed = false }: AboutUsProps)
               alt="Next Arrow"
             ></img>
           </button>
-
-          <div></div>
 
           <div className={styles.controls}>
             <div className={styles.a1}></div>
