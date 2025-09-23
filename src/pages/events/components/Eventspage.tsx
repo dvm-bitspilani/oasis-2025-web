@@ -235,8 +235,9 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
             //  Desktop Layout
             <AnimatePresence mode="wait">
               {events.length > 0 ? (
-                <div className={styles.eventdesktop} >
-                  <motion.div className={styles.eventContentWrapper}
+                <div className={styles.eventdesktop}>
+                  <motion.div
+                    className={styles.eventContentWrapper}
                     key={currentIndex}
                     initial={{ opacity: 0, x: 150 }}
                     animate={{ opacity: 1, x: 0 }}

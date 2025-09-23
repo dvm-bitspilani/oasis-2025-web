@@ -71,6 +71,48 @@ const assetList = {
         ],
         "videos": []
     },
+    "events": {
+        "images": [
+            './images/events/backg.png',
+            './images/events/dance.png',
+            './images/events/DanceMobile.png',
+            './images/events/down.jpg.png',
+            './images/events/drama.png',
+            './images/events/DramaMobile.png',
+            './images/events/evenback.png',
+            './images/events/image.png',
+            './images/events/misc.png',
+            './images/events/miscMobile.png',
+            './images/events/music.png',
+            './images/events/MusicMobile.png',
+            './images/events/photography.png',
+            './images/events/PhotographyMobile.png',
+            './images/events/text.png',
+            './images/events/TextMobile.png',
+            //  './images/events/quizzes.png',
+            // './images/events/QuizzesMobile.png',
+            // './svgs/events/border.svg',
+            './svgs/events/bottom.svg',
+            './svgs/events/cl1.svg',
+            './svgs/events/cl2.svg',
+            './svgs/events/dan.svg',
+            './svgs/events/eventsback.svg',
+            // './svgs/events/Exclude.svg',
+            // './svgs/events/Mask.svg',
+            // './svgs/events/music.svg',
+            './svgs/events/Next1.svg',
+            // './svgs/events/Photography.svg',
+            './svgs/events/star.svg',
+            './svgs/events/star2.svg',
+            './svgs/events/text.svg',
+            './svgs/events/top.svg',
+            './svgs/events/topright.svg',
+
+
+
+        ],
+        "videos": []
+    },
     
 }
 
