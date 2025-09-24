@@ -65,6 +65,17 @@
     .hamDragon {
       transform: scale(0.8);
       transform-origin: center;
+       &.hamOpen{
+        mask-image: url("/videos/dragon-reveal.gif");
+        mask-size: contain;
+        mask-position: 12% center;
+        mask-repeat: no-repeat;
+
+        -webkit-mask-image: url("/videos/dragon-reveal.gif");
+        -webkit-mask-size: contain;
+        -webkit-mask-position: 12% center;
+        -webkit-mask-repeat: no-repeat;
+      }
     }
 
     .devDiv {
