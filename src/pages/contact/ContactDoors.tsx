@@ -42,8 +42,8 @@ export default function ContactDoors({
   const launchEmail = (email: string) =>
     (window.location.href = `mailto:${email}`);
 
-  const calculateHoriBarPos = () => {
-    const contactItems = document.getElementsByClassName(styles.contactItem);
+  const calculateHoriBarPos = (contactItems: HTMLCollection) => {
+    // const contactItems = document.getElementsByClassName(styles.contactItem);
     const firstRowItem = contactItems[0];
     const firstRowRelPos = firstRowItem.getBoundingClientRect().top;
 
@@ -59,11 +59,6 @@ export default function ContactDoors({
 
     const firstRowAbsPos =
       firstRowRelPos - (door1Ref.current?.getBoundingClientRect().top || 0);
-    console.log(
-      firstRowAbsPos,
-      firstRowRelPos,
-      contactSectionRef.current?.getBoundingClientRect().top
-    );
 
     const firstBarPos = Math.round(firstRowAbsPos % barGap);
     const numOfBars = Math.round(
@@ -85,7 +80,7 @@ export default function ContactDoors({
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
-    console.log(triggerElemRef.current, pinElemRef.current);
+    ScrollTrigger.normalizeScroll(true);
 
     const animateContactBanner = (animation: gsap.TimelineVars) =>
       gsap.to(contactBannerRef.current, { ...animation, duration: 0.3 });
@@ -93,13 +88,15 @@ export default function ContactDoors({
     const doorTimeLine = gsap.timeline({
       scrollTrigger: {
         trigger: triggerElemRef.current,
+        // start: `+=${(triggerElemRef.current?.clientHeight || 0) - window.innerHeight}`,
         start: "bottom bottom",
-        end: () =>
-          `+=${window.innerHeight <= 730 ? 200 : window.innerHeight - 1}`,
+        end: () => `+=${window.innerHeight}`,
         scrub: isMobile ? true : 0.5,
         pin: pinElemRef.current,
         pinSpacing: false,
-        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        // anticipatePin: 1,
+        // fastScrollEnd: 1,
         // onEnter: calculateHoriBarPos,
         onLeave: () => {
           animateContactBanner({ y: "0%", autoAlpha: 1 });
@@ -124,8 +121,8 @@ export default function ContactDoors({
     });
 
     doorTimeLine
-      .from(door1Ref.current, { x: "-150%" }, 0)
-      .from(door2Ref.current, { x: "150%" }, 0)
+      .from(door1Ref.current, { x: "-120%" }, 0)
+      .from(door2Ref.current, { x: "120%" }, 0)
       .to(
         document.body,
         {
@@ -137,31 +134,47 @@ export default function ContactDoors({
     // .from(galleryContentRef.current, {autoAlpha: 0})
 
     // if (contactSectionRef.current) contactSectionRef.current.style.transform = "translateY(-100vh)"//`translateY(${-((pinElemRef.current?.clientHeight || 0) - (contactSectionRef.current?.clientHeight || 0))})`
-    console.log(
-      contactSectionRef.current?.clientHeight,
-      pinElemRef.current?.clientHeight
-    );
   }, []);
 
   useEffect(() => {
+    const contactItems = document.getElementsByClassName(styles.contactItem);
+
     const handleResize = () => {
       // location.reload()
-      setIsTab(window.innerWidth <= 1300);
-      setIsMobile(window.innerWidth <= 900);
-      calculateHoriBarPos();
+      const newIsTab = window.innerWidth <= 1300;
+      const newIsMobile = window.innerWidth <= 900;
+      if (newIsTab !== isTab) setIsTab(newIsTab);
+      if (newIsMobile !== isMobile) setIsMobile(newIsMobile);
+      calculateHoriBarPos(contactItems);
       // ScrollTrigger.update();
+      ScrollTrigger.refresh();
       animateContactItems(0);
 
       console.log("Uhh", windowWidth.current, window.innerWidth);
       // if (windowWidth.current !== window.innerWidth) location.reload();
     };
 
-    calculateHoriBarPos();
+    const deboundedHandleResize = () => {
+      let timer;
+      clearTimeout(timer);
+      timer = setTimeout(handleResize, 200);
+    };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    calculateHoriBarPos(contactItems);
+
+    (window.visualViewport || window).addEventListener(
+      "resize",
+      deboundedHandleResize
+    );
+    
+    return () =>
+      (window.visualViewport || window).removeEventListener(
+        "resize",
+        deboundedHandleResize
+      );
   }, []);
 
+  useEffect(() => console.log(window, innerWidth), [window.innerWidth]);
   // useEffect(() => {
   //     ScrollTrigger.refresh();
   //     // ScrollTrigger.update();

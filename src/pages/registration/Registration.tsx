@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import styles from "./Registration.module.scss";
 
 import Instructions from "../../pages/registration/components/Instructions/Instructions";
@@ -312,11 +313,26 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     <div className={styles.instrback}>
       {/* <img src={sun} alt="sun" className={styles.sun} ref={sunRef} /> */}
       {/* <div className={styles.overlay}></div> */}
-      <title>Registration | Oasis 2025 Bits Pilani</title>
-      <meta
-        name="description"
-        content="Register for Oasis 2025, the annual cultural festival of BITS Pilani. Follow our simple instructions to sign up and start participating in events."
-      />
+     <Helmet>
+        <title>Registration | OASIS 2025 | Whispers Of Edo</title>
+        <meta
+          name="description"
+          content="Register for Oasis 2025, the annual cultural festival of BITS Pilani. Follow our simple instructions to sign up and start participating in events."
+        />
+        <link rel="canonical" href="https://www.bits-oasis.org/register" />
+        {/* Open Graph */}
+        <meta property="og:title" content="Registration | OASIS 2025 | Whispers Of Edo" />
+        <meta property="og:description" content="Register for Oasis 2025, the annual cultural festival of BITS Pilani." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.bits-oasis.org/register" />
+        <meta property="og:image" content="https://www.bits-oasis.org/logo2.png" />
+        <meta property="og:site_name" content="OASIS 2025 | Whispers Of Edo" />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Registration | OASIS 2025 | Whispers Of Edo" />
+        <meta name="twitter:description" content="Register for Oasis 2025, the annual cultural festival of BITS Pilani." />
+        <meta name="twitter:image" content="https://www.bits-oasis.org/logo2.png" />
+      </Helmet>
       <img
         src={
           window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45) ")

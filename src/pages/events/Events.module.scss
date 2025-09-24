@@ -1,26 +1,43 @@
 .eventsmaincontainer {
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   position: relative;
   overflow: hidden;
   background-size: cover;
+  .aboutBB {
+    background-image: url("/svgs/registration/back.svg");
+    // filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.828)) sepia()
+    //   saturate(4.5) hue-rotate(-10deg);
+    transition: filter 0.3s;
+    margin: 2.1rem;
+    z-index: 1000;
+
+    &:hover {
+      filter: drop-shadow(0px 0px 9px rgba(255, 255, 255, 1)) sepia()
+        // saturate(4.5) hue-rotate(-10deg);
+    }
+
+    @media (max-width: 700px) {
+      margin: 1.2rem 0.6rem;
+    }
+  }
   .text {
     position: absolute;
     left: 35vw;
     width: 30.625vw;
-    height: 26.74vh;
-    bottom: 2vh;
+    height: 26.74svh;
+    bottom: 2svh;
   }
   .eventscontainer {
     width: 100vw;
     overflow: hidden;
-    height: 100vh;
+    height: 100svh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     z-index: 2;
     position: relative;
-    mask-image: url("/svgs/events/Exclude.svg");
+    // mask-image: url("/svgs/events/Exclude.svg");
 
     mask-composite: exclude;
     mask-repeat: no-repeat;
@@ -37,16 +54,16 @@
     .quizzes {
       position: absolute;
       width: 34.6vw;
-      // height: 52.3vh;
+      height: 52.3svh;
       left: 0;
-      bottom: -2vh;
+      bottom: -2svh;
       transform-origin: center;
-      transition: transform 0.3s ease, filter 0.3s ease;
+      // transition: transform 0.3s ease, filter 0.3s ease;
       z-index: 1;
-      &:hover {
-        transform: scale(1.05) !important;
-        filter: saturate(1.5);
-      }
+      // &:hover {
+      //   transform: scale(1.05) !important;
+      //   filter: saturate(1.5);
+      // }
       @media (min-width: 1950px) {
         bottom: -20px;
         padding-top: 20px;
@@ -55,62 +72,62 @@
 
     .music {
       position: absolute;
-      top: -9vh;
+      top: -9svh;
       left: 0;
       width: 42vw;
-      // height: 80vh;
+      height: 80svh;
       transform-origin: center;
-      transition: transform 0.3s ease, filter 0.3s ease;
+      // transition: transform 0.3s ease, filter 0.3s ease;
       z-index: 2;
       object-fit: fill;
       object-position: center;
-      &:hover {
-        transform: scale(1.1) !important;
-        filter: saturate(1.5);
-      }
+      // &:hover {
+      //   transform: scale(1.1) !important;
+      //   filter: saturate(1.5);
+      // }
     }
 
     .misc {
       position: absolute;
       width: 34.8vw;
-      // height: 56.3vh;
-      bottom: -2.5vh;
+      height: 56.3svh;
+      bottom: -2.5svh;
       right: 0;
       // transform-origin: center;
-      transition: transform 0.3s ease, filter 0.3s ease;
+      // transition: transform 0.3s ease, filter 0.3s ease;
       z-index: 1;
-      &:hover {
-        transform: scale(1.07) !important;
-        filter: saturate(1.5);
-      }
+      // &:hover {
+      //   transform: scale(1.07) !important;
+      //   filter: saturate(1.5);
+      // }
     }
 
     .dance {
       position: absolute;
       width: 42vw;
 
-      // height: 80vh;
+      height: 80svh;
       z-index: 2;
-      top: -9vh;
+      top: -9svh;
       right: 0vw;
       overflow: hidden;
       transform-origin: center;
 
       // rotate: -3deg;
       object-position: center;
-      transition: transform 0.1s, filter 0.1s ease;
+      // transition: transform 0.1s, filter 0.1s ease;
       // z-index: 1;
-      &:hover {
-        transform: scale(1.05) !important;
-        filter: saturate(1.5);
-      }
+      // &:hover {
+      //   transform: scale(1.05) !important;
+      //   filter: saturate(1.5);
+      // }
     }
 
     // .photographyWrapper {
     //   // position: absolute;
     //   // left: 35vw;
     //   // width: 30.2vw;
-    //   // height: 67.8vh;
+    //   // height: 67.8svh;
     //   // top: 0;
 
     //   // // // Apply the clip path to the wrapper
@@ -123,53 +140,137 @@
 
     .photography {
       position: absolute;
-      left: 36vw;
+      left: 50%;
+      translate: -50%;
+      // transform: translateX(-50%);
+
       width: 28.2vw;
-      // height: 67.8vh;
+      height: 67.8svh;
       top: 0;
 
-      transition: transform 0.3s ease, filter 0.3s ease;
+      // transition: transform 0.3s ease, filter 0.3s ease;
     }
 
-    .photography:hover {
-      transform: scale(1.1) !important;
-      filter: saturate(1.5);
-    }
+    // .photography:hover {
+    //    transform: scale(1.1) !important;
+    //   filter: saturate(1.5);
+    // }
 
     .text {
       position: absolute;
       left: 35vw;
       width: 30.625vw;
-      height: 26.74vh;
-      bottom: 2vh;
+      height: 26.74svh;
+      bottom: 2svh;
     }
-    @media (max-aspect-ratio: 1.7) {
+    @media ((min-aspect-ratio: 1.7) or (max-aspect-ratio: 1.7)) {
       .quizzes {
-        height: 50.3vh;
+        height: 50.3svh;
         width: 31vw;
         left: -2vw;
       }
       .music {
         top: 0;
-        height: 80vh;
+        height: 80svh;
         width: 40vw;
       }
       .photography {
         width: 30vw;
-        height: 67.8vh;
+        height: 67.8svh;
       }
       .dance {
-        height: 80vh;
+        height: 80svh;
         width: 40vw;
         top: 0;
       }
       .misc {
-        height: 50.3vh;
+        height: 50.3svh;
         width: 31vw;
         right: -2vw;
       }
     }
+    @media((max-width: 1200px) and (max-aspect-ratio: 1.45)){
+      .text,.music,.photography,.dance,.quizzes,.misc{
+        top: unset;
+        bottom: unset;
+        left: unset;
+        right: unset;
+        translate: none;
+        // pointer-events: none;
+        scale: 1;
+         touch-action: manipulation;
+      }
+      .text:hover,
+.music:hover,
+.photography:hover,
+.dance:hover,
+.quizzes:hover,
+.misc:hover {
+  /* Reset whatever hover styles you had */
+  scale: none;
+  // transform: none;
+  filter: none;
+  opacity: 1;
+  cursor: default;
+}
+      .text{
+        
+        left:0;
+        top: 50svh;
+        translate : 0 -50%;
+        height: 36.55svh;
+        width: 33.55vw;
+      }
+      .music{
+        width: 78.31vw;
+        height: 35.75svh;
+        top: 0;
+        left: 0;
+      }
+      .quizzes{
+        width: 70.08vw;
+        height: 46.8svh;
+        position: absolute;
+        left:unset;
+        right: 0;
+        top: 0;
+
+      }
+      .photography{
+        width: 78.31vw;
+        height: 35.75svh;
+        bottom: 0;
+        left: 0;
+        top: unset;
+        translate: none;
+      }
+      .dance{
+        width: 70.08vw;
+        height: 46.8svh;
+        position: absolute;
+        left:unset;
+        top:unset;
+        right: 0;
+        bottom: 0;
+
+      }
+      .misc {
+    position: absolute;
+    width: 59.91vw;
+    height: 30svh;
+    top: 50svh;
+    right: 0;
+    /* Use CSS variables for translation */
+    --tx: 0; /* default X offset */
+    --ty: -50%; /* default Y offset */
+    --rot: 0deg; /* default rotation */
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
+    transition: transform 0s ease;
   }
+
+    }
+  }
+  
 }
 @keyframes collapseToCenter {
   0% {
@@ -189,7 +290,7 @@
 .fanContainer {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   transform: rotate(-90deg);
   display: flex;
   justify-content: center;
@@ -227,7 +328,7 @@
 }
 .eventsmaincontainer {
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   position: relative;
   background-size: cover;
 
@@ -235,24 +336,30 @@
     position: absolute;
     left: 35vw;
     width: 30.625vw;
-    height: 26.74vh;
-    bottom: 2vh;
+    height: 26.74svh;
+    bottom: 2svh;
     z-index: 10;
   }
-
+  
   .eventscontainer {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     overflow: visible;
     .folding {
       pointer-events: none;
       &:hover {
-        transform: none !important;
+        // transform: none !important;
         filter: none !important;
       }
     }
   }
+  // @media (hover: hover) and (pointer: fine) {
+  // .eventscontainer img:hover {
+  //   transform: scale(2.05); /* only desktop/laptops */
+  // }
+// }
+
 
   // .music,
   // .quizzes,
@@ -260,7 +367,7 @@
   // .dance,
   // .misc {
   //   position: absolute;
-  //   bottom: 15vh; // roughly bottom area
+  //   bottom: 15svh; // roughly bottom area
   //   left: 50vw; // centered horizontally start
   //   width: 20vw;
   //   height: auto;
@@ -273,45 +380,45 @@
   // Left to right (index 0 to 4)
   // .music {
   //   left: 15vw;
-  //   bottom: 10vh;
+  //   bottom: 10svh;
   //   // transform: rotate(-40deg);
   // }
   // .quizzes {
   //   left: 28vw;
-  //   bottom: 8vh;
+  //   bottom: 8svh;
   //   // transform: rotate(-20deg);
   // }
   // .photography {
   //   left: 42vw;
-  //   bottom: 15vh;
+  //   bottom: 15svh;
   //   // transform: rotate(0deg);
   // }
   // .dance {
   //   left: 56vw;
-  //   bottom: 8vh;
+  //   bottom: 8svh;
   //   // transform: rotate(20deg);
   // }
   // .misc {
   //   left: 70vw;
-  //   bottom: 10vh;
+  //   bottom: 10svh;
   //   // transform: rotate(40deg);
   // }
 
-  .eventscontainer img.fold:nth-child(5) {
-    transform: rotate(-40deg);
-  }
+  // .eventscontainer img.fold:nth-child(5) {
+  //   transform: rotate(-40deg);
+  // }
 
-  .eventscontainer img.fold:nth-child(4) {
-    transform: rotate(-120deg);
-  }
+  // .eventscontainer img.fold:nth-child(4) {
+  //   transform: rotate(-120deg);
+  // }
 
-  .eventscontainer img.fold:nth-child(3) {
-    transform: rotate(-50deg);
-  }
+  // .eventscontainer img.fold:nth-child(3) {
+  //   transform: rotate(-50deg);
+  // }
 
-  .eventscontainer img.fold:nth-child(2) {
-    transform: rotate(-20deg);
-  }
+  // .eventscontainer img.fold:nth-child(2) {
+  //   transform: rotate(-20deg);
+  // }
 
   // .eventscontainer img.fold:nth-child(1) {
   // transform: rotate(40deg);

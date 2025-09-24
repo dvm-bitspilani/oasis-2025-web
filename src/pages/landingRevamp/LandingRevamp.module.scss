@@ -52,11 +52,12 @@ body {
   /* CSS class-based scroll control instead of position changes */
   &.scroll-locked {
     overflow: hidden;
-    height: 100vh;
+    height: 100svh;
   }
 }
 
-@media (max-width: 730px), (aspect-ratio < 8/12) {
+@media (max-width: 730px),
+(aspect-ratio < 8/12) {
   body {
     background-image: linear-gradient(to right, #d36f66, #be5964);
   }
@@ -180,7 +181,8 @@ body {
       transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         opacity 0.6s ease-in-out, visibility 0s linear 0.6s;
 
-      @media (max-width: 730px), (aspect-ratio < 8/12) {
+      @media (max-width: 730px),
+      (aspect-ratio < 8/12) {
         clip-path: circle(0% at calc(100vw - 48px) 70px);
       }
     }
@@ -194,7 +196,8 @@ body {
         transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
           opacity 0.4s ease-in-out, visibility 0s linear 0s;
 
-        @media (max-width: 730px), (aspect-ratio < 8/12) {
+        @media (max-width: 730px),
+        (aspect-ratio < 8/12) {
           clip-path: circle(150% at calc(100vw - 48px) 70px);
         }
       }
@@ -244,11 +247,11 @@ body {
     .mobileBackgroundContainer {
       display: none;
       width: 100dvw;
-      height: 100vh;
+      height: 100svh;
 
       .mobileBackground {
         width: 100dvw;
-        height: 100vh;
+        height: 100svh;
         object-fit: cover;
         object-position: center;
         position: fixed;
@@ -263,7 +266,7 @@ body {
         position: fixed;
         bottom: 0;
         right: 0;
-        height: 70vh;
+        height: 70svh;
         margin-bottom: calc(5svw);
       }
 
@@ -331,7 +334,8 @@ body {
     }
   }
 
-  @media (aspect-ratio < 8/12), (max-width: 730px) {
+  @media (aspect-ratio < 8/12),
+  (max-width: 730px) {
     .backgroundContainer {
       .mobileBackgroundContainer {
         display: block;
@@ -391,10 +395,12 @@ body {
 
   .scrollerWrapper {
     background-image: linear-gradient(transparent 60%, black 60%);
+
     @media (max-width: 600px) {
       background-image: linear-gradient(transparent 95%, black 95%);
     }
   }
+
   .scroller {
     overflow-x: hidden;
 
@@ -491,9 +497,11 @@ body {
             .treeDesktop {
               display: block;
             }
+
             .treeMob {
               display: none;
             }
+
             .socialLinksContainer {
               position: absolute;
               top: 2%;
@@ -502,7 +510,7 @@ body {
               width: fit-content;
               z-index: 10;
 
-              + img {
+              +img {
                 mask-image: linear-gradient(black 85%, transparent 90%);
                 mask-size: 100% 100%;
                 max-height: calc(96svh + 56.7svw);
@@ -556,13 +564,11 @@ body {
                     grid-column: 1/2;
                     z-index: 99;
                     width: 80%;
-                    filter: brightness(1)
-                      drop-shadow(0px 0px 3px rgba(255, 213, 3, 0.823));
+                    filter: brightness(1) drop-shadow(0px 0px 3px rgba(255, 213, 3, 0.823));
                     transition: filter 0.3s ease-out;
 
                     &:hover {
-                      filter: brightness(1.1)
-                        drop-shadow(0px 0px 18px rgba(255, 213, 3, 0.848));
+                      filter: brightness(1.1) drop-shadow(0px 0px 18px rgba(255, 213, 3, 0.848));
                     }
                   }
 
@@ -629,7 +635,8 @@ body {
           // }
         }
 
-        @media (aspect-ratio < 8/12), (max-width: 730px) {
+        @media (aspect-ratio < 8/12),
+        (max-width: 730px) {
           .treeContainer {
             .tree {
               margin-top: clamp(0svh, 100svh - 80svw, 100svh);
@@ -665,7 +672,8 @@ body {
         }
       }
 
-      @media (aspect-ratio < 8/12), (max-width: 730px) {
+      @media (aspect-ratio < 8/12),
+      (max-width: 730px) {
         .registerBtnContainer {
           width: 300px;
           left: 50%;
@@ -697,10 +705,26 @@ body {
       }
     }
 
-    .bottomContainer {
-      overflow: hidden;
-      .aboutUsContainer {
+  }
+
+  .bottomContainer {
+    overflow: hidden;
+
+    .aboutUsContainer {
+      position: relative;
+      height: fit-content;
+
+      .aboutUsWrapper {
+        min-height: 100vh;
         position: relative;
+      }
+
+      .aboutUsBottom {
+        position: absolute;
+        bottom: 0px;
+        height: 1px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0);
       }
     }
   }

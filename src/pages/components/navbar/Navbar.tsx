@@ -7,8 +7,8 @@ import cloud3 from "/svgs/landing/hamClouds/cloud3.min.svg";
 import cloud4 from "/svgs/landing/hamClouds/cloud4.min.svg";
 import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
-import { useState, useEffect, useContext, useRef } from "react";
-import { useHamStore, useMainHamStore } from "../../../utils/store";
+import { useEffect, useContext, useRef } from "react";
+import { useMainHamStore } from "../../../utils/store";
 import { navContext } from "../../../App";
 import { gsap } from "gsap";
 import _ScrollTrigger, { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -31,13 +31,6 @@ export default function Navbar({
   variant?: "default" | "about";
 })  {
   const { goToPage } = useContext(navContext);
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
-  const [isMobile, setIsMobile] = useState(
-    viewportWidth / viewportHeight < 8 / 12 || viewportWidth < 730
-      ? true
-      : false
-  );
 
   // const setHamOpen = useHamStore((state) => state.setHamOpen);
   const setMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
@@ -45,8 +38,6 @@ export default function Navbar({
 
   useEffect(() => {
     const handleResize = () => {
-      setViewportWidth(window.innerWidth);
-      setViewportHeight(window.innerHeight);
       ScrollTrigger.refresh();
       ScrollTrigger.update()
     };
@@ -56,14 +47,10 @@ export default function Navbar({
     };
   }, []);
 
-  useEffect(() => {
-    setIsMobile(viewportWidth / viewportHeight < 8 / 12 || viewportWidth < 730);
-  }, [viewportHeight, viewportWidth]);
-
 useEffect(() => {
   if (!navRef.current) return;
 
-  console.log("Setting up scroll-based color change");
+  // console.log("Setting up scroll-based color change");
 
   const timer = setTimeout(() => {
     const targets = navRef.current?.querySelectorAll(
@@ -75,7 +62,7 @@ useEffect(() => {
       return;
     }
 
-    console.log("Found targets:", targets.length);
+    // console.log("Found targets:", targets.length);
 
     ScrollTrigger.refresh();
 
@@ -87,9 +74,9 @@ useEffect(() => {
         start: `+=${window.innerHeight*1.5}`, 
         end: `+=${window.innerHeight*0.5}`, 
         scrub: 1,
-        onEnter: () => console.log("Color change TRIGGERED at 150vh"),
-        onLeave: () => console.log("Color change ENDED"),
-        onUpdate: (self) => console.log("Scroll progress:", self.progress),
+        // onEnter: () => console.log("Color change TRIGGERED at 150vh"),
+        // onLeave: () => console.log("Color change ENDED"),
+        // onUpdate: (self) => console.log("Scroll progress:", self.progress),
       },
       //color: "#C0B063",
       "--navlink-color": "#c0b063",
@@ -98,7 +85,7 @@ useEffect(() => {
     });
 
     return () => {
-      console.log("Cleaning up scroll trigger");
+      // console.log("Cleaning up scroll trigger");
       const element = document.getElementById('navbar-scroll-trigger');
       if (element) {
         element.remove();

@@ -12,7 +12,7 @@ import useCanonicalUrl from "./UseCanonicalUrl";
 
 // import Eventspage from "./pages/events/components/Eventspage";
 
-// import Events from "./pages/events/Events";
+import Events from "./pages/events/Events";
 
 export const navContext = createContext<{ goToPage?: (page: string) => void }>(
   {}
@@ -168,7 +168,7 @@ export default function App() {
         targetPageRef={nextRoute}
       />
       <h1 style={{ display: "none" }}>
-        OASIS 2025 | BITS Pilani's Annual Cultural Fest
+        OASIS 2025 | Whispers Of Edo
       </h1>
       {isPreloading && (
         <Preloader
@@ -190,7 +190,7 @@ export default function App() {
         />
       )}
 
-      {!isPreloading && currentPage === "events" && <ComingSoon />}
+      {!isPreloading && currentPage === "events" && <Events />}
       {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}

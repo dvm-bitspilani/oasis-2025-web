@@ -27,13 +27,17 @@ import letter5 from "/svgs/aboutus/letter5.svg";
 import letter6 from "/svgs/aboutus/letter6.svg";
 import letter7 from "/svgs/aboutus/letter7.svg";
 import letter8 from "/svgs/aboutus/letter8.svg";
-// import Navbar from "../components/navbar/Navbar";
+import { useGSAP } from "@gsap/react";
 
 declare global {
   interface Window {
     YT?: any;
     onYouTubeIframeAPIReady?: () => void;
   }
+}
+
+interface AboutUsProps {
+  isBackBtn?: boolean;
 }
 
 const icons = [
@@ -54,16 +58,52 @@ const iconImages: HTMLImageElement[] = icons.map((src) => {
   img.alt = "Letters";
   return img;
 });
-const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
+
+const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const AboutRef = useRef<HTMLDivElement | null>(null);
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
+  
+  const fan2Ref = useRef<HTMLImageElement>(null);
+  const fan1Ref = useRef<HTMLImageElement>(null);
+
+  const [isMobile, setIsMobile] = useState(
+    window
+      .matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
+      .matches
+  );
+
+  const loadByIndex = (index: number) => {
+    if (!playerRef.current) return;
+    setCurrent(index);
+    playerRef.current.loadVideoById(videos[index]);
+  };
+
+  const nextVideo = () => {
+    const newIdx = (current + 1) % videos.length;
+    loadByIndex(newIdx);
+  };
+
+  const prevVideo = () => {
+    const newIdx = (current - 1 + videos.length) % videos.length;
+    loadByIndex(newIdx);
+  };
+
+  const togglePlayPause = () => {
+    if (!playerRef.current || !window.YT) return;
+    const state = playerRef.current.getPlayerState();
+    const YTState = window.YT.PlayerState;
+    if (state === YTState.PLAYING) {
+      playerRef.current.pauseVideo();
+    } else {
+      playerRef.current.playVideo();
+    }
+  };
+
   useEffect(() => {
     document.body.style.position = "static";
-  }, []);
-  useEffect(() => {
     const initPlayer = () => {
       if (playerRef.current || !playerContainerRef.current || !window.YT)
         return;
@@ -119,64 +159,29 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
     };
   }, []);
 
-  const loadByIndex = (index: number) => {
-    if (!playerRef.current) return;
-    setCurrent(index);
-    playerRef.current.loadVideoById(videos[index]);
-  };
 
-  const nextVideo = () => {
-    const newIdx = (current + 1) % videos.length;
-    loadByIndex(newIdx);
-  };
+  useGSAP(() => {
+    if (!isMobile) {
+      gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
 
-  const prevVideo = () => {
-    const newIdx = (current - 1 + videos.length) % videos.length;
-    loadByIndex(newIdx);
-  };
+      gsap.to(fan1Ref.current, {
+        rotateX: -5,
+        rotateY: -5,
+        duration: 0.5,
+        yoyo: true,
+        repeat: -1,
+        ease: "power1.inOut",
+      });
 
-  const togglePlayPause = () => {
-    if (!playerRef.current || !window.YT) return;
-    const state = playerRef.current.getPlayerState();
-    const YTState = window.YT.PlayerState;
-    if (state === YTState.PLAYING) {
-      playerRef.current.pauseVideo();
-    } else {
-      playerRef.current.playVideo();
+      gsap.to(fan2Ref.current, {
+        rotateX: -9,
+        rotateY: -9,
+        duration: 0.5,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+      });
     }
-  };
-
-  const fan2Ref = useRef<HTMLImageElement>(null);
-  const fan1Ref = useRef<HTMLImageElement>(null);
-  useEffect(() => {
-    gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
-  }, []);
-
-  useEffect(() => {
-    gsap.to(fan1Ref.current, {
-      rotateX: -5,
-      rotateY: -5,
-      duration: 0.5,
-      yoyo: true,
-      repeat: -1,
-      ease: "power1.inOut",
-    });
-
-    gsap.to(fan2Ref.current, {
-      rotateX: -9,
-      rotateY: -9,
-      duration: 0.5,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-    });
-    gsap.to(AboutRef.current, {
-      backgroundPositionY: "-=1000vh",
-      duration: 200,
-
-      repeat: -1,
-      ease: "linear",
-    });
 
     const spawnIcon = (fanSelector: string, isFan1: boolean) => {
       const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
@@ -192,11 +197,9 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
         startY = rect.top - parentRect.top + rect.height / 2 - 100;
       }
 
-      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
       const iconTemplate =
         iconImages[Math.floor(Math.random() * iconImages.length)];
       const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-      // img.src = iconSrc;
       img.className = styles.flyingIcon;
       img.style.left = `${startX}px`;
       img.style.top = `${startY}px`;
@@ -236,60 +239,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       );
     };
 
-    // const spawnIcon2 = (fanSelector: string, isFan1: boolean) => {
-    //   const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
-    //   if (!fanEl || !fanEl.parentElement) return;
-
-    //   const rect = fanEl.getBoundingClientRect();
-    //   const parentRect = fanEl.parentElement.getBoundingClientRect();
-
-    //   const startX = rect.left - parentRect.left + rect.width / 2;
-    //   const startY = rect.top - parentRect.top + rect.height / 2 - 100;
-
-    //   // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-    //   // const img = document.createElement("img");
-    //   // img.src = iconSrc;
-    //   const iconTemplate =
-    //     iconImages[Math.floor(Math.random() * iconImages.length)];
-    //   const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-    //   img.className = styles.flyingIcon;
-    //   img.style.left = `${startX}px`;
-    //   img.style.top = `${startY}px`;
-
-    //   fanEl.parentElement.appendChild(img);
-
-    //   let angle: number;
-    //   if (isFan1) {
-    //     angle = Math.random() * 2 * (Math.PI / 3);
-    //   } else {
-    //     angle = Math.PI + Math.random() * 2 * (Math.PI / 3);
-    //   }
-
-    //   const distance = Math.random() * 100;
-    //   const dx = Math.cos(angle) * distance;
-    //   const dy = -Math.sin(angle) * distance;
-
-    //   gsap.fromTo(
-    //     img,
-    //     { opacity: 0, scale: 0, x: 0, y: 0 },
-    //     {
-    //       opacity: 1,
-    //       scale: 1,
-    //       x: dx,
-    //       y: dy,
-    //       duration: 2,
-    //       ease: "power2.out",
-    //       onComplete: () => {
-    //         gsap.to(img, {
-    //           opacity: 0,
-    //           duration: 0.5,
-    //           onComplete: () => img.remove(),
-    //         });
-    //       },
-    //     }
-    //   );
-    // };
-
     const spawnFromCorner = (
       corner: "top-left" | "top-right" | "bottom-left" | "bottom-right"
     ) => {
@@ -298,24 +247,16 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       ) as HTMLElement | null;
       if (!container) return;
 
-      // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-      // const img = document.createElement("img");
-      // img.src = iconSrc;
       const iconTemplate =
         iconImages[Math.floor(Math.random() * iconImages.length)];
       const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
 
-      // Set start position
       let startX = 0,
         startY = 0;
       const padding = 10;
 
       switch (corner) {
-        // case "top-left":
-        //   startX = padding;
-        //   startY = padding;
-        //   break;
         case "top-right":
           startX = container.clientWidth - padding;
           startY = padding;
@@ -324,10 +265,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
           startX = padding;
           startY = container.clientHeight - padding;
           break;
-        // case "bottom-right":
-        //   startX = container.clientWidth - padding -40;
-        //   startY = container.clientHeight - padding - 40;
-        //   break;
       }
 
       img.style.left = `${startX}px`;
@@ -335,7 +272,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
 
       container.appendChild(img);
 
-      // Move towards center
       const centerX = container.clientWidth / 2;
       const centerY = container.clientHeight / 2;
 
@@ -363,77 +299,11 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       );
     };
 
-    // const spawnFromCorner2 = (corner: "top-right" | "bottom-left") => {
-    //   const container = document.querySelector(
-    //     `.${styles.theme}`
-    //   ) as HTMLElement | null;
-    //   if (!container) return;
-
-    //   // const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-    //   // const img = document.createElement("img");
-    //   // img.src = iconSrc;
-    //   const iconTemplate =
-    //     iconImages[Math.floor(Math.random() * iconImages.length)];
-    //   const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-    //   img.className = styles.flyingIcon;
-
-    //   // Set start position
-    //   let startX = 0,
-    //     startY = 0;
-    //   const padding = 0;
-
-    //   switch (corner) {
-    //     case "top-right":
-    //       startX = container.clientWidth - padding - 25;
-    //       startY = padding - 30;
-    //       break;
-    //     case "bottom-left":
-    //       startX = padding - 20;
-    //       startY = container.clientHeight - padding - 15;
-    //       break;
-    //   }
-
-    //   img.style.left = `${startX}px`;
-    //   img.style.top = `${startY}px`;
-
-    //   container.appendChild(img);
-
-    //   const centerX = container.clientWidth / 2;
-    //   const centerY = container.clientHeight / 2;
-
-    //   const dx = ((centerX - startX) * Math.random()) / 4;
-    //   const dy = ((centerY - startY) * Math.random()) / 2;
-
-    //   gsap.fromTo(
-    //     img,
-    //     { opacity: 0, scale: 0, x: 0, y: 0 },
-    //     {
-    //       opacity: 1,
-    //       scale: 0.5,
-    //       x: -dx,
-    //       y: -dy,
-    //       duration: 2,
-    //       ease: "power2.out",
-    //       onComplete: () => {
-    //         gsap.to(img, {
-    //           opacity: 0,
-    //           duration: 0.5,
-    //           onComplete: () => img.remove(),
-    //         });
-    //       },
-    //     }
-    //   );
-    // };
     let intervalId: number;
 
     const startSpawning = () => {
       intervalId = window.setInterval(
         () => {
-          // const corners2 = ["top-right", "bottom-left"];
-          // const randomCorner2 = corners2[
-          //   Math.floor(Math.random() * corners2.length)
-          // ] as any;
-          // spawnFromCorner2(randomCorner2);
           if (isMobile) {
             const corners = ["top-right", "bottom-left"];
             const randomCorner = corners[
@@ -450,6 +320,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
     };
 
     const stopSpawning = () => {
+      console.log("Cleared interval: ", intervalId)
       if (intervalId) window.clearInterval(intervalId);
     };
 
@@ -465,12 +336,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
       stopSpawning();
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  }, []);
-
-  const [isMobile, setIsMobile] = useState(
-    window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
-      .matches
-  );
+  })
 
   useEffect(() => {
     const handleResize = () =>
@@ -494,7 +360,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
         backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`,
       }}
     >
-      {/* <Navbar hideHam variant="about" /> */}
 
       <div className={styles.header}>
         <img src={isMobile ? Reg : Header} alt="About Us" />
@@ -544,9 +409,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
             ></img>
           </button>
 
-          <div></div>
-
-          {/* CONTROLS */}
           <div className={styles.controls}>
             <div className={styles.a1}></div>
             <div className={styles.buttonContainer}>
@@ -580,7 +442,6 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
           </div>
         </div>
 
-        {/* ABOUT SIDE */}
         <div className={styles.abt}>
           <div
             className={styles.aboutback}
@@ -604,9 +465,7 @@ const AboutUs = ({ isBackBtn = true }: { isBackBtn?: boolean }) => {
           </div>
         </div>
       </div>
-      {/* <button className={styles.theme} onClick={() => { }}>
-        <h3>ABOUT THEME</h3>
-      </button> */}
+     
       <div className={styles.social}>
         <a href="https://www.linkedin.com/company/oasis24-bits-pilani/">
           <img src={linkedin} alt="Linkedin" />

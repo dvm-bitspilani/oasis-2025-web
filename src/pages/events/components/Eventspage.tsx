@@ -1,69 +1,76 @@
 import Back from "/images/events/backg.png";
+import MobileBack from "/images/events/evenback.png";
 import styles from "./Eventspage.module.scss";
 import cl1 from "/svgs/events/cl1.svg";
 import cl2 from "/svgs/events/cl2.svg";
 import topright from "/svgs/events/topright.svg";
 import BackButton from "../../components/backButton/BackButton";
-import down from "/images/events/down.jpg";
 import gsap from "gsap";
 import { useEffect, useState } from "react";
 import Right from "/svgs/events/Next1.svg";
 import { motion, AnimatePresence } from "framer-motion";
+import Star from "/svgs/events/star.svg";
+import Star2 from "/svgs/events/star.svg";
 
-const Eventspage = () => {
-  const icons = ["/svgs/events/star.svg", "/svgs/events/star2.svg"];
-  const events = [
-    {
-      image: down,
-      author: "Madhur Jain",
-      title: "TRAVEL AND LIVING QUIZ",
-      description: `
-      Oasis, the annual cultural extravaganza of Birla Institute of Technology and Science,
-      Pilani, has been a vibrant part of India's cultural tapestry since 1971. Managed
-      entirely by students, it's a dazzling showcase of talent in and Music. It's where
-      dreams come alive, laughter fills the air, and creativity knows no bounds.
-    `,
-    },
-    {
-      image: down,
-      author: "Madhur Jain",
-      title: "TRAVEL AND LIVING QUIZ",
-      description: `
-      Oasis, the annual cultural extravaganza of Birla Institute of Technology and Science,
-      Pilani, has been a vibrant part of India's cultural tapestry since 1971. Managed
-      entirely by students, it's a dazzling showcase of talent in and Music. It's where
-      dreams come alive, laughter fills the air, and creativity knows no bounds.
-    `,
-    },
-    {
-      image: down,
-      author: "Madhur Jain",
-      title: "TRAVEL AND LIVING QUIZ",
-      description: `
-      Oasis, the annual cultural extravaganza of Birla Institute of Technology and Science,
-      Pilani, has been a vibrant part of India's cultural tapestry since 1971. Managed
-      entirely by students, it's a dazzling showcase of talent in and Music. It's where
-      dreams come alive, laughter fills the air, and creativity knows no bounds.
-    `,
-    },
-  ];
+interface EventspageProps {
+  category: string;
+}
 
-  const iconImages: HTMLImageElement[] = icons.map((src) => {
-    const img = new Image();
-    img.src = src;
-    img.alt = "Letters";
-    return img;
-  });
+const Eventspage: React.FC<EventspageProps> = ({ category }) => {
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45)")
+      .matches
+  );
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      "(max-width: 1200px) and (max-aspect-ratio: 1.45)"
+    );
+
+    const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+  const icons = [Star, Star2];
+  const [events, setEvents] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch(
+          "https://bits-oasis.org/2025/main/registrations/web_events/"
+        );
+        const data = await res.json();
+
+        const catData = data.data.find(
+          (cat: any) =>
+            cat.category_name.toLowerCase() === category.toLowerCase()
+        );
+
+        if (catData) {
+          setEvents(catData.events);
+        } else {
+          setEvents([]);
+        }
+      } catch (err) {
+        console.error("Error fetching events:", err);
+      }
+    };
+
+    fetchEvents();
+  }, [category]);
+
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % events.length);
+    setCurrentIndex((prevIndex) =>
+      events.length > 0 ? (prevIndex + 1) % events.length : 0
+    );
   };
 
   const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + events.length) % events.length
+    setCurrentIndex((prevIndex) =>
+      events.length > 0 ? (prevIndex - 1 + events.length) % events.length : 0
     );
   };
 
@@ -73,11 +80,9 @@ const Eventspage = () => {
     ) as HTMLElement | null;
     if (!container) return;
 
-    const spawnFromCorner = (
-      corner: "top-left" | "top-right" | "bottom-left" | "bottom-right"
-    ) => {
-      const iconTemplate =
-        iconImages[Math.floor(Math.random() * iconImages.length)];
+    const spawnFromCorner = (corner: "top-right" | "bottom-left") => {
+      const iconTemplate = new Image();
+      iconTemplate.src = icons[Math.floor(Math.random() * icons.length)];
       const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
 
@@ -133,10 +138,6 @@ const Eventspage = () => {
 
     const startSpawning = () => {
       intervalId = window.setInterval(() => {
-        // const corners = ["top-right", "bottom-left"];
-        // const randomCorner = corners[
-        //   Math.floor(Math.random() * corners.length)
-        // ] as "top-right" | "bottom-left";
         spawnFromCorner("top-right");
         spawnFromCorner("bottom-left");
       }, 400);
@@ -164,61 +165,121 @@ const Eventspage = () => {
     <div>
       <div
         className={styles.page}
-        style={{ backgroundImage: `url("${Back}")` }}
+        style={{
+          backgroundImage: `url("${isMobile ? MobileBack : Back}")`,
+        }}
       >
         <img src={cl1} alt="Clouds" className={styles.cl1} />
         <img src={cl2} alt="Clouds" className={styles.cl2} />
         <img src={topright} alt="Borders" className={styles.bar1} />
         <img src={topright} alt="Borders" className={styles.bar2} />
-        <div>
-          <BackButton className={styles.aboutBB} />
-        </div>
-        <div className={styles.evntcontainer}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 150, rotate: 0 }}
-              animate={{
-                opacity: 1,
-                x: 0,
-                // scale:[0,1],
-                // rotateX: [90,0],
-                // rotateZ: [180,0],
-                // scale:[1,2,1],
-                // rotate from 0 to 20 degrees during animation
-              }}
-              exit={{
-                opacity: 0,
-                x: -150,
-                //  scale:0
-                // rotateX:90, rotateZ:180, scale:[1,2,1]
-              }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className={styles.eventContentWrapper}
-            >
-              <div className={styles.leftevent}>
-                <img
-                  src={events[currentIndex].image}
-                  alt="Event"
-                  className={styles.imagenew}
-                />
-                <p>{events[currentIndex].author}</p>
-              </div>
+        <BackButton
+          className={styles.aboutBB}
+          onClick={() => window.location.reload()}
+        />
 
-              <div className={styles.rightevent}>
-                <h4>{events[currentIndex].title}</h4>
-                <p>{events[currentIndex].description}</p>
-                <div className={styles.controls}>
-                  <div className={styles.left} onClick={handlePrev}>
-                    <img src={Right} alt="Prev" className={styles.prev} />
+        <div className={styles.evntcontainer}>
+          {isMobile ? (
+            //  Mobile Layout
+            <div className={styles.mobileEvents}>
+              <AnimatePresence mode="wait">
+                {events.length > 0 ? (
+                  <div className={styles.mobileCard}>
+                    <motion.div
+                      key={currentIndex}
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -50 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className={styles.mobileContent}>
+                        <h4>{events[currentIndex].name}</h4>
+                        <p className={styles.club}>
+                          {events[currentIndex].club_name}
+                        </p>
+                        <p>
+                          <strong>Venue:</strong> {events[currentIndex].venue}
+                        </p>
+                      </div>
+
+                      <img
+                        src={
+                          events[currentIndex].image_url ||
+                          "/images/events/down.jpg"
+                        }
+                        alt={events[currentIndex].name}
+                        className={styles.mobileImage}
+                      />
+
+                      <div className={styles.eventdesc}>
+                        <p>{events[currentIndex].description}</p>
+                      </div>
+                    </motion.div>
+                    <div className={styles.controls2}>
+                      <div className={styles.left2} onClick={handlePrev}>
+                        <img src={Right} alt="Prev" className={styles.prev} />
+                      </div>
+                      <div className={styles.right2} onClick={handleNext}>
+                        <img src={Right} alt="Next" className={styles.next} />
+                      </div>
+                    </div>
                   </div>
-                  <div className={styles.right} onClick={handleNext}>
-                    <img src={Right} alt="Next" className={styles.next} />
+                ) : (
+                  <p className={styles.loading}>
+                    {`No events found in "${category}"`}
+                  </p>
+                )}
+              </AnimatePresence>
+            </div>
+          ) : (
+            //  Desktop Layout
+            <AnimatePresence mode="wait">
+              {events.length > 0 ? (
+                <div className={styles.eventdesktop}>
+                  <motion.div
+                    className={styles.eventContentWrapper}
+                    key={currentIndex}
+                    initial={{ opacity: 0, x: 150 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -150 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                  >
+                    <div className={styles.leftevent}>
+                      <img
+                        src={
+                          events[currentIndex].image_url ||
+                          "/images/events/down.jpg"
+                        }
+                        alt={events[currentIndex].name}
+                        className={styles.imagenew}
+                      />
+                      <p>{events[currentIndex].club_name}</p>
+                    </div>
+
+                    <div className={styles.rightevent}>
+                      <h4>{events[currentIndex].name}</h4>
+                      <p>{events[currentIndex].description}</p>
+                      <p>
+                        <strong>Venue:</strong> {events[currentIndex].venue}
+                      </p>
+                    </div>
+                  </motion.div>
+                  <div className={styles.controls}>
+                    <div className={styles.left} onClick={handlePrev}>
+                      <img src={Right} alt="Prev" className={styles.prev} />
+                    </div>
+                    <div className={styles.right} onClick={handleNext}>
+                      <img src={Right} alt="Next" className={styles.next} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              ) : (
+                <p className={styles.loading}>
+                  {`No events found in "${category}"`}
+                </p>
+              )}
+            </AnimatePresence>
+          )}
         </div>
       </div>
     </div>
