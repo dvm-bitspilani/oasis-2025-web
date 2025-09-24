@@ -29,7 +29,7 @@ const fanImages: FanImage[] = [
   {
     src: drama,
     mobileSrc: dramaMobile,
-    alt: "Drama",
+    alt: "Drama & Theatre",
     className: styles.quizzes,
   },
   { src: music, mobileSrc: musicMobile, alt: "Music", className: styles.music },

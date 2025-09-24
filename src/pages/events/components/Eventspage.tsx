@@ -35,6 +35,12 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
   const icons = [Star, Star2];
   const [events, setEvents] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  // category alias mapping
+  const categoryAliases: Record<string, string[]> = {
+    drama: ["drama", "drama & theatre", "drama and theatre"],
+    music: ["music"],
+    misc: ["misc", "fashion"],
+  };
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -44,16 +50,18 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
         );
         const data = await res.json();
 
-        const catData = data.data.find(
-          (cat: any) =>
-            cat.category_name.toLowerCase() === category.toLowerCase()
+        const normalizedCategory = category.toLowerCase();
+        const validCategories = categoryAliases[normalizedCategory] || [
+          normalizedCategory,
+        ];
+
+        const matchedCats = data.data.filter((cat: any) =>
+          validCategories.includes(cat.category_name.toLowerCase())
         );
 
-        if (catData) {
-          setEvents(catData.events);
-        } else {
-          setEvents([]);
-        }
+        const allEvents = matchedCats.flatMap((cat: any) => cat.events);
+
+        setEvents(allEvents);
       } catch (err) {
         console.error("Error fetching events:", err);
       }
