@@ -58,6 +58,9 @@
     @media (max-width: 700px) {
       margin: 2.5rem 2.5rem;
     }
+    @media (max-width: 400px) {
+      margin: 1.5rem 1.6rem;
+    }
   }
   .eventdesktop {
     .eventContentWrapper {
@@ -261,6 +264,7 @@
       overflow: hidden;
 
       .mobileCard {
+        padding-top: 10px;
         width: 80vw;
         // background-color: red;
         height: 80svh;
@@ -291,7 +295,7 @@
           margin: 3vw 5vw;
         }
         .eventdesc {
-          margin: 3vw 5vw;
+          margin: 3vw 4vw;
           p {
             text-align: center;
             font-size: 4vw;
