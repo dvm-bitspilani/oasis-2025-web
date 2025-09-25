@@ -87,6 +87,34 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        
+       .venname {
+  // position: absolute;
+  margin-top: clamp(500px,35vw,800px);
+  bottom: 0;
+  // left: 5vw;
+  display: flex;
+  flex-direction: row;
+  // gap: 10vw;
+  justify-content: space-between;
+  align-items:stretch;
+  // padding: 1vw;
+  width: 30vw; // prevent overflow
+  // background: rgba(0, 0, 0, 0.5);
+
+  p {
+    font: 1.5vw $regFont;
+    margin: 0;
+    color: white;
+    white-space: nowrap;         // keep everything on one line
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // max-width: 5vw; 
+    position: relative;
+    left:0vw;            // control width per p
+  }
+}
+
         img {
           position: absolute;
           // left: 4vw;
@@ -124,7 +152,7 @@
           display: flex;
           flex-direction: column;
           position: absolute;
-          right: 5vw;
+          right:0vw;
           bottom: 0;
           gap: 10px;
           cursor: pointer;
@@ -149,7 +177,7 @@
       display: flex;
       // flex-direction: column;
       position: absolute;
-      left: 65vw;
+      left: 66.5vw;
       bottom: 8vw;
       gap: 10px;
       cursor: pointer;

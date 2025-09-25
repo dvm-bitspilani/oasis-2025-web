@@ -261,15 +261,18 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                         alt={events[currentIndex].name}
                         className={styles.imagenew}
                       />
-                      <p>{events[currentIndex].club_name}</p>
+                     <div className={styles.venname}>
+                       <p>{events[currentIndex].club_name}</p>
+                       <p>
+                        <strong>Venue:</strong> {events[currentIndex].venue}
+                      </p>
+                     </div>
                     </div>
 
                     <div className={styles.rightevent}>
                       <h4>{events[currentIndex].name}</h4>
                       <p>{events[currentIndex].description}</p>
-                      <p>
-                        <strong>Venue:</strong> {events[currentIndex].venue}
-                      </p>
+                     
                     </div>
                   </motion.div>
                   <div className={styles.controls}>
