@@ -2,15 +2,17 @@ import styles from "./Events.module.scss";
 import EventBack from "/svgs/events/eventsback.svg";
 import Text from "/images/events/text.png";
 import dance from "/images/events/dance.png";
+import drama from "/images/events/drama.png";
+import dramaMobile from "/images/events/DramaMobile.png";
 import music from "/images/events/music.png";
 import misc from "/images/events/misc.png";
 import photography from "/images/events/photography.png";
-import quizzes from "/images/events/quizzes.png";
+// import quizzes from "/images/events/quizzes.png";
 import danceMobile from "/images/events/DanceMobile.png";
 import musicMobile from "/images/events/MusicMobile.png";
 import miscMobile from "/images/events/MiscMobile.png";
 import photographyMobile from "/images/events/PhotographyMobile.png";
-import quizzesMobile from "/images/events/QuizzesMobile.png";
+// import quizzesMobile from "/images/events/QuizzesMobile.png";
 import Eventspage from "./components/Eventspage";
 import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
@@ -23,12 +25,11 @@ interface FanImage {
   className: string;
 }
 
-
 const fanImages: FanImage[] = [
   {
-    src: quizzes,
-    mobileSrc: quizzesMobile,
-    alt: "Quizzes",
+    src: drama,
+    mobileSrc: dramaMobile,
+    alt: "Drama & Theatre",
     className: styles.quizzes,
   },
   { src: music, mobileSrc: musicMobile, alt: "Music", className: styles.music },
@@ -62,8 +63,9 @@ const Events: React.FC = () => {
     window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45)")
       .matches
   );
-  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
+  const canHover = window.matchMedia(
+    "(hover: hover) and (pointer: fine)"
+  ).matches;
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(
@@ -87,43 +89,42 @@ const Events: React.FC = () => {
 
   const EventRef = useRef<HTMLDivElement>(null);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-useEffect(() => {
-  if (!canHover) return; // skip for mobile/touch
+  useEffect(() => {
+    if (!canHover) return; // skip for mobile/touch
 
-  const cleanups: (() => void)[] = [];
+    const cleanups: (() => void)[] = [];
 
-  imageRefs.current.forEach((img) => {
-    if (!img) return;
+    imageRefs.current.forEach((img) => {
+      if (!img) return;
 
-    const hoverTween = gsap.to(img, {
-      scale: 1.05,
-      filter: "saturate(1.5)",
-      duration: 0.2,
-      ease: "power1.out",
-      paused: true,
-      overwrite: true,
-      startAt: { filter: "saturate(1)" }, // initial value
+      const hoverTween = gsap.to(img, {
+        scale: 1.05,
+        filter: "saturate(1.5)",
+        duration: 0.2,
+        ease: "power1.out",
+        paused: true,
+        overwrite: true,
+        startAt: { filter: "saturate(1)" }, // initial value
+      });
+
+      const onEnter = () => hoverTween.play();
+      const onLeave = () => hoverTween.reverse();
+
+      img.addEventListener("mouseenter", onEnter);
+      img.addEventListener("mouseleave", onLeave);
+
+      // push cleanup for this img
+      cleanups.push(() => {
+        img.removeEventListener("mouseenter", onEnter);
+        img.removeEventListener("mouseleave", onLeave);
+      });
     });
 
-    const onEnter = () => hoverTween.play();
-    const onLeave = () => hoverTween.reverse();
-
-    img.addEventListener("mouseenter", onEnter);
-    img.addEventListener("mouseleave", onLeave);
-
-    // push cleanup for this img
-    cleanups.push(() => {
-      img.removeEventListener("mouseenter", onEnter);
-      img.removeEventListener("mouseleave", onLeave);
-    });
-  });
-
-  // Cleanup all listeners
-  return () => {
-    cleanups.forEach((fn) => fn());
-  };
-}, [canHover]);
-
+    // Cleanup all listeners
+    return () => {
+      cleanups.forEach((fn) => fn());
+    };
+  }, [canHover]);
 
   useEffect(() => {
     const radius = isMobile ? window.innerHeight / 2 : window.innerWidth / 2;
@@ -145,90 +146,89 @@ useEffect(() => {
     // const maxDiff = Math.max(...angleDiffs);
     const computedDelays = angleDiffs.map(
       // (diff) => (maxDiff - diff) * delayAngleFactor
-        (diff) => diff+10000
+      (diff) => diff + 10000
     );
 
     setDelays(computedDelays);
   }, []);
 
   const handleImageClick = (alt: string) => {
-  setSelectedCategory(alt);
-  setFoldFan(true);
-  setShowEventPage(true);
-  setTimeout(() => {
-    setShowImages(false);
-  }, 1500);
+    setSelectedCategory(alt);
+    setFoldFan(true);
+    setShowEventPage(true);
+    setTimeout(() => {
+      setShowImages(false);
+    }, 1500);
 
-  const mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
 
-  // MOBILE
-  mm.add("(max-width: 1200px) and (max-aspect-ratio: 1.45)", () => {
-    const mobileOrder = [1, 0, 4, 3, 2];
+    // MOBILE
+    mm.add("(max-width: 1200px) and (max-aspect-ratio: 1.45)", () => {
+      const mobileOrder = [1, 0, 4, 3, 2];
 
-    requestAnimationFrame(() => {
-      mobileOrder.forEach((originalIndex, orderIndex) => {
-        const imgEl = imageRefs.current[originalIndex];
-        if (!imgEl) return;
+      requestAnimationFrame(() => {
+        mobileOrder.forEach((originalIndex, orderIndex) => {
+          const imgEl = imageRefs.current[originalIndex];
+          if (!imgEl) return;
 
-        const origin = (() => {
-          const rect = imgEl.getBoundingClientRect();
-          const rec = EventRef.current?.getBoundingClientRect();
-          if (!rec) return { x: 0, y: 0 };
-          return {
-            x: rec.left - rect.left,
-            y: rec.top + rec.height / 2 - rect.top,
-          };
-        })();
+          const origin = (() => {
+            const rect = imgEl.getBoundingClientRect();
+            const rec = EventRef.current?.getBoundingClientRect();
+            if (!rec) return { x: 0, y: 0 };
+            return {
+              x: rec.left - rect.left,
+              y: rec.top + rec.height / 2 - rect.top,
+            };
+          })();
 
-        //  reset transforms before animation
-        gsap.killTweensOf(imgEl);
-        gsap.set(imgEl, { scale: 1 });
-        imgEl.style.transformOrigin = `${origin.x}px ${origin.y}px`;
+          //  reset transforms before animation
+          gsap.killTweensOf(imgEl);
+          gsap.set(imgEl, { scale: 1 });
+          imgEl.style.transformOrigin = `${origin.x}px ${origin.y}px`;
 
-        gsap.to(imgEl, {
-          rotate: rotationAngles[orderIndex],
-          duration: durations[orderIndex],
-          delay: delays[orderIndex],
-          ease: "linear",
-          zIndex: alt === fanImages[originalIndex].alt ? 5 : 2, // clicked image on top
+          gsap.to(imgEl, {
+            rotate: rotationAngles[orderIndex],
+            duration: durations[orderIndex],
+            delay: delays[orderIndex],
+            ease: "linear",
+            zIndex: alt === fanImages[originalIndex].alt ? 5 : 2, // clicked image on top
+          });
         });
       });
     });
-  });
 
-  // DESKTOP
-  mm.add("(min-width: 1201px), (min-aspect-ratio: 1.46)", () => {
-    requestAnimationFrame(() => {
-      fanImages.forEach((_, i) => {
-        const imgEl = imageRefs.current[i];
-        if (!imgEl) return;
+    // DESKTOP
+    mm.add("(min-width: 1201px), (min-aspect-ratio: 1.46)", () => {
+      requestAnimationFrame(() => {
+        fanImages.forEach((_, i) => {
+          const imgEl = imageRefs.current[i];
+          if (!imgEl) return;
 
-        const origin = (() => {
-          const rect = imgEl.getBoundingClientRect();
-          const rec = EventRef.current?.getBoundingClientRect();
-          if (!rec) return { x: 0, y: 0 };
-          return {
-            x: rec.left + rec.width / 2 - rect.left,
-            y: rec.bottom - rect.top,
-          };
-        })();
+          const origin = (() => {
+            const rect = imgEl.getBoundingClientRect();
+            const rec = EventRef.current?.getBoundingClientRect();
+            if (!rec) return { x: 0, y: 0 };
+            return {
+              x: rec.left + rec.width / 2 - rect.left,
+              y: rec.bottom - rect.top,
+            };
+          })();
 
-        gsap.killTweensOf(imgEl);
-        gsap.set(imgEl, { scale: 1 });
-        imgEl.style.transformOrigin = `${origin.x}px ${origin.y}px`;
+          gsap.killTweensOf(imgEl);
+          gsap.set(imgEl, { scale: 1 });
+          imgEl.style.transformOrigin = `${origin.x}px ${origin.y}px`;
 
-        gsap.to(imgEl, {
-          rotate: rotationAngles[i],
-          duration: durations[i],
-          delay: delays[i],
-          ease: "linear",
-          zIndex: 2,
+          gsap.to(imgEl, {
+            rotate: rotationAngles[i],
+            duration: durations[i],
+            delay: delays[i],
+            ease: "linear",
+            zIndex: 2,
+          });
         });
       });
     });
-  });
-};
-
+  };
 
   return (
     <div

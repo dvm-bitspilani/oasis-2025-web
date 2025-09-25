@@ -3,7 +3,7 @@ import backButton from "/svgs/landing/hamBack.svg";
 import { useMainHamStore } from "../../../utils/store";
 import hamCloud from "/images/landing/hamCloud.png";
 import heartIcon from "/svgs/landing/heartIcon.svg";
-// import { useRef } from "react";
+import { useRef, useEffect } from "react";
 // import { gsap } from "gsap";
 // import { useGSAP } from "@gsap/react";
 
@@ -13,7 +13,26 @@ export default function mainHam({
   goToPage: (path: string) => void;
 }) {
   const setMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
-  // const isMainHamOpen = useMainHamStore((state) => state.isMainHamOpen);
+  const isMainHamOpen = useMainHamStore((state) => state.isMainHamOpen);
+  const dragonRef = useRef<SVGSVGElement | null>(null);
+
+  useEffect(() => {
+  if (dragonRef.current) {
+    if (isMainHamOpen) {
+      const timestamp = new Date().getTime();
+      const element = dragonRef.current;
+      
+      element.classList.add(styles.hamOpen);
+      
+      element.style.setProperty('mask-image', `url("/videos/dragon-reveal.gif?${timestamp}")`);
+      element.style.setProperty('-webkit-mask-image', `url("/videos/dragon-reveal.gif?${timestamp}")`);
+    } else {
+      dragonRef.current.classList.remove(styles.hamOpen);
+      dragonRef.current.style.removeProperty('mask-image');
+      dragonRef.current.style.removeProperty('-webkit-mask-image');
+    }
+  }
+}, [isMainHamOpen]);
 
   const hamItems = [
     {
@@ -72,6 +91,7 @@ export default function mainHam({
 
       <div className={styles.hamDragonContainer}>
         <svg
+          ref={dragonRef}
           width="1920"
           height="1080"
           fill="none"
