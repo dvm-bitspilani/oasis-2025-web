@@ -103,6 +103,12 @@ export default function LandingRevamp({
           (scrollerRef.current.scrollHeight ?? 0) - window.innerHeight * 1.4
         );
       }
+      if (window.innerWidth <= 730) {
+        document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
+        document.body.style.position = "fixed";
+      } else {
+        document.body.style.position = "static";
+      }
     };
 
     handleResize();
@@ -170,6 +176,8 @@ export default function LandingRevamp({
   useEffect(() => {
     const lenis = new Lenis({
       smoothWheel: true,
+      // wrapper: document.body,
+      // content: document.body,
       lerp: window.innerWidth < 730 ? 0.1 : 0.1, // higher lerp for mobile for smoother scroll
       infinite: false,
     });
@@ -582,9 +590,10 @@ export default function LandingRevamp({
           </div>
         </div>
         <div className={styles.bottomContainer}>
+          <div className={styles.bottomOverlay} />
           <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
             <div className={styles.aboutUsWrapper} ref={aboutUsWrapperRef}>
-              <AboutUs isBackBtn={false}/>
+              <AboutUs  />
               <div className={styles.aboutUsBottom} id="aboutUsBottom" />
             </div>
             {aboutUsContRef.current &&
