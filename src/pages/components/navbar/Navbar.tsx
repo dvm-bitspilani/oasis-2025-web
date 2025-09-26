@@ -13,7 +13,6 @@ import { navContext } from "../../../App";
 import { gsap } from "gsap";
 import _ScrollTrigger, { ScrollTrigger } from "gsap/ScrollTrigger";
 import debouncedHandler from "../../../utils/debounce";
-import { set } from "react-hook-form";
 // import { rect } from "framer-motion/client";
 
 gsap.registerPlugin(ScrollTrigger);
