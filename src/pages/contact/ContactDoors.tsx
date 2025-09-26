@@ -11,6 +11,7 @@ import contactBanner from "/images/contact/contact-banner.png";
 import contacts from "./components/contactGallery/contacts";
 // import ContactGallery from './components/contactGallery/ContactGallery';
 import { FaEnvelope } from "react-icons/fa6";
+import debouncedHandler from "../../utils/debounce";
 
 interface ContactDoorsProps {
   pinElemRef: React.RefObject<HTMLDivElement | null>;
@@ -32,7 +33,6 @@ export default function ContactDoors({
   const contactBannerRef = useRef<HTMLImageElement>(null);
   const contactSectionRef = useRef<HTMLDivElement>(null);
   // const galleryContentRef = useRef<HTMLDivElement>(null);
-  const windowWidth = useRef<number>(window.innerWidth);
   const horiBarDetailsRef = useRef<HoriBarDetails | null>(null);
 
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 900);
@@ -149,32 +149,25 @@ export default function ContactDoors({
       // ScrollTrigger.update();
       ScrollTrigger.refresh();
       animateContactItems(0);
-
-      console.log("Uhh", windowWidth.current, window.innerWidth);
       // if (windowWidth.current !== window.innerWidth) location.reload();
     };
 
-    const deboundedHandleResize = () => {
-      let timer;
-      clearTimeout(timer);
-      timer = setTimeout(handleResize, 200);
-    };
+    const debouncedHandleResize = debouncedHandler(handleResize, 1000);
 
     calculateHoriBarPos(contactItems);
 
     (window.visualViewport || window).addEventListener(
       "resize",
-      deboundedHandleResize
+      debouncedHandleResize
     );
     
     return () =>
       (window.visualViewport || window).removeEventListener(
         "resize",
-        deboundedHandleResize
+        debouncedHandleResize
       );
   }, []);
 
-  useEffect(() => console.log(window, innerWidth), [window.innerWidth]);
   // useEffect(() => {
   //     ScrollTrigger.refresh();
   //     // ScrollTrigger.update();
