@@ -51,7 +51,7 @@ const icons = [
   letter8,
 ];
 
-const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
+const videos = ["V9LHjddKR_M","Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
 const iconImages: HTMLImageElement[] = icons.map((src) => {
   const img = new Image();
   img.src = src;
