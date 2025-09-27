@@ -588,14 +588,14 @@ export default function LandingRevamp({
                       src={tree}
                       // className={styles.tree}
                       className={styles.treeDesktop}
-                      alt=""
+                      alt="Tree"
                       loading="eager"
                       fetchPriority="high"
                       style={{ contain: "none" }}
                     />
                     <img
                       src={treeMob}
-                      alt=""
+                      alt="TreeMobile"
                       className={styles.treeMob}
                       loading="eager"
                       fetchPriority="high"

@@ -85,7 +85,7 @@ export default function mainHam({
 
       <img
         src="svgs/landing/topRightDragon.svg"
-        alt=""
+        alt="Dragon"
         className={styles.topRightDragon}
       />
 
@@ -273,7 +273,7 @@ export default function mainHam({
 
       <img
         src="svgs/landing/bottomLeftDragon.svg"
-        alt=""
+        alt="Dragon"
         className={styles.bottomLeftDragon}
       />
 

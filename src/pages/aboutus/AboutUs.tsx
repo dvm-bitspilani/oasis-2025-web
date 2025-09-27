@@ -28,7 +28,7 @@ import letter6 from "/svgs/aboutus/letter6.svg";
 import letter7 from "/svgs/aboutus/letter7.svg";
 import letter8 from "/svgs/aboutus/letter8.svg";
 import { useGSAP } from "@gsap/react";
-
+import VideoMetaData from "./components/VideoMetaData";
 declare global {
   interface Window {
     YT?: any;
@@ -51,7 +51,14 @@ const icons = [
   letter8,
 ];
 
-const videos = ["V9LHjddKR_M","Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
+const videos = ["V9LHjddKR_M", "Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
+const mainVideoMetadata = {
+  id: "V9LHjddKR_M",
+  title: "Official Theme Reveal | Oasis 2025 | Whispers of Edo",
+  description:
+    'It’s getting closer! Oasis, the cultural festival of BITS Pilani, returns this year with the theme "Whispers of Edo", setting the tone for four unforgettable days. From performances to pro-shows, competitions to experiences—this is where it all begins.',
+  uploadDate: "2025-09-28",
+};
 const iconImages: HTMLImageElement[] = icons.map((src) => {
   const img = new Image();
   img.src = src;
@@ -59,19 +66,18 @@ const iconImages: HTMLImageElement[] = icons.map((src) => {
   return img;
 });
 
-const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
+const AboutUs = ({ isBackBtn = true }: AboutUsProps) => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const AboutRef = useRef<HTMLDivElement | null>(null);
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
-  
+
   const fan2Ref = useRef<HTMLImageElement>(null);
   const fan1Ref = useRef<HTMLImageElement>(null);
 
   const [isMobile, setIsMobile] = useState(
-    window
-      .matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
+    window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
       .matches
   );
 
@@ -158,7 +164,6 @@ const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
       }
     };
   }, []);
-
 
   useGSAP(() => {
     if (!isMobile) {
@@ -320,7 +325,7 @@ const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
     };
 
     const stopSpawning = () => {
-      console.log("Cleared interval: ", intervalId)
+      console.log("Cleared interval: ", intervalId);
       if (intervalId) window.clearInterval(intervalId);
     };
 
@@ -336,7 +341,7 @@ const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
       stopSpawning();
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  })
+  });
 
   useEffect(() => {
     const handleResize = () =>
@@ -360,6 +365,12 @@ const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
         backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`,
       }}
     >
+      <VideoMetaData
+        videoId={mainVideoMetadata.id}
+        title={mainVideoMetadata.title}
+        description={mainVideoMetadata.description}
+        uploadDate={mainVideoMetadata.uploadDate}
+      />
 
       <div className={styles.header}>
         <img src={isMobile ? Reg : Header} alt="About Us" />
@@ -465,7 +476,7 @@ const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
           </div>
         </div>
       </div>
-     
+
       <div className={styles.social}>
         <a href="https://www.linkedin.com/company/oasis24-bits-pilani/">
           <img src={linkedin} alt="Linkedin" />

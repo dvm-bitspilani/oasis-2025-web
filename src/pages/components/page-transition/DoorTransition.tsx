@@ -138,24 +138,28 @@ export default function DoorTransition({
     <div className={styles.cont} aria-hidden>
       <motion.img
         src={Door1Image}
+        alt="Door1"
         className={`${styles.door} ${styles.door1}`}
         style={{ "--dx": START.outerLeft } as any}
         animate={c1}
       />
       <motion.img
         src={Door2Image}
+        alt="Door2"
         className={`${styles.door} ${styles.door2}`}
         style={{ "--dx": START.innerLeft } as any}
         animate={c2}
       />
       <motion.img
         src={Door3Image}
+        alt="Door3"
         className={`${styles.door} ${styles.door3}`}
         style={{ "--dx": START.innerRight } as any}
         animate={c3}
       />
       <motion.img
         src={Door4Image}
+        alt="Door4"
         className={`${styles.door} ${styles.door4}`}
         style={{ "--dx": START.outerRight } as any}
         animate={c4}

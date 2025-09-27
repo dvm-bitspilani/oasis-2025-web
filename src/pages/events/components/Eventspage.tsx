@@ -93,6 +93,7 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
       iconTemplate.src = icons[Math.floor(Math.random() * icons.length)];
       const img = iconTemplate.cloneNode(true) as HTMLImageElement;
       img.className = styles.flyingIcon;
+      img.alt = "Stars";
 
       let startX = 0,
         startY = 0;
