@@ -243,7 +243,7 @@ const Events: React.FC = () => {
           name="description"
           content="Explore the diverse events at OASIS 2025 including Drama, Music, Dance, Photography, and more!"
         />
-        
+        <link rel="canonical" href="https://www.bits-oasis.org/events" />
       </Helmet>
      
       <div>
