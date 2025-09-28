@@ -18,6 +18,7 @@ import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import TextMobile from "/images/events/TextMobile.png";
 import BackButton from "../components/backButton/BackButton";
+import { Helmet } from "react-helmet";
 interface FanImage {
   src: string;
   mobileSrc?: string;
@@ -236,6 +237,15 @@ const Events: React.FC = () => {
       ref={EventRef}
       style={{ backgroundImage: `url("${EventBack}")` }}
     >
+      <Helmet>
+        <title>Events | OASIS 2025 | Whispers Of Edo</title>
+        <meta
+          name="description"
+          content="Explore the diverse events at OASIS 2025 including Drama, Music, Dance, Photography, and more!"
+        />
+        
+      </Helmet>
+     
       <div>
         <BackButton className={styles.aboutBB} />
       </div>
@@ -243,6 +253,7 @@ const Events: React.FC = () => {
 
       {showImages && (
         <div className={styles.eventscontainer}>
+          <h2 style={{display :"none"}}>Events | OASIS 2025 | Whispers Of Edo</h2>
           {fanImages.map((img, i) => {
             return (
               <img

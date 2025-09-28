@@ -29,6 +29,7 @@ import letter7 from "/svgs/aboutus/letter7.svg";
 import letter8 from "/svgs/aboutus/letter8.svg";
 import { useGSAP } from "@gsap/react";
 import VideoMetaData from "./components/VideoMetaData";
+import { Helmet } from "react-helmet";
 declare global {
   interface Window {
     YT?: any;
@@ -358,7 +359,11 @@ const AboutUs = ({ isBackBtn = true }: AboutUsProps) => {
   }, []);
 
   return (
-    <div
+    <div>
+       <Helmet>
+      <meta name="robots" content="index, follow" />
+    </Helmet>
+      <div
       className={styles.AboutContainer}
       ref={AboutRef}
       style={{
@@ -492,6 +497,7 @@ const AboutUs = ({ isBackBtn = true }: AboutUsProps) => {
         </a>
       </div>
       {isBackBtn && <BackButton className={styles.aboutBB} />}
+    </div>
     </div>
   );
 };

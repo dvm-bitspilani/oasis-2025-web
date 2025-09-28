@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /about
+Disallow: /about$
 Disallow: /download
 
 Sitemap: https://www.bits-oasis.org/sitemap.xml
