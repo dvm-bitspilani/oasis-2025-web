@@ -427,6 +427,7 @@ export default function LandingRevamp({
 
   return (
     <>
+    <title>OASIS 2025 | Whispers of Edo</title>
       <main
         className={`${styles.wrapper} ${
           !removeGif ? styles.pointerNoneEvent : ""
