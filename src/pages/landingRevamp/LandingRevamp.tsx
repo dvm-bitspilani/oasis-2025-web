@@ -612,7 +612,7 @@ export default function LandingRevamp({
           <div className={styles.bottomOverlay} />
           <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
             <div className={styles.aboutUsWrapper} ref={aboutUsWrapperRef}>
-              <AboutUs  />
+              <AboutUs isBackBtn={false} />
               <div className={styles.aboutUsBottom} id="aboutUsBottom" />
             </div>
             {aboutUsContRef.current &&
