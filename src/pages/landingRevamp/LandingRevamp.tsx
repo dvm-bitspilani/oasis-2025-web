@@ -31,6 +31,7 @@ import Lenis from "@studio-freight/lenis";
 // import { useMainHamStore } from "../../utils/store";
 import { useHamStore, useMainHamStore } from "../../utils/store";
 import ContactDoors from "../contact/ContactDoors";
+import { Helmet } from "react-helmet";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -427,7 +428,7 @@ export default function LandingRevamp({
 
   return (
     <>
-    <title>OASIS 2025 | Whispers of Edo</title>
+    
       <main
         className={`${styles.wrapper} ${
           !removeGif ? styles.pointerNoneEvent : ""
@@ -626,6 +627,10 @@ export default function LandingRevamp({
           {/* <div className={styles.bottomSpacer} ref={bottomSpacerRef}/> */}
         </div>
       </main>
+      <Helmet>
+      
+    <title>OASIS 2025 | Whispers Of Edo</title>
+    </Helmet>
     </>
   );
 }
