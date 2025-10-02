@@ -5,14 +5,14 @@ interface VideoMetadataType {
   videoId: string;
   title: string;
   description: string;
-  // uploadDate: string;
+  uploadDate: string;
 }
 
 const VideoMetaData: React.FC<VideoMetadataType> = ({
   videoId,
   title,
   description,
-  // uploadDate,
+  uploadDate,
 }) => {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   const jsonLd = {
@@ -21,7 +21,7 @@ const VideoMetaData: React.FC<VideoMetadataType> = ({
     name: title,
     description,
     thumbnailUrl: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
-    // uploadDate,
+    uploadDate,
     contentUrl: videoUrl,
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
   };
