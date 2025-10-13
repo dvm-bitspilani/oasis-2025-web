@@ -18,6 +18,8 @@ import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import TextMobile from "/images/events/TextMobile.png";
 import BackButton from "../components/backButton/BackButton";
+import { Helmet } from "react-helmet";
+import BreadCrumb from "../components/breadCrumb/BreadCrumb";
 interface FanImage {
   src: string;
   mobileSrc?: string;
@@ -59,6 +61,24 @@ const rotationAngles = [-78, -90, -102, -114, -126];
 // ];
 
 const Events: React.FC = () => {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.bits-oasis.org/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Events",
+        item: "https://www.bits-oasis.org/events",
+      },
+    ],
+  };
   const [isMobile, setIsMobile] = useState(
     window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45)")
       .matches
@@ -236,6 +256,15 @@ const Events: React.FC = () => {
       ref={EventRef}
       style={{ backgroundImage: `url("${EventBack}")` }}
     >
+      <Helmet>
+        <title>Events | OASIS 2025 | Whispers Of Edo</title>
+        <meta
+          name="description"
+          content="Explore the diverse events at OASIS 2025 including Drama, Music, Dance, Photography, and more!"
+        />
+        <link rel="canonical" href="https://www.bits-oasis.org/events" />
+      </Helmet>
+      <BreadCrumb data={breadcrumbJsonLd} />
       <div>
         <BackButton className={styles.aboutBB} />
       </div>
@@ -243,12 +272,16 @@ const Events: React.FC = () => {
 
       {showImages && (
         <div className={styles.eventscontainer}>
+          <h2 style={{ display: "none" }}>
+            Events | OASIS 2025 | Whispers Of Edo
+          </h2>
           {fanImages.map((img, i) => {
             return (
               <img
                 key={i}
                 src={isMobile && img.mobileSrc ? img.mobileSrc : img.src}
                 alt={img.alt}
+                data-nosnippet   
                 ref={(el) => {
                   imageRefs.current[i] = el;
                 }}

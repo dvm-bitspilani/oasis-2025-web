@@ -31,6 +31,7 @@ import Lenis from "@studio-freight/lenis";
 // import { useMainHamStore } from "../../utils/store";
 import { useHamStore, useMainHamStore } from "../../utils/store";
 import ContactDoors from "../contact/ContactDoors";
+import { Helmet } from "react-helmet";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -427,6 +428,7 @@ export default function LandingRevamp({
 
   return (
     <>
+    
       <main
         className={`${styles.wrapper} ${
           !removeGif ? styles.pointerNoneEvent : ""
@@ -588,14 +590,14 @@ export default function LandingRevamp({
                       src={tree}
                       // className={styles.tree}
                       className={styles.treeDesktop}
-                      alt=""
+                      alt="Tree"
                       loading="eager"
                       fetchPriority="high"
                       style={{ contain: "none" }}
                     />
                     <img
                       src={treeMob}
-                      alt=""
+                      alt="TreeMobile"
                       className={styles.treeMob}
                       loading="eager"
                       fetchPriority="high"
@@ -611,7 +613,7 @@ export default function LandingRevamp({
           <div className={styles.bottomOverlay} />
           <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
             <div className={styles.aboutUsWrapper} ref={aboutUsWrapperRef}>
-              <AboutUs  />
+              <AboutUs isBackBtn={false} />
               <div className={styles.aboutUsBottom} id="aboutUsBottom" />
             </div>
             {aboutUsContRef.current &&
@@ -625,6 +627,10 @@ export default function LandingRevamp({
           {/* <div className={styles.bottomSpacer} ref={bottomSpacerRef}/> */}
         </div>
       </main>
+      <Helmet>
+      
+    <title>OASIS 2025 | Whispers Of Edo</title>
+    </Helmet>
     </>
   );
 }

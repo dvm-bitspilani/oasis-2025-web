@@ -16,13 +16,31 @@ import { useRef, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-
+import BreadCrumb from "../components/breadCrumb/BreadCrumb";
 interface RegistrationProps {
   startAnimation: boolean;
   goToPage: (path: string) => void;
 }
 
 const Registration = ({ goToPage }: RegistrationProps) => {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.bits-oasis.org/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Registration",
+        item: "https://www.bits-oasis.org/register",
+      },
+    ],
+  };
   const { contextSafe } = useGSAP();
   const [currentPage, setCurrentPage] = useState(1);
   const [userEmail, setUserEmail] = useState("");
@@ -313,7 +331,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     <div className={styles.instrback}>
       {/* <img src={sun} alt="sun" className={styles.sun} ref={sunRef} /> */}
       {/* <div className={styles.overlay}></div> */}
-     <Helmet>
+      <Helmet>
         <title>Registration | OASIS 2025 | Whispers Of Edo</title>
         <meta
           name="description"
@@ -321,18 +339,37 @@ const Registration = ({ goToPage }: RegistrationProps) => {
         />
         <link rel="canonical" href="https://www.bits-oasis.org/register" />
         {/* Open Graph */}
-        <meta property="og:title" content="Registration | OASIS 2025 | Whispers Of Edo" />
-        <meta property="og:description" content="Register for Oasis 2025, the annual cultural festival of BITS Pilani." />
+        <meta
+          property="og:title"
+          content="Registration | OASIS 2025 | Whispers Of Edo"
+        />
+        <meta
+          property="og:description"
+          content="Register for Oasis 2025, the annual cultural festival of BITS Pilani."
+        />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.bits-oasis.org/register" />
-        <meta property="og:image" content="https://www.bits-oasis.org/logo2.png" />
+        <meta
+          property="og:image"
+          content="https://www.bits-oasis.org/logo2.png"
+        />
         <meta property="og:site_name" content="OASIS 2025 | Whispers Of Edo" />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Registration | OASIS 2025 | Whispers Of Edo" />
-        <meta name="twitter:description" content="Register for Oasis 2025, the annual cultural festival of BITS Pilani." />
-        <meta name="twitter:image" content="https://www.bits-oasis.org/logo2.png" />
+        <meta
+          name="twitter:title"
+          content="Registration | OASIS 2025 | Whispers Of Edo"
+        />
+        <meta
+          name="twitter:description"
+          content="Register for Oasis 2025, the annual cultural festival of BITS Pilani."
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.bits-oasis.org/logo2.png"
+        />
       </Helmet>
+      <BreadCrumb data={breadcrumbJsonLd} />
       <img
         src={
           window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45) ")

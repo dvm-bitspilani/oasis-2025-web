@@ -404,7 +404,7 @@ export default function Landing({
               <div className={styles.treeExtender}></div>
             </div>
             <div className={styles.logoContainer}>
-              <img src={logo} className={styles.logo} alt="Logo" />
+              <img src={logo} className={styles.logo} alt="Oasis Logo | Whispers of Edo" />
             </div>
             <div className={styles.dateCountdown} ref={dateCountdownRef}>
               <div className={`${styles.daysLeft} ${styles.timeLeft}`}>

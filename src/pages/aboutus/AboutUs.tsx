@@ -28,7 +28,8 @@ import letter6 from "/svgs/aboutus/letter6.svg";
 import letter7 from "/svgs/aboutus/letter7.svg";
 import letter8 from "/svgs/aboutus/letter8.svg";
 import { useGSAP } from "@gsap/react";
-
+import VideoMetaData from "./components/VideoMetaData";
+import { Helmet } from "react-helmet";
 declare global {
   interface Window {
     YT?: any;
@@ -51,7 +52,14 @@ const icons = [
   letter8,
 ];
 
-const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
+const videos = ["V9LHjddKR_M", "Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
+const mainVideoMetadata = {
+  id: "V9LHjddKR_M",
+  title: "Official Theme Reveal | Oasis 2025 | Whispers of Edo",
+  description:
+    'It’s getting closer! Oasis, the cultural festival of BITS Pilani, returns this year with the theme "Whispers of Edo", setting the tone for four unforgettable days. From performances to pro-shows, competitions to experiences—this is where it all begins.',
+  uploadDate: "2025-09-24T14:00:55+05:30",
+};
 const iconImages: HTMLImageElement[] = icons.map((src) => {
   const img = new Image();
   img.src = src;
@@ -59,19 +67,18 @@ const iconImages: HTMLImageElement[] = icons.map((src) => {
   return img;
 });
 
-const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
+const AboutUs = ({ isBackBtn = true }: AboutUsProps) => {
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const AboutRef = useRef<HTMLDivElement | null>(null);
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
-  
+
   const fan2Ref = useRef<HTMLImageElement>(null);
   const fan1Ref = useRef<HTMLImageElement>(null);
 
   const [isMobile, setIsMobile] = useState(
-    window
-      .matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
+    window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
       .matches
   );
 
@@ -158,7 +165,6 @@ const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
       }
     };
   }, []);
-
 
   useGSAP(() => {
     if (!isMobile) {
@@ -320,7 +326,7 @@ const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
     };
 
     const stopSpawning = () => {
-      console.log("Cleared interval: ", intervalId)
+      console.log("Cleared interval: ", intervalId);
       if (intervalId) window.clearInterval(intervalId);
     };
 
@@ -336,7 +342,7 @@ const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
       stopSpawning();
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  })
+  });
 
   useEffect(() => {
     const handleResize = () =>
@@ -353,134 +359,153 @@ const AboutUs = ({ isBackBtn = true}: AboutUsProps) => {
   }, []);
 
   return (
-    <div
-      className={styles.AboutContainer}
-      ref={AboutRef}
-      style={{
-        backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`,
-      }}
-    >
+    <div>
+      <Helmet>
+        <title>About Us | OASIS 2025 | Whispers of Edo</title>
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+      <div
+        className={styles.AboutContainer}
+        ref={AboutRef}
+        style={{
+          backgroundImage: `url("${
+            isMobile ? aboutPageBGMobile : aboutPageBG
+          }")`,
+        }}
+      >
+        <VideoMetaData
+          videoId={mainVideoMetadata.id}
+          title={mainVideoMetadata.title}
+          description={mainVideoMetadata.description}
+          uploadDate={mainVideoMetadata.uploadDate}
+        />
 
-      <div className={styles.header}>
-        <img src={isMobile ? Reg : Header} alt="About Us" />
-      </div>
+        <div className={styles.header}>
+          <img src={isMobile ? Reg : Header} alt="About Us" />
+        </div>
 
-      <div className={styles.content3D}>
-        <div className={styles.wrapper}>
-          <button onClick={prevVideo} className={styles.arr}>
-            <img
-              src={nextarr}
-              className={styles.prevarr}
-              width="100%"
-              alt="Next Arrow"
-            ></img>
-          </button>
-          <div className={styles.vid}>
-            <div
-              onClick={togglePlayPause}
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: "16px",
-                zIndex: "20",
-              }}
-            >
+        <div className={styles.content3D}>
+          <div className={styles.wrapper}>
+            <button onClick={prevVideo} className={styles.arr}>
+              <img
+                src={nextarr}
+                className={styles.prevarr}
+                width="100%"
+                alt="Next Arrow"
+              ></img>
+            </button>
+            <div className={styles.vid}>
               <div
-                ref={playerContainerRef}
+                onClick={togglePlayPause}
                 style={{
                   width: "100%",
                   height: "100%",
                   borderRadius: "16px",
-                  pointerEvents: "none",
+                  zIndex: "20",
                 }}
-              />
+              >
+                <div
+                  ref={playerContainerRef}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "16px",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+
+              <img src={fan} alt="fan1" ref={fan1Ref} className={styles.fan1} />
+              <img src={fan} alt="fan2" ref={fan2Ref} className={styles.fan2} />
             </div>
 
-            <img src={fan} alt="fan1" ref={fan1Ref} className={styles.fan1} />
-            <img src={fan} alt="fan2" ref={fan2Ref} className={styles.fan2} />
-          </div>
-
-          <button onClick={nextVideo} className={styles.arr}>
-            <img
-              src={nextarr}
-              className={styles.nextarr}
-              width="100%"
-              alt="Next Arrow"
-            ></img>
-          </button>
-
-          <div className={styles.controls}>
-            <div className={styles.a1}></div>
-            <div className={styles.buttonContainer}>
+            <button onClick={nextVideo} className={styles.arr}>
               <img
-                src={PlayButton}
-                className={styles.background}
-                alt="Buttons"
-              />
-              <div className={styles.buttonGroup}>
-                <button onClick={prevVideo}>
-                  <img
-                    src={prev}
-                    alt="Previous Button"
-                    className={styles.btns1}
-                  />
-                </button>
-                <div className={styles.a1}></div>
-                <button onClick={togglePlayPause}>
-                  <img
-                    src={isPlaying ? play : pause}
-                    alt="Pause Button"
-                    className={styles.btns2}
-                  />
-                </button>
-                <div className={styles.a1}></div>
-                <button onClick={nextVideo}>
-                  <img src={next} alt="Next Button" className={styles.btns3} />
-                </button>
+                src={nextarr}
+                className={styles.nextarr}
+                width="100%"
+                alt="Next Arrow"
+              ></img>
+            </button>
+
+            <div className={styles.controls}>
+              <div className={styles.a1}></div>
+              <div className={styles.buttonContainer}>
+                <img
+                  src={PlayButton}
+                  className={styles.background}
+                  alt="Buttons"
+                />
+                <div className={styles.buttonGroup}>
+                  <button onClick={prevVideo}>
+                    <img
+                      src={prev}
+                      alt="Previous Button"
+                      className={styles.btns1}
+                    />
+                  </button>
+                  <div className={styles.a1}></div>
+                  <button onClick={togglePlayPause}>
+                    <img
+                      src={isPlaying ? play : pause}
+                      alt="Pause Button"
+                      className={styles.btns2}
+                    />
+                  </button>
+                  <div className={styles.a1}></div>
+                  <button onClick={nextVideo}>
+                    <img
+                      src={next}
+                      alt="Next Button"
+                      className={styles.btns3}
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+
+          <div className={styles.abt}>
+            <div
+              className={styles.aboutback}
+              style={{
+                backgroundImage: isMobile ? "none" : `url("${aboutTextBG}")`,
+              }}
+            >
+              <p>
+                Oasis, the annual cultural extravaganza of Birla Institute of
+                Technology and Science, Pilani, has been a vibrant part of
+                India's cultural tapestry since 1971. Managed entirely by
+                students, it's a dazzling showcase of talent in Dance, Drama,
+                Literature, Comedy, Fashion, and Music. It's where dreams come
+                alive, laughter fills the air, and creativity knows no bounds.
+                Step into the world of Oasis, where youth's boundless potential
+                shines.
+              </p>
+            </div>
+            <div className={styles.abtus}>
+              <img src={abtus} alt="ABOUT US" />
+              <h3>ABOUT US</h3>
+            </div>
+          </div>
         </div>
 
-        <div className={styles.abt}>
-          <div
-            className={styles.aboutback}
-            style={{
-              backgroundImage: isMobile ? "none" : `url("${aboutTextBG}")`,
-            }}
-          >
-            <p>
-              Oasis, the annual cultural extravaganza of Birla Institute of
-              Technology and Science, Pilani, has been a vibrant part of India's
-              cultural tapestry since 1971. Managed entirely by students, it's a
-              dazzling showcase of talent in Dance, Drama, Literature, Comedy,
-              Fashion, and Music. It's where dreams come alive, laughter fills
-              the air, and creativity knows no bounds. Step into the world of
-              Oasis, where youth's boundless potential shines.
-            </p>
-          </div>
-          <div className={styles.abtus}>
-            <img src={abtus} alt="ABOUT US" />
-            <h3>ABOUT US</h3>
-          </div>
+        <div className={styles.social}>
+          <a href="https://www.linkedin.com/company/oasis24-bits-pilani/">
+            <img src={linkedin} alt="Linkedin" />
+          </a>
+          <a href="https://www.youtube.com/@oasisbitspilani6375">
+            <img src={yticon} alt="Youtube" />
+          </a>
+          <a href="https://twitter.com/bitsoasis">
+            <img src={xicon} alt="Twitter" />
+          </a>
+          <a href="https://www.instagram.com/bitsoasis">
+            <img src={instaicon} alt="Instagram" />
+          </a>
         </div>
+        {isBackBtn && <BackButton className={styles.aboutBB} />}
       </div>
-     
-      <div className={styles.social}>
-        <a href="https://www.linkedin.com/company/oasis24-bits-pilani/">
-          <img src={linkedin} alt="Linkedin" />
-        </a>
-        <a href="https://www.youtube.com/@oasisbitspilani6375">
-          <img src={yticon} alt="Youtube" />
-        </a>
-        <a href="https://twitter.com/bitsoasis">
-          <img src={xicon} alt="Twitter" />
-        </a>
-        <a href="https://www.instagram.com/bitsoasis">
-          <img src={instaicon} alt="Instagram" />
-        </a>
-      </div>
-      {isBackBtn && <BackButton className={styles.aboutBB} />}
     </div>
   );
 };
