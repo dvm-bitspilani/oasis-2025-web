@@ -21,7 +21,7 @@ import registerBtn from "/svgs/landing/registerBtn.svg";
 import wire from "/svgs/landing/wire.svg";
 import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
-import logo from "/images/landing/oasisLogo.png";
+import logo from "/images/landing/banner_without_sponz.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
 import Ham from "../components/ham/ham";
@@ -104,12 +104,12 @@ export default function LandingRevamp({
           (scrollerRef.current.scrollHeight ?? 0) - window.innerHeight * 1.4
         );
       }
-      if (window.innerWidth <= 730) {
-        document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
-        document.body.style.position = "fixed";
-      } else {
-        document.body.style.position = "static";
-      }
+      // if (window.innerWidth <= 730) {
+      //   document.scrollingElement?.scrollTo({ top: 0, behavior: "instant" });
+      //   document.body.style.position = "fixed";
+      // } else {
+      //   document.body.style.position = "static";
+      // }
     };
 
     handleResize();

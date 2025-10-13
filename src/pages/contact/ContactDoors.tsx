@@ -134,7 +134,7 @@ export default function ContactDoors({
     // .from(galleryContentRef.current, {autoAlpha: 0})
 
     // if (contactSectionRef.current) contactSectionRef.current.style.transform = "translateY(-100vh)"//`translateY(${-((pinElemRef.current?.clientHeight || 0) - (contactSectionRef.current?.clientHeight || 0))})`
-  }, []);
+  });
 
   useEffect(() => {
     const contactItems = document.getElementsByClassName(styles.contactItem);
@@ -172,6 +172,8 @@ export default function ContactDoors({
   //     ScrollTrigger.refresh();
   //     // ScrollTrigger.update();
   // }, [isMobile, isTab])
+
+  useEffect(() => console.log("ContactDoors just unmounted"), []);
 
   return (
     <div className={styles.contactSection} ref={contactSectionRef}>

@@ -7,7 +7,7 @@ import cloud3 from "/svgs/landing/hamClouds/cloud3.min.svg";
 import cloud4 from "/svgs/landing/hamClouds/cloud4.min.svg";
 import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
-import { useEffect, useContext, useRef, useState } from "react";
+import { useEffect, useContext, useRef } from "react";
 import { useMainHamStore, useHamStore } from "../../../utils/store";
 import { navContext } from "../../../App";
 import { gsap } from "gsap";
@@ -36,7 +36,7 @@ export default function Navbar({
   //! removw with old ham (and their references)
   const isHamOpen = useHamStore((state) => state.isHamOpen);
   const isMainHamOpen = useMainHamStore((state) => state.isMainHamOpen);
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth / window.innerHeight < 8 / 12 || window.innerWidth < 730);
+  const isMobile = useRef<boolean>(window.innerWidth / window.innerHeight < 8 / 12 || window.innerWidth < 730);
   //! ---
 
   const setHamOpen = useHamStore((state) => state.setHamOpen);
@@ -48,9 +48,9 @@ export default function Navbar({
       ScrollTrigger.refresh();
       ScrollTrigger.update();
       const newIsMobile = window.innerWidth / window.innerHeight < 8 / 12 || window.innerWidth < 730;
-      setIsMobile(newIsMobile);
-      setHamOpen(isHamOpen && isMobile);
-      setMainHamOpen(isMainHamOpen && !isMobile);
+      isMobile.current = newIsMobile;
+      setHamOpen(isHamOpen && newIsMobile);
+      setMainHamOpen(isMainHamOpen && !newIsMobile);
     };
 
     const debouncedHandleResize = debouncedHandler(handleResize, 1000);
@@ -120,6 +120,7 @@ export default function Navbar({
 
   const handleHamClick = () => {
     // setMainHamOpen(true);
+    const isMobile = window.innerWidth / window.innerHeight < 8 / 12 || window.innerWidth < 730;
     if (isMobile) {
       setHamOpen(true);
     } else {
