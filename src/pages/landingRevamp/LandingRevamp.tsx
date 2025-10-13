@@ -21,7 +21,7 @@ import registerBtn from "/svgs/landing/registerBtn.svg";
 import wire from "/svgs/landing/wire.svg";
 import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
-import logo from "/images/landing/oasisLogo.png";
+import logo from "/images/landing/banner_without_sponz.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
 import Ham from "../components/ham/ham";
