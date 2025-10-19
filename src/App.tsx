@@ -19,6 +19,7 @@ export const navContext = createContext<{ goToPage?: (page: string) => void }>(
 );
 
 import ReactGA from "react-ga4";
+import Brochure from "./pages/brochure/Brochure";
 
 const TRACKING_ID = "G-57YBBH7RXW";
 if (window.location.hostname.search("bits-oasis.org") !== -1) {
@@ -42,21 +43,16 @@ export default function App() {
     });
   }, [location]);
 
-  const [currentPage, setCurrentPage] = useState<
-    "home" | "register" | "events" | "aboutus" | "contact" | "comingSoon"
-  >(
-    location.pathname === "/"
-      ? "home"
-      : location.pathname === "/register"
-      ? "register"
-      : location.pathname === "/events"
-      ? "events"
-      : location.pathname === "/aboutus"
-      ? "aboutus"
-      : location.pathname === "/contact"
-      ? "contact"
-      : "comingSoon"
+  const pageList = ["home", "register", "events", "aboutus", "contact", "brochure"];
+
+  const [currentPage, setCurrentPage] = useState<typeof pageList[number] | "comingSoon">(
+    location.pathname === "/" ?
+      "home" : 
+      pageList.includes(location.pathname.replace("/", "")) ? 
+        location.pathname.replace("/", "") : 
+        "comingSoon"
   );
+  console.log("Current Page:", currentPage);
 
   const [doorPhase, setDoorPhase] = useState<
     "idle" | "closing" | "waiting" | "opening"
@@ -70,10 +66,10 @@ export default function App() {
 
   useEffect(() => {
     const path = location.pathname.replace("/", "");
-    const pages = ["register", "events", "aboutus", "contact"];
+    // const pages = ["register", "events", "aboutus", "contact", "brochure"];
 
     setCurrentPage(
-      pages.includes(path)
+      pageList.includes(path)
         ? (path as typeof currentPage)
         : path === ""
         ? "home"
@@ -193,6 +189,7 @@ export default function App() {
       {!isPreloading && currentPage === "events" && <Events />}
       {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
+      {!isPreloading && currentPage === "brochure" && <Brochure />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
       {/* 
       <Routes>

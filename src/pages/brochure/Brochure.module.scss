@@ -1,0 +1,47 @@
+@use '../../assets/global.scss' as *;
+
+.brochurePageBg {
+    position: relative;
+    height: 100svh;
+    width: 100vw;
+    background: url("/images/landing/background1.png");
+    background-position: center;
+    background-size: cover; 
+    background-repeat: no-repeat;
+
+    .brochurePage {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 1.8rem;
+        height: 100%;
+        width: 100%;
+        backdrop-filter: brightness(0.6);
+
+        .title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: $primaryFont;
+            color: rgb(203, 203, 203);
+            @media (max-width: 768px) {
+                font-size: 2.1rem;
+            }
+        }
+
+        .brochureContainer {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 1.5rem 0;
+            .brochureIframe {
+                width: 69%;
+                min-height: 450px;
+                @media (max-width: 1024px) {width: 81%;}
+                @media (max-width: 768px) {width: 100%;}
+            }
+        }
+    }
+}
