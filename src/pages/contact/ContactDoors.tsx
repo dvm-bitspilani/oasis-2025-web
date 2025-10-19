@@ -173,7 +173,7 @@ export default function ContactDoors({
   //     // ScrollTrigger.update();
   // }, [isMobile, isTab])
 
-  useEffect(() => console.log("ContactDoors just unmounted"), []);
+  // useEffect(() => console.log("ContactDoors just unmounted"), []);
 
   return (
     <div className={styles.contactSection} ref={contactSectionRef}>

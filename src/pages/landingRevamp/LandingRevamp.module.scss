@@ -129,46 +129,36 @@ body {
     position: fixed;
   }
 
-  .hamContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10000;
+  // .hamContainer {
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   z-index: 10000;
 
-    .blur {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100dvh;
-      width: 100dvw;
-      background-color: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      pointer-events: none;
-    }
+  //   .blur {
+  //     position: fixed;
+  //     top: 0;
+  //     left: 0;
+  //     height: 100dvh;
+  //     width: 100dvw;
+  //     background-color: rgba(0, 0, 0, 0.5);
+  //     backdrop-filter: blur(5px);
+  //     opacity: 0;
+  //     transition: opacity 0.5s ease-in-out;
+  //     pointer-events: none;
+  //   }
 
-    .translateHam {
-      position: fixed;
-      height: 100%;
-      width: 70svw;
-      right: 0;
-      top: 0;
-      transform: translateX(100svw);
-      transition: transform 0.5s ease-in-out;
-    }
-    
-    &.hamOpen {
-      .blur {
-        opacity: 1;
-        pointer-events: auto;
-      }
+  //   &.hamOpen {
+  //     .blur {
+  //       opacity: 1;
+  //       pointer-events: auto;
+  //     }
 
-      .translateHam {
-        transform: translateX(0);
-      }
-    }
-  }
+  //     .translateHam {
+  //       transform: translateX(0);
+  //     }
+  //   }
+  // }
 
   .mainHamContainer {
     position: fixed;
