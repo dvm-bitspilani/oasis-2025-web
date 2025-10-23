@@ -24,23 +24,49 @@
             text-align: center;
             margin-bottom: 2rem;
             font-family: $primaryFont;
-            color: rgb(203, 203, 203);
+            color: rgb(221, 221, 221);
             @media (max-width: 768px) {
                 font-size: 2.1rem;
             }
         }
 
-        .brochureContainer {
+        .brochureWrapper {
             flex: 1;
             display: flex;
             justify-content: center;
             width: 100%;
             padding: 1.5rem 0;
-            .brochureIframe {
+            .brochureContainer {
+                position: relative;
                 width: 69%;
-                min-height: 450px;
                 @media (max-width: 1024px) {width: 81%;}
                 @media (max-width: 768px) {width: 100%;}
+                .brochureIframe {
+                    border: 1px solid #DB6365;
+                    height: 100%;
+                    width: 100%;
+                    min-height: 450px;
+                }
+                .downloadButton {
+                    position: absolute;
+                    bottom: 1.2rem;
+                    right: 1.2rem;
+                    background-color: #BD2C35;
+                    color: rgb(193, 193, 193);
+                    font-size: 1.5rem;
+                    border: none;
+                    border-radius: 50%;
+                    padding: 0.72rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: background-color 0.1s ease;
+
+                    &:hover {
+                        background-color: #D0494A;
+                    }
+                }
             }
         }
     }
