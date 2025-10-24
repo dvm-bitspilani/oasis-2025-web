@@ -34,6 +34,11 @@ export default function Homepage({
       audioRef.current.pause();
     }
   };
+  const playMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
   return (
     <div>
       <Helmet>
@@ -74,9 +79,9 @@ export default function Homepage({
           removeGif ? { display: "none" } : { zIndex: 50, position: "relative" }
         }
       >
-        <DrawingPreloader onEnter={toggleMusic} />
+        <DrawingPreloader onEnter={playMusic} />
       </div>
-      <audio src={bgMusic} autoPlay loop ref={audioRef}></audio>
+      <audio src={bgMusic} loop ref={audioRef}></audio>
       <div style={{ zIndex: 100, position: "relative" }}>
         <LandingRevamp goToPage={goToPage} onToggle={toggleMusic} />
       </div>
