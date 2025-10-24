@@ -4,6 +4,8 @@ import useOverlayStore from "./utils/store";
 import LandingRevamp from "./pages/landingRevamp/LandingRevamp";
 import { Helmet } from "react-helmet";
 import BreadCrumb from "./pages/components/breadCrumb/BreadCrumb";
+import bgMusic from "/sounds/bg-music.mp3";
+import { useRef } from "react";
 export default function Homepage({
   goToPage,
 }: {
@@ -22,6 +24,16 @@ export default function Homepage({
     ],
   };
   const removeGif = useOverlayStore((state) => state.removeGif);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+
+    if (audioRef.current.paused) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  };
   return (
     <div>
       <Helmet>
@@ -62,10 +74,11 @@ export default function Homepage({
           removeGif ? { display: "none" } : { zIndex: 50, position: "relative" }
         }
       >
-        <DrawingPreloader />
+        <DrawingPreloader onEnter={toggleMusic} />
       </div>
+      <audio src={bgMusic} autoPlay loop ref={audioRef}></audio>
       <div style={{ zIndex: 100, position: "relative" }}>
-        <LandingRevamp goToPage={goToPage} />
+        <LandingRevamp goToPage={goToPage} onToggle={toggleMusic} />
       </div>
     </div>
   );

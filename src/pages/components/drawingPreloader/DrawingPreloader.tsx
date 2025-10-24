@@ -87,9 +87,10 @@ const soundsToPreload: string[] = []; // (/iPad|iPhone|iPod/.test(navigator.user
 
 export default function DrawingPreloader({
   className,
+  onEnter
 }: {
   className?: string;
-  onEnter?: () => void;
+  onEnter: () => void;
 }) {
   const overlaySetActive = useOverlayStore((state: any) => state.setActive);
   const [progress, setProgress] = useState(0);
@@ -598,6 +599,7 @@ export default function DrawingPreloader({
               className={styles.enterButton}
               onClick={() => {
                 overlaySetActive();
+                onEnter();
               }}
             >
               <div className={styles.enterButtonText}>Enter</div>
