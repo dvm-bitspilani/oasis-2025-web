@@ -83,7 +83,7 @@ export default function Homepage({
       </div>
       <audio src={bgMusic} loop ref={audioRef}></audio>
       <div style={{ zIndex: 100, position: "relative" }}>
-        <LandingRevamp goToPage={goToPage} onToggle={toggleMusic} />
+        <LandingRevamp goToPage={goToPage} onToggle={toggleMusic} audioRef={audioRef} />
       </div>
     </div>
   );

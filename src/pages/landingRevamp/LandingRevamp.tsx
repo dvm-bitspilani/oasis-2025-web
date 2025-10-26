@@ -67,10 +67,16 @@ const socialLinks = [
 export default function LandingRevamp({
   goToPage,
   onToggle,
+  audioRef,
 }: {
   goToPage: (path: string) => void;
   onToggle: () => void;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
 }) {
+  const [styleTag, setstyleTag] = useState([
+    audioRef.current?.paused ? styles.soundLine : styles.soundLine2,
+    audioRef.current?.paused ? styles.soundCross : styles.soundCross2,
+  ]);
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
   const setRemoveGif = useOverlayStore((state) => state.setRemoveGif);
@@ -429,7 +435,6 @@ export default function LandingRevamp({
 
   return (
     <>
-
       <main
         className={`${styles.wrapper} ${
           !removeGif ? styles.pointerNoneEvent : ""
@@ -516,6 +521,22 @@ export default function LandingRevamp({
             MINUTES
           </div>
         </div>
+        <div
+          className={styles.sounds}
+          onClick={() => {
+            if (styleTag[0] === styles.soundLine2)
+              setstyleTag([styles.soundLine, styles.soundCross]);
+            else setstyleTag([styles.soundLine2, styles.soundCross2]);
+            onToggle();
+          }}
+        >
+          <span className={styleTag[0]}></span>
+          <span className={styleTag[0]}></span>
+          <span className={styleTag[0]}></span>
+          <span className={styleTag[0]}></span>
+          <span className={styleTag[0]}></span>
+          <span className={styleTag[1]}></span>
+        </div>
         <div className={styles.scrollerWrapper}>
           <div className={styles.scroller} ref={scrollerRef}>
             <div className={styles.landingContainer}>
@@ -574,7 +595,7 @@ export default function LandingRevamp({
                       <div className={styles.wire}>
                         <img src={wire} alt="Wire" />
                       </div>
-                      <svg
+                      {/* <svg
                         fill="#fff"
                         version="1.1"
                         id="Capa_1"
@@ -603,7 +624,47 @@ export default function LandingRevamp({
                             c20.897,20.888,32.402,48.654,32.402,78.191C283.385,202.094,271.886,229.861,251.007,250.74z"
                           />
                         </g>
-                      </svg>
+                      </svg> */}
+                      {/* <svg
+                        width="667"
+                        height="601"
+                        viewBox="0 0 667 601"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={styles.audioTag}
+                        onClick={onToggle}
+                      >
+                        <path
+                          d="M433.333 41.748C433.333 5.79397 390.85 -13.2804 363.983 10.609L214.265 143.718C209.688 147.787 203.778 150.034 197.654 150.034H75C33.5787 150.034 0 183.613 0 225.034V374.964C0 416.384 33.5787 449.964 75 449.964H197.652C203.776 449.964 209.688 452.211 214.264 456.281L363.98 589.404C390.85 613.298 433.333 594.224 433.333 558.268V41.748ZM247.487 181.085L383.333 60.3077V539.708L247.488 418.918C233.758 406.708 216.025 399.964 197.652 399.964H75C61.193 399.964 50 388.771 50 374.964V225.034C50 211.227 61.193 200.034 75 200.034H197.654C216.025 200.034 233.757 193.291 247.487 181.085ZM566.387 96.659C577.48 88.441 593.137 90.7737 601.357 101.869C642.39 157.271 666.667 225.878 666.667 300.081C666.667 374.284 642.39 442.891 601.357 498.294C593.137 509.391 577.48 511.724 566.387 503.504C555.29 495.288 552.96 479.631 561.177 468.534C596.05 421.451 616.667 363.211 616.667 300.081C616.667 236.954 596.05 178.714 561.177 131.628C552.96 120.533 555.29 104.877 566.387 96.659ZM504.767 179.059C516.907 172.486 532.08 177.001 538.653 189.143C556.527 222.163 566.667 259.974 566.667 300.081C566.667 340.188 556.527 378.001 538.653 411.021C532.08 423.161 516.907 427.678 504.767 421.104C492.623 414.531 488.107 399.358 494.68 387.218C508.697 361.324 516.667 331.671 516.667 300.081C516.667 268.491 508.697 238.838 494.68 212.946C488.107 200.804 492.623 185.632 504.767 179.059Z"
+                          fill="#413f43ff"
+                        />
+                      </svg> */}
+                      {/* <svg
+                        width="526"
+                        height="526"
+                        viewBox="0 0 526 526"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={styles.audioTag}
+                        onClick={onToggle}
+                      >
+                        <path
+                          d="M215.333 148L163.333 200H121.199C97.9994 200 77.066 200.4 74.7993 200.8L70.666 201.6V270.133V338.667H116.933H163.199L215.599 390.933L267.999 443.333V269.6C267.999 174.133 267.866 96.0001 267.599 96.0001C267.466 96.0001 243.866 119.333 215.333 148Z"
+                          fill="#ffdfd0"
+                        />
+                        <path
+                          d="M400.132 120.534L394.399 126.267L402.932 136.134C414.399 149.467 417.732 154.134 426.132 168.4C449.732 208.4 458.532 260.8 449.466 307.6C442.666 342.8 425.066 378.667 402.666 403.067L394.266 412.267L400.532 418.4L406.799 424.667L415.866 415.067C437.732 392 455.866 358.267 464.666 324.667C480.799 262.534 469.466 198.534 433.066 145.067C425.466 134 408.799 114.667 406.799 114.667C406.266 114.667 403.332 117.334 400.132 120.534Z"
+                          fill="#ffdfd0"
+                        />
+                        <path
+                          d="M350.934 169.734C347.867 172.8 345.334 176 345.334 176.8C345.334 177.6 347.2 179.867 349.467 182.134C356.267 188.4 368.8 208.534 373.334 220.267C391.067 266 383.2 316 352.534 353.467L344.934 362.8L351.067 369.067L357.2 375.2L361.467 371.334C367.334 365.6 379.067 348.8 384.4 337.867C397.2 312.534 400.534 298.4 400.4 268.667C400.4 248.534 400 244.534 396.934 233.067C392.4 216.134 385.867 201.334 376.934 187.734C369.734 176.8 359.334 164 357.467 164C356.934 164 354 166.534 350.934 169.734Z"
+                          fill="#ffdfd0"
+                        />
+                        <path
+                          d="M301.467 219.2C298.533 222.267 296 225.2 296 225.6C296 226.133 298.4 230 301.333 234.267C308 243.733 312.533 257.733 312.533 269.333C312.667 280.533 308.133 295.067 302 303.467C295.067 313.2 295.067 312.933 301.6 319.6L307.733 325.6L311.467 321.467C316.4 316 324.267 302.267 327.2 293.867C330.8 284.133 331.6 261.6 328.8 250.8C325.467 237.867 313.467 216.267 308.533 214.133C307.733 213.867 304.533 216.133 301.467 219.2Z"
+                          fill="#ffdfd0"
+                        />
+                      </svg> */}
                     </div>
                     <img
                       src={tree}
