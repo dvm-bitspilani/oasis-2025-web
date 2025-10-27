@@ -336,28 +336,28 @@ body {
     gap: 3px;
     width: calc(var(--counterSmallFontSize) * 2.4);
     height: calc(var(--counterSmallFontSize) * 2.4);
-    @media screen and (max-width: 1350px) {
-      width: calc(var(--counterBigFontSize) * 1.6);
-      height: calc(var(--counterBigFontSize) * 1.6);
-    }
     cursor: pointer;
     border-radius: 50%;
     border: 2px solid #ffdfd0;
     transform: translateY(6%);
+    @media screen and (max-width: 1350px) {
+      width: calc(var(--counterBigFontSize) * 1.6);
+      height: calc(var(--counterBigFontSize) * 1.6);
+    }
     @media screen and (max-width: 800px) {
       display: none;
     }
 
     .soundLine {
       height: calc(var(--counterSmallFontSize) * 1.1);
-      @media screen and (max-width: 1350px) {
-        height: calc(var(--counterBigFontSize) * 0.7);
-      }
       width: 2.5px;
       border-radius: 50000px;
       background: #ffdfd0;
       animation: scaler infinite;
       transition: height 0.3s ease-in-out;
+      @media screen and (max-width: 1350px) {
+        height: calc(var(--counterBigFontSize) * 0.7);
+      }
       &:nth-child(1) {
         animation: scaler2 2s ease-in-out infinite;
         // animation-delay: -0.2s;
@@ -401,10 +401,10 @@ body {
     }
     @keyframes scaler2 {
       0% {
-        transform: scaleY(1);
+        transform: scaleY(0.8);
       }
       25% {
-        transform: scaleY(1.2);
+        transform: scaleY(1.1);
       }
       50% {
         transform: scaleY(0.9);
@@ -413,7 +413,7 @@ body {
         transform: scaleY(1.1);
       }
       100% {
-        transform: scaleY(1);
+        transform: scaleY(0.8);
       }
     }
 
@@ -437,13 +437,13 @@ body {
       position: absolute;
       width: 2.5px;
       height: calc(var(--counterSmallFontSize) * 1.8);
-      @media screen and (max-width: 1350px) {
-        height: calc(var(--counterBigFontSize) * 1.1);
-      }
       border-radius: 50000px;
       background: #ffdfd0;
       transform: rotate(65deg);
       transition: height 0.3s ease-in-out;
+      @media screen and (max-width: 1350px) {
+        height: calc(var(--counterBigFontSize) * 1.1);
+      }
     }
   }
 

@@ -75,8 +75,8 @@ export default function LandingRevamp({
   audioRef: React.RefObject<HTMLAudioElement | null>;
 }) {
   const [styleTag, setstyleTag] = useState([
-    audioRef.current?.paused ? styles.soundLine : styles.soundLine2,
-    audioRef.current?.paused ? styles.soundCross : styles.soundCross2,
+    audioRef.current?.paused ? styles.soundLine2 : styles.soundLine,
+    audioRef.current?.paused ? styles.soundCross2 : styles.soundCross,
   ]);
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
@@ -127,6 +127,14 @@ export default function LandingRevamp({
       window.removeEventListener("resize", handleResize);
     };
   }, [removeGif]);
+
+
+  useEffect(() => {
+    setstyleTag([
+      audioRef.current?.paused ? styles.soundLine2 : styles.soundLine,
+      audioRef.current?.paused ? styles.soundCross2 : styles.soundCross,
+    ]);
+  }, [audioRef.current?.paused]);
 
   useEffect(() => {
     if (overlayIsActive) {

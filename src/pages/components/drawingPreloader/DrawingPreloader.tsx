@@ -87,7 +87,7 @@ const soundsToPreload: string[] = []; // (/iPad|iPhone|iPod/.test(navigator.user
 
 export default function DrawingPreloader({
   className,
-  onEnter
+  onEnter,
 }: {
   className?: string;
   onEnter: () => void;
@@ -240,6 +240,17 @@ export default function DrawingPreloader({
   useEffect(() => {
     setIsMobile(viewportWidth / viewportHeight < 8 / 12 || viewportWidth < 730);
   }, [viewportHeight, viewportWidth]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter" && !isAnimating) {
+        overlaySetActive();
+        onEnter();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isAnimating]);
 
   return (
     <div className={styles.overlay} ref={svgContainerRef}>
@@ -600,6 +611,14 @@ export default function DrawingPreloader({
               onClick={() => {
                 overlaySetActive();
                 onEnter();
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  console.log("Enter key pressed2");
+                  // e.preventDefault();
+                  overlaySetActive();
+                  onEnter();
+                }
               }}
             >
               <div className={styles.enterButtonText}>Enter</div>
