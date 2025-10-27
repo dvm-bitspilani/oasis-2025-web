@@ -1,0 +1,65 @@
+@use '../../../assets/global.scss' as *;
+
+$numberOfArrows: 4;
+
+:export {
+    numberOfArrows: $numberOfArrows;
+}
+
+.scrollLabel {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    margin: auto;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .scrollArrows {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin: 1rem;
+
+        .scrollArrow {
+            $borderWidth: 3px;
+
+            position: absolute;
+            transform-origin: center;
+            transform: rotateZ(45deg);
+            border-width: 0 $borderWidth $borderWidth 0;
+            border-style: solid;
+            border-color: rgb(234, 234, 234);
+            width: 15px;
+            height: 15px;
+        }
+
+        @for $i from 1 through $numberOfArrows {
+            .scrollArrow:nth-child(#{$i}) {
+                bottom: ($i - 1) * 0.81rem;
+                opacity: 1;
+                animation: arrowAnim (($numberOfArrows + 1) * 0.3s) infinite alternate;
+                animation-delay: 1.5 - ($i - 1) * 0.3s;
+            }
+
+            @keyframes arrowAnim {
+                from {
+                    opacity: 1;
+                    transform: translateY(3px) rotateZ(45deg);
+                }
+                to {
+                    opacity: 0.3;
+                    transform: translateY(0px) rotateZ(45deg);
+                }
+            }
+        }
+    }
+
+    .labelText {
+        font-family: $primaryFont;
+        color: rgb(234, 234, 234);
+        font-size: 1.2rem;
+    }
+}

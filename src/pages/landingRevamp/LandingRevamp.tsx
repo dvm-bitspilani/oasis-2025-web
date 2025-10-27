@@ -32,6 +32,7 @@ import Lenis from "@studio-freight/lenis";
 import { useMainHamStore } from "../../utils/store";
 import ContactDoors from "../contact/ContactDoors";
 import { Helmet } from "react-helmet";
+import ScrollLabel from "./components/ScrollLabel";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -368,7 +369,7 @@ export default function LandingRevamp({
           {
             y: "-30%",
             duration: 12,
-            // ease: "sine.in",
+            ease: "power1.in",
           },
           0.5
         )
@@ -427,11 +428,10 @@ export default function LandingRevamp({
 
   return (
     <>
-    
+
       <main
-        className={`${styles.wrapper} ${
-          !removeGif ? styles.pointerNoneEvent : ""
-        } ${overlayIsActive ? styles.mask : ""}`}
+        className={`${styles.wrapper} ${!removeGif ? styles.pointerNoneEvent : ""
+          } ${overlayIsActive ? styles.mask : ""}`}
         ref={wrapperRef}
       >
         <Navbar />
@@ -469,7 +469,7 @@ export default function LandingRevamp({
               src={mobileMountains}
               className={styles.mobileMountains}
               alt="Mountains"
-              // ref={landingMobileRef}
+            // ref={landingMobileRef}
             />
             <img
               src={mobileBackground}
@@ -511,9 +511,10 @@ export default function LandingRevamp({
                 <span>0{timeLeft.minutes}</span>
               )}
             </div>
-          MINUTES
+            MINUTES
           </div>
         </div>
+        <ScrollLabel />
         <div className={styles.scrollerWrapper}>
           <div className={styles.scroller} ref={scrollerRef}>
             <div className={styles.landingContainer}>
@@ -610,9 +611,8 @@ export default function LandingRevamp({
         </div>
       </main>
       <Helmet>
-      
-    <title>OASIS 2025 | Whispers Of Edo</title>
-    </Helmet>
+        <title>OASIS 2025 | Whispers Of Edo</title>
+      </Helmet>
     </>
   );
 }
