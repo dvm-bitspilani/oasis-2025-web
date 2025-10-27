@@ -206,9 +206,12 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                         <p className={styles.club}>
                           {events[currentIndex].club_name}
                         </p>
+                        <div className={styles.mobilevenue}>
+                          <img src="/svgs/events/location.svg" alt="" />
                         <p>
-                          <strong>Venue:</strong> {events[currentIndex].venue}
+                          {events[currentIndex].venue}
                         </p>
+                        </div>
                       </div>
 
                       <img
@@ -264,9 +267,11 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                       />
                      <div className={styles.venname}>
                        <p>{events[currentIndex].club_name}</p>
-                       <p>
-                        <strong>Venue:</strong> {events[currentIndex].venue}
-                      </p>
+                       <div className={styles.venue}>
+                        <img src="/svgs/events/location.svg" alt="" />
+                      <p>{events[currentIndex].venue}
+                      </p> 
+                      </div>
                      </div>
                     </div>
 

@@ -47,7 +47,9 @@ const fanImages: FanImage[] = [
 // const speed = 500; // constant speed in pixels/second
 // delay factor per degree
 
-const rotationAngles = [-78, -90, -102, -114, -126];
+const rotationAngles = [-30, -135, -185, -225, -305];
+// const rotationAngles = [-30, -75, -120, -165, -215]; final without scales
+// const rotationAngles = [-40, -85, -110, -145, -195];
 // const rotationAngles = [-80, -92, -103, -114, -126];
 // const rotationAngles = [-72, -92, -103, -114, -134];
 // const rotationAngles = [-72, -92, -103, -112, -134];
@@ -104,8 +106,8 @@ const Events: React.FC = () => {
   // const [origins, setOrigins] = useState<{ x: number; y: number }[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const [durations, setDurations] = useState<number[]>([]);
-  const [delays, setDelays] = useState<number[]>([]);
+  // const [durations, setDurations] = useState<number[]>([]);
+  // const [delays, setDelays] = useState<number[]>([]);
 
   const EventRef = useRef<HTMLDivElement>(null);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
@@ -119,12 +121,12 @@ const Events: React.FC = () => {
 
       const hoverTween = gsap.to(img, {
         scale: 1.05,
-        filter: "saturate(1.5)",
+        filter: "saturate(1.5) drop-shadow(0px 0px 30px rgba(0, 0,  0,1))",
         duration: 0.2,
         ease: "power1.out",
         paused: true,
-        overwrite: true,
-        startAt: { filter: "saturate(1)" }, // initial value
+        // overwrite: true,
+        startAt: { filter: "saturate(1) drop-shadow(0px 0px 30px rgba(0, 0,  0,1))" }, // initial value
       });
 
       const onEnter = () => hoverTween.play();
@@ -132,7 +134,7 @@ const Events: React.FC = () => {
 
       img.addEventListener("mouseenter", onEnter);
       img.addEventListener("mouseleave", onLeave);
-
+      img.addEventListener("click", onLeave);
       // push cleanup for this img
       cleanups.push(() => {
         img.removeEventListener("mouseenter", onEnter);
@@ -147,38 +149,45 @@ const Events: React.FC = () => {
   }, [canHover]);
 
   useEffect(() => {
-    const radius = isMobile ? window.innerHeight / 2 : window.innerWidth / 2;
+    // const radius = isMobile ? window.innerHeight / 2 : window.innerWidth / 2;
 
     // const delayAngleFactor = isMobile ? 0.0016 : 0.01505;
     // const delayAngleFactor = 1000;
-    const speed = isMobile ? 800 : 1000;
-    const computedDurations = rotationAngles.map((angle) => {
-      const angleRad = Math.abs((angle * Math.PI) / 180);
-      const arcLength = angleRad * radius;
-      return arcLength / speed;
-    });
+    // const speed = isMobile ? 800 : 1000;
+    // const time= 2;
+    // const computedDurations = rotationAngles.map((angle) => {
+    //   // const angleRad = Math.abs((angle * Math.PI) / 180);
+    //   // const arcLength = angleRad * radius;
+    //   return  time;
+    // });
 
-    setDurations(computedDurations);
+    // setDurations([2,2,2,2,2]);
 
-    const angleDiffs = rotationAngles.map((angle) =>
-      Math.abs(angle - rotationAngles[0])
-    );
+    // const angleDiffs = rotationAngles.map((angle) =>
+    //   Math.abs(angle - rotationAngles[0])
+    // );
     // const maxDiff = Math.max(...angleDiffs);
-    const computedDelays = angleDiffs.map(
-      // (diff) => (maxDiff - diff) * delayAngleFactor
-      (diff) => diff + 10000
-    );
+    // const computedDelays = angleDiffs.map(
+    //   (diff) => 0
+    //   // (diff) => diff + 10000
+    // );
 
-    setDelays(computedDelays);
+    // setDelays([0,0,0,0,0]);
   }, []);
 
   const handleImageClick = (alt: string) => {
     setSelectedCategory(alt);
     setFoldFan(true);
-    setShowEventPage(true);
+    imageRefs.current.forEach((img) => {
+  if (!img) return;
+  gsap.killTweensOf(img);
+  img.style.filter = "saturate(1) drop-shadow(0px 0px 30px rgba(0, 0,  0,1))"; // reset if needed
+  img.style.scale = "1";  // optional: reset transforms
+});
     setTimeout(() => {
       setShowImages(false);
-    }, 1500);
+    }, 2000);
+     setShowEventPage(true);
 
     const mm = gsap.matchMedia();
 
@@ -200,18 +209,25 @@ const Events: React.FC = () => {
               y: rec.top + rec.height / 2 - rect.top,
             };
           })();
-
+          
           //  reset transforms before animation
           gsap.killTweensOf(imgEl);
           gsap.set(imgEl, { scale: 1 });
+         
+
           imgEl.style.transformOrigin = `${origin.x}px ${origin.y}px`;
 
           gsap.to(imgEl, {
             rotate: rotationAngles[orderIndex],
-            duration: durations[orderIndex],
-            delay: delays[orderIndex],
+            duration: 2,
+            delay: 0,
+              scaleX: [1,2].includes(originalIndex) ? 0.2: 1, // X scale for index 1,2,3
+  scaleY: [0,3,4].includes(originalIndex) ? 0.2 : 1,
+          // pointerEvents:"none",
+          // scale:"1",
+          // filter:"drop-shadow(0px 0px 30px rgba(0, 0,  0,1))",
             ease: "linear",
-            zIndex: alt === fanImages[originalIndex].alt ? 5 : 2, // clicked image on top
+            // zIndex: alt === fanImages[originalIndex].alt ? 5 : 2, // clicked image on top
           });
         });
       });
@@ -237,13 +253,15 @@ const Events: React.FC = () => {
           gsap.killTweensOf(imgEl);
           gsap.set(imgEl, { scale: 1 });
           imgEl.style.transformOrigin = `${origin.x}px ${origin.y}px`;
-
+          imgEl.style.pointerEvents ="none";
           gsap.to(imgEl, {
             rotate: rotationAngles[i],
-            duration: durations[i],
-            delay: delays[i],
+            duration: 1.7,
+            delay: 0,
+            scaleX: [1, 2, 3].includes(i) ? 0.2: 1, // X scale for index 1,2,3
+  scaleY: [0, 4].includes(i) ? 0.2 : 1,
             ease: "linear",
-            zIndex: 2,
+            // zIndex: 2,
           });
         });
       });

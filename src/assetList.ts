@@ -82,7 +82,7 @@ const assetList = {
             './images/events/evenback.png',
             './images/events/image.png',
             './images/events/misc.png',
-            './images/events/miscMobile.png',
+            './images/events/MiscMobile.png',
             './images/events/music.png',
             './images/events/MusicMobile.png',
             './images/events/photography.png',

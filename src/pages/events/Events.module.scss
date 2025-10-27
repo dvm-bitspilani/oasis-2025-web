@@ -90,6 +90,7 @@
     .misc {
       position: absolute;
       width: 34.8vw;
+      
       height: 56.3svh;
       bottom: -2.5svh;
       right: 0;
@@ -168,25 +169,39 @@
         height: 50.3svh;
         width: 31vw;
         left: -2vw;
+        z-index: 1;
+        filter: drop-shadow(0px 0px 10px rgba(0, 0,  0,1));
       }
       .music {
         top: 0;
         height: 80svh;
         width: 40vw;
+        z-index: 2;
+        filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1));
       }
       .photography {
         width: 30vw;
         height: 67.8svh;
+        z-index: 100;
+        filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1));
+        z-index: 3;
       }
       .dance {
         height: 80svh;
         width: 40vw;
         top: 0;
+        z-index: 4;
+        filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1))  ;
+
       }
       .misc {
         height: 50.3svh;
         width: 31vw;
-        right: -2vw;
+        // right: -2vw;
+        left: 71;
+        z-index: 5;
+        
+        filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1))  ;
       }
     }
     @media((max-width: 1200px) and (max-aspect-ratio: 1.45)){
@@ -226,6 +241,11 @@
         height: 35.75svh;
         top: 0;
         left: 0;
+        z-index: 1;
+        clip-path: polygon(0% 0%,
+        0% 90%,
+        38% 100%,
+        100% 0%);
       }
       .quizzes{
         width: 70.08vw;
@@ -234,6 +254,12 @@
         left:unset;
         right: 0;
         top: -2px;
+        z-index: 2;
+        clip-path: polygon(0% 80%,
+        15% 100%,
+        100% 70%,
+        100% 0%,
+        70% 0%);
 
       }
       .photography{
@@ -243,6 +269,12 @@
         left: 0;
         top: unset;
         translate: none;
+        z-index: 5;
+        clip-path: polygon(0% 10%,
+          0% 100%,
+        100% 100%,
+        38% 0%,
+        );
       }
       .dance{
         width: 70.08vw;
@@ -252,6 +284,14 @@
         top:unset;
         right: 0;
         bottom: 0;
+        z-index: 4;
+        clip-path: polygon(
+    100% 20%,   /* top-right */
+    10 10%,    /* tip at upper-left */
+    0% 30%,
+    90% 100%, /* bottom-left taper */
+    100% 100% /* bottom-right base */
+  );
 
       }
       .misc {
@@ -266,6 +306,9 @@
     --rot: 0deg; /* default rotation */
     transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
     transition: transform 0s ease;
+    z-index: 3;
+    clip-path: polygon(100% 0, 0 40%, 0 60%, 100% 100%);
+
   }
 
     }
@@ -348,10 +391,10 @@
     overflow: visible;
     .folding {
       pointer-events: none;
-      &:hover {
-        // transform: none !important;
-        filter: none !important;
-      }
+      // &:hover {
+      //   // transform: none !important;
+      //   // filter: none !important;
+      // }
     }
   }
   // @media (hover: hover) and (pointer: fine) {
