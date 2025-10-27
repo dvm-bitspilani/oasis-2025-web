@@ -62,4 +62,10 @@ $numberOfArrows: 4;
         color: rgb(234, 234, 234);
         font-size: 1.2rem;
     }
+
+    @media (max-width: 768px) {
+        bottom: 96px;
+
+        .labelText {font-size: 0.9rem;}
+    }
 }
