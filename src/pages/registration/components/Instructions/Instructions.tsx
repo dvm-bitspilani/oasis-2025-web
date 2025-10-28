@@ -33,8 +33,9 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
             <li>All team members are required to register separately.</li>
             <li>All prof shows are free. </li>
             <li>
-              For further details contact, Ujjwal Kansal: <a href="tel:+919991520330">+91 99915 20330</a>,
-              Sneha: <a href="tel:+919026855597">+91 90268 55597</a>
+              For further details contact, Ujjwal Kansal:{" "}
+              <a href="tel:+919991520330">+91 99915 20330</a>, Sneha:{" "}
+              <a href="tel:+919026855597">+91 90268 55597</a>
             </li>
             <li>
               For detailed Instructions{" "}
@@ -42,9 +43,22 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
             </li>
           </ul>
 
-          <button className={styles.googleButton} onClick={onGoogleSignIn}>
-            Sign in with Google
-          </button>
+          <div className={styles.buttonCont}>
+            <div className={styles.buttonSubCont}>
+              <p className={styles.note}>Already Registered?</p>
+              <button className={styles.googleButton} onClick={onGoogleSignIn}>
+                Sign in with Google
+              </button>
+            </div>
+            <div className={styles.buttonSubCont}>
+              <p className={styles.note + " " + styles.reclaimNote}>
+                New User?
+              </p>
+              <button className={styles.reclaimButton}>
+                Register with Reclaim
+              </button>
+            </div>
+          </div>
         </div>
       </>
     );

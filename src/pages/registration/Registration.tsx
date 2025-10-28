@@ -12,6 +12,7 @@ import Back from "/svgs/registration/back.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useRef, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -184,6 +185,21 @@ const Registration = ({ goToPage }: RegistrationProps) => {
       });
     })();
   };
+
+  gsap.registerPlugin(ScrollToPlugin);
+
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+    mm.add("(max-width: 1200px) and (aspect-ratio < 1.45)", () => {
+      contextSafe(() => {
+        gsap.to(elemRef1.current, {
+          duration: 1.5,
+          scrollTo: { y: "max" },
+          ease: "power2.inOut",
+        });
+      })();
+    });
+  }, []);
 
   useEffect(() => {
     document.body.style.position = "static";
