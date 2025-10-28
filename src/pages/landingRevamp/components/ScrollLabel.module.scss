@@ -12,6 +12,7 @@ $numberOfArrows: 4;
     width: 100%;
     margin: auto;
     z-index: 100;
+    pointer-events: none;
 
     display: flex;
     flex-direction: column;
