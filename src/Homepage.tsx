@@ -28,15 +28,15 @@ export default function Homepage({
   const toggleMusic = () => {
     if (!audioRef.current) return;
 
-    if (audioRef.current.paused) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
-    }
+    // if (audioRef.current.paused) {
+    //   audioRef.current.play();
+    // } else {
+    //   audioRef.current.pause();
+    // }
   };
   const playMusic = () => {
     if (audioRef.current) {
-      audioRef.current.play();
+      // audioRef.current.play();
     }
   };
   return (
