@@ -57,6 +57,7 @@
       height: 52.3svh;
       left: 0;
       bottom: -2svh;
+      bottom: 0;
       transform-origin: center;
       // transition: transform 0.3s ease, filter 0.3s ease;
       z-index: 1;
@@ -64,10 +65,10 @@
       //   transform: scale(1.05) !important;
       //   filter: saturate(1.5);
       // }
-      @media (min-width: 1950px) {
-        bottom: -20px;
-        padding-top: 20px;
-      }
+      // @media (min-width: 1950px) {
+      //   bottom: -20px;
+      //   padding-top: 20px;
+      // }
     }
 
     .music {
@@ -92,7 +93,7 @@
       width: 34.8vw;
       
       height: 56.3svh;
-      bottom: -2.5svh;
+      // bottom: -2.5svh;
       right: 0;
       // transform-origin: center;
       // transition: transform 0.3s ease, filter 0.3s ease;
@@ -168,40 +169,50 @@
       .quizzes {
         height: 50.3svh;
         width: 31vw;
+        width: 32.6198vw;
+        height: 55.07svh;
         left: -2vw;
         z-index: 1;
-        filter: drop-shadow(0px 0px 10px rgba(0, 0,  0,1));
+        // filter: drop-shadow(0px 0px 10px rgba(0, 0,  0,1));
       }
       .music {
         top: 0;
         height: 80svh;
         width: 40vw;
+        width: 41.614vw;
+        height: 80.098svh;
         z-index: 2;
-        filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1));
+        // filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1));
       }
       .photography {
         width: 30vw;
         height: 67.8svh;
         z-index: 100;
-        filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1));
+        // filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1));
         z-index: 3;
       }
       .dance {
         height: 80svh;
         width: 40vw;
+        width: 41.614vw;
+        height: 80.098svh;
         top: 0;
         z-index: 4;
-        filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1))  ;
+        // filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1))  ;
 
       }
       .misc {
         height: 50.3svh;
         width: 31vw;
         // right: -2vw;
+        width: 31.9427vw;
+        height: 54.6092svh;
         left: 71;
+        right: 0;
         z-index: 5;
+        bottom: -1.12svh;
         
-        filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1))  ;
+        // filter: drop-shadow(0px 0px 30px rgba(0, 0,  0,1))  ;
       }
     }
     @media((max-width: 1200px) and (max-aspect-ratio: 1.45)){
