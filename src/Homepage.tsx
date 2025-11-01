@@ -4,7 +4,7 @@ import useOverlayStore from "./utils/store";
 import LandingRevamp from "./pages/landingRevamp/LandingRevamp";
 import { Helmet } from "react-helmet";
 import BreadCrumb from "./pages/components/breadCrumb/BreadCrumb";
-import bgMusic from "/sounds/bg-music.mp3";
+import bgMusic from "/sounds/bg-music2.mp3";
 import { useRef } from "react";
 export default function Homepage({
   goToPage,
@@ -81,9 +81,20 @@ export default function Homepage({
       >
         <DrawingPreloader onEnter={playMusic} />
       </div>
-      <audio src={bgMusic} loop ref={audioRef}></audio>
+      <audio
+        src={bgMusic}
+        loop
+        ref={(el) => {
+          audioRef.current = el;
+          if (el) el.volume = 0.2; // set volume between 0.0 and 1.0
+        }}
+      />
       <div style={{ zIndex: 100, position: "relative" }}>
-        <LandingRevamp goToPage={goToPage} onToggle={toggleMusic} audioRef={audioRef} />
+        <LandingRevamp
+          goToPage={goToPage}
+          onToggle={toggleMusic}
+          audioRef={audioRef}
+        />
       </div>
     </div>
   );
