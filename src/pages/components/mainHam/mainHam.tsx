@@ -17,22 +17,28 @@ export default function mainHam({
   const dragonRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
-  if (dragonRef.current) {
-    if (isMainHamOpen) {
-      const timestamp = new Date().getTime();
-      const element = dragonRef.current;
-      
-      element.classList.add(styles.hamOpen);
-      
-      element.style.setProperty('mask-image', `url("/videos/dragon-reveal.gif?${timestamp}")`);
-      element.style.setProperty('-webkit-mask-image', `url("/videos/dragon-reveal.gif?${timestamp}")`);
-    } else {
-      dragonRef.current.classList.remove(styles.hamOpen);
-      dragonRef.current.style.removeProperty('mask-image');
-      dragonRef.current.style.removeProperty('-webkit-mask-image');
+    if (dragonRef.current) {
+      if (isMainHamOpen) {
+        const timestamp = new Date().getTime();
+        const element = dragonRef.current;
+
+        element.classList.add(styles.hamOpen);
+
+        element.style.setProperty(
+          "mask-image",
+          `url("/videos/dragon-reveal.gif?${timestamp}")`
+        );
+        element.style.setProperty(
+          "-webkit-mask-image",
+          `url("/videos/dragon-reveal.gif?${timestamp}")`
+        );
+      } else {
+        dragonRef.current.classList.remove(styles.hamOpen);
+        dragonRef.current.style.removeProperty("mask-image");
+        dragonRef.current.style.removeProperty("-webkit-mask-image");
+      }
     }
-  }
-}, [isMainHamOpen]);
+  }, [isMainHamOpen]);
 
   const hamItems = [
     {
@@ -65,7 +71,7 @@ export default function mainHam({
       classNameDiv: styles.mediaPartnersDiv,
       classNameText: styles.mediaPartnersText,
       classNameCloud: styles.mediaPartnersCloud,
-      url: "/media-partners", // Replace with actual URL
+      url: "/mediaPartners", // Replace with actual URL
     },
     {
       title: "BROCHURE",

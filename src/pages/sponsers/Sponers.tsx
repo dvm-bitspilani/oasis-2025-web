@@ -1,6 +1,6 @@
 import styles from "./Sponsers.module.scss";
 import background from "/images/mediaPartners/bg1.jpg";
-import heading from "/images/logo.png";
+import heading from "/svgs/sponsors/sponsorsHead.svg";
 import dummy from "/images/logo.png";
 import Back from "/svgs/registration/back.svg";
 import { useContext } from "react";
