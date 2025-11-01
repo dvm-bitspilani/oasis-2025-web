@@ -29,6 +29,26 @@ const Confirmation = (props: PropsType) => {
     message: "",
   });
 
+  function redirectWithPost(url: string, data: { [key: string]: string }) {
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = url;
+
+    // Add each key-value pair to the form
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = data[key];
+        form.appendChild(input);
+      }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+
   const mainContainerRef = useRef<HTMLUListElement>(null);
   const scrollBarRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLImageElement>(null);
@@ -214,7 +234,13 @@ const Confirmation = (props: PropsType) => {
                 if (notification.isError) {
                   onCancel();
                 } else {
-                  window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${access_token}`;
+                  // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${access_token}`;
+                  redirectWithPost(
+                    "https://bits-oasis.org/2025/main/registrations",
+                    {
+                      token: access_token,
+                    }
+                  );
                 }
               }}
             >
