@@ -235,10 +235,23 @@
             display: flex;
             align-items: center;
             .cycleButton {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 100%;
+                height: 3.6rem;
+                width: 3.6rem;
+                cursor: pointer;
+
                 .cycleButtonIcon {
                     font-size: 1.8rem;
                     color: white;
-                    cursor: pointer;
+                }
+
+                @media (max-width: 768px) {
+                    .cycleButtonIcon {font-size: 1.2rem;}
+                    height: 1.5rem;
+                    width: 1.5rem;
                 }
             }
         }

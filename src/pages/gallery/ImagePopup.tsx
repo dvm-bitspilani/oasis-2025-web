@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './Gallery.module.scss';
 import galleryItemList from './galleryItemList';
-import { FaLeftLong, FaRightLong, FaXmark } from 'react-icons/fa6';
+import { FaLeftLong, FaRightLong } from 'react-icons/fa6';
 import closeButton from '/images/gallery/close_button.png'
 
 interface ImagePopupProps {
