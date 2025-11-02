@@ -123,6 +123,26 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     );
   };
 
+  function redirectWithPost(url: string, data: { [key: string]: string }) {
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = url;
+
+    // Add each key-value pair to the form
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = data[key];
+        form.appendChild(input);
+      }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+
   const toRegPage = (back: boolean) => {
     const mm = gsap.matchMedia();
     contextSafe(() => {
@@ -306,7 +326,10 @@ const Registration = ({ goToPage }: RegistrationProps) => {
           if (res.data.exists) {
             setCookies("user-auth", res.data);
             setCookies("Authorization", res.data.tokens.access);
-            window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
+            // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
+            redirectWithPost("https://bits-oasis.org/2025/main/registrations", {
+              token: res.data.tokens.access,
+            });
             setUserEmail(res.data.email);
           } else {
             setCookies("user-auth", res.data);

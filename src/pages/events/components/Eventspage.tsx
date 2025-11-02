@@ -11,17 +11,19 @@ import Right from "/svgs/events/Next1.svg";
 import { motion, AnimatePresence } from "framer-motion";
 import Star from "/svgs/events/star.svg";
 import Star2 from "/svgs/events/star.svg";
-
+// import ImagePreloader from "./ImagePreloader/ImagePreloader";
+// import PlaceholderImage from "/images/events/down.jpg"
 interface EventspageProps {
   category: string;
 }
 
 const Eventspage: React.FC<EventspageProps> = ({ category }) => {
+  //  const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(
     window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45)")
       .matches
   );
-
+  
   useEffect(() => {
     const mediaQuery = window.matchMedia(
       "(max-width: 1200px) and (max-aspect-ratio: 1.45)"
@@ -237,9 +239,13 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                     </div>
                   </div>
                 ) : (
-                  <p className={styles.loading}>
-                    {`No events found in "${category}"`}
-                  </p>
+                 <p
+  className={styles.centerText}
+>
+  {`No events found in "${category}"`}
+</p>
+
+
                 )}
               </AnimatePresence>
             </div>
@@ -265,6 +271,11 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                         alt={events[currentIndex].name}
                         className={styles.imagenew}
                       />
+                      {/* <ImagePreloader  src={
+                          events[currentIndex].image_url ||
+                          "/images/events/down.jpg"
+                        }
+                        alt={events[currentIndex].name}/> */}
                      <div className={styles.venname}>
                        <p>{events[currentIndex].club_name}</p>
                        <div className={styles.venue}>
@@ -291,9 +302,11 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                   </div>
                 </div>
               ) : (
-                <p className={styles.loading}>
-                  {`No events found in "${category}"`}
-                </p>
+                <p
+  className={styles.centerText}
+>
+  {`No events found in "${category}"`}
+</p>
               )}
             </AnimatePresence>
           )}

@@ -1,0 +1,32 @@
+.spinner{
+    background-color: red;
+    z-index: 1111111;
+      position: absolute;
+          // left: 4vw;
+          // top: 10svh;
+          width: 30vw;
+        //   top:20svh;
+        //   left: -5.5vw;
+          border-style: solid;
+          border-width: 20px;
+          border-image-source: url("/images/events/image.png");
+          border-image-slice: 40; 
+          box-sizing: border-box; 
+        //   padding: 4px 4px 4px 4px;/* or appropriate value */
+}
+  .imagenew {
+          position: absolute;
+          // left: 4vw;
+          // top: 10svh;
+          width: 30vw;
+          border-style: solid;
+          border-width: 20px;
+          border-image-source: url("/images/events/image.png");
+          border-image-slice: 40; 
+          box-sizing: border-box; 
+          top:20svh;
+          left: -5.5vw;
+        //   top: 0;
+        //   left: 0;
+          padding: 4px 4px 4px 4px;/* or appropriate value */
+        }

@@ -121,12 +121,12 @@ const Events: React.FC = () => {
 
       const hoverTween = gsap.to(img, {
         scale: 1.05,
-        filter: "saturate(1.5) drop-shadow(0px 0px 30px rgba(0, 0,  0,1))",
+        filter: "saturate(1.5)",
         duration: 0.2,
         ease: "power1.out",
         paused: true,
         // overwrite: true,
-        startAt: { filter: "saturate(1) drop-shadow(0px 0px 30px rgba(0, 0,  0,1))" }, // initial value
+        startAt: { filter: "saturate(1) " }, // initial value
       });
 
       const onEnter = () => hoverTween.play();
@@ -181,7 +181,7 @@ const Events: React.FC = () => {
     imageRefs.current.forEach((img) => {
   if (!img) return;
   gsap.killTweensOf(img);
-  img.style.filter = "saturate(1) drop-shadow(0px 0px 30px rgba(0, 0,  0,1))"; // reset if needed
+  img.style.filter = "saturate(1) "; // reset if needed
   img.style.scale = "1";  // optional: reset transforms
 });
     setTimeout(() => {
@@ -220,7 +220,7 @@ const Events: React.FC = () => {
           gsap.to(imgEl, {
             rotate: rotationAngles[orderIndex],
             duration: 2,
-            delay: 0,
+            delay: 10,
               scaleX: [1,2].includes(originalIndex) ? 0.2: 1, // X scale for index 1,2,3
   scaleY: [0,3,4].includes(originalIndex) ? 0.2 : 1,
           // pointerEvents:"none",
@@ -257,7 +257,7 @@ const Events: React.FC = () => {
           gsap.to(imgEl, {
             rotate: rotationAngles[i],
             duration: 1.7,
-            delay: 0,
+            delay: 10,
             scaleX: [1, 2, 3].includes(i) ? 0.2: 1, // X scale for index 1,2,3
   scaleY: [0, 4].includes(i) ? 0.2 : 1,
             ease: "linear",
