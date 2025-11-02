@@ -112,8 +112,9 @@ const assetList = {
     },
     "gallery": {
         "images": [
+            './images/gallery/close_button.png',
             './images/gallery/photog white logo.png',
-            './images/gallery/photog black logo.png',
+            // './images/gallery/photog black logo.png',
         ],
         "videos": []
     }
