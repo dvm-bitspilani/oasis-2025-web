@@ -107,13 +107,16 @@ const assetList = {
             './svgs/events/text.svg',
             './svgs/events/top.svg',
             './svgs/events/topright.svg',
-
-
-
         ],
         "videos": []
     },
-    
+    "gallery": {
+        "images": [
+            './images/gallery/photog white logo.png',
+            './images/gallery/photog black logo.png',
+        ],
+        "videos": []
+    }
 }
 
 export default assetList;
