@@ -20,6 +20,7 @@ export const navContext = createContext<{ goToPage?: (page: string) => void }>(
 
 import ReactGA from "react-ga4";
 import Brochure from "./pages/brochure/Brochure";
+import Gallery from "./pages/gallery/Gallery";
 
 const TRACKING_ID = "G-57YBBH7RXW";
 if (window.location.hostname.search("bits-oasis.org") !== -1) {
@@ -43,7 +44,7 @@ export default function App() {
     });
   }, [location]);
 
-  const pageList = ["home", "register", "events", "aboutus", "contact", "brochure"];
+  const pageList = ["home", "register", "events", "aboutus", "contact", "brochure", "gallery"];
 
   const [currentPage, setCurrentPage] = useState<typeof pageList[number] | "comingSoon">(
     location.pathname === "/" ?
@@ -190,6 +191,7 @@ export default function App() {
       {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "brochure" && <Brochure />}
+      {!isPreloading && currentPage === "gallery" && <Gallery />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
       {/* 
       <Routes>
