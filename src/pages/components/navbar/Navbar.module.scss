@@ -155,6 +155,15 @@ body {
     margin: 0;
     padding: 0;
     gap: 2svw;
+    @media (max-width:800px)
+    {
+      // display: none;
+      gap:0;
+      li{
+        width: 140px!important;
+      }
+    
+    }
 
     li {
       font-family: $primaryFont;
