@@ -219,7 +219,7 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                       <img
                         src={
                           events[currentIndex].image_url ||
-                          "/images/events/oasis_logo.png"
+                          "/images/events/oasis_logo.svg"
                         }
                         alt={events[currentIndex].name}
                         // className={styles.mobileImage}
@@ -264,14 +264,16 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <div className={styles.leftevent}>
+                      <div className={styles.imageholder}>
                       <img
                         src={
                           events[currentIndex].image_url ||
-                          "/images/events/oasis_logo.png"
+                          "/images/events/oasis_logo.svg"
                         }
                         alt={events[currentIndex].name}
                         className={events[currentIndex].image_url?styles.imagenew:styles.imagenewpreview}
                       />
+                      </div>
                       {/* <ImagePreloader  src={
                           events[currentIndex].image_url ||
                           "/images/events/down.jpg"

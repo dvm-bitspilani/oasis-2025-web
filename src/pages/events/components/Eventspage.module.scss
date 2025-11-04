@@ -90,7 +90,7 @@
 
         .venname {
           // position: absolute;
-          margin-top: clamp(500px, 35vw, 800px);
+          // margin-top: clamp(500px, 35vw, 800px);
           bottom: 0;
           // left: 5vw;
           display: flex;
@@ -143,20 +143,29 @@
               position: relative;
               left: -5px;
               height: 1.5vw;
-              bottom: 10svh;
+              // bottom: 10svh;
             }
           }
         }
-
+        .imageholder{
+          position: relative;
+           border-style: solid;
+           background-color: black;
+          border-width: 20px;
+          border-image-source: url("/images/events/image.png");
+          border-image-slice: 40;
+          box-sizing: border-box;
+          width: 30vw;
+          aspect-ratio: 1.67;
         .imagenew {
           position: absolute;
           // left: 4vw;
           // top: 10svh;
-          width: 30vw;
-          border-style: solid;
-          border-width: 20px;
-          border-image-source: url("/images/events/image.png");
-          border-image-slice: 40;
+          width: calc(30vw - 40px);
+          // border-style: solid;
+          // border-width: 20px;
+          // border-image-source: url("/images/events/image.png");
+          // border-image-slice: 40;
           box-sizing: border-box;
           padding: 4px 4px 4px 4px; /* or appropriate value */
         }
@@ -164,21 +173,36 @@
           position: absolute;
           // left: 4vw;
           // top: 10svh;
-          width: 30vw;
+          width: calc(30vw - 40px);
+          height: calc( (30vw / 1.67) - 40px);
           aspect-ratio: 1.67;
           padding: 4vw 10vw 4vw 10vw;
-          background-color: rgb(0, 0, 0);
-          border-style: solid;
-          border-width: 20px;
-          border-image-source: url("/images/events/image.png");
-          border-image-slice: 40;
-          box-sizing: border-box;
+          // background-color: rgb(0, 0, 0);
+          // border-style: solid;
+          // border-width: 20px;
+          // border-image-source: url("/images/events/image.png");
+          // border-image-slice: 40;
+          // box-sizing: border-box;
           opacity: 1;
+         
+           transform: rotateY(-360deg);
+            animation: rotating 2s infinite ease;
+          //  transition: transform 1s ease ;
+          // animation-duration: 1;
           // padding: 4px 4px 4px 4px; /* or appropriate value */
         }
+        @keyframes rotating{
+          0%{
+            transform: rotateY(0deg) scaleX(1);
+          }
+          100%{
+            transform: rotateY(-360deg) scaleX(1);
+          }
+        }
+      }
         p {
           position: absolute;
-          bottom: 10svh;
+          // bottom: 10svh;
         }
       }
       .rightevent {
