@@ -6,6 +6,14 @@ import Back from "/svgs/registration/back.svg";
 import { useContext } from "react";
 import { navContext } from "../../App";
 
+import abhibusLogo from "/images/sponsors/abhibus.png";
+import easeMyTripLogo from "/images/sponsors/EaseMyTrip.png";
+import nutribs from "/images/sponsors/Nutribs.png";
+import qoneqt from "/images/sponsors/Qoneqt.png";
+import suno from "/images/sponsors/Suno.png";
+import rtc from "/images/sponsors/rtc.jpg";
+import snapchat from "/images/sponsors/Snapchat.png";
+
 const sponsors = {
   title: {
     head: "Official Title Sponsor",
@@ -15,112 +23,106 @@ const sponsors = {
   },
   otherSponsers: [
     {
-      head: "Official Powered by Sponsor",
+      head: "Powered-By",
       img: dummy,
-      name: "Micron",
-      link: "https://www.micron.com/",
+      name: "NetApp",
+      link: "",
     },
     {
-      head: "Official Technology Partner",
-      img: dummy,
-      name: "Arcesium",
-      link: "https://www.arcesium.com/",
+      head: "Diamond Sponsor",
+      img: suno,
+      name: "Suno AI",
+      link: "",
     },
     {
-      head: "Official Platinum Partner",
-      img: dummy,
-      name: "QSW",
-      link: "https://quicksmartwash.com/",
+      head: "Official Skincare Partner",
+      img: nutribs,
+      name: "Nutribs",
+      link: "https://nutribs.com/",
     },
     {
-      head: "Official Bath and Body Care Partner",
+      head: "Official Community Partner",
+      img: qoneqt,
+      name: "Qoneqt",
+      link: "https://qoneqt.com/",
+    },
+    {
+      head: "Co-Powered By",
+      img: snapchat,
+      name: "Snap Inc.",
+      link: "https://www.snap.com/",
+    },
+    {
+      head: "Official Partner",
+      img: dummy,
+      name: "Zebronics",
+      link: "",
+    },
+    {
+      head: "Official Travel Partner",
+      img: easeMyTripLogo,
+      name: "EaseMyTrip",
+      link: "https://www.easemytrip.com/",
+    },
+    {
+      head: "Official Infrastructure Partner",
+      img: dummy,
+      name: "Maa Karni",
+      link: "",
+    },
+    {
+      head: "",
       img: dummy,
       name: "Plum",
-      link: "https://plumgoodness.com/",
+      link: "",
+    },
+    {
+      head: "Official Commute Partner",
+      img: abhibusLogo,
+      name: "Abhibus",
+      link: "https://www.abhibus.com/",
+    },
+    {
+      head: "",
+      img: dummy,
+      name: "Posterwa",
+      link: "",
+    },
+    {
+      head: "",
+      img: dummy,
+      name: "Travelzada",
+      link: "",
+    },
+    {
+      head: "",
+      img: dummy,
+      name: "HDFC Bank",
+      link: "",
+    },
+    {
+      head: "Pasta Partner",
+      img: dummy,
+      name: "Gustora",
+      link: "",
     },
     {
       head: "Official Music Streaming Partner",
       img: dummy,
       name: "JioSaavn",
-      link: "https://www.jiosaavn.com/",
+      link: "",
     },
     {
       head: "",
       img: dummy,
-      name: "Unicorn India",
-      link: "https://www.unicornivc.com/",
+      name: "Coca-Cola",
+      link: "",
     },
     {
-      head: "",
-      img: dummy,
-      name: "IIC",
-      link: "https://iic.mic.gov.in/login",
-    },
-    {
-      head: "",
-      img: dummy,
-      name: "XTCY",
-      link: "https://drinkxtcy.com/",
-    },
-    // {
-    //   head: "",
-    //   img: dummy,
-    //   name: "ICFDR",
-    //   link: "https://icfdr.org/",
-    // },
-    {
-      head: "",
-      img: dummy,
-      name: "ICICI Bank",
-      link: "https://www.icicibank.com/",
-    },
-    {
-      head: "",
-      img: dummy,
-      name: "EaseMyTrip",
-      link: "https://www.easemytrip.com/flights.html?msclkid=4e959a8a43391623fe37fd68f1fdb553&utm_source=bing&utm_medium=cpc&utm_campaign=Bing_Search_AllAudience_%20Brand%20(EaseMyTrip.Com)&utm_term=easemytrip&utm_content=EaseMyTrip%20Exact",
-    },
-    // {
-    //   head: "",
-    //   img: dummy,
-    //   name: "Yana",
-    //   link: "https://yana.travel/tabs/hosted-trips",
-    // },
-    {
-      head: "",
-      img: dummy,
-      name: "Umeed Social and Economic Development",
-      link: "https://umeedfoundation.co.in/",
-    },
-    {
-      head: "",
-      img: dummy,
-      name: "Unstop",
-      link: "https://unstop.com/",
-    },
-    {
-      head: "",
-      img: dummy,
-      name: "StockGro",
-      link: "https://www.stockgro.club/",
-    },
-    {
-      head: "Official Assessment Partner",
-      img: dummy,
-      name: "Languify",
-      link: "https://www.languify.in/",
-    },
-    {
-      head: "Campus Ambassador Partner",
-      img: dummy,
-      name: "Etasha",
-      link: "https://www.etashasociety.org/",
-    },
-    {
-      head: "Official Savings Partner",
-      img: dummy,
-      name: "GrabOn",
-      link: "https://www.grabon.in/",
+      head: "Official Technology Partner",
+      img: rtc,
+      name: "Round The Technologies",
+      link: "https://rtctek.com/",
     },
   ],
 };
