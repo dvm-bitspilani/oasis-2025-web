@@ -22,6 +22,7 @@ import ReactGA from "react-ga4";
 import Brochure from "./pages/brochure/Brochure";
 import Sponsors from "./pages/sponsers/Sponers";
 import MediaPatners from "./pages/mediaPartners/MediaPartners";
+import Gallery from "./pages/gallery/Gallery";
 
 const TRACKING_ID = "G-57YBBH7RXW";
 if (window.location.hostname.search("bits-oasis.org") !== -1) {
@@ -54,6 +55,7 @@ export default function App() {
     "brochure",
     "sponsors",
     "mediaPartners",
+    "gallery",
   ];
 
   const [currentPage, setCurrentPage] = useState<
@@ -201,6 +203,7 @@ export default function App() {
       {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "brochure" && <Brochure />}
+      {!isPreloading && currentPage === "gallery" && <Gallery />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
       {!isPreloading && currentPage === "sponsors" && <Sponsors />}
       {!isPreloading && currentPage === "mediaPartners" && <MediaPatners />}

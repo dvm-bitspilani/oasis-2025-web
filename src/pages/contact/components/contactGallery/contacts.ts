@@ -50,18 +50,18 @@ const contacts: Contact[] = [
         imageURL: "/images/contact/Pranav.png"
     },
     {
-        name: "Ahan Bansal",
+        name: "Sajal Yadav",
         role: "President, Students' Union",
-        phone: "+91 96875 13867",
+        phone: "+91 99900 67040", //! Phone is of Ahan Bansal
         email: "president@pilani.bits-pilani.ac.in",
-        imageURL: "/images/contact/Ahan.png"
+        imageURL: "/images/contact/SajalY.png"
     },
     {
-        name: "Aryan Khorana",
+        name: "Aaditya Khandelwal",
         role: "General Secretary, Students' Union",
-        phone: "+91 91493 38624",
+        phone: "+91 89556 65800",
         email: "gensec@pilani.bits-pilani.ac.in",
-        imageURL: "/images/contact/Aryan.png"
+        imageURL: "/images/contact/Aditya.png"
     }
 ]
 

@@ -31,7 +31,7 @@ const ScrollLabel = () => {
                     Array(parseInt(styles.numberOfArrows)).fill(null).map((_, index) => <div key={index} className={styles.scrollArrow} />)
                 }
             </div>
-            <div className={styles.labelText}>Scroll down to explore</div>
+            {/* <div className={styles.labelText}>Scroll down to explore</div> */}
         </div>
     );
 };

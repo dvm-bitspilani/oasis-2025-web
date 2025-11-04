@@ -17,11 +17,12 @@ const assetList = {
     },
     "contact": {
         "images": [
-            './images/contact/Aryan.png',
+            // './images/contact/Aryan.png',
+            './images/contact/Aditya.png',
             // './images/contact/ContactCard2.png',
             // './images/contact/ContactCard3.png',
             './images/contact/contact-banner.png',
-            './images/contact/Ahan.png',
+            // './images/contact/Ahan.png',
             './images/contact/Arshita.png',
             './images/contact/Ayushmaan.png',
             './images/contact/Dhruv.png',
@@ -30,6 +31,7 @@ const assetList = {
             './images/contact/Ishita.png',
             './images/contact/Pranav.png',
             './images/contact/Rahul.png',
+            './images/contact/SajalY.png',
             './images/contact/ContactCard1.png',
             './images/contact/DoorsCombined.png',
             './images/contact/DoorsMobile.png',
@@ -107,13 +109,17 @@ const assetList = {
             './svgs/events/text.svg',
             './svgs/events/top.svg',
             './svgs/events/topright.svg',
-
-
-
         ],
         "videos": []
     },
-    
+    "gallery": {
+        "images": [
+            './images/gallery/close_button.png',
+            './images/gallery/photog white logo.png',
+            // './images/gallery/photog black logo.png',
+        ],
+        "videos": []
+    }
 }
 
 export default assetList;
