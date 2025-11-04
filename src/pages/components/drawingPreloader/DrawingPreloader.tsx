@@ -83,6 +83,7 @@ const imagesToPreload = [
   "/images/aboutus/background.jpg",
   "/images/aboutus/backg.png",
   "/images/aboutus/abtbck.png",
+  "/videos/dragon-reveal.gif",
 ];
 
 const soundsToPreload: string[] = []; // (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? [] : ["./sounds/door-close.mp3"]
