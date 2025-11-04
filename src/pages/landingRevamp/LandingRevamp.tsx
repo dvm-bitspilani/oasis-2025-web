@@ -18,6 +18,7 @@ import linkdenLamp from "/svgs/landing/linkdenLamp.svg";
 import mobileBackground from "/svgs/landing/mobileBackground.svg";
 import mobileRegisterBtn from "/svgs/landing/mobileRegisterBtn.svg";
 import registerBtn from "/svgs/landing/registerBtn.svg";
+import eventsBtn from "/svgs/landing/mobileEventsBtn.svg";
 import wire from "/svgs/landing/wire.svg";
 import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
@@ -84,6 +85,7 @@ export default function LandingRevamp({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const registerButtonRef = useRef<HTMLDivElement>(null);
   const dateCountdownRef = useRef<HTMLDivElement>(null);
+  const eventsButtonRef = useRef<HTMLDivElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const landingMobileRef = useRef<HTMLImageElement>(null);
   const treeContainerRef = useRef<HTMLDivElement>(null);
@@ -250,6 +252,21 @@ export default function LandingRevamp({
 
     gsap.fromTo(
       registerButtonRef.current,
+      { autoAlpha: 1 },
+      {
+        autoAlpha: 0,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "50vh",
+          end: "+=145vh",
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      eventsButtonRef.current,
       { autoAlpha: 1 },
       {
         autoAlpha: 0,
@@ -450,6 +467,17 @@ export default function LandingRevamp({
         ref={wrapperRef}
       >
         <Navbar />
+
+        <div className={styles.mobileEventsBtnContainer} ref={eventsButtonRef}>
+          <img
+            src={eventsBtn}
+            className={styles.mobileEventsBtn}
+            onClick={() => goToPage("/events")}
+            alt="Events Button"
+          />
+
+          <div className={styles.mobileEventsBtnText}>Events</div>
+        </div>
 
         <div
           className={
