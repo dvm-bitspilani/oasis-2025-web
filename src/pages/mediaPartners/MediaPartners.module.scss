@@ -1,0 +1,257 @@
+@use "../../assets/global.scss" as *;
+
+.Wrapper {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .backBtn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    z-index: 5;
+    position: absolute;
+    top: 2vw;
+    left: 2vw;
+    width: 4vw;
+    height: 4vw;
+    background: transparent;
+    &:focus {
+      outline: none;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
+    .backBtn {
+      width: 8vw;
+      height: 8vw;
+    }
+  }
+  @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
+    .backBtn {
+      width: 12vw;
+      height: 12vw;
+    }
+  }
+
+  .scrollBarContainer {
+    height: 80vh;
+    width: 10%;
+    margin: 10vh 0;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    right: -1.5rem;
+    cursor: -webkit-grab;
+
+    @media screen and (max-width: 1366px) {
+      right: 1rem;
+    }
+  }
+
+  .scrollBarContainer img {
+    position: absolute;
+    transform: translateY(-50%);
+    height: 110px;
+  }
+
+  .scrollBar {
+    background: #e6c189;
+    width: 4px;
+    stroke-width: 7px;
+    stroke: #7b6a69;
+    border-radius: 5px;
+    filter: drop-shadow(0px 0px 8px rgba(175, 148, 120, 0.4));
+    box-shadow: 0px 0px 12px 0px #af947866;
+  }
+
+  @media screen and (max-width: 768px) {
+    .scrollBarContainer {
+      display: none;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .backgroundImage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(20%) blur(5px);
+    }
+  }
+
+  .heading {
+    position: fixed;
+    top: 30px;
+    left: 0;
+    z-index: 2;
+    -webkit-user-drag: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    img {
+      height: 100px;
+      //   transform: translateY(-50px);
+    }
+
+    @media screen and (max-width: 900px) {
+      img {
+        height: 80px;
+      }
+    }
+    @media screen and (max-width: 500px) {
+      img {
+        height: 60px;
+      }
+    }
+  }
+
+  .mediaPatners {
+    align-self: center;
+    box-sizing: border-box;
+    position: fixed;
+
+    padding: 40px;
+    padding-top: 0px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 190px);
+    width: 1500px;
+    max-width: 90%;
+    align-items: center;
+    justify-items: center;
+    gap: 50px;
+    overflow: scroll;
+    // transform: translate(-50%, -50%);
+    -webkit-user-drag: none;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      max-width: 100%;
+    }
+
+    @media screen and (max-width: 925px) {
+      .other {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      height: calc(100% - 160px);
+    }
+    @media screen and (max-width: 450px) {
+      height: calc(100% - 130px);
+    }
+
+    .otherMediaPatners {
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      gap: 45px;
+      box-sizing: border-box;
+
+      .mediaPatner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 400px;
+        gap: 15px;
+        box-sizing: border-box;
+        padding: 10px;
+        .patnersImage {
+          display: flex;
+          justify-content: center;
+        }
+        img {
+          height: 100px;
+          max-width: 100%;
+          object-fit: contain;
+          object-position: center;
+        }
+        .patnersName {
+          font-size: 22px;
+        }
+        .head {
+          font-size: 26px;
+          height: 64px;
+          color: #eea0cd;
+          filter: drop-shadow(0px 0px 6px #ff6868a6);
+          cursor: default;
+        }
+        @media (max-width: 650px) {
+          width: 300px;
+          max-width: 100%;
+          img {
+            height: 80px;
+            max-width: 90%;
+            object-fit: contain;
+            object-position: center;
+          }
+          .patnersName {
+            font-size: 20px;
+          }
+          .head {
+            font-size: 24px;
+            width: 100%;
+          }
+        }
+        @media (max-width: 400px) {
+          width: 100%;
+          img {
+            width: 100%;
+          }
+          .patnersName {
+            font-size: 20px;
+          }
+          .head {
+            height: 50px;
+            font-size: 24px;
+          }
+        }
+      }
+    }
+    .patnersName {
+      color: white;
+      font-family: $regFont;
+      font-weight: 400;
+      font-family: $regFont;
+      font-weight: 600;
+      text-align: center;
+    }
+    .head {
+      color: #eea0cd;
+      filter: drop-shadow(0px 0px 6px #ff6868a6);
+      font-family: $regFont;
+      font-family: $regFont;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+}

@@ -20,6 +20,8 @@ export const navContext = createContext<{ goToPage?: (page: string) => void }>(
 
 import ReactGA from "react-ga4";
 import Brochure from "./pages/brochure/Brochure";
+import Sponsors from "./pages/sponsers/Sponers";
+import MediaPatners from "./pages/mediaPartners/MediaPartners";
 import Gallery from "./pages/gallery/Gallery";
 
 const TRACKING_ID = "G-57YBBH7RXW";
@@ -44,14 +46,26 @@ export default function App() {
     });
   }, [location]);
 
-  const pageList = ["home", "register", "events", "aboutus", "contact", "brochure", "gallery"];
+  const pageList = [
+    "home",
+    "register",
+    "events",
+    "aboutus",
+    "contact",
+    "brochure",
+    "sponsors",
+    "mediaPartners",
+    "gallery",
+  ];
 
-  const [currentPage, setCurrentPage] = useState<typeof pageList[number] | "comingSoon">(
-    location.pathname === "/" ?
-      "home" : 
-      pageList.includes(location.pathname.replace("/", "")) ? 
-        location.pathname.replace("/", "") : 
-        "comingSoon"
+  const [currentPage, setCurrentPage] = useState<
+    (typeof pageList)[number] | "comingSoon"
+  >(
+    location.pathname === "/"
+      ? "home"
+      : pageList.includes(location.pathname.replace("/", ""))
+      ? location.pathname.replace("/", "")
+      : "comingSoon"
   );
   console.log("Current Page:", currentPage);
 
@@ -164,9 +178,7 @@ export default function App() {
         percentageLoaded={doorPLPercentageLoaded}
         targetPageRef={nextRoute}
       />
-      <h1 style={{ display: "none" }}>
-        OASIS 2025 | Whispers Of Edo
-      </h1>
+      <h1 style={{ display: "none" }}>OASIS 2025 | Whispers Of Edo</h1>
       {isPreloading && (
         <Preloader
           onEnter={handlePreloaderEnter}
@@ -193,6 +205,8 @@ export default function App() {
       {!isPreloading && currentPage === "brochure" && <Brochure />}
       {!isPreloading && currentPage === "gallery" && <Gallery />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
+      {!isPreloading && currentPage === "sponsors" && <Sponsors />}
+      {!isPreloading && currentPage === "mediaPartners" && <MediaPatners />}
       {/* 
       <Routes>
         <Route path="/" element={null} errorElement={<ComingSoon />} />
