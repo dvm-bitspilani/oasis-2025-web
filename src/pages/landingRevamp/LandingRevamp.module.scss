@@ -173,7 +173,7 @@ body {
     align-items: center;
     justify-items: center;
 
-    @media (max-width: 731px) and (aspect-ratio <= 8/12) {transform: translateY(12px)}
+    @media (max-width: 731px) or (aspect-ratio <= 8/12) {transform: translateY(12px)}
 
     @media (min-width: 731px) and (aspect-ratio >= 8/12) {
       display: none;
