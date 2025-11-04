@@ -219,10 +219,11 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                       <img
                         src={
                           events[currentIndex].image_url ||
-                          "/images/events/down.jpg"
+                          "/images/events/oasis_logo.png"
                         }
                         alt={events[currentIndex].name}
-                        className={styles.mobileImage}
+                        // className={styles.mobileImage}
+                        className={events[currentIndex].image_url ? styles.mobileImage : styles.mobileImagepreview}
                       />
 
                       <div className={styles.eventdesc}>
@@ -266,10 +267,10 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                       <img
                         src={
                           events[currentIndex].image_url ||
-                          "/images/events/down.jpg"
+                          "/images/events/oasis_logo.png"
                         }
                         alt={events[currentIndex].name}
-                        className={styles.imagenew}
+                        className={events[currentIndex].image_url?styles.imagenew:styles.imagenewpreview}
                       />
                       {/* <ImagePreloader  src={
                           events[currentIndex].image_url ||
