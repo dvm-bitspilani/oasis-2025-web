@@ -44,7 +44,16 @@ export default function Navbar({
     let ticking = false;
     const threshold = 20;
 
+    const isPhone = () =>
+      window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45)")
+        .matches;
+
     const handleScroll = () => {
+      if (isPhone()) {
+        setNavShow(1);
+        return;
+      }
+
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentY = window.scrollY;
@@ -52,7 +61,7 @@ export default function Navbar({
 
           if (diff > threshold && currentY > 80) {
             setNavShow(0);
-          } else if (diff < 9-threshold) {
+          } else if (diff < 9 - threshold) {
             setNavShow(1);
           }
 
@@ -64,7 +73,17 @@ export default function Navbar({
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleResize = () => {
+      if (isPhone()) {
+        setNavShow(1);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   useEffect(() => {
