@@ -47,7 +47,7 @@ html {
 
 body {
   -ms-overflow-style: none;
-  background-color: #1a0b2a;
+  background-color: #000000;
 
   /* CSS class-based scroll control instead of position changes */
   &.scroll-locked {
@@ -173,6 +173,8 @@ body {
     align-items: center;
     justify-items: center;
 
+    @media (max-width: 731px) and (aspect-ratio <= 8/12) {transform: translateY(12px)}
+
     @media (min-width: 731px) and (aspect-ratio >= 8/12) {
       display: none;
     }
@@ -192,6 +194,7 @@ body {
       grid-row: 1/2;
       grid-column: 1/2;
       z-index: 1001;
+      transform: translateY(1px);
       pointer-events: none;
     }
   }
@@ -584,6 +587,8 @@ body {
         user-select: none;
         transition: filter 0.3s;
 
+        @media (max-width: 730px) {top: calc(100svh - 3svw - 1.8rem);}
+
         &:hover {
           filter: brightness(0.8);
         }
@@ -861,7 +866,7 @@ body {
         @media (max-width: 500px) {
           .treeContainer {
             .tree {
-              margin-top: clamp(0svh, 100svh - 85svw, 100svh);
+              margin-top: clamp(0svh, 100svh - 85svw - 1.5rem, 100svh);
             }
           }
         }

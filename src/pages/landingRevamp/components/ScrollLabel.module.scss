@@ -7,8 +7,10 @@ $numberOfArrows: 4;
 }
 
 .scrollLabel {
+    @media (max-width: 768px) {$numberOfArrows: 2;}
+
     position: fixed;
-    bottom: 30px;
+    bottom: 0.3rem;
     width: 100%;
     margin: auto;
     z-index: 100;
@@ -43,6 +45,8 @@ $numberOfArrows: 4;
                 opacity: 1;
                 animation: arrowAnim (($numberOfArrows + 1) * 0.3s) infinite alternate;
                 animation-delay: 1.5 - ($i - 1) * 0.3s;
+
+                @if $i > 2 {@media (max-width: 768px) {visibility: hidden;}}
             }
 
             @keyframes arrowAnim {
@@ -65,7 +69,7 @@ $numberOfArrows: 4;
     }
 
     @media (max-width: 768px) {
-        bottom: 96px;
+        // bottom: 96px;
 
         .labelText {font-size: 0.9rem;}
     }
