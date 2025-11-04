@@ -378,12 +378,17 @@ body {
     border: 2px solid #ffdfd0;
     transform: translateY(6%);
     @media screen and (max-width: 1350px) {
-      width: calc(var(--counterBigFontSize) * 1.6);
-      height: calc(var(--counterBigFontSize) * 1.6);
+      width: calc(var(--counterBigFontSize) * 1.1);
+      height: calc(var(--counterBigFontSize) * 1.1);
     }
-    @media screen and (max-width: 800px) {
-      display: none;
+    @media screen and (max-width: 730px) {
+      // display: none;
+      bottom:30px;
+      right: 20px;
+      top: unset;
+      position: absolute;
     }
+
 
     .soundLine {
       height: calc(var(--counterSmallFontSize) * 1.1);
@@ -393,7 +398,7 @@ body {
       animation: scaler infinite;
       transition: height 0.3s ease-in-out;
       @media screen and (max-width: 1350px) {
-        height: calc(var(--counterBigFontSize) * 0.7);
+        height: calc(var(--counterBigFontSize) * 0.5);
       }
       &:nth-child(1) {
         animation: scaler2 2s ease-in-out infinite;
