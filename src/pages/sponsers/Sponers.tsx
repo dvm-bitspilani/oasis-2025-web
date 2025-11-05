@@ -25,6 +25,7 @@ import pepero from "/images/sponsors/pepero.jpeg";
 import jioSaavn from "/images/sponsors/jio-saavn.png";
 import cocaCola from "/images/sponsors/coke.png";
 import artisbaazi from "/images/sponsors/artisbaazi.png";
+import gustora from "/images/sponsors/gustora.webp";
 
 const sponsors = {
   title: {
@@ -114,7 +115,7 @@ const sponsors = {
     },
     {
       head: "Pasta Partner",
-      img: dummy,
+      img: gustora,
       name: "Gustora",
       link: "https://www.gustorafoods.com/",
     },
