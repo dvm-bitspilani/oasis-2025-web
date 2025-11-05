@@ -109,6 +109,8 @@ const assetList = {
             './svgs/events/text.svg',
             './svgs/events/top.svg',
             './svgs/events/topright.svg',
+            "/svgs/events/location.svg",
+            "/svgs/events/oasis_logo.svg",
         ],
         "videos": []
     },

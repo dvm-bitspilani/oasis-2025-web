@@ -11,6 +11,8 @@ import Right from "/svgs/events/Next1.svg";
 import { motion, AnimatePresence } from "framer-motion";
 import Star from "/svgs/events/star.svg";
 import Star2 from "/svgs/events/star.svg";
+import Location from "/svgs/events/location.svg";
+import Logo from "/svgs/events/oasis_logo.svg";
 // import ImagePreloader from "./ImagePreloader/ImagePreloader";
 // import PlaceholderImage from "/images/events/down.jpg"
 interface EventspageProps {
@@ -209,22 +211,23 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                           {events[currentIndex].club_name}
                         </p>
                         <div className={styles.mobilevenue}>
-                          <img src="/svgs/events/location.svg" alt="" />
+                          <img src={Location} alt="" />
                         <p>
                           {events[currentIndex].venue}
                         </p>
                         </div>
                       </div>
-
+                      <div className={styles.imageholder2}>
                       <img
                         src={
                           events[currentIndex].image_url ||
-                          "/images/events/oasis_logo.svg"
+                          Logo
                         }
                         alt={events[currentIndex].name}
                         // className={styles.mobileImage}
                         className={events[currentIndex].image_url ? styles.mobileImage : styles.mobileImagepreview}
                       />
+                      </div>
 
                       <div className={styles.eventdesc}>
                         <p>{events[currentIndex].description}</p>
@@ -268,7 +271,7 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                       <img
                         src={
                           events[currentIndex].image_url ||
-                          "/images/events/oasis_logo.svg"
+                          Logo
                         }
                         alt={events[currentIndex].name}
                         className={events[currentIndex].image_url?styles.imagenew:styles.imagenewpreview}
@@ -282,7 +285,7 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                      <div className={styles.venname}>
                        <p>{events[currentIndex].club_name}</p>
                        <div className={styles.venue}>
-                        <img src="/svgs/events/location.svg" alt="" />
+                        <img src={Location} alt="" />
                       <p>{events[currentIndex].venue}
                       </p> 
                       </div>

@@ -83,10 +83,12 @@
         gap: 10px;
       }
       .leftevent {
-        height: 100%;
+        // height: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
+        gap: 20px;
+        margin-top: 5vh;
+        // justify-content: center;
 
         .venname {
           // position: absolute;
@@ -157,6 +159,8 @@
           box-sizing: border-box;
           width: 30vw;
           aspect-ratio: 1.67;
+          // top:40vh;
+          // transform: translateY(-50%);
         .imagenew {
           position: absolute;
           // left: 4vw;
@@ -185,7 +189,7 @@
           // box-sizing: border-box;
           opacity: 1;
          
-           transform: rotateY(-360deg);
+          //  transform: rotateY(-360deg);
             animation: rotating 2s infinite ease;
           //  transition: transform 1s ease ;
           // animation-duration: 1;
@@ -442,16 +446,7 @@
 
           text-align: center;
         }
-        .mobileImage {
-          width: 70vw;
-          border-style: solid;
-          border-width: 5vw;
-          border-image-source: url("/images/events/image.png");
-          border-image-slice: 40;
-          aspect-ratio: 1.67;
-          margin: 3vw 5vw;
-        }
-        .mobileImagepreview {
+        .imageholder2{
           width: 70vw;
           border-style: solid;
           border-width: 5vw;
@@ -459,9 +454,30 @@
           border-image-source: url("/images/events/image.png");
           border-image-slice: 40;
           aspect-ratio: 1.67;
-          padding: 8vw 20vw 8vw 20vw;
           margin: 3vw 5vw;
+
+        .mobileImage {
+          width: calc(70vw - 50px);
+          // border-style: solid;
+          // border-width: 5vw;
+          // border-image-source: url("/images/events/image.png");
+          // border-image-slice: 40;
+          aspect-ratio: 1.67;
+          // margin: 3vw 5vw;
         }
+        .mobileImagepreview {
+          width: calc(70vw - 40px);
+          // border-style: solid;
+          // border-width: 5vw;
+          // background-color: rgb(0, 0, 0);
+          // border-image-source: url("/images/events/image.png");
+          // border-image-slice: 40;
+          aspect-ratio: 1.67;
+          padding: 8vw 20vw 8vw 20vw;
+          // margin: 3vw 5vw;
+          animation: rotating 2s infinite ease;
+        }
+      }
         .eventdesc {
           margin: 3vw 4vw;
           p {
@@ -599,29 +615,41 @@
 
           text-align: center;
         }
-        .mobileImage {
-          width: 40vw;
-
-          border-style: solid;
-          border-width: clamp(20px, 1vw, 40px);
-          border-image-source: url("/images/events/image.png");
-          border-image-slice: 40;
-
-          // translate: -50%;
-          margin: 3vw 20vw;
-        }
-        .mobileImagepreview {
+        .imageholder2{
           width: 40vw;
           aspect-ratio: 1.67;
           border-style: solid;
           border-width: clamp(20px, 1vw, 40px);
           border-image-source: url("/images/events/image.png");
           border-image-slice: 40;
-          background-color: rgb(0, 0, 0);
+
           // translate: -50%;
           margin: 3vw 20vw;
+        .mobileImage {
+          width: calc(40vw - 40px);
+
+          // border-style: solid;
+          // border-width: clamp(20px, 1vw, 40px);
+          // border-image-source: url("/images/events/image.png");
+          // border-image-slice: 40;
+
+          // // translate: -50%;
+          // margin: 3vw 20vw;
+        }
+        .mobileImagepreview {
+          width: calc(40vw - 40px);
+          aspect-ratio: 1.67;
+          // border-style: solid;
+          // border-width: clamp(20px, 1vw, 40px);
+          // border-image-source: url("/images/events/image.png");
+          // border-image-slice: 40;
+          background-color: rgb(0, 0, 0);
+           animation: rotating 2s infinite ease;
+          // translate: -50%;
+          // margin: 3vw 20vw;
           padding: 4vw 10vw 4vw 10vw;
         }
+      }
         .eventdesc {
           margin: 1vw 0vw;
           p {
