@@ -32,7 +32,7 @@ import { useHamStore } from "../../utils/store";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TARGET_DATE = new Date("2025-11-07T00:00:00Z");
+const TARGET_DATE = new Date("2025-11-08T00:00:00Z");
 
 const socialLinks = [
   {
@@ -358,7 +358,7 @@ export default function Landing({
               className={styles.mobileBackground}
             />
 
-            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud"/>
+            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud" />
 
             <div className={styles.treeContainer} ref={treeImageRef}>
               <div className={styles.tree}>
@@ -404,7 +404,11 @@ export default function Landing({
               <div className={styles.treeExtender}></div>
             </div>
             <div className={styles.logoContainer}>
-              <img src={logo} className={styles.logo} alt="Oasis Logo | Whispers of Edo" />
+              <img
+                src={logo}
+                className={styles.logo}
+                alt="Oasis Logo | Whispers of Edo"
+              />
             </div>
             <div className={styles.dateCountdown} ref={dateCountdownRef}>
               <div className={`${styles.daysLeft} ${styles.timeLeft}`}>

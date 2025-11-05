@@ -37,7 +37,7 @@ import ScrollLabel from "./components/ScrollLabel";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TARGET_DATE = new Date("2025-11-07T00:00:00+05:30");
+const TARGET_DATE = new Date("2025-11-07T19:00:00+05:30");
 
 const socialLinks = [
   {
@@ -129,7 +129,6 @@ export default function LandingRevamp({
       window.removeEventListener("resize", handleResize);
     };
   }, [removeGif]);
-
 
   useEffect(() => {
     setstyleTag([
@@ -462,8 +461,9 @@ export default function LandingRevamp({
   return (
     <>
       <main
-        className={`${styles.wrapper} ${!removeGif ? styles.pointerNoneEvent : ""
-          } ${overlayIsActive ? styles.mask : ""}`}
+        className={`${styles.wrapper} ${
+          !removeGif ? styles.pointerNoneEvent : ""
+        } ${overlayIsActive ? styles.mask : ""}`}
         ref={wrapperRef}
       >
         <Navbar />
@@ -512,7 +512,7 @@ export default function LandingRevamp({
               src={mobileMountains}
               className={styles.mobileMountains}
               alt="Mountains"
-            // ref={landingMobileRef}
+              // ref={landingMobileRef}
             />
             <img
               src={mobileBackground}

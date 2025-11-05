@@ -173,7 +173,9 @@ body {
     align-items: center;
     justify-items: center;
 
-    @media (max-width: 731px) or (aspect-ratio <= 8/12) {transform: translateY(12px)}
+    @media (max-width: 731px) or (aspect-ratio <= 8/12) {
+      transform: translateY(12px);
+    }
 
     @media (min-width: 731px) and (aspect-ratio >= 8/12) {
       display: none;
@@ -386,12 +388,11 @@ body {
     }
     @media screen and (max-width: 730px) {
       // display: none;
-      bottom:30px;
+      bottom: 30px;
       right: 20px;
       top: unset;
       position: absolute;
     }
-
 
     .soundLine {
       height: calc(var(--counterSmallFontSize) * 1.1);
@@ -528,6 +529,8 @@ body {
       padding: 0.5svw;
       text-align: center;
       gap: 1.5svw;
+      color: #535353;
+      mix-blend-mode: difference;
     }
   }
 
@@ -592,7 +595,9 @@ body {
         user-select: none;
         transition: filter 0.3s;
 
-        @media (max-width: 730px) {top: calc(100svh - 3svw - 1.8rem);}
+        @media (max-width: 730px) {
+          top: calc(100svh - 3svw - 1.8rem);
+        }
 
         &:hover {
           filter: brightness(0.8);
