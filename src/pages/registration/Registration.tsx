@@ -327,9 +327,12 @@ const Registration = ({ goToPage }: RegistrationProps) => {
             setCookies("user-auth", res.data);
             setCookies("Authorization", res.data.tokens.access);
             // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
-            redirectWithPost("https://bits-oasis.org/2025/main/registrations", {
-              token: res.data.tokens.access,
-            });
+            redirectWithPost(
+              "https://bits-oasis.org/2025/main/registrations/",
+              {
+                token: res.data.tokens.access,
+              }
+            );
             setUserEmail(res.data.email);
           } else {
             setCookies("user-auth", res.data);

@@ -236,7 +236,7 @@ const Confirmation = (props: PropsType) => {
                 } else {
                   // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${access_token}`;
                   redirectWithPost(
-                    "https://bits-oasis.org/2025/main/registrations",
+                    "https://bits-oasis.org/2025/main/registrations/",
                     {
                       token: access_token,
                     }

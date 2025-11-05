@@ -42,7 +42,7 @@ export default function mainHam({
 
   const hamItems = [
     {
-      title: "ROCTAVES",
+      title: "ROCKTAVES",
       cloud: hamCloud,
       classNameDiv: styles.devDiv,
       classNameText: styles.devText,
