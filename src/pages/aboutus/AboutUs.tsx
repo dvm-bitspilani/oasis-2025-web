@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
 import styles from "./AboutUs.module.scss";
 import Header from "/svgs/aboutus/header.svg";
 import fan from "/svgs/aboutus/fan.png";
@@ -11,14 +10,8 @@ import play from "/svgs/aboutus/play.svg";
 import nextarr from "/svgs/aboutus/nextarr.svg";
 import BackButton from "../components/backButton/BackButton";
 import PlayButton from "/svgs/aboutus/borde.svg";
-import instaicon from "/svgs/aboutus/instaicon.svg";
-import xicon from "/svgs/aboutus/xicon.svg";
-import linkedin from "/svgs/aboutus/linkedin.svg";
-import yticon from "/svgs/aboutus/yticon.svg";
-import abtus from "/svgs/aboutus/abtus.svg";
 import aboutPageBG from "/images/aboutus/background.jpg";
 import aboutPageBGMobile from "/images/aboutus/backg.png";
-import aboutTextBG from "/images/aboutus/abtbck.png";
 import letter1 from "/svgs/aboutus/letter1.svg";
 import letter2 from "/svgs/aboutus/letter2.svg";
 import letter3 from "/svgs/aboutus/letter3.svg";
@@ -27,9 +20,12 @@ import letter5 from "/svgs/aboutus/letter5.svg";
 import letter6 from "/svgs/aboutus/letter6.svg";
 import letter7 from "/svgs/aboutus/letter7.svg";
 import letter8 from "/svgs/aboutus/letter8.svg";
-import { useGSAP } from "@gsap/react";
 import VideoMetaData from "./components/VideoMetaData";
 import { Helmet } from "react-helmet";
+import SocialLinks from "./components/SocialLinks/SocialLinks";
+import AboutText from "./components/AboutText/AboutText";
+import { useYouTubePlayer } from "./components/useYoutubePlayer/useYoutubePlayer";
+import { useFanAnimation } from "./components/useFanAnimation/useFanAnimation";
 declare global {
   interface Window {
     YT?: any;
@@ -68,11 +64,11 @@ const iconImages: HTMLImageElement[] = icons.map((src) => {
 });
 
 const AboutUs = ({ isBackBtn = true }: AboutUsProps) => {
-  const [current, setCurrent] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [current, setCurrent] = useState(0);
+  // const [isPlaying, setIsPlaying] = useState(false);
   const AboutRef = useRef<HTMLDivElement | null>(null);
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
-  const playerRef = useRef<any>(null);
+  // const playerRef = useRef<any>(null);
 
   const fan2Ref = useRef<HTMLImageElement>(null);
   const fan1Ref = useRef<HTMLImageElement>(null);
@@ -81,268 +77,9 @@ const AboutUs = ({ isBackBtn = true }: AboutUsProps) => {
     window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
       .matches
   );
+const { isPlaying, nextVideo, prevVideo, togglePlayPause } = useYouTubePlayer(videos, playerContainerRef);
+ useFanAnimation(fan1Ref, fan2Ref, isMobile, iconImages, styles);
 
-  const loadByIndex = (index: number) => {
-    if (!playerRef.current) return;
-    setCurrent(index);
-    playerRef.current.loadVideoById(videos[index]);
-  };
-
-  const nextVideo = () => {
-    const newIdx = (current + 1) % videos.length;
-    loadByIndex(newIdx);
-  };
-
-  const prevVideo = () => {
-    const newIdx = (current - 1 + videos.length) % videos.length;
-    loadByIndex(newIdx);
-  };
-
-  const togglePlayPause = () => {
-    if (!playerRef.current || !window.YT) return;
-    const state = playerRef.current.getPlayerState();
-    const YTState = window.YT.PlayerState;
-    if (state === YTState.PLAYING) {
-      playerRef.current.pauseVideo();
-    } else {
-      playerRef.current.playVideo();
-    }
-  };
-
-  useEffect(() => {
-    document.body.style.position = "static";
-    const initPlayer = () => {
-      if (playerRef.current || !playerContainerRef.current || !window.YT)
-        return;
-
-      playerRef.current = new window.YT.Player(playerContainerRef.current, {
-        height: "100%",
-        width: "100%",
-        videoId: videos[0],
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          rel: 0,
-          modestbranding: 1,
-          playsinline: 1,
-        },
-        events: {
-          onStateChange: (event: any) => {
-            const YTState = window.YT.PlayerState;
-            if (event.data === YTState.PLAYING) setIsPlaying(true);
-            if (event.data === YTState.PAUSED) setIsPlaying(false);
-            if (event.data === YTState.ENDED) {
-              setIsPlaying(false);
-              nextVideo();
-            }
-          },
-        },
-      });
-    };
-
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      window.onYouTubeIframeAPIReady = () => initPlayer();
-      const existingScript = document.querySelector(
-        "script[src='https://www.youtube.com/iframe_api']"
-      );
-      if (!existingScript) {
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        tag.async = true;
-        document.body.appendChild(tag);
-      }
-    }
-
-    return () => {
-      if (
-        playerRef.current &&
-        typeof playerRef.current.destroy === "function"
-      ) {
-        playerRef.current.destroy();
-        playerRef.current = null;
-      }
-    };
-  }, []);
-
-  useGSAP(() => {
-    if (!isMobile) {
-      gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
-
-      gsap.to(fan1Ref.current, {
-        rotateX: -5,
-        rotateY: -5,
-        duration: 0.5,
-        yoyo: true,
-        repeat: -1,
-        ease: "power1.inOut",
-      });
-
-      gsap.to(fan2Ref.current, {
-        rotateX: -9,
-        rotateY: -9,
-        duration: 0.5,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut",
-      });
-    }
-
-    const spawnIcon = (fanSelector: string, isFan1: boolean) => {
-      const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
-      if (!fanEl || !fanEl.parentElement) return;
-
-      const rect = fanEl.getBoundingClientRect();
-      const parentRect = fanEl.parentElement.getBoundingClientRect();
-
-      let startX = fanEl.offsetLeft + fanEl.offsetWidth / 2;
-      let startY = fanEl.offsetTop + fanEl.offsetHeight / 2;
-      if (isFan1) {
-        startX = rect.left - parentRect.left + rect.width / 2;
-        startY = rect.top - parentRect.top + rect.height / 2 - 100;
-      }
-
-      const iconTemplate =
-        iconImages[Math.floor(Math.random() * iconImages.length)];
-      const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-      img.className = styles.flyingIcon;
-      img.style.left = `${startX}px`;
-      img.style.top = `${startY}px`;
-
-      fanEl.parentElement.appendChild(img);
-
-      let distance = 20 + Math.random() * 100;
-      let angle: number;
-      if (isFan1) {
-        angle = Math.random() * 2 * (Math.PI / 3);
-        distance = Math.random() * 100;
-      } else {
-        angle = (-20 * Math.PI) / 180 + Math.PI + Math.random() * (Math.PI / 3);
-      }
-
-      let dx = Math.cos(angle) * distance;
-      let dy = -Math.sin(angle) * distance;
-
-      gsap.fromTo(
-        img,
-        { opacity: 0, scale: 0, x: 0, y: 0 },
-        {
-          opacity: 1,
-          scale: 1,
-          x: dx,
-          y: dy,
-          duration: 2,
-          ease: "power2.out",
-          onComplete: () => {
-            gsap.to(img, {
-              opacity: 0,
-              duration: 0.5,
-              onComplete: () => img.remove(),
-            });
-          },
-        }
-      );
-    };
-
-    const spawnFromCorner = (
-      corner: "top-left" | "top-right" | "bottom-left" | "bottom-right"
-    ) => {
-      const container = document.querySelector(
-        `.${styles.vid}`
-      ) as HTMLElement | null;
-      if (!container) return;
-
-      const iconTemplate =
-        iconImages[Math.floor(Math.random() * iconImages.length)];
-      const img = iconTemplate.cloneNode(true) as HTMLImageElement;
-      img.className = styles.flyingIcon;
-
-      let startX = 0,
-        startY = 0;
-      const padding = 10;
-
-      switch (corner) {
-        case "top-right":
-          startX = container.clientWidth - padding;
-          startY = padding;
-          break;
-        case "bottom-left":
-          startX = padding;
-          startY = container.clientHeight - padding;
-          break;
-      }
-
-      img.style.left = `${startX}px`;
-      img.style.top = `${startY}px`;
-
-      container.appendChild(img);
-
-      const centerX = container.clientWidth / 2;
-      const centerY = container.clientHeight / 2;
-
-      const dx = ((centerX - startX) * Math.random()) / 4;
-      const dy = ((centerY - startY) * Math.random()) / 2;
-
-      gsap.fromTo(
-        img,
-        { opacity: 0, scale: 0, x: 0, y: 0 },
-        {
-          opacity: 1,
-          scale: 1,
-          x: -dx,
-          y: -dy,
-          duration: 2,
-          ease: "power2.out",
-          onComplete: () => {
-            gsap.to(img, {
-              opacity: 0,
-              duration: 0.5,
-              onComplete: () => img.remove(),
-            });
-          },
-        }
-      );
-    };
-
-    let intervalId: number;
-
-    const startSpawning = () => {
-      intervalId = window.setInterval(
-        () => {
-          if (isMobile) {
-            const corners = ["top-right", "bottom-left"];
-            const randomCorner = corners[
-              Math.floor(Math.random() * corners.length)
-            ] as any;
-            spawnFromCorner(randomCorner);
-          } else {
-            spawnIcon(`.${styles.fan1}`, true);
-            spawnIcon(`.${styles.fan2}`, false);
-          }
-        },
-        isMobile ? 700 : 500
-      );
-    };
-
-    const stopSpawning = () => {
-      console.log("Cleared interval: ", intervalId);
-      if (intervalId) window.clearInterval(intervalId);
-    };
-
-    const handleVisibility = () => {
-      if (document.hidden) stopSpawning();
-      else startSpawning();
-    };
-
-    document.addEventListener("visibilitychange", handleVisibility);
-    startSpawning();
-
-    return () => {
-      stopSpawning();
-      document.removeEventListener("visibilitychange", handleVisibility);
-    };
-  });
 
   useEffect(() => {
     const handleResize = () =>
@@ -464,46 +201,9 @@ const AboutUs = ({ isBackBtn = true }: AboutUsProps) => {
               </div>
             </div>
           </div>
-
-          <div className={styles.abt}>
-            <div
-              className={styles.aboutback}
-              style={{
-                backgroundImage: isMobile ? "none" : `url("${aboutTextBG}")`,
-              }}
-            >
-              <p>
-                Oasis, the annual cultural extravaganza of Birla Institute of
-                Technology and Science, Pilani, has been a vibrant part of
-                India's cultural tapestry since 1971. Managed entirely by
-                students, it's a dazzling showcase of talent in Dance, Drama,
-                Literature, Comedy, Fashion, and Music. It's where dreams come
-                alive, laughter fills the air, and creativity knows no bounds.
-                Step into the world of Oasis, where youth's boundless potential
-                shines.
-              </p>
-            </div>
-            <div className={styles.abtus}>
-              <img src={abtus} alt="ABOUT US" />
-              <h3>ABOUT US</h3>
-            </div>
-          </div>
+          <AboutText isMobile={isMobile} />
         </div>
-
-        <div className={styles.social}>
-          <a href="https://www.linkedin.com/company/oasis24-bits-pilani/">
-            <img src={linkedin} alt="Linkedin" />
-          </a>
-          <a href="https://www.youtube.com/@oasisbitspilani6375">
-            <img src={yticon} alt="Youtube" />
-          </a>
-          <a href="https://twitter.com/bitsoasis">
-            <img src={xicon} alt="Twitter" />
-          </a>
-          <a href="https://www.instagram.com/bitsoasis">
-            <img src={instaicon} alt="Instagram" />
-          </a>
-        </div>
+        <SocialLinks />
         {isBackBtn && <BackButton className={styles.aboutBB} />}
       </div>
     </div>
