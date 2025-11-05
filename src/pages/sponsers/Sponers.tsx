@@ -27,6 +27,8 @@ import cocaCola from "/images/sponsors/coke.png";
 import artisbaazi from "/images/sponsors/artisbaazi.png";
 import gustora from "/images/sponsors/gustora.webp";
 
+//nothing is changed
+
 const sponsors = {
   title: {
     head: "Official Title Sponsor",
