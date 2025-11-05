@@ -35,7 +35,7 @@ const imagesToPreload = [
   "/svgs/landing/mobileRegisterBtn.svg",
   "/svgs/landing/registerBtn.svg",
   // "/images/landing/oasisLogo.png",
-  "/images/landing/banner_without_sponz.png",
+  "/images/landing/logo_final.png",
   "/images/landing/mobileCloud.png",
   "/images/registration/reg-banner.png",
   "/svgs/registration/bg-extended.svg",

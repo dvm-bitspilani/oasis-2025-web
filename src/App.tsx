@@ -53,7 +53,7 @@ export default function App() {
     "aboutus",
     "contact",
     "brochure",
-    "sponsors",
+    // "sponsors",
     "mediaPartners",
     "gallery",
   ];

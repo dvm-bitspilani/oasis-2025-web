@@ -22,7 +22,7 @@ import eventsBtn from "/svgs/landing/mobileEventsBtn.svg";
 import wire from "/svgs/landing/wire.svg";
 import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
-import logo from "/images/landing/banner_without_sponz.png";
+import logo from "/images/landing/logo_final.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
 import AboutUs from "../aboutus/AboutUs";
 // import ContactDoors from "../contact/ContactDoors";

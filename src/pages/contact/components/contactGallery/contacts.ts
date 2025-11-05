@@ -57,7 +57,7 @@ const contacts: Contact[] = [
         imageURL: "/images/contact/SajalY.png"
     },
     {
-        name: "Aaditya Khandelwal",
+        name: "Aditya Khandelwal",
         role: "General Secretary, Students' Union",
         phone: "+91 89556 65800",
         email: "gensec@pilani.bits-pilani.ac.in",

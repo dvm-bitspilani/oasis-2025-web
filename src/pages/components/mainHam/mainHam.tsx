@@ -50,20 +50,20 @@ export default function mainHam({
       url: "https://rocktaves.bits-oasis.org/",
     },
     {
-      title: "EVENTS",
+      title: "GALLERY",
       cloud: hamCloud,
       classNameDiv: styles.sponsDiv,
       classNameText: styles.sponsText,
       classNameCloud: styles.sponsCloud,
-      url: "/events", // Replace with actual URL
+      url: "/gallery", // Replace with actual URL
     },
     {
-      title: "GALLERY",
+      title: "SPONSORS",
       cloud: hamCloud,
       classNameDiv: styles.galleryDiv,
       classNameText: styles.galleryText,
       classNameCloud: styles.galleryCloud,
-      url: "/gallery", // Replace with actual URL
+      url: "/sponsors", // Replace with actual URL
     },
     {
       title: "MEDIA PARTNERS",
