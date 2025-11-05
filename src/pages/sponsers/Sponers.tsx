@@ -193,7 +193,7 @@ const Sponsors = () => {
           <img src={heading} alt="heading" draggable={false} />
         </div>
         <div className={styles.sponsors}>
-          <a
+          {/* <a
             href={sponsors.title.link}
             target="_blank"
             rel="noreferrer"
@@ -212,7 +212,7 @@ const Sponsors = () => {
                 {sponsors.title.name}
               </div>
             </div>
-          </a>
+          </a> */}
 
           <div className={styles.otherSponsors}>
             {sponsors.otherSponsers.map((sponsor, index) => (
