@@ -13,6 +13,18 @@ import qoneqt from "/images/sponsors/Qoneqt.png";
 import suno from "/images/sponsors/Suno.png";
 import rtc from "/images/sponsors/rtc.jpg";
 import snapchat from "/images/sponsors/Snapchat.png";
+import zebronics from "/images/sponsors/Zebronics.avif";
+import maaKarni from "/images/sponsors/maa-karni.jpg";
+import plumGoodness from "/images/sponsors/plum-goodness.png";
+import posterwa from "/images/sponsors/posterwa.png";
+import travelzada from "/images/sponsors/travelzada.jpeg";
+import hdfcBank from "/images/sponsors/hdfc.png";
+import peeSafe from "/images/sponsors/pee-safe.png";
+import plumBodyLovin from "/images/sponsors/plum-body-lovin.png";
+import pepero from "/images/sponsors/pepero.jpeg";
+import jioSaavn from "/images/sponsors/jio-saavn.png";
+import cocaCola from "/images/sponsors/coke.png";
+import artisbaazi from "/images/sponsors/artisbaazi.png";
 
 const sponsors = {
   title: {
@@ -22,17 +34,17 @@ const sponsors = {
     link: "https://www.larsentoubro.com/",
   },
   otherSponsers: [
-    {
-      head: "Powered-By",
-      img: dummy,
-      name: "NetApp",
-      link: "",
-    },
+    // {
+    //   head: "Powered-By",
+    //   img: dummy,
+    //   name: "NetApp",
+    //   link: "",
+    // },
     {
       head: "Diamond Sponsor",
       img: suno,
       name: "Suno AI",
-      link: "",
+      link: "https://suno.com/",
     },
     {
       head: "Official Skincare Partner",
@@ -54,9 +66,9 @@ const sponsors = {
     },
     {
       head: "Official Partner",
-      img: dummy,
+      img: zebronics,
       name: "Zebronics",
-      link: "",
+      link: "https://zebronics.com/",
     },
     {
       head: "Official Travel Partner",
@@ -66,15 +78,15 @@ const sponsors = {
     },
     {
       head: "Official Infrastructure Partner",
-      img: dummy,
+      img: maaKarni,
       name: "Maa Karni",
       link: "",
     },
     {
-      head: "",
-      img: dummy,
-      name: "Plum",
-      link: "",
+      head: "Official Beauty and Wellness Partner",
+      img: plumGoodness,
+      name: "Plum Goodness",
+      link: "https://plumgoodness.com/",
     },
     {
       head: "Official Commute Partner",
@@ -84,45 +96,69 @@ const sponsors = {
     },
     {
       head: "",
-      img: dummy,
+      img: posterwa,
       name: "Posterwa",
-      link: "",
+      link: "https://posterwa.com/",
     },
     {
       head: "",
-      img: dummy,
+      img: travelzada,
       name: "Travelzada",
       link: "",
     },
     {
-      head: "",
-      img: dummy,
+      head: "Official Banking Partner",
+      img: hdfcBank,
       name: "HDFC Bank",
-      link: "",
+      link: "https://www.hdfc.bank.in/",
     },
     {
       head: "Pasta Partner",
       img: dummy,
       name: "Gustora",
-      link: "",
+      link: "https://www.gustorafoods.com/",
     },
     {
       head: "Official Music Streaming Partner",
-      img: dummy,
+      img: jioSaavn,
       name: "JioSaavn",
-      link: "",
+      link: "https://www.jiosaavn.com/",
     },
     {
-      head: "",
-      img: dummy,
+      head: "Official Beverage Partner",
+      img: cocaCola,
       name: "Coca-Cola",
-      link: "",
+      link: "https://www.coca-colacompany.com/",
     },
     {
       head: "Official Technology Partner",
       img: rtc,
       name: "Round The Technologies",
       link: "https://rtctek.com/",
+    },
+    {
+      head: "Official Hygiene Partner",
+      img: peeSafe,
+      name: "Pee Safe",
+      link: "https://www.peesafe.com/",
+    },
+    {
+      head: "Bath and BodyCare Partner",
+      img: plumBodyLovin,
+      name: "Plum Body Lovin'",
+      link: "",
+    },
+    {
+      head: "Official Snack Partner",
+      img: pepero,
+      name: "Pepero",
+      link: "",
+    },
+    {
+      head: "",
+      img: artisbaazi,
+      name: "Artisbaazi",
+      link: "",
     },
   ],
 };

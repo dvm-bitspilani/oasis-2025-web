@@ -441,11 +441,11 @@
 
         .galleryCloud {
           width: auto;
-          height: 100px;
+          height: 110px;
         }
 
         .galleryText {
-          transform: translate(-65%, -30%);
+          transform: translate(-60%, -30%);
           font-size: 1em;
         }
       }
@@ -519,7 +519,7 @@
 
       .galleryDiv {
         top: 49.5%;
-        right: 44.5%;
+        right: 44%;
         transform: translate(-50%, -50%);
 
         &:hover {
@@ -528,11 +528,11 @@
 
         .galleryCloud {
           width: auto;
-          height: 80px;
+          height: 85px;
         }
 
         .galleryText {
-          transform: translate(-65%, -30%);
+          transform: translate(-60%, -30%);
           font-size: 0.8em;
         }
       }
