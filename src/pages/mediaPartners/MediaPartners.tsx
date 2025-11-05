@@ -5,97 +5,55 @@ import dummy from "/images/logo.png";
 import Back from "/svgs/registration/back.svg";
 import { useContext } from "react";
 import { navContext } from "../../App";
+import bronx from "/images/mediaPartners/Bronx.png";
+import zack from "/images/mediaPartners/Zack.jpeg";
+import kanika from "/images/mediaPartners/Kanika.png";
+import jhoom from "/images/mediaPartners/Jhoom.jpg";
+import captures from "/images/mediaPartners/Captures.png";
+import sarcaster from "/images/mediaPartners/Sarcaaster.png";
 
 let mediaPatners = [
   {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Campus Times Pune",
-    link: "https://www.campustimespune.com/",
+    head: "Official Vlogging Partner",
+    img: jhoom,
+    name: "Jhoom Baba",
+    link: "https://www.instagram.com/jhoombaba22?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
   },
   {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Silicon India",
-    link: "https://www.siliconindia.com/",
+    head: "Official Vlogging Partner",
+    img: kanika,
+    name: "Kanika Devrani",
+    link: "https://www.instagram.com/kanika_devrani?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
   },
   {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Youth Inc",
-    link: "https://youthincmag.com/",
-  },
-  {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Sach Kahoon",
-    link: "https://epaper.sachkahoon.com/",
-  },
-  {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Zex PR",
-    link: "https://zexprwire.com/",
-  },
-  {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Sachi Shiksha",
-    link: "https://sachishiksha.com/",
-  },
-  {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "DU Express",
-    link: "https://duexpress.in/",
-  },
-  {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Techstory",
-    link: "https://techstory.in/",
-  },
-  {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Rashtriya Sahara",
-    link: "https://rashtriyasahara.com/indexnext.php",
-  },
-  {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Computer Science Meme Yojana",
-    link: "https://www.instagram.com/computer_science_meme_yojana?igsh=eHAzaXJxcTk3dmkx",
-  },
-  {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "ATP STAR",
-    link: "https://atpstar.com/",
+    head: "Official Vlogging Partner",
+    img: zack,
+    name: "Zack Vlogs",
+    link: "https://www.instagram.com/zack_vlogs/",
   },
   {
     head: "Official Coverage Partner",
-    img: dummy,
-    name: "Eclipse Media",
-    link: "https://www.instagram.com/the.eclipse.media?igsh=MWkzanp2cmhxMjd3aA==",
+    img: captures,
+    name: "Captures",
+    link: "https://www.instagram.com/captures.inc?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
   },
   {
-    head: "Official Knowledge Partner",
+    head: "Official Outreach Partners",
     img: dummy,
-    name: "Amar Ujala",
-    link: "https://www.amarujala.com/",
+    name: "Inglu",
+    link: "https://www.instagram.com/inglu_events/",
   },
   {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "The Global Hues",
-    link: "https://theglobalhues.com/",
+    head: "BITS GOT LATENT PANEL",
+    img: sarcaster,
+    name: "Sarcaaster",
+    link: "https://www.instagram.com/sarcaaster_/",
   },
   {
-    head: "Official Media Partner",
-    img: dummy,
-    name: "Fluxus, IIT Indore",
-    link: "https://www.instagram.com/fluxus_iit_indore/?hl=en",
+    head: "Official Media Partners",
+    img: bronx,
+    name: "Bronx",
+    link: "https://www.instagram.com/rap.bronx?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
   },
 ];
 
