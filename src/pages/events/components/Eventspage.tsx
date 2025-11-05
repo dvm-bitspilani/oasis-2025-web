@@ -12,7 +12,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Star from "/svgs/events/star.svg";
 import Star2 from "/svgs/events/star.svg";
 import Location from "/svgs/events/location.svg";
-import Logo from "/svgs/events/oasis_logo.svg";
+// import Logo from "/svgs/events/oasis_logo.svg";
+import EventImage from "./ImagePreloader/ImagePreloader";
 // import ImagePreloader from "./ImagePreloader/ImagePreloader";
 // import PlaceholderImage from "/images/events/down.jpg"
 interface EventspageProps {
@@ -25,7 +26,7 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
     window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 1.45)")
       .matches
   );
-  
+
   useEffect(() => {
     const mediaQuery = window.matchMedia(
       "(max-width: 1200px) and (max-aspect-ratio: 1.45)"
@@ -212,21 +213,16 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                         </p>
                         <div className={styles.mobilevenue}>
                           <img src={Location} alt="" />
-                        <p>
-                          {events[currentIndex].venue}
-                        </p>
+                          <p>{events[currentIndex].venue}</p>
                         </div>
                       </div>
                       <div className={styles.imageholder2}>
-                      <img
-                        src={
-                          events[currentIndex].image_url ||
-                          Logo
-                        }
-                        alt={events[currentIndex].name}
-                        // className={styles.mobileImage}
-                        className={events[currentIndex].image_url ? styles.mobileImage : styles.mobileImagepreview}
-                      />
+                        <EventImage
+                          imageUrl={events[currentIndex]?.image_url}
+                          alt={events[currentIndex]?.name}
+                          className={styles.mobileImage} // style for final loaded image
+                          previewClass={styles.mobileImagepreview} // style for Logo preloader
+                        />
                       </div>
 
                       <div className={styles.eventdesc}>
@@ -243,13 +239,9 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                     </div>
                   </div>
                 ) : (
-                 <p
-  className={styles.centerText}
->
-  {`No events found in "${category}"`}
-</p>
-
-
+                  <p className={styles.centerText}>
+                    {`No events found in "${category}"`}
+                  </p>
                 )}
               </AnimatePresence>
             </div>
@@ -268,34 +260,31 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                   >
                     <div className={styles.leftevent}>
                       <div className={styles.imageholder}>
-                      <img
-                        src={
-                          events[currentIndex].image_url ||
-                          Logo
-                        }
-                        alt={events[currentIndex].name}
-                        className={events[currentIndex].image_url?styles.imagenew:styles.imagenewpreview}
-                      />
+                        <EventImage
+                          imageUrl={events[currentIndex]?.image_url}
+                          alt={events[currentIndex]?.name}
+                          className={styles.imagenew} // for actual event image
+                          previewClass={styles.imagenewpreview} // for Logo preloader
+                        />
                       </div>
+
                       {/* <ImagePreloader  src={
                           events[currentIndex].image_url ||
                           "/images/events/down.jpg"
                         }
                         alt={events[currentIndex].name}/> */}
-                     <div className={styles.venname}>
-                       <p>{events[currentIndex].club_name}</p>
-                       <div className={styles.venue}>
-                        <img src={Location} alt="" />
-                      <p>{events[currentIndex].venue}
-                      </p> 
+                      <div className={styles.venname}>
+                        <p>{events[currentIndex].club_name}</p>
+                        <div className={styles.venue}>
+                          <img src={Location} alt="" />
+                          <p>{events[currentIndex].venue}</p>
+                        </div>
                       </div>
-                     </div>
                     </div>
 
                     <div className={styles.rightevent}>
                       <h4>{events[currentIndex].name}</h4>
                       <p>{events[currentIndex].description}</p>
-                     
                     </div>
                   </motion.div>
                   <div className={styles.controls}>
@@ -308,11 +297,9 @@ const Eventspage: React.FC<EventspageProps> = ({ category }) => {
                   </div>
                 </div>
               ) : (
-                <p
-  className={styles.centerText}
->
-  {`No events found in "${category}"`}
-</p>
+                <p className={styles.centerText}>
+                  {`No events found in "${category}"`}
+                </p>
               )}
             </AnimatePresence>
           )}

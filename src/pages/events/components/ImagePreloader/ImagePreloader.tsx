@@ -1,36 +1,32 @@
-import React, { useState } from "react";
-import styles from "./ImagePreloader.module.scss"
-const ImagePreloader: React.FC<{ src: string; alt?: string }> = ({ src, alt }) => {
-  const [loading, setLoading] = useState(true);
+import { useEffect, useState } from "react";
+import Logo from "/svgs/events/oasis_logo.svg";
+interface EventImageProps {
+  imageUrl?: string;
+  alt?: string;
+  className?: string;
+  previewClass?: string;
+}
 
-  return (
-    <div style={{ position: "relative", width: "300px", height: "200px" }}>
-      {/* Preloader (shown while loading) */}
-      {loading && (
-        <div
-          style={{
-            position: "absolute",
-            // backgroundColor: "#f0f0f0",
-          }}
-        > 
-          <div className={styles.spinner} />
-        </div>
-      )}
-
-      {/* Actual Image */}
-      <img
-        src={src}
-        alt={alt}
-        onLoad={() => setLoading(false)}
-        style={{
-          objectFit: "cover",
-          opacity: loading ? 0 : 1,
-          transition: "opacity 0.4s ease-in-out",
-        }}
-        className={styles.imagenew}
-      />
-    </div>
-  );
+const EventImage: React.FC<EventImageProps> = ({
+  imageUrl,
+  alt = "Event image",
+  className,
+  previewClass,
+}) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  useEffect(() => {
+    setImageLoaded(false);
+    if (!imageUrl) return;
+    const img = new Image();
+    img.src = imageUrl;
+    img.onload = () => setImageLoaded(true);
+    img.onerror = () => setImageLoaded(false);
+  }, [imageUrl]);
+  if (!imageLoaded) {
+    return (
+      <img src={Logo} alt="Loading placeholder" className={previewClass} />
+    );
+  }
+  return <img src={imageUrl} alt={alt} className={className} />;
 };
-
-export default ImagePreloader;
+export default EventImage;
