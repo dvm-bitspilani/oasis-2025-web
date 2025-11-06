@@ -121,6 +121,45 @@ const assetList = {
             // './images/gallery/photog black logo.png',
         ],
         "videos": []
+    },
+    "sponsors": {
+        "images": [
+            '/images/sponsors/EaseMyTrip.png',
+            '/images/sponsors/Nutribs.png',
+            '/images/sponsors/Qoneqt.png',
+            '/images/sponsors/Snapchat.png',
+            '/images/sponsors/Suno.png',
+            '/images/sponsors/abhibus.png',
+            '/images/sponsors/rtc.jpg',
+            '/images/sponsors/Zebronics.avif',
+            '/images/sponsors/artisbaazi.png',
+            '/images/sponsors/coke.png',
+            '/images/sponsors/gustora.webp',
+            '/images/sponsors/hdfc.png',
+            '/images/sponsors/jio-saavn.png',
+            '/images/sponsors/maa-karni.jpg',
+            '/images/sponsors/netApp.png',
+            '/images/sponsors/pee-safe.png',
+            '/images/sponsors/pepero.jpeg',
+            '/images/sponsors/plum-body-lovin.png',
+            '/images/sponsors/plum-goodness.png',
+            '/images/sponsors/posterwa.png',
+            '/images/sponsors/travelzada.jpeg',
+        ],
+        "videos": []
+    },
+    "mediaPartners": {
+        "images": [
+            '/images/mediaPartners/Bronx.png',
+            '/images/mediaPartners/Captures.png',
+            '/images/mediaPartners/Jhoom.jpg',
+            '/images/mediaPartners/Kanika.png',
+            '/images/mediaPartners/Sarcaaster.png',
+            '/images/mediaPartners/Zack.jpeg',
+            '/images/mediaPartners/bg.jpg',
+            '/images/mediaPartners/bg1.jpg',
+        ],
+        "videos": []
     }
 }
 
