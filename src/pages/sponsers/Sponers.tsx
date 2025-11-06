@@ -1,7 +1,7 @@
 import styles from "./Sponsers.module.scss";
 import background from "/images/mediaPartners/bg1.jpg";
 import heading from "/svgs/sponsors/sponsorsHead.svg";
-import dummy from "/images/logo.png";
+// import dummy from "/images/logo.png";
 import Back from "/svgs/registration/back.svg";
 import { useContext } from "react";
 import { navContext } from "../../App";
@@ -26,15 +26,16 @@ import jioSaavn from "/images/sponsors/jio-saavn.png";
 import cocaCola from "/images/sponsors/coke.png";
 import artisbaazi from "/images/sponsors/artisbaazi.png";
 import gustora from "/images/sponsors/gustora.webp";
+import netApp from "/images/sponsors/netApp.png";
 
 //nothing is changed
 
 const sponsors = {
   title: {
     head: "Official Title Sponsor",
-    img: dummy,
-    name: "L&T",
-    link: "https://www.larsentoubro.com/",
+    img: netApp,
+    name: "NetApp",
+    link: "https://www.netapp.com/",
   },
   otherSponsers: [
     // {
@@ -195,7 +196,7 @@ const Sponsors = () => {
           <img src={heading} alt="heading" draggable={false} />
         </div>
         <div className={styles.sponsors}>
-          {/* <a
+          <a
             href={sponsors.title.link}
             target="_blank"
             rel="noreferrer"
@@ -214,7 +215,7 @@ const Sponsors = () => {
                 {sponsors.title.name}
               </div>
             </div>
-          </a> */}
+          </a>
 
           <div className={styles.otherSponsors}>
             {sponsors.otherSponsers.map((sponsor, index) => (
