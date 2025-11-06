@@ -34,6 +34,7 @@ import { useMainHamStore } from "../../utils/store";
 import ContactDoors from "../contact/ContactDoors";
 import { Helmet } from "react-helmet";
 import ScrollLabel from "./components/ScrollLabel";
+import LanternsInfinite from "./components/lanterns/lanterns";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -743,6 +744,7 @@ export default function LandingRevamp({
           </div>
           {/* <div className={styles.bottomSpacer} ref={bottomSpacerRef}/> */}
         </div>
+        <LanternsInfinite count ={4}/>
       </main>
       <Helmet>
         <title>OASIS 2025 | Whispers Of Edo</title>
