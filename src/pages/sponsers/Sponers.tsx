@@ -12,6 +12,7 @@ import nutribs from "/images/sponsors/Nutribs.png";
 import qoneqt from "/images/sponsors/Qoneqt.png";
 import suno from "/images/sponsors/Suno.png";
 import rtc from "/images/sponsors/rtc.jpg";
+import acer from "/images/sponsors/acer_logo.avif";
 import snapchat from "/images/sponsors/Snapchat.png";
 import zebronics from "/images/sponsors/Zebronics.avif";
 import maaKarni from "/images/sponsors/maa-karni.jpg";
@@ -44,6 +45,12 @@ const sponsors = {
     //   name: "NetApp",
     //   link: "",
     // },
+    {
+      head: "Associate Title Sponsor",
+      img: acer,
+      name: "Acer",
+      link: "https://www.acer.com",
+    },
     {
       head: "Diamond Sponsor",
       img: suno,
