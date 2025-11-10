@@ -51,6 +51,12 @@ const sponsors = {
       link: "https://suno.com/",
     },
     {
+      head: "Co-Powered By",
+      img: snapchat,
+      name: "Snap Inc.",
+      link: "https://www.snap.com/",
+    },
+    {
       head: "Official Skincare Partner",
       img: nutribs,
       name: "Nutribs",
@@ -61,12 +67,6 @@ const sponsors = {
       img: qoneqt,
       name: "Qoneqt",
       link: "https://qoneqt.com/",
-    },
-    {
-      head: "Co-Powered By",
-      img: snapchat,
-      name: "Snap Inc.",
-      link: "https://www.snap.com/",
     },
     {
       head: "Official Partner",
