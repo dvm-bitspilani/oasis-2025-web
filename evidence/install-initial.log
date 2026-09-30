@@ -1,0 +1,20 @@
+
+added 37 packages, removed 27 packages, and audited 309 packages in 2s
+
+69 packages are looking for funding
+  run `npm fund` for details
+
+17 vulnerabilities (1 low, 3 moderate, 13 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+npm warn install-scripts 5 packages have install scripts not yet covered by allowScripts:
+npm warn install-scripts   @parcel/watcher@2.5.1 (install: node-gyp rebuild)
+npm warn install-scripts   esbuild@0.25.6 (postinstall: node install.js)
+npm warn install-scripts   fsevents@2.3.3 (install: (install scripts present))
+npm warn install-scripts   esbuild@0.28.1 (postinstall: node install.js)
+npm warn install-scripts   workerd@1.20260930.2 (postinstall: node install.js)
+npm warn install-scripts
+npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.

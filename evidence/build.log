@@ -1,0 +1,212 @@
+
+> oasis-2025-web@0.0.0 build
+> tsc -b && vite build && node scripts/check.mjs
+
+vite v7.3.6 building client environment for production...
+transforming...
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+212 │ ┌         @media (max-width: 786px) {
+213 │ │             height: 3rem;
+214 │ │             width: 3rem;
+215 │ │             top: 1rem;
+216 │ │             right: 1rem;
+217 │ │         }
+    │ └─── nested rule
+... │
+219 │           transition: filter 0.3s;
+    │           ^^^^^^^^^^^^^^^^^^^^^^^ declaration
+    ╵
+    src/pages/gallery/Gallery.module.scss 219:9  root stylesheet
+
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+226 │         @media (max-width: 768px) {$paddingH: 1.5rem;}
+    │         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ nested rule
+227 │         position: relative;
+    │         ^^^^^^^^^^^^^^^^^^ declaration
+    ╵
+    src/pages/gallery/Gallery.module.scss 227:9  root stylesheet
+
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+226 │         @media (max-width: 768px) {$paddingH: 1.5rem;}
+    │         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ nested rule
+... │
+228 │         padding: $paddingTop $paddingH 2rem $paddingH;
+    │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ declaration
+    ╵
+    src/pages/gallery/Gallery.module.scss 228:9  root stylesheet
+
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+226 │         @media (max-width: 768px) {$paddingH: 1.5rem;}
+    │         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ nested rule
+... │
+229 │         height: 100%;
+    │         ^^^^^^^^^^^^ declaration
+    ╵
+    src/pages/gallery/Gallery.module.scss 229:9  root stylesheet
+
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+226 │         @media (max-width: 768px) {$paddingH: 1.5rem;}
+    │         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ nested rule
+... │
+230 │         width: 100%;
+    │         ^^^^^^^^^^^ declaration
+    ╵
+    src/pages/gallery/Gallery.module.scss 230:9  root stylesheet
+
+WARNING: 3 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+10  │     @media (max-width: 768px) {$numberOfArrows: 2;}
+    │     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ nested rule
+... │
+12  │     position: fixed;
+    │     ^^^^^^^^^^^^^^^ declaration
+    ╵
+    src/pages/landingRevamp/components/ScrollLabel.module.scss 12:5  root stylesheet
+
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+10  │     @media (max-width: 768px) {$numberOfArrows: 2;}
+    │     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ nested rule
+... │
+13  │     bottom: 0.3rem;
+    │     ^^^^^^^^^^^^^^ declaration
+    ╵
+    src/pages/landingRevamp/components/ScrollLabel.module.scss 13:5  root stylesheet
+
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+10  │     @media (max-width: 768px) {$numberOfArrows: 2;}
+    │     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ nested rule
+... │
+14  │     width: 100%;
+    │     ^^^^^^^^^^^ declaration
+    ╵
+    src/pages/landingRevamp/components/ScrollLabel.module.scss 14:5  root stylesheet
+
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+10  │     @media (max-width: 768px) {$numberOfArrows: 2;}
+    │     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ nested rule
+... │
+15  │     margin: auto;
+    │     ^^^^^^^^^^^^ declaration
+    ╵
+    src/pages/landingRevamp/components/ScrollLabel.module.scss 15:5  root stylesheet
+
+DEPRECATION WARNING [mixed-decls]: Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+    ╷
+10  │     @media (max-width: 768px) {$numberOfArrows: 2;}
+    │     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ nested rule
+... │
+16  │     z-index: 100;
+    │     ^^^^^^^^^^^^ declaration
+    ╵
+    src/pages/landingRevamp/components/ScrollLabel.module.scss 16:5  root stylesheet
+
+WARNING: 4 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+
+✓ 740 modules transformed.
+rendering chunks...
+[plugin vite:reporter] 
+(!) /Users/rishit/Coding/dvm-repos/oasis-2025-web/src/pages/aboutus/AboutUs.tsx is dynamically imported by /Users/rishit/Coding/dvm-repos/oasis-2025-web/src/App.tsx but also statically imported by /Users/rishit/Coding/dvm-repos/oasis-2025-web/src/pages/landingRevamp/LandingRevamp.tsx, dynamic import will not move module into another chunk.
+
+computing gzip size...
+dist/index.html                                  3.85 kB │ gzip:   1.08 kB
+dist/assets/Oasis_25_Brochure-CIVDag8b.pdf  16,313.96 kB
+dist/assets/ComingSoon-C-To8uz8.css              1.49 kB │ gzip:   0.58 kB
+dist/assets/Brochure-BhQi4rD4.css                3.32 kB │ gzip:   0.89 kB
+dist/assets/MediaPartners-DkS5bbFU.css           6.09 kB │ gzip:   1.26 kB
+dist/assets/ContactPage-CVnEe6M1.css             6.22 kB │ gzip:   0.96 kB
+dist/assets/Sponers-bWd_X4Qw.css                 6.81 kB │ gzip:   1.37 kB
+dist/assets/Gallery-BMFGX3RV.css                 9.00 kB │ gzip:   1.52 kB
+dist/assets/Events-RSYZWrdv.css                 22.83 kB │ gzip:   3.52 kB
+dist/assets/Registration-CKZPbC_K.css           63.84 kB │ gzip:   6.36 kB
+dist/assets/index-CNpOgdg1.css                  80.53 kB │ gzip:  10.15 kB
+dist/assets/back-CefEcyuv.js                     0.05 kB │ gzip:   0.07 kB
+dist/assets/bg1-B9549S8c.js                      0.06 kB │ gzip:   0.08 kB
+dist/assets/ComingSoon-D9oaagdV.js               0.81 kB │ gzip:   0.42 kB
+dist/assets/Brochure-DzrVsp7H.js                 1.04 kB │ gzip:   0.47 kB
+dist/assets/MediaPartners-DDlD4zdU.js            2.78 kB │ gzip:   1.02 kB
+dist/assets/ContactPage-CLnIJnJa.js              4.01 kB │ gzip:   1.30 kB
+dist/assets/Gallery-HbUxyfcF.js                  4.66 kB │ gzip:   1.34 kB
+dist/assets/Sponers-CVNI9UzI.js                  4.66 kB │ gzip:   1.54 kB
+dist/assets/archive-0qG6u7rR.js                 11.65 kB │ gzip:   0.66 kB
+dist/assets/Events-4uzQcDKo.js                  13.81 kB │ gzip:   4.95 kB
+dist/assets/Registration-VHPizSjm.js           235.67 kB │ gzip:  81.73 kB
+dist/assets/index-D3-GHpbo.js                  999.14 kB │ gzip: 353.35 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 5.29s
+Pages asset limits, CSP, canonical, local original fonts and absence of backend/auth/storage verified.

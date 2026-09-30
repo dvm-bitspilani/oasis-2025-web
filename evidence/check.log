@@ -1,0 +1,5 @@
+
+> oasis-2025-web@0.0.0 check
+> node scripts/check.mjs
+
+Pages asset limits, CSP, canonical, local original fonts and absence of backend/auth/storage verified.
