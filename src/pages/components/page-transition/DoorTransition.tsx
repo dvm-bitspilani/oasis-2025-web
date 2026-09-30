@@ -2,12 +2,12 @@ import { useEffect, useRef, type RefObject } from "react";
 import { motion, useAnimation } from "framer-motion";
 import styles from "./style.module.scss";
 import Door1Image from "/images/doors/Door1.png";
-import Door2Image from "/images/doors/Door2.png";
-import Door3Image from "/images/doors/Door3.png";
+import Door2Image from "/images/doors/Door2.webp";
+import Door3Image from "/images/doors/Door3.webp";
 import Door4Image from "/images/doors/Door4.png";
 import Aud from "/sounds/door-close.mp3";
 // import Preloader from "../../registration/components/Preloader/Preloader";
-import assetList from "../../../assetList";
+
 
 type Phase = "idle" | "closing" | "waiting" | "opening";
 
@@ -38,9 +38,8 @@ export default function DoorTransition({
     innerRight: "300%",
     outerRight: "200%",
   };
-  const isLoading =
-    targetPageRef.current &&
-    Object.keys(assetList).includes(targetPageRef?.current.replace("/", ""));
+  const isLoading = false;
+  void targetPageRef;
 
   useEffect(() => {
     const closeAudio = new Audio(Aud);
@@ -58,7 +57,7 @@ export default function DoorTransition({
     let cancelled = false;
 
     const runClosing = async () => {
-      closeSoundRef.current?.play();
+      closeSoundRef.current?.play().catch(()=>{});
       await Promise.all([
         c1.set({ "--dx": START.outerLeft }),
         c2.set({ "--dx": START.innerLeft }),
@@ -97,8 +96,8 @@ export default function DoorTransition({
     };
 
     const runOpening = async () => {
-      setTimeout(async () => {
-        openSoundRef.current?.play();
+
+        openSoundRef.current?.play().catch(()=>{});
         // await Promise.all([ setTimeout(()=>{     console.log("Hi")},10000) ])
         await Promise.all([
           c2.start({
@@ -121,7 +120,7 @@ export default function DoorTransition({
         ]);
 
         if (!cancelled) onOpened?.();
-      }, 500);
+
     };
 
     if (phase === "closing") runClosing();

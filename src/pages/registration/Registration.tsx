@@ -13,9 +13,6 @@ import Back from "/svgs/registration/back.svg";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef, useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 import BreadCrumb from "../components/breadCrumb/BreadCrumb";
 interface RegistrationProps {
   startAnimation: boolean;
@@ -31,13 +28,13 @@ const Registration = ({ goToPage }: RegistrationProps) => {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.bits-oasis.org/",
+        item: "https://oasis2025.bits-oasis.org/",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Registration",
-        item: "https://www.bits-oasis.org/register",
+        item: "https://oasis2025.bits-oasis.org/register",
       },
     ],
   };
@@ -46,11 +43,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
   const [userEmail, setUserEmail] = useState("");
   const [isAnim, setIsAnim] = useState(false);
   const [userData, setUserData] = useState<any>(null);
-  const [_cookies, setCookies] = useCookies([
-    "Authorization",
-    "user-auth",
-    "Access_token",
-  ]);
+
 
   const bgRef = useRef<HTMLImageElement>(null);
   const elemRef1 = useRef<HTMLDivElement>(null);
@@ -122,26 +115,6 @@ const Registration = ({ goToPage }: RegistrationProps) => {
       })
     );
   };
-
-  function redirectWithPost(url: string, data: { [key: string]: string }) {
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = url;
-
-    // Add each key-value pair to the form
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = key;
-        input.value = data[key];
-        form.appendChild(input);
-      }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-  }
 
   const toRegPage = (back: boolean) => {
     const mm = gsap.matchMedia();
@@ -314,44 +287,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     }
   };
 
-  const onGoogleSignIn = useGoogleLogin({
-    onSuccess: (response) => {
-      // console.log(response.access_token);
-      axios
-        .post("https://bits-oasis.org/2025/main/registrations/google-reg/", {
-          access_token: response.access_token,
-        })
-        .then((res) => {
-          setCookies("Access_token", response.access_token);
-          if (res.data.exists) {
-            setCookies("user-auth", res.data);
-            setCookies("Authorization", res.data.tokens.access);
-            // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
-            redirectWithPost(
-              "https://bits-oasis.org/2025/main/registrations/",
-              {
-                token: res.data.tokens.access,
-              }
-            );
-            setUserEmail(res.data.email);
-          } else {
-            setCookies("user-auth", res.data);
-            // setUserState({
-            //   ...res.data,
-            //   access_token: response.access_token,
-            // });
-            setUserEmail(res.data.email);
-            if (res.data.email) toRegPage(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    // onFailure: () => {
-    //   console.error("Login failed");
-    // },
-  });
+  const onStartDemo = () => {setUserEmail("demo@example.invalid");toRegPage(false)};
 
   return (
     <div className={styles.instrback}>
@@ -363,7 +299,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
           name="description"
           content="Register for Oasis 2025, the annual cultural festival of BITS Pilani. Follow our simple instructions to sign up and start participating in events."
         />
-        <link rel="canonical" href="https://www.bits-oasis.org/register" />
+        <link rel="canonical" href="https://oasis2025.bits-oasis.org/register" />
         {/* Open Graph */}
         <meta
           property="og:title"
@@ -374,10 +310,10 @@ const Registration = ({ goToPage }: RegistrationProps) => {
           content="Register for Oasis 2025, the annual cultural festival of BITS Pilani."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.bits-oasis.org/register" />
+        <meta property="og:url" content="https://oasis2025.bits-oasis.org/register" />
         <meta
           property="og:image"
-          content="https://www.bits-oasis.org/logo2.png"
+          content="https://oasis2025.bits-oasis.org/logo2.png"
         />
         <meta property="og:site_name" content="OASIS 2025 | Whispers Of Edo" />
         {/* Twitter Card */}
@@ -392,7 +328,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
         />
         <meta
           name="twitter:image"
-          content="https://www.bits-oasis.org/logo2.png"
+          content="https://oasis2025.bits-oasis.org/logo2.png"
         />
       </Helmet>
       <BreadCrumb data={breadcrumbJsonLd} />
@@ -418,7 +354,7 @@ const Registration = ({ goToPage }: RegistrationProps) => {
         <img src={Back} alt="Back Button" />
       </button>
 
-      <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />
+      <Instructions onStartDemo={onStartDemo} ref={elemRef1} />
       <Register
         ref={elemRef2}
         onClickNext={toEventPage}

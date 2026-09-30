@@ -4,7 +4,7 @@ import phone from "/svgs/landing/phone.svg";
 import homeIcon from "/svgs/landing/homeIcon.svg";
 import aboutusIcon from "/svgs/landing/aboutusIcon.svg";
 import eventIcon from "/svgs/landing/eventsIcon.svg";
-import oasisLogo from "/images/landing/oasisLogo.png";
+import oasisLogo from "/images/landing/oasisLogo.webp";
 import { useHamStore } from "../../../utils/store";
 
 const navItems = [

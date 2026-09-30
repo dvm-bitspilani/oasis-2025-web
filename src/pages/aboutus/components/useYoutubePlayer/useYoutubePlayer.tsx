@@ -25,15 +25,19 @@ export const useYouTubePlayer = (videos: string[],containerRef: React.RefObject<
       });
     };
 
-    if (window.YT && window.YT.Player) initPlayer();
-    else {
-      window.onYouTubeIframeAPIReady = initPlayer;
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
-    }
+    const load = () => {
+      if (window.YT?.Player) initPlayer();
+      else {
+        window.onYouTubeIframeAPIReady = initPlayer;
+        if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+          const tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";document.body.appendChild(tag);
+        }
+      }
+    };
+    const observer = new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();load()}});
+    if(containerRef.current) observer.observe(containerRef.current);
+    return () => {observer.disconnect();playerRef.current?.destroy?.();playerRef.current=null};
 
-    return () => playerRef.current?.destroy?.();
   }, [videos, containerRef]);
 
   const loadByIndex = (i: number) => {
@@ -55,7 +59,7 @@ export const useYouTubePlayer = (videos: string[],containerRef: React.RefObject<
     setIsPlaying(false);
   } else {
     playerRef.current.playVideo();
-    setIsPlaying(true); 
+    setIsPlaying(true);
   }
 };
 

@@ -19,7 +19,7 @@ export default function Homepage({
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.bits-oasis.org/",
+        item: "https://oasis2025.bits-oasis.org/",
       },
     ],
   };
@@ -29,14 +29,14 @@ export default function Homepage({
     if (!audioRef.current) return;
 
     if (audioRef.current.paused) {
-      audioRef.current.play();
+      audioRef.current.play().catch(()=>{});
     } else {
       audioRef.current.pause();
     }
   };
   const playMusic = () => {
     if (audioRef.current) {
-      audioRef.current.play();
+      audioRef.current.play().catch(()=>{});
     }
   };
   return (
@@ -47,7 +47,7 @@ export default function Homepage({
           name="description"
           content="The official website of Oasis 2025 | Whispers Of Edo. Asia's Largest Student-Run College Cultural Festival returns for its 53rd edition in 2025! Est. 1971"
         />
-        <link rel="canonical" href="https://www.bits-oasis.org/" />
+        <link rel="canonical" href="https://oasis2025.bits-oasis.org/" />
         {/* Open Graph */}
         <meta property="og:title" content=" OASIS 2025 | Whispers Of Edo" />
         <meta
@@ -55,10 +55,10 @@ export default function Homepage({
           content="The official website of Oasis 2025 | Whispers Of Edo. Asia's Largest Student-Run College Cultural Festival returns for its 53rd edition in 2025! Est. 1971"
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.bits-oasis.org/" />
+        <meta property="og:url" content="https://oasis2025.bits-oasis.org/" />
         <meta
           property="og:image"
-          content="https://www.bits-oasis.org/logo2.png"
+          content="https://oasis2025.bits-oasis.org/logo2.png"
         />
         <meta property="og:site_name" content="OASIS 2025 | Whispers Of Edo" />
         {/* Twitter Card */}
@@ -70,7 +70,7 @@ export default function Homepage({
         />
         <meta
           name="twitter:image"
-          content="https://www.bits-oasis.org/logo2.png"
+          content="https://oasis2025.bits-oasis.org/logo2.png"
         />
       </Helmet>
       <BreadCrumb data={breadcrumbJsonLd} />

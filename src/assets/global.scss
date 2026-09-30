@@ -1,40 +1,52 @@
 @font-face {
+  font-display: swap;
   font-family: "Japan Ramen";
-  src: url("/fonts/japanRamen.otf") format("opentype");
+  src: url("/fonts/japanRamen.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
+  font-display: swap;
   font-family: "Ibarra Real Nova SemiBold";
-  src: url("/fonts/IbarraRealNova-SemiBold.ttf");
+  font-weight: 600;
+  src: url("/fonts/IbarraRealNova-SemiBold.woff2");
 }
 @font-face {
+  font-display: swap;
   font-family: "DM Serif Text";
-  src: url("/fonts/DMSerifText-Regular.ttf");
+  src: url("/fonts/DMSerifText-Regular.woff2");
 }
 @font-face {
+  font-display: swap;
   font-family: "Abhaya Libre Extrabold";
-  src: url("/fonts/AbhayaLibre-ExtraBold.ttf");
+  font-weight: 800;
+  src: url("/fonts/AbhayaLibre-ExtraBold.woff2");
 }
 @font-face {
+  font-display: swap;
   font-family: "Abhaya Libre";
-  src: url("/fonts/AbhayaLibre-Regular.ttf");
+  src: url("/fonts/AbhayaLibre-Regular.woff2");
 }
 @font-face {
+  font-display: swap;
   font-family: "Abhaya Libre Bold";
-  src: url("/fonts/AbhayaLibre-Bold.ttf");
+  font-weight: 700;
+  src: url("/fonts/AbhayaLibre-Bold.woff2");
 }
 @font-face {
+  font-display: swap;
   font-family: "Shippori Mincho";
-  src: url("/fonts/ShipporiMincho-Regular.ttf");
+  src: url("/fonts/ShipporiMincho-Regular.woff2");
 }
 @font-face {
+  font-display: swap;
   font-family: "The Last Shuriken";
-  src: url("/fonts/TheLastShuriken.otf");
+  src: url("/fonts/TheLastShuriken.woff2");
 }
 @font-face {
+  font-display: swap;
   font-family: "NoyagiDemo";
-  src: url("/fonts/NoyagiDemo.ttf");
+  src: url("/fonts/NoyagiDemo.woff2");
 }
 $primaryFont: "Japan Ramen", sans-serif;
 
@@ -45,3 +57,5 @@ $abtusHeadFont:"The Last Shuriken",sans-serif;
 $hamFooterFont: "NoyagiDemo", sans-serif;
 
 * {-webkit-tap-highlight-color:  transparent}
+@font-face {font-family:"Ibarra Real Nova";src:url("/fonts/IbarraRealNova-Regular.woff2") format("woff2");font-weight:400;font-display:swap;}
+@font-face {font-family:"Averia Serif Libre";src:url("/fonts/AveriaSerifLibre-Regular.woff2") format("woff2");font-weight:400;font-display:swap;}

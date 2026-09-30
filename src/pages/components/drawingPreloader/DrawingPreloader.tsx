@@ -5,89 +5,6 @@ import styles from "./DrawingPreloader.module.scss";
 import useOverlayStore from "../../../utils/store";
 // import { set } from "react-hook-form";
 
-const imagesToPreload = [
-  // "/svgs/logo.svg",
-  "/images/doors/Door1.png",
-  "/images/doors/Door2.png",
-  "/images/doors/Door3.png",
-  "/images/doors/Door4.png",
-  "/videos/ink-spread-5.gif",
-  "/svgs/landing/hamClouds/cloud1.min.svg",
-  "/svgs/landing/hamClouds/cloud2.min.svg",
-  "/svgs/landing/hamClouds/cloud3.min.svg",
-  "/svgs/landing/hamClouds/cloud4.min.svg",
-  "/svgs/landing/hamClouds/cloud5.min.svg",
-  "/svgs/landing/hamClouds/cloud6.min.svg",
-  "/svgs/landing/insta.svg",
-  "/svgs/landing/linkden.svg",
-  "/svgs/landing/moon1.svg",
-  "/svgs/landing/moonHam.svg",
-  "/images/landing/background1.png",
-  "/images/landing/tree1.png",
-  "/svgs/landing/insta.svg",
-  "/svgs/landing/x.svg",
-  "/svgs/landing/linkden.svg",
-  "/svgs/landing/wire.svg",
-  "/images/landing/mobileMountains.png",
-  "/svgs/landing/instaLamp.svg",
-  "/svgs/landing/linkdenLamp.svg",
-  "/svgs/landing/mobileBackground.svg",
-  "/svgs/landing/mobileRegisterBtn.svg",
-  "/svgs/landing/registerBtn.svg",
-  // "/images/landing/oasisLogo.png",
-  "/images/landing/logo_final.png",
-  "/images/landing/mobileCloud.png",
-  "/images/registration/reg-banner.png",
-  "/svgs/registration/bg-extended.svg",
-  "/svgs/registration/bg-mobile.svg",
-  "/svgs/registration/scrollThumb.svg",
-  "/svgs/registration/scroll-bar.svg",
-  "/svgs/registration/leftarr.svg",
-  "/svgs/registration/rightarr.svg",
-  "/images/contact/contact-banner.png",
-  // "/images/contact/Aryan.png",
-  // "/images/contact/Ahan.png",
-  "/images/contact/Aditya.png",
-  "/images/contact/Arshita.png",
-  "/images/contact/Ayushmaan.png",
-  "/images/contact/Dhruv.png",
-  "/images/contact/Ishita.png",
-  "/images/contact/Pranav.png",
-  "/images/contact/Rahul.png",
-  "/images/contact/SajalY.png",
-  "/images/contact/ContactCard1.png",
-  "/images/contact/DoorsCombined.png",
-  "/images/contact/DoorsMobile.png",
-  "/svgs/aboutus/letter1.svg",
-  "/svgs/aboutus/letter2.svg",
-  "/svgs/aboutus/letter3.svg",
-  "/svgs/aboutus/letter4.svg",
-  "/svgs/aboutus/letter5.svg",
-  "/svgs/aboutus/letter6.svg",
-  "/svgs/aboutus/letter7.svg",
-  "/svgs/aboutus/letter8.svg",
-  "/svgs/aboutus/header.svg",
-  "/svgs/aboutus/fan.png",
-  "/svgs/aboutus/prev.svg",
-  "/svgs/aboutus/pause.svg",
-  "/svgs/aboutus/next.svg",
-  "/svgs/aboutus/reghead.svg",
-  "/svgs/aboutus/play.svg",
-  "/svgs/aboutus/nextarr.svg",
-  "/svgs/aboutus/borde.svg",
-  "/svgs/aboutus/instaicon.svg",
-  "/svgs/aboutus/xicon.svg",
-  "/svgs/aboutus/linkedin.svg",
-  "/svgs/aboutus/yticon.svg",
-  "/svgs/aboutus/abtus.svg",
-  "/images/aboutus/background.jpg",
-  "/images/aboutus/backg.png",
-  "/images/aboutus/abtbck.png",
-  "/videos/dragon-reveal.gif",
-];
-
-const soundsToPreload: string[] = []; // (/iPad|iPhone|iPod/.test(navigator.userAgent)) ? [] : ["./sounds/door-close.mp3"]
-
 export default function DrawingPreloader({
   className,
   onEnter,
@@ -107,72 +24,7 @@ export default function DrawingPreloader({
   );
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    let loadedAssets = 0;
-
-    const preloadImage = (src: string) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-          loadedAssets++;
-          setProgress(
-            (loadedAssets / (imagesToPreload.length + soundsToPreload.length)) *
-              99
-          );
-          const canvas = document.createElement("canvas");
-          canvas.width = img.naturalWidth;
-          canvas.height = img.naturalHeight;
-          const ctx = canvas.getContext("2d");
-          if (ctx) {
-            ctx.drawImage(img, 0, 0);
-          }
-          resolve(img);
-        };
-        img.onerror = (err) => {
-          console.error("Image failed to load", err, img);
-          resolve(img);
-        };
-      });
-    };
-    const preloadSound = (src: string) => {
-      return new Promise((resolve) => {
-        const audio = new Audio(src);
-        audio.onloadeddata = () => {
-          loadedAssets++;
-          setProgress(
-            (loadedAssets / (imagesToPreload.length + soundsToPreload.length)) *
-              99
-          );
-          resolve(audio);
-        };
-        audio.onerror = (err) => {
-          console.error("Image failed to load", err, audio);
-          resolve(audio);
-        };
-      });
-    };
-
-    Promise.all([
-      ...imagesToPreload.map((src, i) =>
-        preloadImage(src).then(async (img) => {
-          await new Promise((resolve) => setTimeout(resolve, 1000 * i));
-          return img;
-        })
-      ),
-      ...soundsToPreload.map((src, i) =>
-        preloadSound(src).then(async (audio) => {
-          await new Promise((resolve) => setTimeout(resolve, 1000 * i));
-          return audio;
-        })
-      ),
-    ])
-      .then(() => {})
-      .catch((err) => {
-        console.error("Error preloading images:", err);
-      });
-    console.log("Preloading images completed");
-  }, []);
+  useEffect(() => { setProgress(99); }, []);
 
   const svgEl = useRef<SVGSVGElement>(null);
   const pathsRef = useRef<SVGPathElement[]>([]);
@@ -202,7 +54,7 @@ export default function DrawingPreloader({
         if (progressNormalized >= pathEndProgress) {
           gsap.to(path, {
             strokeDashoffset: 0,
-            duration: 5,
+            duration: 1.2,
             ease: "power2.out",
             onComplete: () => {
               if (index === totalPaths - 1) {
@@ -219,7 +71,7 @@ export default function DrawingPreloader({
 
           gsap.to(path, {
             strokeDashoffset: offset,
-            duration: 3,
+            duration: 1.2,
             ease: "power2.out",
           });
         }

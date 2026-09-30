@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./ConfirmModal.module.scss";
-import axios from "axios";
-import { useCookies } from "react-cookie";
 
 import thumb from "/svgs/registration/scrollThumb.svg";
 import ScrollBar from "/svgs/registration/scroll-bar.svg";
@@ -19,81 +17,21 @@ const Backdrop = () => {
 };
 
 const Confirmation = (props: PropsType) => {
-  const { onCancel, selectedEvents, userData } = props;
+  const { onCancel, selectedEvents } = props;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [access_token, setAccess_token] = useState("");
+
   const [notification, setNotification] = useState({
     showSelection: true,
     isError: false,
     message: "",
   });
 
-  function redirectWithPost(url: string, data: { [key: string]: string }) {
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = url;
-
-    // Add each key-value pair to the form
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = key;
-        input.value = data[key];
-        form.appendChild(input);
-      }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-  }
-
   const mainContainerRef = useRef<HTMLUListElement>(null);
   const scrollBarRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLImageElement>(null);
 
-  const [cookies] = useCookies(["Access_token", "user-auth"]);
-
-  const handleSubmit = async () => {
-    setIsSubmitting(true);
-    const reqData = {
-      ...userData,
-      access_token: cookies["Access_token"],
-    };
-    axios
-      .post("https://bits-oasis.org/2025/main/registrations/register/", reqData)
-      .then((response) => {
-        setIsSubmitting(false);
-        if (response.data.message === "User has been registered") {
-          setAccess_token(response.data.tokens.access);
-          setNotification({
-            showSelection: false,
-            isError: false,
-            message: "Registration Successful.",
-          });
-        } else {
-          setNotification({
-            showSelection: false,
-            isError: true,
-            message: response.data.message || response.data.error,
-          });
-        }
-      })
-      .catch((error) => {
-        setIsSubmitting(false);
-        console.error("Error registering:", error);
-        setNotification({
-          showSelection: false,
-          isError: true,
-          message:
-            error.response.data.message ||
-            error.response.data.error ||
-            "Registration Failed.",
-        });
-      });
-    sessionStorage.removeItem("selectedEvents");
-  };
+  const handleSubmit = () => {setIsSubmitting(false);setNotification({showSelection:false,isError:false,message:"Demo complete. Registration is closed; nothing was sent or saved."})};
 
   function handleScroll() {
     if (!mainContainerRef.current || !thumbRef.current) return;
@@ -230,21 +168,9 @@ const Confirmation = (props: PropsType) => {
           <div className={styles.buttonsContainer}>
             <button
               className={styles.confirmButton}
-              onClick={() => {
-                if (notification.isError) {
-                  onCancel();
-                } else {
-                  // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${access_token}`;
-                  redirectWithPost(
-                    "https://bits-oasis.org/2025/main/registrations/",
-                    {
-                      token: access_token,
-                    }
-                  );
-                }
-              }}
+              onClick={onCancel}
             >
-              {notification.isError ? "Return" : "Dashboard"}
+              Return to demo
             </button>
           </div>
         </>

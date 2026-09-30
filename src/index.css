@@ -8,3 +8,4 @@
   height: 100vh;
   width: 100vw;
 }
+.portfolio-archive{position:fixed;bottom:8px;left:8px;z-index:99999;background:#252620e8;color:#f8ebcb;padding:5px 9px;border-radius:4px;font:11px/1.4 sans-serif;pointer-events:none}.archive-loading{position:fixed;inset:0;display:grid;place-items:center;background:#e0d5bb;color:#30291f;font:18px serif}

@@ -12,7 +12,7 @@ export default function Brochure() {
                 <div className={styles.title}>Brochure</div>
                 <div className={styles.brochureWrapper}>
                     <div className={styles.brochureContainer}>
-                        <iframe 
+                        <iframe loading="lazy"
                             src={`${pdfFile}#toolbar=0&scrollbar=0`}
                             className={styles.brochureIframe}
                             title="Oasis 2025 Brochure"

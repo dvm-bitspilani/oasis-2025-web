@@ -8,9 +8,9 @@ import styles from "./Landing.module.scss";
 import { useGSAP } from "@gsap/react";
 import { i } from "framer-motion/client";
 import Navbar from "../components/navbar/Navbar";
-import landingImage from "/images/landing/background1.png";
-import mobileMountains from "/images/landing/mobileMountains.png";
-import tree from "/images/landing/tree1.png";
+import landingImage from "/images/landing/background1.webp";
+import mobileMountains from "/images/landing/mobileMountains.webp";
+import tree from "/images/landing/tree1.webp";
 import insta from "/svgs/landing/insta.svg";
 import instaLamp from "/svgs/landing/instaLamp.svg";
 import linkden from "/svgs/landing/linkden.svg";
@@ -21,7 +21,7 @@ import registerBtn from "/svgs/landing/registerBtn.svg";
 import wire from "/svgs/landing/wire.svg";
 import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
-import logo from "/images/landing/oasisLogo.png";
+import logo from "/images/landing/oasisLogo.webp";
 import mobileCloud from "/images/landing/mobileCloud.png";
 import Ham from "../components/ham/ham";
 // import AboutUs from "../aboutus/AboutUs";
@@ -466,14 +466,14 @@ export default function Landing({
         </div>
         {/* <div className={styles.bottomContent} ref={bottomContentRef}>
             {
-              // replace this with actual about us and give it the required ref 
+              // replace this with actual about us and give it the required ref
             }
-            <div className={styles.dummyAboutUs} ref={aboutUsRef} /> 
+            <div className={styles.dummyAboutUs} ref={aboutUsRef} />
             {
               // Don't render contact doors until the refs are set
               treeImageRef.current && aboutUsRef.current &&
               <ContactDoors
-                aboutUsRef={aboutUsRef} 
+                aboutUsRef={aboutUsRef}
                 pinnedContRef={wrapperRef}
                 bottomContentRef={bottomContentRef}
               />

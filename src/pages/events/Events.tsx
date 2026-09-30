@@ -1,17 +1,17 @@
 import styles from "./Events.module.scss";
 import EventBack from "/svgs/events/eventsback.svg";
 import Text from "/images/events/text.png";
-import dance from "/images/events/dance.png";
-import drama from "/images/events/drama.png";
-import dramaMobile from "/images/events/DramaMobile.png";
-import music from "/images/events/music.png";
-import misc from "/images/events/misc.png";
-import photography from "/images/events/photography.png";
-// import quizzes from "/images/events/quizzes.png";
-import danceMobile from "/images/events/DanceMobile.png";
-import musicMobile from "/images/events/MusicMobile.png";
+import dance from "/images/events/dance.webp";
+import drama from "/images/events/drama.webp";
+import dramaMobile from "/images/events/DramaMobile.webp";
+import music from "/images/events/music.webp";
+import misc from "/images/events/misc.webp";
+import photography from "/images/events/photography.webp";
+// import quizzes from "/images/events/quizzes.webp";
+import danceMobile from "/images/events/DanceMobile.webp";
+import musicMobile from "/images/events/MusicMobile.webp";
 import miscMobile from "/images/events/MiscMobile.png";
-import photographyMobile from "/images/events/PhotographyMobile.png";
+import photographyMobile from "/images/events/PhotographyMobile.webp";
 // import quizzesMobile from "/images/events/QuizzesMobile.png";
 import Eventspage from "./components/Eventspage";
 import { useRef, useState, useEffect } from "react";
@@ -71,13 +71,13 @@ const Events: React.FC = () => {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.bits-oasis.org/",
+        item: "https://oasis2025.bits-oasis.org/",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Events",
-        item: "https://www.bits-oasis.org/events",
+        item: "https://oasis2025.bits-oasis.org/events",
       },
     ],
   };
@@ -209,11 +209,11 @@ const Events: React.FC = () => {
               y: rec.top + rec.height / 2 - rect.top,
             };
           })();
-          
+
           //  reset transforms before animation
           gsap.killTweensOf(imgEl);
           gsap.set(imgEl, { scale: 1 });
-         
+
 
           imgEl.style.transformOrigin = `${origin.x}px ${origin.y}px`;
 
@@ -280,7 +280,7 @@ const Events: React.FC = () => {
           name="description"
           content="Explore the diverse events at OASIS 2025 including Drama, Music, Dance, Photography, and more!"
         />
-        <link rel="canonical" href="https://www.bits-oasis.org/events" />
+        <link rel="canonical" href="https://oasis2025.bits-oasis.org/events" />
       </Helmet>
       <BreadCrumb data={breadcrumbJsonLd} />
       <div>
@@ -299,7 +299,7 @@ const Events: React.FC = () => {
                 key={i}
                 src={isMobile && img.mobileSrc ? img.mobileSrc : img.src}
                 alt={img.alt}
-                data-nosnippet   
+                data-nosnippet
                 ref={(el) => {
                   imageRefs.current[i] = el;
                 }}

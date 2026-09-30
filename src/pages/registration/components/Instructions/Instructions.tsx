@@ -7,11 +7,11 @@ import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
 
 type PropsType = {
-  onGoogleSignIn: () => void;
+  onStartDemo: () => void;
 };
 
 const Instructions = forwardRef<HTMLDivElement, PropsType>(
-  ({ onGoogleSignIn }, ref) => {
+  ({ onStartDemo }, ref) => {
     const [detailInst, setdetailInst] = useState(false);
 
     return (
@@ -27,10 +27,9 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
           </div>
           <ul className={styles.instr}>
             <li>
-              Complete the registration form with all required details. You'll
-              be able to login through your registered email id when required.
+              Use fictional sample details to explore this archived form. No login, registration, payment or information is sent or saved.
             </li>
-            <li>All team members are required to register separately.</li>
+            <li>Historical registration is closed.</li>
             <li>All prof shows are free. </li>
             <li>
               For further details contact, Ujjwal Kansal: <a href="tel:+919991520330">+91 99915 20330</a>,
@@ -42,8 +41,8 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
             </li>
           </ul>
 
-          <button className={styles.googleButton} onClick={onGoogleSignIn}>
-            Sign in with Google
+          <button className={styles.googleButton} onClick={onStartDemo}>
+            Start portfolio demo
           </button>
         </div>
       </>

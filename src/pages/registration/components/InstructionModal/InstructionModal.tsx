@@ -117,26 +117,10 @@ const Confirmation = (props: PropsType) => {
       <h2 className={styles.heading}>Detailed Instructions :</h2>
       <div className={styles.content}>
         <ul ref={mainContainerRef}>
-          <li>
-            ⁠Complete the registration form with all required details. You'll be
-            able to login through your registered email id when required. All
-            team members are required to register separately.
-          </li>
-          <li>
-            A College Representative (CR) will be appointed for each college
-            who'll be responsible for allotting heads for all the societies the
-            college will be participating for.
-          </li>
-          <li>
-            The heads and CR will be responsible for approving the other
-            participating members.
-          </li>
-          <li>
-            After this, an approval email will be sent from the Department of
-            Publication and Correspondence.
-          </li>
-          <li>Make the required payment as instructed.</li>
-          <li>Upon successful payment, a confirmation email will be sent.</li>
+          <li>Portfolio demonstration only. Oasis 2025 registration is closed.</li>
+          <li>Use fictional sample details and explore the original form and event-selection screens.</li>
+          <li>College records and unavailable event details are representative demos; event names are preserved from the original brochure.</li>
+          <li>Confirmation is shown in memory. No login, payment, email or information is sent or saved.</li>
         </ul>
         <div
           className={styles.scrollBarContainer}

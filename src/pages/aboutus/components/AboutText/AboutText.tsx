@@ -1,6 +1,6 @@
 import styles from"../../AboutUs.module.scss"
 import abtus from "/svgs/aboutus/abtus.svg";
-import aboutTextBG from "/images/aboutus/abtbck.png";
+import aboutTextBG from "/images/aboutus/abtbck.webp";
 
 interface AboutTextProps {
   isMobile: boolean;

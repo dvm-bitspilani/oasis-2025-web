@@ -1,7 +1,7 @@
 import styles from "./Contact.module.scss";
 import { useEffect, useRef, useState } from "react";
-import door1 from "/images/contact/Door1.png";
-import door2 from "/images/contact/Door2.png";
+import door1 from "/images/contact/Door1.webp";
+import door2 from "/images/contact/Door2.webp";
 import door1mobile from "/images/contact/Door1Mobile.png";
 import door2mobile from "/images/contact/Door2Mobile.png";
 import { useGSAP } from "@gsap/react";
@@ -160,7 +160,7 @@ export default function ContactDoors({
       "resize",
       debouncedHandleResize
     );
-    
+
     return () =>
       (window.visualViewport || window).removeEventListener(
         "resize",

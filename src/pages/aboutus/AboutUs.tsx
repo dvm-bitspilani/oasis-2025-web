@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./AboutUs.module.scss";
 import Header from "/svgs/aboutus/header.svg";
-import fan from "/svgs/aboutus/fan.png";
+import fan from "/svgs/aboutus/fan.webp";
 import prev from "/svgs/aboutus/prev.svg";
 import pause from "/svgs/aboutus/pause.svg";
 import next from "/svgs/aboutus/next.svg";
@@ -11,7 +11,7 @@ import nextarr from "/svgs/aboutus/nextarr.svg";
 import BackButton from "../components/backButton/BackButton";
 import PlayButton from "/svgs/aboutus/borde.svg";
 import aboutPageBG from "/images/aboutus/background.jpg";
-import aboutPageBGMobile from "/images/aboutus/backg.png";
+import aboutPageBGMobile from "/images/aboutus/backg.webp";
 import letter1 from "/svgs/aboutus/letter1.svg";
 import letter2 from "/svgs/aboutus/letter2.svg";
 import letter3 from "/svgs/aboutus/letter3.svg";

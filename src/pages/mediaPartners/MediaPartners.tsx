@@ -5,12 +5,12 @@ import dummy from "/images/logo.png";
 import Back from "/svgs/registration/back.svg";
 import { useContext } from "react";
 import { navContext } from "../../App";
-import bronx from "/images/mediaPartners/Bronx.png";
-import zack from "/images/mediaPartners/Zack.jpeg";
-import kanika from "/images/mediaPartners/Kanika.png";
-import jhoom from "/images/mediaPartners/Jhoom.jpg";
+import bronx from "/images/mediaPartners/Bronx.webp";
+import zack from "/images/mediaPartners/Zack.webp";
+import kanika from "/images/mediaPartners/Kanika.webp";
+import jhoom from "/images/mediaPartners/Jhoom.webp";
 import captures from "/images/mediaPartners/Captures.png";
-import sarcaster from "/images/mediaPartners/Sarcaaster.png";
+import sarcaster from "/images/mediaPartners/Sarcaaster.webp";
 
 let mediaPatners = [
   {
@@ -88,8 +88,7 @@ const MediaPatners = () => {
             {mediaPatners.map((mediaPatner, index) => (
               <a
                 href={mediaPatner.link}
-                target="_blank"
-                rel="noreferrer"
+                target="_blank" rel="noopener noreferrer"
                 draggable={false}
               >
                 <div key={index} className={styles.mediaPatner}>

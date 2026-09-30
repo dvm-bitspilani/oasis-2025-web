@@ -1,0 +1,68 @@
+[
+  {
+    "font": "NoyagiDemo.ttf",
+    "before": 38572,
+    "after": 11924,
+    "weight": 400
+  },
+  {
+    "font": "AbhayaLibre-Bold.ttf",
+    "before": 511516,
+    "after": 25316,
+    "weight": 700
+  },
+  {
+    "font": "japanRamen.otf",
+    "before": 15592,
+    "after": 4940,
+    "weight": 400
+  },
+  {
+    "font": "AbhayaLibre-Regular.ttf",
+    "before": 538364,
+    "after": 25024,
+    "weight": 400
+  },
+  {
+    "font": "AveriaSerifLibre-Regular.ttf",
+    "before": 108904,
+    "after": 39072,
+    "weight": 400
+  },
+  {
+    "font": "TheLastShuriken.otf",
+    "before": 17140,
+    "after": 7596,
+    "weight": 400
+  },
+  {
+    "font": "AbhayaLibre-ExtraBold.ttf",
+    "before": 518396,
+    "after": 25068,
+    "weight": 800
+  },
+  {
+    "font": "ShipporiMincho-Regular.ttf",
+    "before": 8662440,
+    "after": 34104,
+    "weight": 400
+  },
+  {
+    "font": "DMSerifText-Regular.ttf",
+    "before": 73992,
+    "after": 26824,
+    "weight": 400
+  },
+  {
+    "font": "IbarraRealNova-SemiBold.ttf",
+    "before": 74088,
+    "after": 22532,
+    "weight": 600
+  },
+  {
+    "font": "IbarraRealNova-Regular.ttf",
+    "before": 74012,
+    "after": 21408,
+    "weight": 400
+  }
+]

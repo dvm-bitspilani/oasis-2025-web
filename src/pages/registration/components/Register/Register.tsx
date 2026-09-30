@@ -5,7 +5,7 @@ import Field from "/svgs/registration/field2.svg";
 import styles from "./Register.module.scss";
 import { useEffect, useState, forwardRef, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
+
 import statesData from "./cities.json";
 import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
@@ -49,7 +49,7 @@ const genderOptions: GenderOption[] = [
   { value: "O", label: "Other" },
 ];
 
-const Register = forwardRef<HTMLDivElement, PropsType>(  
+const Register = forwardRef<HTMLDivElement, PropsType>(
   function RegisterComponent(props, ref) {
     const { onClickNext, userEmail, setUserData } = props;
     const [selectedState, setSelectedState] = useState("");
@@ -62,20 +62,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
     const [inputValue, setInputValue] = useState("");
 
     const dropDownRef = useRef<(HTMLImageElement | null)[]>([]);
-    
-    useEffect(() => {
-      axios
-        .get("https://bits-oasis.org/2025/main/registrations/get_college/")
-        .then((response) => {
-          setCollegeOptions(
-            response.data.data.map((college: { id: number; name: string }) => ({
-              value: String(college.id),
-              label: college.name,
-            }))
-          );
-        })
-        .catch((error) => console.error("Error fetching colleges:", error));
-    }, []);
+
+    useEffect(() => {setCollegeOptions([{value:"demo-college",label:"Representative demo college"}])}, []);
 
     const getAvailableCities = (stateName: string) =>
       (statesData.find((item) => item.state === stateName)?.cities ?? []).map(
@@ -92,8 +80,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
       formState: { errors },
       setValue,
       control,
-      reset,
-      watch,
+
+
     } = useForm<FormData>({
       resolver: yupResolver(registrationSchema as any),
       defaultValues: {
@@ -108,31 +96,6 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
       },
     });
 
-useEffect(() => {
-  const savedData = localStorage.getItem("registrationFormData");
-  if (savedData) {
-    try {
-      const parsedData = JSON.parse(savedData);
-      reset({
-        ...parsedData,
-        email_id: userEmail,
-      });
-      if (parsedData.state) {
-        setSelectedState(parsedData.state);
-      }
-    } catch (err) {
-      console.error("Failed to parse local storage data:", err);
-      localStorage.removeItem("registrationFormData");
-    }
-  }
-}, [reset, userEmail]);
-    useEffect(() => {
-  const subscription = watch((value) => {
-    localStorage.setItem("registrationFormData", JSON.stringify(value));
-  });
-
-  return () => subscription.unsubscribe();
-}, [watch]);
 
     const getFilteredOptions = (input: string) => {
       if (!input) return stateOptions;
@@ -271,14 +234,14 @@ useEffect(() => {
     };
 
     const onSubmit = (data: any) => {
-      console.log("Form Data:", data);
+
       setUserData({
         ...data,
         email_id: userEmail,
       });
       onClickNext();
-      
-      localStorage.removeItem("registrationFormData");
+
+
     };
 
     return (

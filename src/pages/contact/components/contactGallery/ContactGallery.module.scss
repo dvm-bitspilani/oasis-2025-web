@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'Averia Serif Libre';
-    src: url('/fonts/AveriaSerifLibre-Regular.ttf') format('truetype');
+    src: url('/fonts/AveriaSerifLibre-Regular.woff2') format('truetype');
 }
 
 .contactContent {
@@ -101,7 +101,7 @@
                             display: flex;
                             justify-content: center;
                             gap: 3rem;
-                            
+
                             .contactIcon {
                                 font-size: 1.8rem;
                                 transition: 0.3s color;
@@ -119,7 +119,7 @@
                                 div {
                                     height: 1.5rem;
                                     .contactIcon {
-                                        font-size: 1.5rem; 
+                                        font-size: 1.5rem;
                                         height: 1.5rem;
                                         position: relative;
                                     }
@@ -136,7 +136,7 @@
                                 div {
                                     // height: 0.8rem;
                                     .contactIcon {
-                                        font-size: 0.8rem; 
+                                        font-size: 0.8rem;
                                         // height: 0.8rem;
                                         position: relative;
                                     }
@@ -158,5 +158,5 @@
             gap: 1.5rem;
         }
     }
-    
+
 }

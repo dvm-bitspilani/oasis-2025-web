@@ -1,37 +1,31 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useRef, useEffect, createContext } from "react";
-import Preloader from "./pages/registration/components/Preloader/Preloader";
+import { useState, useRef, useEffect, createContext, lazy, Suspense, useCallback } from "react";
+
 import Homepage from "./Homepage";
-import Registration from "./pages/registration/Registration";
+const Registration = lazy(() => import("./pages/registration/Registration"));
 import DoorTransition from "./pages/components/page-transition/DoorTransition";
-import AboutUs from "./pages/aboutus/AboutUs";
-import Contact from "./pages/contact/ContactPage";
-import ComingSoon from "./pages/comingSoon/ComingSoon";
-import assetList from "./assetList";
+const AboutUs = lazy(() => import("./pages/aboutus/AboutUs"));
+const Contact = lazy(() => import("./pages/contact/ContactPage"));
+const ComingSoon = lazy(() => import("./pages/comingSoon/ComingSoon"));
+
 import useCanonicalUrl from "./UseCanonicalUrl";
 
 // import Eventspage from "./pages/events/components/Eventspage";
 
-import Events from "./pages/events/Events";
+const Events = lazy(() => import("./pages/events/Events"));
 
 export const navContext = createContext<{ goToPage?: (page: string) => void }>(
   {}
 );
 
-import ReactGA from "react-ga4";
-import Brochure from "./pages/brochure/Brochure";
-import Sponsors from "./pages/sponsers/Sponers";
-import MediaPatners from "./pages/mediaPartners/MediaPartners";
-import Gallery from "./pages/gallery/Gallery";
 
-const TRACKING_ID = "G-57YBBH7RXW";
-if (window.location.hostname.search("bits-oasis.org") !== -1) {
-  ReactGA.initialize(TRACKING_ID);
-  console.log("Hey :)");
-}
+const Brochure = lazy(() => import("./pages/brochure/Brochure"));
+const Sponsors = lazy(() => import("./pages/sponsers/Sponers"));
+const MediaPatners = lazy(() => import("./pages/mediaPartners/MediaPartners"));
+const Gallery = lazy(() => import("./pages/gallery/Gallery"));
 
 export default function App() {
-  useCanonicalUrl("https://www.bits-oasis.org");
+  useCanonicalUrl("https://oasis2025.bits-oasis.org");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,12 +33,7 @@ export default function App() {
     startAnimation?: boolean;
   }
 
-  useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: location.pathname + location.search,
-    });
-  }, [location]);
+
 
   const pageList = [
     "home",
@@ -75,7 +64,7 @@ export default function App() {
   const [doorPLPercentageLoaded, setDoorPLPercentageLoaded] =
     useState<number>(0);
 
-  const [isPreloading, setIsPreloading] = useState(location.pathname !== "/");
+  const isPreloading = false;
 
   const nextRoute = useRef<string | null>(null);
 
@@ -90,36 +79,20 @@ export default function App() {
         ? "home"
         : "comingSoon"
     );
-    setIsPreloading(Object.keys(assetList).includes(path));
+
   }, [location.pathname]);
 
-  const handleDoorsClosed = async () => {
-    setDoorPhase("waiting");
+  const handleDoorsClosed = useCallback(() => {
+    if (nextRoute.current) navigate(nextRoute.current, {state:{startAnimation:true}});
+    setDoorPLPercentageLoaded(100);
+    setDoorPhase("opening");
+  }, [navigate]);
 
-    const page = nextRoute.current?.replace("/", "");
-    if (page && Object.keys(assetList).includes(page))
-      await loadAssets(page as keyof typeof assetList);
-    // await new Promise((resolve) => setTimeout(resolve, 10000))
-
-    if (nextRoute.current) {
-      navigate(nextRoute.current, { state: { startAnimation: true } });
-    }
-
-    if (
-      nextRoute.current &&
-      !Object.keys(assetList).includes(nextRoute.current)
-    ) {
-      setTimeout(() => {
-        setDoorPhase("opening");
-      }, 500);
-    }
-  };
-
-  const handleDoorsOpened = () => {
+  const handleDoorsOpened = useCallback(() => {
     setDoorPhase("idle");
     nextRoute.current = null;
     setDoorPLPercentageLoaded(0);
-  };
+  }, []);
 
   const goToPage = (path: string) => {
     if (location.pathname !== path) {
@@ -128,49 +101,10 @@ export default function App() {
     }
   };
 
-  const handlePreloaderEnter = () => {
-    setIsPreloading(false);
-
-    if (location.pathname === "/register") {
-      setTimeout(() => {
-        setDoorPhase("opening");
-      }, 300);
-    }
-  };
-
-  const loadAssets = async (page: keyof typeof assetList) => {
-    const handleLoadedAsset = (callback: (param?: any) => void) => {
-      setDoorPLPercentageLoaded((prev) => prev + 100 / promises.length);
-      callback();
-    };
-
-    const promises = [
-      ...assetList[page].images.map(
-        (path) =>
-          new Promise((resolve, reject) => {
-            const image = new Image();
-            image.src = path;
-            image.onload = () => handleLoadedAsset(() => resolve(image));
-            image.onerror = () => handleLoadedAsset((error) => reject(error));
-          })
-      ),
-      ...assetList[page].videos.map(
-        (path) =>
-          new Promise((resolve, reject) => {
-            const video = document.createElement("video");
-            video.src = path;
-            video.onloadeddata = () => handleLoadedAsset(() => resolve(video));
-            video.onerror = () => handleLoadedAsset((error) => reject(error));
-          })
-      ),
-    ];
-
-    await Promise.allSettled(promises); //.catch((error) => console.log(error))
-    console.log("loaded");
-  };
 
   return (
     <navContext.Provider value={{ goToPage }}>
+      <div className="portfolio-archive" role="note">OASIS 2025 · Portfolio archive · Registration demo only</div>
       <DoorTransition
         phase={doorPhase}
         onClosed={handleDoorsClosed}
@@ -178,13 +112,9 @@ export default function App() {
         percentageLoaded={doorPLPercentageLoaded}
         targetPageRef={nextRoute}
       />
+      <Suspense fallback={<div className="archive-loading">Opening archived page…</div>}>
       <h1 style={{ display: "none" }}>OASIS 2025 | Whispers Of Edo</h1>
-      {isPreloading && (
-        <Preloader
-          onEnter={handlePreloaderEnter}
-          targetLocation={nextRoute.current}
-        />
-      )}
+
 
       {!isPreloading && currentPage === "home" && (
         <Homepage goToPage={goToPage} />
@@ -207,7 +137,7 @@ export default function App() {
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
       {!isPreloading && currentPage === "sponsors" && <Sponsors />}
       {!isPreloading && currentPage === "mediaPartners" && <MediaPatners />}
-      {/* 
+      {/*
       <Routes>
         <Route path="/" element={null} errorElement={<ComingSoon />} />
         <Route path="/events" element={null} errorElement={<ComingSoon />} />
@@ -217,6 +147,7 @@ export default function App() {
         <Route path="/aboutus" element={null} />
         <Route path="/comingSoon" element={null} />
       </Routes> */}
+    </Suspense>
     </navContext.Provider>
   );
 }

@@ -1,7 +1,7 @@
 import ContactGallery from './components/contactGallery/ContactGallery';
 import styles from './Contact.module.scss';
-import doors from '/images/contact/DoorsCombined.png';
-import doorsMobile from '/images/contact/DoorsMobile.png';
+import doors from '/images/contact/DoorsCombined.webp';
+import doorsMobile from '/images/contact/DoorsMobile.webp';
 import BackButton from '../components/backButton/BackButton';
 import { useEffect, useState } from 'react';
 
@@ -33,13 +33,13 @@ export default function Contact() {
             />
             <div className={styles.contactPageBg}>
                 {
-                    Array(horiBarDetails?.numOfBars).fill(null).map((_, i) => 
-                        <div 
-                            className={styles.horiBar} 
-                            key={i} 
+                    Array(horiBarDetails?.numOfBars).fill(null).map((_, i) =>
+                        <div
+                            className={styles.horiBar}
+                            key={i}
                             style={{
                                 top: `${i*(horiBarDetails?.barGap || 0) + (horiBarDetails?.firstBarPos || 0)}px`
-                            }} 
+                            }}
                         >
                             {
                                 Array(isMobile ? 5 : 3).fill(null).map(() => <div />)
@@ -55,7 +55,7 @@ export default function Contact() {
                     {/* <div className={styles.contactBgImg} style={{backgroundImage: door1}} />
                     <div className={styles.contactBgImg} style={{backgroundImage: door2}} />
                 </div> */}
-                
+
                 <div className={styles.contactContent}>
                     <ContactGallery setHoriBarDetails={setHoriBarDetails} />
                 </div>

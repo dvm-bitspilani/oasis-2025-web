@@ -1,0 +1,427 @@
+[
+  {
+    "file": "public/images/aboutus/abtbck.png",
+    "before": 372810,
+    "after": 81742
+  },
+  {
+    "file": "public/images/aboutus/backg.png",
+    "before": 325800,
+    "after": 25724
+  },
+  {
+    "file": "public/images/contact/Door1.png",
+    "before": 311395,
+    "after": 57592
+  },
+  {
+    "file": "public/images/contact/Door2.png",
+    "before": 292311,
+    "after": 50330
+  },
+  {
+    "file": "public/images/contact/DoorsCombined.png",
+    "before": 607707,
+    "after": 31656
+  },
+  {
+    "file": "public/images/contact/DoorsMobile.png",
+    "before": 343580,
+    "after": 37306
+  },
+  {
+    "file": "public/images/doors/Door2.png",
+    "before": 397466,
+    "after": 114832
+  },
+  {
+    "file": "public/images/doors/Door3.png",
+    "before": 348655,
+    "after": 83080
+  },
+  {
+    "file": "public/images/events/DanceMobile.png",
+    "before": 450557,
+    "after": 67656
+  },
+  {
+    "file": "public/images/events/DramaMobile.png",
+    "before": 417909,
+    "after": 60738
+  },
+  {
+    "file": "public/images/events/MusicMobile.png",
+    "before": 327411,
+    "after": 35914
+  },
+  {
+    "file": "public/images/events/PhotographyMobile.png",
+    "before": 272063,
+    "after": 38018
+  },
+  {
+    "file": "public/images/events/backg.png",
+    "before": 2526750,
+    "after": 564050
+  },
+  {
+    "file": "public/images/events/dance.png",
+    "before": 995892,
+    "after": 146522
+  },
+  {
+    "file": "public/images/events/drama.png",
+    "before": 509348,
+    "after": 74040
+  },
+  {
+    "file": "public/images/events/evenback.png",
+    "before": 505243,
+    "after": 119210
+  },
+  {
+    "file": "public/images/events/misc.png",
+    "before": 466109,
+    "after": 60626
+  },
+  {
+    "file": "public/images/events/music.png",
+    "before": 774506,
+    "after": 88408
+  },
+  {
+    "file": "public/images/events/photography.png",
+    "before": 394828,
+    "after": 56036
+  },
+  {
+    "file": "public/images/events/quizzes.png",
+    "before": 405476,
+    "after": 46068
+  },
+  {
+    "file": "public/images/gallery/gallery_0H4A2729.jpeg",
+    "before": 1029599,
+    "after": 128548
+  },
+  {
+    "file": "public/images/gallery/gallery_0H4A2749.jpeg",
+    "before": 984847,
+    "after": 62372
+  },
+  {
+    "file": "public/images/gallery/gallery_0H4A2800.jpeg",
+    "before": 1185082,
+    "after": 95470
+  },
+  {
+    "file": "public/images/gallery/gallery_3K2A0013.jpeg",
+    "before": 563820,
+    "after": 31726
+  },
+  {
+    "file": "public/images/gallery/gallery_3K2A0022.jpeg",
+    "before": 416099,
+    "after": 43658
+  },
+  {
+    "file": "public/images/gallery/gallery_3K2A0863.jpeg",
+    "before": 956233,
+    "after": 73974
+  },
+  {
+    "file": "public/images/gallery/gallery_3K2A1046.jpeg",
+    "before": 753401,
+    "after": 103324
+  },
+  {
+    "file": "public/images/gallery/gallery_3K2A9949.jpeg",
+    "before": 1034339,
+    "after": 154854
+  },
+  {
+    "file": "public/images/gallery/gallery_DSC00072.jpeg",
+    "before": 587021,
+    "after": 87322
+  },
+  {
+    "file": "public/images/gallery/gallery_DSC00199.jpeg",
+    "before": 667506,
+    "after": 108008
+  },
+  {
+    "file": "public/images/gallery/gallery_IMG_3953.jpeg",
+    "before": 1496879,
+    "after": 332058
+  },
+  {
+    "file": "public/images/gallery/gallery_IMG_4225.jpeg",
+    "before": 1454253,
+    "after": 279138
+  },
+  {
+    "file": "public/images/gallery/gallery__H4A0022.jpeg",
+    "before": 1644331,
+    "after": 303694
+  },
+  {
+    "file": "public/images/gallery/gallery__H4A0035.jpeg",
+    "before": 693703,
+    "after": 79466
+  },
+  {
+    "file": "public/images/gallery/gallery__H4A0455.jpeg",
+    "before": 1770066,
+    "after": 233606
+  },
+  {
+    "file": "public/images/gallery/gallery__H4A3296.jpeg",
+    "before": 850324,
+    "after": 123814
+  },
+  {
+    "file": "public/images/gallery/gallery__H4A3316.jpeg",
+    "before": 918445,
+    "after": 126138
+  },
+  {
+    "file": "public/images/gallery/gallery__H4A3369.jpeg",
+    "before": 976331,
+    "after": 138854
+  },
+  {
+    "file": "public/images/gallery/gallery__H4A3519.jpeg",
+    "before": 498190,
+    "after": 74214
+  },
+  {
+    "file": "public/images/gallery/gallery__H4A9619.jpeg",
+    "before": 1007137,
+    "after": 124346
+  },
+  {
+    "file": "public/images/gallery/gallery__MG_0028.jpeg",
+    "before": 623325,
+    "after": 67338
+  },
+  {
+    "file": "public/images/gallery/gallery__MG_0266.jpeg",
+    "before": 872297,
+    "after": 82220
+  },
+  {
+    "file": "public/images/gallery/gallery__MG_0552.jpeg",
+    "before": 1052177,
+    "after": 71140
+  },
+  {
+    "file": "public/images/gallery/gallery__MG_7912.jpeg",
+    "before": 936228,
+    "after": 138648
+  },
+  {
+    "file": "public/images/gallery/gallery__MG_8684.jpeg",
+    "before": 474224,
+    "after": 47952
+  },
+  {
+    "file": "public/images/landing/O25_Date_White.png",
+    "before": 1960324,
+    "after": 158112
+  },
+  {
+    "file": "public/images/landing/background.png",
+    "before": 4734132,
+    "after": 277212
+  },
+  {
+    "file": "public/images/landing/background1.png",
+    "before": 513078,
+    "after": 476786
+  },
+  {
+    "file": "public/images/landing/banner_without_sponz.png",
+    "before": 4939529,
+    "after": 395058
+  },
+  {
+    "file": "public/images/landing/bigMountain.png",
+    "before": 513948,
+    "after": 61184
+  },
+  {
+    "file": "public/images/landing/logo_final.png",
+    "before": 887441,
+    "after": 369648
+  },
+  {
+    "file": "public/images/landing/mobileMountains.png",
+    "before": 971253,
+    "after": 107210
+  },
+  {
+    "file": "public/images/landing/oasisLogo.png",
+    "before": 649183,
+    "after": 155682
+  },
+  {
+    "file": "public/images/landing/smallMountainsOg.png",
+    "before": 2016045,
+    "after": 177412
+  },
+  {
+    "file": "public/images/landing/tree1.png",
+    "before": 1019519,
+    "after": 1604582
+  },
+  {
+    "file": "public/images/landing/tree6.png",
+    "before": 12059713,
+    "after": 819924
+  },
+  {
+    "file": "public/images/landing/treeMob.png",
+    "before": 692238,
+    "after": 209348
+  },
+  {
+    "file": "public/images/landing/treeOg.png",
+    "before": 29682688,
+    "after": 798876
+  },
+  {
+    "file": "public/images/landing/v.png",
+    "before": 17861343,
+    "after": 317978
+  },
+  {
+    "file": "public/images/mediaPartners/Bronx.png",
+    "before": 948321,
+    "after": 98276
+  },
+  {
+    "file": "public/images/mediaPartners/Jhoom.jpg",
+    "before": 575480,
+    "after": 401542
+  },
+  {
+    "file": "public/images/mediaPartners/Kanika.png",
+    "before": 541557,
+    "after": 235024
+  },
+  {
+    "file": "public/images/mediaPartners/Sarcaaster.png",
+    "before": 529857,
+    "after": 246680
+  },
+  {
+    "file": "public/images/mediaPartners/Zack.jpeg",
+    "before": 312660,
+    "after": 329540
+  },
+  {
+    "file": "public/images/paper-texture.svg",
+    "before": 22126620,
+    "after": 584073
+  },
+  {
+    "file": "public/images/registration/reg-bg.png",
+    "before": 2070766,
+    "after": 30440
+  },
+  {
+    "file": "public/images/sponsors/EaseMyTrip.png",
+    "before": 387848,
+    "after": 204810
+  },
+  {
+    "file": "public/images/sponsors/Nutribs.png",
+    "before": 1486233,
+    "after": 43234
+  },
+  {
+    "file": "public/images/sponsors/Qoneqt.png",
+    "before": 344195,
+    "after": 61006
+  },
+  {
+    "file": "public/images/sponsors/artisbaazi.png",
+    "before": 450996,
+    "after": 21606
+  },
+  {
+    "file": "public/images/sponsors/maa-karni.jpg",
+    "before": 1281699,
+    "after": 83396
+  },
+  {
+    "file": "public/images/sponsors/pee-safe.png",
+    "before": 312592,
+    "after": 77960
+  },
+  {
+    "file": "public/images/sponsors/plum-body-lovin.png",
+    "before": 255979,
+    "after": 235392
+  },
+  {
+    "file": "public/svgs/aboutus/fan.png",
+    "before": 574936,
+    "after": 213110
+  },
+  {
+    "file": "public/svgs/events/Exclude.svg",
+    "before": 2052223,
+    "after": 81420
+  },
+  {
+    "file": "public/svgs/events/Mask.svg",
+    "before": 2052308,
+    "after": 81505
+  },
+  {
+    "file": "public/svgs/events/Photography.svg",
+    "before": 8408311,
+    "after": 749420
+  },
+  {
+    "file": "public/svgs/events/dan.svg",
+    "before": 2496336,
+    "after": 930689
+  },
+  {
+    "file": "public/svgs/events/eventsback.svg",
+    "before": 2051325,
+    "after": 80522
+  },
+  {
+    "file": "public/svgs/events/image.png",
+    "before": 476237,
+    "after": 51204
+  },
+  {
+    "file": "public/svgs/events/music.svg",
+    "before": 31360309,
+    "after": 2400482
+  },
+  {
+    "file": "public/svgs/events/oasis_logo.svg",
+    "before": 1817719,
+    "after": 552696
+  },
+  {
+    "file": "public/svgs/landing/crumpled-black-paper-texture.svg",
+    "before": 5866688,
+    "after": 1108021
+  },
+  {
+    "file": "public/svgs/logo.svg",
+    "before": 1144691,
+    "after": 482116
+  },
+  {
+    "file": "public/svgs/registration/bg-extended.svg",
+    "before": 894775,
+    "after": 894775
+  }
+]

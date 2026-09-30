@@ -1,0 +1,34 @@
+[
+  {
+    "file": "public/images/paperboard-texture.webp",
+    "bytes": 1539016
+  },
+  {
+    "file": "public/sounds/bg-music.mp3",
+    "bytes": 960784
+  },
+  {
+    "file": "public/videos/ink-spread.gif",
+    "bytes": 1670199
+  },
+  {
+    "file": "public/svgs/registration/bg-extended.svg",
+    "bytes": 894775
+  },
+  {
+    "file": "public/svgs/landing/hamDragon.svg",
+    "bytes": 516882
+  },
+  {
+    "file": "public/images/landing/tree6.webp",
+    "bytes": 819924
+  },
+  {
+    "file": "public/images/landing/treeOg.webp",
+    "bytes": 798876
+  },
+  {
+    "file": "public/images/landing/mobileMountains.psd",
+    "bytes": 4561736
+  }
+]

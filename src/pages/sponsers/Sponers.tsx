@@ -7,25 +7,25 @@ import { useContext } from "react";
 import { navContext } from "../../App";
 
 import abhibusLogo from "/images/sponsors/abhibus.png";
-import easeMyTripLogo from "/images/sponsors/EaseMyTrip.png";
-import nutribs from "/images/sponsors/Nutribs.png";
-import qoneqt from "/images/sponsors/Qoneqt.png";
+import easeMyTripLogo from "/images/sponsors/EaseMyTrip.webp";
+import nutribs from "/images/sponsors/Nutribs.webp";
+import qoneqt from "/images/sponsors/Qoneqt.webp";
 import suno from "/images/sponsors/Suno.png";
 import rtc from "/images/sponsors/rtc.jpg";
 import acer from "/images/sponsors/acer_logo.avif";
 import snapchat from "/images/sponsors/Snapchat.png";
 import zebronics from "/images/sponsors/Zebronics.avif";
-import maaKarni from "/images/sponsors/maa-karni.jpg";
+import maaKarni from "/images/sponsors/maa-karni.webp";
 import plumGoodness from "/images/sponsors/plum-goodness.png";
 import posterwa from "/images/sponsors/posterwa.png";
 import travelzada from "/images/sponsors/travelzada.jpeg";
 import hdfcBank from "/images/sponsors/hdfc.png";
-import peeSafe from "/images/sponsors/pee-safe.png";
-import plumBodyLovin from "/images/sponsors/plum-body-lovin.png";
+import peeSafe from "/images/sponsors/pee-safe.webp";
+import plumBodyLovin from "/images/sponsors/plum-body-lovin.webp";
 import pepero from "/images/sponsors/pepero.jpeg";
 import jioSaavn from "/images/sponsors/jio-saavn.png";
 import cocaCola from "/images/sponsors/coke.png";
-import artisbaazi from "/images/sponsors/artisbaazi.png";
+import artisbaazi from "/images/sponsors/artisbaazi.webp";
 import gustora from "/images/sponsors/gustora.webp";
 import netApp from "/images/sponsors/netApp.png";
 
@@ -205,8 +205,7 @@ const Sponsors = () => {
         <div className={styles.sponsors}>
           <a
             href={sponsors.title.link}
-            target="_blank"
-            rel="noreferrer"
+            target="_blank" rel="noopener noreferrer"
             draggable={false}
           >
             <div className={styles.titleSponsor}>
@@ -228,8 +227,7 @@ const Sponsors = () => {
             {sponsors.otherSponsers.map((sponsor, index) => (
               <a
                 href={sponsor.link}
-                target="_blank"
-                rel="noreferrer"
+                target="_blank" rel="noopener noreferrer"
                 key={index}
                 draggable={false}
               >

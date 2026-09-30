@@ -18,9 +18,10 @@ const EventImage: React.FC<EventImageProps> = ({
     setImageLoaded(false);
     if (!imageUrl) return;
     const img = new Image();
-    img.src = imageUrl;
     img.onload = () => setImageLoaded(true);
     img.onerror = () => setImageLoaded(false);
+    img.src = imageUrl;
+    if(img.complete && img.naturalWidth > 0) setImageLoaded(true);
   }, [imageUrl]);
   if (!imageLoaded) {
     return (

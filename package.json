@@ -5,23 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite -- --host",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/check.mjs",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "wrangler pages dev dist",
+    "deploy": "CLOUDFLARE_ACCOUNT_ID=e6ad8a6f22a88b57a02e176325692373 wrangler pages deploy dist --project-name dvm-portfolio-oasis-2025",
+    "check": "node scripts/check.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.1",
-    "@react-oauth/google": "^0.12.2",
-    "@studio-freight/lenis": "^1.0.42",
-    "axios": "^1.11.0",
     "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
     "lenis": "^1.3.10",
-    "react": "^19.1.0",
-    "react-cookie": "^8.0.1",
-    "react-dom": "^19.1.0",
-    "react-ga4": "^2.1.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.62.0",
     "react-icons": "^5.5.0",
@@ -42,8 +39,10 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "sharp": "0.35.5",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
-    "vite": "^7.1.3"
+    "vite": "^7.1.3",
+    "wrangler": "4.145.0"
   }
 }

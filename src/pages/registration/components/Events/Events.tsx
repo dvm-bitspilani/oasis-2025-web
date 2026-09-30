@@ -1,6 +1,6 @@
 import { useState, forwardRef, useRef, useEffect } from "react";
 import React from "react";
-import axios from "axios";
+import {archiveEvents} from "../../../../utils/archive";
 
 import styles from "./Events.module.scss";
 
@@ -74,7 +74,7 @@ const Events = forwardRef<
 
   const [selectedEvents, setSelectedEvents] = useState<
     { id: number; name: string }[]
-  >(JSON.parse(sessionStorage.getItem("selectedEvents") || "[]"));
+  >([]);
   const [confirmModal, setConfirmModal] = useState(false);
   const [search, setSearch] = useState("");
   const [activeEvent, setActiveEvent] = useState<{
@@ -108,15 +108,7 @@ const Events = forwardRef<
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  useEffect(() => {
-    sessionStorage.removeItem("selectedEvents");
-    axios
-      .get("https://bits-oasis.org/2025/main/registrations/events_details/")
-      .then((response) => {
-        setEventsOptions(response.data);
-      })
-      .catch((error) => console.error("Error fetching events:", error));
-  }, []);
+  useEffect(() => {setEventsOptions(archiveEvents)}, []);
 
   const showEventDescription = (event: {
     id: number;
@@ -157,16 +149,10 @@ const Events = forwardRef<
     if (!event) return;
     if (flag) {
       if (selectedEvents.some((e) => e.id === event.id)) {
-        sessionStorage.setItem(
-          "selectedEvents",
-          JSON.stringify(selectedEvents.filter((e) => e.id !== event.id))
-        );
+
         setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
       } else {
-        sessionStorage.setItem(
-          "selectedEvents",
-          JSON.stringify([...selectedEvents, event])
-        );
+
         setSelectedEvents((prev) => [...prev, event]);
       }
       // showEventDescription(event);
@@ -175,16 +161,10 @@ const Events = forwardRef<
       contextSafe(() => {
         mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
           if (selectedEvents.some((e) => e.id === event.id)) {
-            sessionStorage.setItem(
-              "selectedEvents",
-              JSON.stringify(selectedEvents.filter((e) => e.id !== event.id))
-            );
+
             setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
           } else {
-            sessionStorage.setItem(
-              "selectedEvents",
-              JSON.stringify([...selectedEvents, event])
-            );
+
             setSelectedEvents((prev) => [...prev, event]);
           }
           showEventDescription(event);

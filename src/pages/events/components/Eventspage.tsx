@@ -1,5 +1,5 @@
-import Back from "/images/events/backg.png";
-import MobileBack from "/images/events/evenback.png";
+import Back from "/images/events/backg.webp";
+import MobileBack from "/images/events/evenback.webp";
 import styles from "./Eventspage.module.scss";
 import cl1 from "/svgs/events/cl1.svg";
 import cl2 from "/svgs/events/cl2.svg";
@@ -62,11 +62,11 @@ const events = useFetchEvents(category);
           className={styles.aboutBB}
           onClick={() => window.location.reload()}
         />
-         <FlyingIcons icons={[Star, Star2]} /> 
+         <FlyingIcons icons={[Star, Star2]} />
 
         <div className={styles.evntcontainer}>
           {isMobile ? (
-            
+
             <MobileEvents
             events={events}
             currentIndex={currentIndex}
