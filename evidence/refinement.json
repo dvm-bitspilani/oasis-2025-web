@@ -5,9 +5,9 @@
     "js_bytes": 1278334
   },
   "after": {
-    "files": 350,
-    "bytes": 56301394,
-    "js_bytes": 1040229
+    "files": 355,
+    "bytes": 56377667,
+    "js_bytes": 1040817
   },
   "audit": {
     "info": 0,
@@ -16,5 +16,12 @@
     "high": 0,
     "critical": 0,
     "total": 0
+  },
+  "runtime_checks": {
+    "desktop_mobile_closed_notice": "passed",
+    "events_navigation": "passed",
+    "gallery_images": "passed",
+    "blocked_route_and_audio_navigation_recovery": "passed",
+    "application_errors": 0
   }
 }

@@ -1,9 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Gallery.module.scss';
 import { type ImageProperty } from './galleryItemList';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface GalleryItemProps {
     galleryItem: ImageProperty;
@@ -23,19 +20,22 @@ function GalleryItem({ galleryItem, index, onClick }: GalleryItemProps) {
         setIsError(true);
     }
 
-    useGSAP(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.to(`#gallery-image-${index}`, {
-            scrollTrigger: {
-                trigger: `#gallery-image-${index}`,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: true,
-            },
-            scale: (0.1 * Math.random()) + 1,
-            objectPosition: `center +=${(10 * Math.random())}%`,
-        })
-    })
+    useEffect(() => {
+        if (isLoading || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        let disposed = false;
+        let animation: {kill: () => void; scrollTrigger?: {kill: () => void}} | undefined;
+        const timer = window.setTimeout(async () => {
+            const [{default: gsap}, {ScrollTrigger}] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
+            if (disposed) return;
+            gsap.registerPlugin(ScrollTrigger);
+            animation = gsap.to(`#gallery-image-${index}`, {
+                scrollTrigger: {trigger: `#gallery-image-${index}`, start: "top bottom", end: "bottom top", scrub: true},
+                scale: 1.05, objectPosition: "center +=5%",
+            });
+        }, 0);
+        return () => {disposed = true; clearTimeout(timer); animation?.scrollTrigger?.kill(); animation?.kill()};
+    }, [isLoading, index]);
+
 
     return (
         <div className={styles.galleryImageContainer} onClick={onClick} role="button" tabIndex={0} aria-label={`Open festival photograph ${index + 1}`} onKeyDown={event => {if(event.key === "Enter") onClick()}}>

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, createContext, lazy, Suspense, useCallback
 const Homepage = lazy(() => import("./Homepage"));
 import RegistrationClosed from "./pages/components/RegistrationClosed";
 const Registration = lazy(() => import("./pages/registration/Registration"));
-import DoorTransition from "./pages/components/page-transition/DoorTransition";
+const DoorTransition = lazy(() => import("./pages/components/page-transition/DoorTransition"));
 const AboutUs = lazy(() => import("./pages/aboutus/AboutUs"));
 const Contact = lazy(() => import("./pages/contact/ContactPage"));
 const ComingSoon = lazy(() => import("./pages/comingSoon/ComingSoon"));
@@ -139,14 +139,14 @@ export default function App() {
   return (
     <navContext.Provider value={{ goToPage, preloadPage: path => {void preloadRoute(path).catch(() => {})} }}>
       {registrationClosed && <RegistrationClosed onClose={() => setRegistrationClosed(false)} />}
-      {routeError && <div className="route-error" role="alert">This page could not load. <button onClick={() => {setRouteError(false); goToPage(nextRoute.current || "/")}}>Try again</button><button onClick={() => {setRouteError(false); navigate("/")}}>Home</button></div>}
-      <DoorTransition
+      {routeError && <div className="route-error" role="alert">This page could not load. <button onClick={() => window.location.reload()}>Reload</button><button onClick={() => {setRouteError(false); setDoorPhase("idle"); nextRoute.current = null; navigate("/")}}>Home</button></div>}
+      {doorPhase !== "idle" && <Suspense fallback={null}><DoorTransition
         phase={doorPhase}
         onClosed={handleDoorsClosed}
         onOpened={handleDoorsOpened}
         percentageLoaded={doorPLPercentageLoaded}
         targetPageRef={nextRoute}
-      />
+      /></Suspense>}
       <Suspense fallback={<div className="page-loading" role="status">Loading…</div>}>
       <h1 style={{ display: "none" }}>OASIS 2025 | Whispers Of Edo</h1>
 

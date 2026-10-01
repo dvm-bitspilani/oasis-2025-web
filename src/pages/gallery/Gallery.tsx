@@ -2,9 +2,9 @@ import BackButton from '../components/backButton/BackButton';
 import styles from './Gallery.module.scss';
 import galleryItemList from './galleryItemList';
 import GalleryItem from './GalleryItem';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import ImagePopup from './ImagePopup';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import photogLogo from '/images/gallery/photog white logo.png'
 
 function Gallery() {
@@ -17,7 +17,7 @@ function Gallery() {
         setIsPopupOpen(true);
     }
 
-    useEffect(() => {const normalizer = ScrollTrigger.normalizeScroll(true); return () => {normalizer?.kill()}}, []);
+
 
     return (
         <div className={styles.galleryPage}>
