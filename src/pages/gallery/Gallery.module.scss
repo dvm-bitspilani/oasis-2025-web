@@ -17,7 +17,8 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        background: url("/images/landing/background1.webp");
+        background: url("/images/gallery/background-1600.webp");
+        @media (max-width: 768px) {background-image: url("/images/gallery/background-800.webp");}
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;

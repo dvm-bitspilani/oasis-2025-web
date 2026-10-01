@@ -47,7 +47,7 @@ function GalleryItem({ galleryItem, index, onClick }: GalleryItemProps) {
                 style={galleryItem.modifiers}
                 src={galleryItem.src.replace("/gallery/", "/gallery/responsive/").replace(".webp", "-800.webp")}
                 srcSet={`${galleryItem.src.replace("/gallery/", "/gallery/responsive/").replace(".webp", "-400.webp")} 400w, ${galleryItem.src.replace("/gallery/", "/gallery/responsive/").replace(".webp", "-800.webp")} 800w`}
-                sizes="(max-width: 768px) 90vw, (max-width: 1200px) 60vw, 45vw"
+                sizes={index % 16 === 1 || index % 16 === 3 || index % 16 >= 4 ? "(max-width: 768px) 90vw, (max-width: 1200px) 60vw, 45vw" : "(max-width: 768px) 45vw, (max-width: 1200px) 30vw, 23vw"}
                 alt={`Oasis festival photograph ${index + 1}`}
                 decoding="async"
                 onLoad={handleLoad}
