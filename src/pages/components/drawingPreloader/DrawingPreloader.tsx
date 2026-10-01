@@ -14,7 +14,7 @@ export default function DrawingPreloader({
 }) {
   const overlaySetActive = useOverlayStore((state: any) => state.setActive);
   const [progress, setProgress] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [isMobile, setIsMobile] = useState(
@@ -54,7 +54,7 @@ export default function DrawingPreloader({
         if (progressNormalized >= pathEndProgress) {
           gsap.to(path, {
             strokeDashoffset: 0,
-            duration: 1.2,
+            duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1.2,
             ease: "power2.out",
             onComplete: () => {
               if (index === totalPaths - 1) {
@@ -71,7 +71,7 @@ export default function DrawingPreloader({
 
           gsap.to(path, {
             strokeDashoffset: offset,
-            duration: 1.2,
+            duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1.2,
             ease: "power2.out",
           });
         }
@@ -105,7 +105,7 @@ export default function DrawingPreloader({
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isAnimating]);
+  }, [isAnimating, overlaySetActive, onEnter]);
 
   return (
     <div className={styles.overlay} ref={svgContainerRef}>

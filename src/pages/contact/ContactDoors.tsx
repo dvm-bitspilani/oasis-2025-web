@@ -127,7 +127,7 @@ export default function ContactDoors({
         document.body,
         {
           "--navlink-color": "#ffdfd0",
-          reverse: true,
+
         },
         0
       );

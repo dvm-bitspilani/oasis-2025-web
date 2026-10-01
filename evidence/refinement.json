@@ -1,0 +1,20 @@
+{
+  "before": {
+    "files": 288,
+    "bytes": 54861172,
+    "js_bytes": 1278334
+  },
+  "after": {
+    "files": 350,
+    "bytes": 56301394,
+    "js_bytes": 1040229
+  },
+  "audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  }
+}

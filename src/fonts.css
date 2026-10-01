@@ -1,0 +1,50 @@
+@font-face {
+  font-display: swap;
+  font-family: "Japan Ramen";
+  src: url("/fonts/japanRamen.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-display: swap;
+  font-family: "Ibarra Real Nova SemiBold";
+  font-weight: 600;
+  src: url("/fonts/IbarraRealNova-SemiBold.woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "DM Serif Text";
+  src: url("/fonts/DMSerifText-Regular.woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Abhaya Libre Extrabold";
+  font-weight: 800;
+  src: url("/fonts/AbhayaLibre-ExtraBold.woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Abhaya Libre";
+  src: url("/fonts/AbhayaLibre-Regular.woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Abhaya Libre Bold";
+  font-weight: 700;
+  src: url("/fonts/AbhayaLibre-Bold.woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Shippori Mincho";
+  src: url("/fonts/ShipporiMincho-Regular.woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "The Last Shuriken";
+  src: url("/fonts/TheLastShuriken.woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "NoyagiDemo";
+  src: url("/fonts/NoyagiDemo.woff2");
+}

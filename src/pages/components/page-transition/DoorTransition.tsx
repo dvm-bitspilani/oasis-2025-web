@@ -31,7 +31,7 @@ export default function DoorTransition({
   const c3 = useAnimation();
   const c4 = useAnimation();
   const closeSoundRef = useRef<HTMLAudioElement | null>(null);
-  const openSoundRef = useRef<HTMLAudioElement | null>(null);
+
   const START = {
     outerLeft: "-200%",
     innerLeft: "-300%",
@@ -42,22 +42,16 @@ export default function DoorTransition({
   void targetPageRef;
 
   useEffect(() => {
-    const closeAudio = new Audio(Aud);
-    closeAudio.load();
-    closeAudio.onerror = (e) => console.warn("Error loading close sound", e);
-    closeSoundRef.current = closeAudio;
-
-    const openAudio = new Audio(Aud);
-    openAudio.load();
-    openAudio.onerror = (e) => console.warn("Error loading open sound", e);
-    openSoundRef.current = openAudio;
+    const audio = new Audio(Aud); audio.preload = "none"; closeSoundRef.current = audio;
+    return () => {audio.pause(); audio.removeAttribute("src"); audio.load(); closeSoundRef.current = null};
   }, []);
+  const playSound = () => {const audio = closeSoundRef.current; if(audio){audio.currentTime = 0; void audio.play().catch(() => {})}};
 
   useEffect(() => {
     let cancelled = false;
 
     const runClosing = async () => {
-      closeSoundRef.current?.play().catch(()=>{});
+      playSound();
       await Promise.all([
         c1.set({ "--dx": START.outerLeft }),
         c2.set({ "--dx": START.innerLeft }),
@@ -97,7 +91,7 @@ export default function DoorTransition({
 
     const runOpening = async () => {
 
-        openSoundRef.current?.play().catch(()=>{});
+        playSound();
         // await Promise.all([ setTimeout(()=>{     console.log("Hi")},10000) ])
         await Promise.all([
           c2.start({

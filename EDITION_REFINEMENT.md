@@ -1,0 +1,9 @@
+# Oasis 2025 refinement
+
+Removed the added site banner, demo copy, fictional photography event and simulated signup flow. Register opens the same small native dialog on desktop and mobile. A direct /register visit retains the original responsive registration artwork.
+
+Cold navigation begins importing the destination while the original doors close and keeps them closed until its module and styles arrive. Failed imports show a retry/home message and leave navigation usable. Reduced motion navigates without doors. Door sound uses one reusable audio instance and never gates navigation; background music only requests audio after interaction. The original drawing animation no longer blocks Enter behind simulated 99% progress. YouTube only loads after Play, and secondary About content mounts near its original scroll position.
+
+Retained the original display/body fonts and consolidated duplicated font faces. Added 400/800px gallery sources while preserving full images for the original image overlay. Lazy homepage code avoids downloading the entire animated homepage on direct content-page visits. Removed unused form dependencies. Fixed scroll/animation cleanup and the invalid reverse animation property. Content-hashed assets cache for a year; HTML revalidates; named artwork/fonts/audio have bounded cache lifetimes.
+
+Validation: npm ci --ignore-scripts; npm run build and artifact/security checks; npm audit (zero findings). Headless Chromium desktop/mobile registration, Escape dismissal, Events navigation, direct /gallery refresh, loaded images and horizontal overflow passed. No application exceptions or external requests during those checks. Browser evidence and comparative throttled measurements are stored in the workspace portfolio-evidence/refinement folder; these are lab results, not field/device guarantees. Artifact comparison is evidence/refinement.json.

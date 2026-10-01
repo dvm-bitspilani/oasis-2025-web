@@ -8,6 +8,7 @@ export function useFanAnimation(
   styles: Record<string, string>
 ) {
   useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (!isMobile) {
       gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
 
@@ -170,7 +171,7 @@ export function useFanAnimation(
     };
 
     const stopSpawning = () => {
-      console.log("Cleared interval: ", intervalId);
+
       if (intervalId) window.clearInterval(intervalId);
     };
 

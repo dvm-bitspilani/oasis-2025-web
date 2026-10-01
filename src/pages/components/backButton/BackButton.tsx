@@ -19,9 +19,9 @@ export default function BackButton({ className, to = "/", onClick }: BackButtonP
   };
 
   return (
-    <div
+    <button type="button" aria-label="Back"
       className={`${className ?? ""} ${styles.backButton}`}
-      onClick={handleClick}
+      onClick={handleClick} style={{border: 0, backgroundColor: "transparent", cursor: "pointer"}}
     />
   );
 }

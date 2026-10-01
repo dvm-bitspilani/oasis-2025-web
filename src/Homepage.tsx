@@ -82,6 +82,7 @@ export default function Homepage({
         <DrawingPreloader onEnter={playMusic} />
       </div>
       <audio
+        preload="none"
         src={bgMusic}
         loop
         ref={(el) => {

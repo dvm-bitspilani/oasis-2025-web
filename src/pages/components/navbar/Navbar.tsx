@@ -32,7 +32,7 @@ export default function Navbar({
   hideHam?: boolean;
   variant?: "default" | "about";
 }) {
-  const { goToPage } = useContext(navContext);
+  const { goToPage, preloadPage } = useContext(navContext);
 
   // const setHamOpen = useHamStore((state) => state.setHamOpen);
   const setMainHamOpen = useMainHamStore((state) => state.setMainHamOpen);
@@ -102,6 +102,7 @@ export default function Navbar({
 
     // console.log("Setting up scroll-based color change");
 
+    let colorAnimation: gsap.core.Tween | undefined;
     const timer = setTimeout(() => {
       const targets = navRef.current?.querySelectorAll(
         `.${styles.actualLabel}, .${styles.katakana}`
@@ -116,7 +117,7 @@ export default function Navbar({
 
       ScrollTrigger.refresh();
 
-      const colorAnimation = gsap.fromTo(
+      colorAnimation = gsap.fromTo(
         document.body,
         {
           "--navlink-color": "#ffdfd0",
@@ -155,6 +156,8 @@ export default function Navbar({
 
     return () => {
       clearTimeout(timer);
+      colorAnimation?.scrollTrigger?.kill();
+      colorAnimation?.kill();
     };
   }, []);
 
@@ -215,6 +218,9 @@ export default function Navbar({
             key={item.label}
             className={styles.navItem}
             onClick={() => goToPage?.(item.links)}
+            onPointerEnter={() => preloadPage?.(item.links)}
+            onFocus={() => preloadPage?.(item.links)}
+            role="link" tabIndex={0} onKeyDown={event => {if(event.key === "Enter") goToPage?.(item.links)}}
           >
             <div className={styles.navLink}>
               <div className={styles.actualLabel}>{item.label}</div>

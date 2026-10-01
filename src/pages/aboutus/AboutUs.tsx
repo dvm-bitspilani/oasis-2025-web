@@ -77,7 +77,7 @@ const AboutUs = ({ isBackBtn = true }: AboutUsProps) => {
     window.matchMedia("(max-width: 1200px) and (max-aspect-ratio: 0.75) ")
       .matches
   );
-const { isPlaying, nextVideo, prevVideo, togglePlayPause } = useYouTubePlayer(videos, playerContainerRef);
+const { isPlaying, nextVideo, prevVideo, togglePlayPause, error } = useYouTubePlayer(videos, playerContainerRef);
  useFanAnimation(fan1Ref, fan2Ref, isMobile, iconImages, styles);
 
 
@@ -134,6 +134,8 @@ const { isPlaying, nextVideo, prevVideo, togglePlayPause } = useYouTubePlayer(vi
             <div className={styles.vid}>
               <div
                 onClick={togglePlayPause}
+                role="button" tabIndex={0} aria-label="Play video"
+                onKeyDown={event => {if(event.key === "Enter" || event.key === " ") {event.preventDefault(); void togglePlayPause()}}}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -148,8 +150,9 @@ const { isPlaying, nextVideo, prevVideo, togglePlayPause } = useYouTubePlayer(vi
                     height: "100%",
                     borderRadius: "16px",
                     pointerEvents: "none",
+                    display: "grid", placeItems: "center", color: "#f8ebcb", background: "#201913",
                   }}
-                />
+                >{error ? "Video could not load. Try again." : "Play video"}</div>
               </div>
 
               <img src={fan} alt="fan1" ref={fan1Ref} className={styles.fan1} />
@@ -184,8 +187,8 @@ const { isPlaying, nextVideo, prevVideo, togglePlayPause } = useYouTubePlayer(vi
                   <div className={styles.a1}></div>
                   <button onClick={togglePlayPause}>
                     <img
-                      src={isPlaying ? play : pause}
-                      alt="Pause Button"
+                      src={isPlaying ? pause : play}
+                      alt={isPlaying ? "Pause video" : "Play video"}
                       className={styles.btns2}
                     />
                   </button>

@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 
 import useOverlayStore from "../../utils/store";
 import styles from "./LandingRevamp.module.scss";
@@ -24,7 +24,7 @@ import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/logo_final.webp";
 import mobileCloud from "/images/landing/mobileCloud.png";
-import AboutUs from "../aboutus/AboutUs";
+const AboutUs = lazy(() => import("../aboutus/AboutUs"));
 // import ContactDoors from "../contact/ContactDoors";
 // import Ham from "../components/ham/ham";
 import MainHam from "../components/mainHam/mainHam";
@@ -97,8 +97,15 @@ export default function LandingRevamp({
   const treeImageRef = useRef<HTMLImageElement>(null);
   const scrollerRef = useRef<HTMLImageElement>(null);
 
+  const [aboutVisible, setAboutVisible] = useState(false);
   const aboutUsContRef = useRef<HTMLDivElement>(null);
   const aboutUsWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {if(entries.some(e => e.isIntersecting)){setAboutVisible(true); observer.disconnect()}}, {rootMargin: "300px"});
+    if(aboutUsContRef.current) observer.observe(aboutUsContRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const [scrollHeight, setScrollHeight] = useState(
     (scrollerRef.current?.scrollHeight ?? 0) - window.innerHeight * 1.4
@@ -139,9 +146,8 @@ export default function LandingRevamp({
 
   useEffect(() => {
     if (overlayIsActive) {
-      setTimeout(() => {
-        setRemoveGif();
-      }, 3000);
+      const timer = setTimeout(() => setRemoveGif(), 1200);
+      return () => clearTimeout(timer);
     }
   }, [overlayIsActive]);
 
@@ -730,7 +736,7 @@ export default function LandingRevamp({
           <div className={styles.bottomOverlay} />
           <div className={styles.aboutUsContainer} ref={aboutUsContRef}>
             <div className={styles.aboutUsWrapper} ref={aboutUsWrapperRef}>
-              <AboutUs isBackBtn={false} />
+              <div style={{minHeight: "100svh"}}>{aboutVisible && <Suspense fallback={null}><AboutUs isBackBtn={false} /></Suspense>}</div>
               <div className={styles.aboutUsBottom} id="aboutUsBottom" />
             </div>
             {aboutUsContRef.current &&

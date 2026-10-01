@@ -1,3 +1,4 @@
+@import "./fonts.css";
 *{
   margin: 0;
   padding: 0;
@@ -8,4 +9,7 @@
   height: 100vh;
   width: 100vw;
 }
-.portfolio-archive{position:fixed;bottom:8px;left:8px;z-index:99999;background:#252620e8;color:#f8ebcb;padding:5px 9px;border-radius:4px;font:11px/1.4 sans-serif;pointer-events:none}.archive-loading{position:fixed;inset:0;display:grid;place-items:center;background:#e0d5bb;color:#30291f;font:18px serif}
+
+.page-loading{position:fixed;inset:0;display:grid;place-items:center;background:#e0d5bb;color:#30291f;font:18px "Japan Ramen",serif}
+.registration-closed{position:fixed;inset:0;margin:auto;width:min(90vw,420px);padding:28px;border:2px solid #61412e;background:#f8ebcb;color:#30291f;box-shadow:0 12px 40px #0006;text-align:center;font-family:"Abhaya Libre",serif}
+.registration-closed::backdrop{background:#120a0877}.registration-closed h2{font-size:24px;line-height:1.3;font-weight:700;margin:0 0 22px}.registration-closed button,.route-error button{padding:10px 24px;min-height:44px;background:#61412e;color:#f8ebcb;border:0;cursor:pointer;font:inherit}.registration-closed button:focus-visible{outline:3px solid #30291f;outline-offset:4px}.route-error{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:10000;background:#f8ebcb;padding:16px;width:min(90vw,450px);color:#30291f}.route-error button{margin:8px}

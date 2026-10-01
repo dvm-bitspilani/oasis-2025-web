@@ -38,17 +38,22 @@ function GalleryItem({ galleryItem, index, onClick }: GalleryItemProps) {
     })
 
     return (
-        <div className={styles.galleryImageContainer} onClick={onClick}>
+        <div className={styles.galleryImageContainer} onClick={onClick} role="button" tabIndex={0} aria-label={`Open festival photograph ${index + 1}`} onKeyDown={event => {if(event.key === "Enter") onClick()}}>
             <div className={isLoading ? styles.overlayVisible : styles.overlayHidden}>
                 <p className={styles.overlayText}>{!isError ? "Loading" : "Could not load image"}</p>
             </div>
-            <img 
-                className={styles.galleryImage} 
+            <img
+                className={styles.galleryImage}
                 style={galleryItem.modifiers}
-                src={galleryItem.src} 
+                src={galleryItem.src.replace("/gallery/", "/gallery/responsive/").replace(".webp", "-800.webp")}
+                srcSet={`${galleryItem.src.replace("/gallery/", "/gallery/responsive/").replace(".webp", "-400.webp")} 400w, ${galleryItem.src.replace("/gallery/", "/gallery/responsive/").replace(".webp", "-800.webp")} 800w`}
+                sizes="(max-width: 768px) 90vw, (max-width: 1200px) 60vw, 45vw"
+                alt={`Oasis festival photograph ${index + 1}`}
+                decoding="async"
                 onLoad={handleLoad}
                 onError={handleError}
-                loading='lazy'
+                loading={index < 3 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "auto"}
                 id={`gallery-image-${index}`}
             />
         </div>
