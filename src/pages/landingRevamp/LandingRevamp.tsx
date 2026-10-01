@@ -75,6 +75,9 @@ export default function LandingRevamp({
   onToggle: () => void;
   audioRef: React.RefObject<HTMLAudioElement | null>;
 }) {
+  const artQuery = "(max-width: 730px), (aspect-ratio < 8/12)";
+  const [mobileArt, setMobileArt] = useState(() => window.matchMedia(artQuery).matches);
+  useEffect(() => {const mq = window.matchMedia(artQuery); const update = () => setMobileArt(mq.matches); mq.addEventListener("change", update); return () => mq.removeEventListener("change", update)}, []);
   const [styleTag, setstyleTag] = useState([
     audioRef.current?.paused ? styles.soundLine2 : styles.soundLine,
     audioRef.current?.paused ? styles.soundCross2 : styles.soundCross,
@@ -210,9 +213,8 @@ export default function LandingRevamp({
     lenis.on("scroll", ScrollTrigger.update);
 
     // Use GSAP ticker for better sync with ScrollTrigger
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+    const tick = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(tick);
 
     // const breakPointDetector = gsap.to("#aboutUsBottom", {
     //   scrollTrigger: {
@@ -224,9 +226,7 @@ export default function LandingRevamp({
 
     return () => {
       // breakPointDetector.kill()
-      gsap.ticker.remove((time) => {
-        lenis.raf(time);
-      });
+      gsap.ticker.remove(tick);
       lenis.destroy();
     };
   }, []);
@@ -476,7 +476,7 @@ export default function LandingRevamp({
 
         <div className={styles.mobileEventsBtnContainer} ref={eventsButtonRef}>
           <img
-            src={eventsBtn}
+            src={eventsBtn} width={110} height={35}
             className={styles.mobileEventsBtn}
             onClick={() => goToPage("/events")}
             alt="Events Button"
@@ -499,12 +499,12 @@ export default function LandingRevamp({
         </div>
         <div className={styles.backgroundContainer}>
           <div className={styles.logoContainer}>
-            <img src={logo} className={styles.logo} alt="Logo" />
+            <img src={logo} width={2880} height={1563} className={styles.logo} alt="Logo" />
           </div>
 
           <div className={styles.desktopBackground} ref={landingRef}>
             <img
-              src={landingImage}
+              src={landingImage} width={2874} height={1620}
               className={styles.landingImage}
               alt="Landing Image"
             />
@@ -515,18 +515,18 @@ export default function LandingRevamp({
             ref={landingMobileRef}
           >
             <img
-              src={mobileMountains}
+              src={mobileMountains} width={1222} height={918}
               className={styles.mobileMountains}
               alt="Mountains"
               // ref={landingMobileRef}
             />
             <img
-              src={mobileBackground}
+              src={mobileBackground} width={393} height={765}
               alt="mobile"
               className={styles.mobileBackground}
             />
 
-            <img src={mobileCloud} className={styles.mobileCloud} alt="cloud" />
+            <img src={mobileCloud} width={169} height={49} className={styles.mobileCloud} alt="cloud" />
           </div>
         </div>
         <div className={styles.dateCountdown} ref={dateCountdownRef}>
@@ -589,12 +589,12 @@ export default function LandingRevamp({
                 ref={registerButtonRef}
               >
                 <img
-                  src={registerBtn}
+                  src={registerBtn} width={527} height={132}
                   className={styles.registerBtn}
                   alt="Register"
                 />
                 <img
-                  src={mobileRegisterBtn}
+                  src={mobileRegisterBtn} width={337} height={93}
                   className={styles.mobileRegisterBtn}
                   alt="Register"
                 />
@@ -606,7 +606,7 @@ export default function LandingRevamp({
                   <div className={styles.tree} ref={treeImageRef}>
                     <div className={styles.socialLinksContainer}>
                       <div className={styles.wire}>
-                        <img src={wire} alt="Wire" />
+                        <img src={wire} width={864} height={314} alt="Wire" />
                       </div>
                       {socialLinks.map((link, index) => (
                         <div
@@ -636,7 +636,7 @@ export default function LandingRevamp({
                     </div>
                     <div className={styles.audioTagContainer}>
                       <div className={styles.wire}>
-                        <img src={wire} alt="Wire" />
+                        <img src={wire} width={864} height={314} alt="Wire" />
                       </div>
                       {/* <svg
                         fill="#fff"
@@ -710,7 +710,7 @@ export default function LandingRevamp({
                       </svg> */}
                     </div>
                     <img
-                      src={tree}
+                      src={mobileArt ? undefined : tree} width={2775} height={4199}
                       // className={styles.tree}
                       className={styles.treeDesktop}
                       alt="Tree"
@@ -719,7 +719,7 @@ export default function LandingRevamp({
                       style={{ contain: "none" }}
                     />
                     <img
-                      src={treeMob}
+                      src={mobileArt ? treeMob : undefined} width={1440} height={2179}
                       alt="TreeMobile"
                       className={styles.treeMob}
                       loading="eager"
