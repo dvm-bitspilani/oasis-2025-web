@@ -25,6 +25,7 @@ function GalleryItem({ galleryItem, index, onClick }: GalleryItemProps) {
         let disposed = false;
         let animation: {kill: () => void; scrollTrigger?: {kill: () => void}} | undefined;
         const timer = window.setTimeout(async () => {
+            try {
             const [{default: gsap}, {ScrollTrigger}] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
             if (disposed) return;
             gsap.registerPlugin(ScrollTrigger);
@@ -32,6 +33,7 @@ function GalleryItem({ galleryItem, index, onClick }: GalleryItemProps) {
                 scrollTrigger: {trigger: `#gallery-image-${index}`, start: "top bottom", end: "bottom top", scrub: true},
                 scale: 1.05, objectPosition: "center +=5%",
             });
+            } catch { /* Keep photographs usable if optional animation cannot load. */ }
         }, 0);
         return () => {disposed = true; clearTimeout(timer); animation?.scrollTrigger?.kill(); animation?.kill()};
     }, [isLoading, index]);
