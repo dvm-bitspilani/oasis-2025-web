@@ -11,6 +11,10 @@ interface GalleryItemProps {
 function GalleryItem({ galleryItem, index, onClick }: GalleryItemProps) {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
+    const item = index + 1;
+    const wideDesktop = ![1, 3, 7, 11, 12].includes((index % 16) + 1);
+    const wideTablet = wideDesktop && !(item >= 22 && (item - 22) % 16 === 0) && !(item >= 24 && (item - 24) % 16 === 0);
+    const wideMobile = wideTablet && !((item >= 2 && (item - 2) % 16 === 0) || (item >= 5 && (item - 5) % 16 === 0) || item === 4);
 
     const handleLoad = () => {
         setIsLoading(false);
@@ -49,7 +53,7 @@ function GalleryItem({ galleryItem, index, onClick }: GalleryItemProps) {
                 style={galleryItem.modifiers}
                 src={galleryItem.src.replace("/gallery/", "/gallery/responsive/").replace(".webp", "-800.webp")}
                 srcSet={`${galleryItem.src.replace("/gallery/", "/gallery/responsive/").replace(".webp", "-400.webp")} 400w, ${galleryItem.src.replace("/gallery/", "/gallery/responsive/").replace(".webp", "-800.webp")} 800w`}
-                sizes={index % 16 === 1 || index % 16 === 3 || index % 16 >= 4 ? "(max-width: 768px) 90vw, (max-width: 1200px) 60vw, 45vw" : "(max-width: 768px) 45vw, (max-width: 1200px) 30vw, 23vw"}
+                sizes={`(max-width: 768px) ${wideMobile ? "90vw" : "45vw"}, (max-width: 1200px) ${wideTablet ? "60vw" : "30vw"}, ${wideDesktop ? "45vw" : "23vw"}`}
                 alt={`Oasis festival photograph ${index + 1}`}
                 decoding="async"
                 onLoad={handleLoad}
